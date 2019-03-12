@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\lib">
+      <UniqueIdentifier>{d63b350d-dc6d-48eb-ba57-296d68c0b18a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\stdhdr">
+      <UniqueIdentifier>{7556b623-52b6-448a-9d29-f4762987a17b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\stdhdr">
+      <UniqueIdentifier>{0b30493e-8ce0-414f-8cd0-1aad99f1484d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Transform">
+      <UniqueIdentifier>{efcabb74-5b23-4f63-be6b-6621ab414b37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Transform">
+      <UniqueIdentifier>{e903f610-d26c-4337-94f4-2fa1552581ca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Program Files\glad\gl_3_3_core\src\glad.c">
+      <Filter>Исходные файлы\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="DeltaTime.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenResolution.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="stdhdr.cpp">
+      <Filter>Исходные файлы\stdhdr</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Исходные файлы\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="ArithmeticVec3.cpp">
+      <Filter>Исходные файлы\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Position.cpp">
+      <Filter>Исходные файлы\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Rotation.cpp">
+      <Filter>Исходные файлы\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Scale.cpp">
+      <Filter>Исходные файлы\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Axis.cpp">
+      <Filter>Исходные файлы\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="DeltaTime.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenResolution.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="stdhdr.h">
+      <Filter>Файлы заголовков\stdhdr</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Файлы заголовков\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="ArithmeticVec3.h">
+      <Filter>Файлы заголовков\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>Файлы заголовков\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Rotation.h">
+      <Filter>Файлы заголовков\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Scale.h">
+      <Filter>Файлы заголовков\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Axis.h">
+      <Filter>Файлы заголовков\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
