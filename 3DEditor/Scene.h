@@ -17,8 +17,8 @@ public:
 	std::vector<Object> objects {};
 
 public:
-	Scene();
-	~Scene();
+	Scene() = default;
+	~Scene() = default;
 
 	Camera& getCamera();
 	Model& getModel();

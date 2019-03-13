@@ -17,7 +17,7 @@ private:
 public:
 	Application();
 	Application(std::string appTitle);
-	~Application();
+	~Application() = default;
 
 	static Application& getInstance();
 	static Application* getInstancePtr();

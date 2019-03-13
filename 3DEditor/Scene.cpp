@@ -1,11 +1,6 @@
 #include "Scene.h"
 
 
-Scene::Scene() {}
-
-Scene::~Scene() {}
-
-
 Camera& Scene::getCamera() {
 	return this->camera;
 }

@@ -10,8 +10,6 @@ Application::Application(std::string appTitle) : window(appTitle) {
 		Application::instance = this;
 }
 
-Application::~Application() {}
-
 
 Application& Application::getInstance() {
 	return *Application::instance;
