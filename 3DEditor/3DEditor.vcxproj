@@ -85,9 +85,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>stdhdr.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdhdr.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -110,9 +110,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>stdhdr.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdhdr.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -159,6 +159,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdhdr.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Util.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +178,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stdhdr.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

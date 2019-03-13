@@ -55,6 +55,9 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Sources\Transform</Filter>
     </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -104,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="Position.h">
       <Filter>Headers\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
