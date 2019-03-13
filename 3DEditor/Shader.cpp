@@ -4,7 +4,7 @@
 /*************************/
 /* Start default shaders */
 
-const std::string Shader::DEFAULT_VERTEX_CODE =
+const std::string Shader::DEFAULT_VERTEX_SOURCE =
 R"(#version 330 core
 
 layout (location = 0) in vec3 VertexPosition;
@@ -21,7 +21,7 @@ void main(){
 }
 )";
 
-const std::string Shader::DEFAULT_FRAGMENT_CODE =
+const std::string Shader::DEFAULT_FRAGMENT_SOURCE =
 R"(#version 330 core
 
 layout (location = 0) out vec4 FragColor;
@@ -37,7 +37,10 @@ void main() {
 /***********************/
 
 
-Shader::Shader() : vertexCode(DEFAULT_VERTEX_CODE), fragmentCode(DEFAULT_FRAGMENT_CODE) {}
+Shader::Shader() : vertexSource(DEFAULT_VERTEX_SOURCE), fragmentSource(DEFAULT_FRAGMENT_SOURCE) {}
+
+Shader::Shader(std::string _vertexSource, std::string _fragmentSource)
+	: vertexSource(_vertexSource), fragmentSource(_fragmentSource) {}
 
 
 void Shader::setMat4(const std::string& name, glm::mat4 value) const {
@@ -47,10 +50,10 @@ void Shader::setMat4(const std::string& name, glm::mat4 value) const {
 
 
 void Shader::vertexInit() {
-	const GLchar* vShaderCode = this->vertexCode.c_str();
+	const GLchar* vShaderSource = this->vertexSource.c_str();
 
 	this->vertex = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(this->vertex, 1, &vShaderCode, nullptr);
+	glShaderSource(this->vertex, 1, &vShaderSource, nullptr);
 	glCompileShader(this->vertex);
 
 	// print error vertex shader
@@ -63,7 +66,7 @@ void Shader::vertexInit() {
 }
 
 void Shader::fragmentInit() {
-	const GLchar* fShaderCode = this->fragmentCode.c_str();
+	const GLchar* fShaderCode = this->fragmentSource.c_str();
 
 	this->fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(this->fragment, 1, &fShaderCode, nullptr);

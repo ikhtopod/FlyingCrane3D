@@ -4,14 +4,14 @@
 
 class Shader {
 private:
-	static const std::string DEFAULT_VERTEX_CODE;
-	static const std::string DEFAULT_FRAGMENT_CODE;
+	static const std::string DEFAULT_VERTEX_SOURCE;
+	static const std::string DEFAULT_FRAGMENT_SOURCE;
 
 private:
 	GLuint id;
 
-	std::string vertexCode;
-	std::string fragmentCode;
+	std::string vertexSource;
+	std::string fragmentSource;
 
 	GLuint vertex;
 	GLuint fragment;
@@ -28,6 +28,7 @@ private:
 
 public:
 	Shader();
+	Shader(std::string _vertexSource, std::string _fragmentSource);
 	~Shader() = default;
 
 	void setMat4(const std::string& name, glm::mat4 value) const;
