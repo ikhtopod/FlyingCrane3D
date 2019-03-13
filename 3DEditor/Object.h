@@ -16,9 +16,6 @@ private:
 	static const GLsizei BUFFER_SIZE;
 
 private:
-	// Mesh - vertex, normal, polygon
-	// Texture - coord, img
-	// Shader - glsl
 	std::string name;
 
 	Transform transform {};
