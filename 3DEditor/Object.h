@@ -30,8 +30,9 @@ private:
 	GLuint vbo;
 
 public:
+	Object() = delete;
 	Object(std::string _name);
-	~Object();
+	~Object() = default;
 
 	std::string getName();
 	void setName(std::string _name);

@@ -6,8 +6,6 @@ const GLsizei Object::BUFFER_SIZE = 1;
 
 Object::Object(std::string _name) : name(_name) {}
 
-Object::~Object() {}
-
 
 std::string Object::getName() {
 	return this->name;
@@ -30,6 +28,7 @@ void Object::init() {
 	glEnableVertexAttribArray(Object::AttribIndex::POSITION);
 
 	// texture coord attribute
+	// ...
 
 	// shader init
 	this->shader.init();
@@ -37,6 +36,8 @@ void Object::init() {
 
 void Object::draw() {
 	// draw texture
+	// ...
+
 	// draw shader
 	this->shader.draw();
 
