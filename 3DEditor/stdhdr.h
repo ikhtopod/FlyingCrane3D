@@ -24,15 +24,13 @@
 #include <cstdlib>
 #include <cmath>
 #include <stdexcept>
+#include <type_traits>
 
-
-/* Constants */
-
-const glm::mat4 IDENTITY_MATRIX { 1.0f };
 
 
 /* app headers */
 
+#include "Util.h"
 #include "Application.h"
 #include "Window.h"
 #include "ScreenResolution.h"

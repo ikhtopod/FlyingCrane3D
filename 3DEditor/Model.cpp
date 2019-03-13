@@ -44,5 +44,5 @@ void Model::update() {
 
 	this->setProjection(persp);
 	this->setView(appThis->getScene().getCamera().GetViewMatrix());
-	this->setModel(IDENTITY_MATRIX);
+	this->setModel(Util::IDENTITY_MATRIX);
 }

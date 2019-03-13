@@ -1,12 +1,13 @@
 #pragma once
 
+#include "Util.h"
 #include "Application.h"
 
 class Model final {
 private:
-	glm::mat4 model { IDENTITY_MATRIX };
-	glm::mat4 view { IDENTITY_MATRIX };
-	glm::mat4 projection { IDENTITY_MATRIX };
+	glm::mat4 model { Util::IDENTITY_MATRIX };
+	glm::mat4 view { Util::IDENTITY_MATRIX };
+	glm::mat4 projection { Util::IDENTITY_MATRIX };
 public:
 	Model();
 	~Model();

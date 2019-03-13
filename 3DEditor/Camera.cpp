@@ -6,6 +6,9 @@ const float Camera::MAX_MOUSE_PITCH = 90.0f;
 const float Camera::MIN_MOUSE_PITCH = -MAX_MOUSE_PITCH;
 
 const float Camera::DEFAULT_MOUSE_YAW = -90.0f;
+const float Camera::MIN_MOUSE_YAW = 0.0f;
+const float Camera::MAX_MOUSE_YAW = 360.0f;
+
 const float Camera::DEFAULT_MOUSE_ROLL = 0.0f;
 
 const float Camera::DEFAULT_SPEED_MOVEMENT = 2.5f;
@@ -89,9 +92,11 @@ void Camera::mouseMovement(float xOffset, float yOffset) {
 
 	glm::vec3 _rotation = this->transform.getRotation().getValue();
 
-	_rotation.y += xOffset;
 	_rotation.x += yOffset;
+	_rotation.y += xOffset;
+
 	_rotation.x = std::clamp<float>(_rotation.x, MIN_MOUSE_PITCH, MAX_MOUSE_PITCH);
+	_rotation.y = Util::repeat(_rotation.y, MIN_MOUSE_YAW, MAX_MOUSE_YAW);
 
 	this->transform.getRotation().setValue(_rotation);
 

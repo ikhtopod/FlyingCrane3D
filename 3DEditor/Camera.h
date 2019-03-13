@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Util.h"
 #include "Transform.h"
 #include "Axis.h"
 
@@ -16,6 +17,9 @@ public:
 	static const float MAX_MOUSE_PITCH;
 
 	static const float DEFAULT_MOUSE_YAW;
+	static const float MIN_MOUSE_YAW;
+	static const float MAX_MOUSE_YAW;
+
 	static const float DEFAULT_MOUSE_ROLL;
 
 	static const float DEFAULT_SPEED_MOVEMENT;
