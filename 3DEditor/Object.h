@@ -2,6 +2,7 @@
 
 #include "Transform.h"
 #include "Axis.h"
+#include "Mesh.h"
 #include "Shader.h"
 
 
@@ -21,6 +22,7 @@ private:
 	Transform transform {};
 	Axis axis {};
 
+	Mesh mesh {};
 	Shader shader {};
 
 	GLuint vao;

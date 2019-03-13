@@ -16,16 +16,10 @@
     <ClCompile Include="Model.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="ScreenResolution.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Window.cpp">
@@ -58,6 +52,15 @@
     <ClCompile Include="Util.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Sources\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Sources\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Sources\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -72,16 +75,10 @@
     <ClInclude Include="Model.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="ScreenResolution.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
@@ -110,6 +107,15 @@
     </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Headers\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +148,12 @@
     <Filter Include="Resources\Shaders">
       <UniqueIdentifier>{7498ece9-a332-4bd2-8060-457ae2c50d60}</UniqueIdentifier>
       <Extensions>glsl;vs;fs;gs;vert;frag;geom</Extensions>
+    </Filter>
+    <Filter Include="Headers\Object">
+      <UniqueIdentifier>{8d03e873-3016-4e2e-819e-b4fe34596378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Object">
+      <UniqueIdentifier>{668327a0-e97c-4dd4-a1e5-bb48e358a075}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

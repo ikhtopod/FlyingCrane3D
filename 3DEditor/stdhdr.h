@@ -36,6 +36,7 @@
 #include "ScreenResolution.h"
 #include "DeltaTime.h"
 #include "Scene.h"
+#include "Mesh.h"
 #include "Object.h"
 #include "Transform.h"
 #include "Position.h"
