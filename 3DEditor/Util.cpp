@@ -18,7 +18,5 @@ float Util::repeat(float val, float _min, float _max) {
 		res = _min - std::fmodf(val, _max);
 	}
 
-	std::cout << res << std::endl;
-
 	return res;
 }
