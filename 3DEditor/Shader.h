@@ -15,9 +15,20 @@ private:
 
 	GLuint vertex;
 	GLuint fragment;
+
+private:
+	static constexpr unsigned int INFOLOG_SIZE = 512;
+
+	GLint successChecker;
+	GLchar infoLog[Shader::INFOLOG_SIZE];
+
+	void vertexInit();
+	void fragmentInit();
+	void programInit();
+
 public:
 	Shader();
-	~Shader();
+	~Shader() = default;
 
 	void setMat4(const std::string& name, glm::mat4 value) const;
 

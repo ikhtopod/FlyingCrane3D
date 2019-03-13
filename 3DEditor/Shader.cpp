@@ -1,6 +1,9 @@
 #include "Shader.h"
 
 
+/*************************/
+/* Start default shaders */
+
 const std::string Shader::DEFAULT_VERTEX_CODE =
 R"(#version 330 core
 
@@ -30,10 +33,11 @@ void main() {
 }
 )";
 
+/* End default shaders */
+/***********************/
+
 
 Shader::Shader() : vertexCode(DEFAULT_VERTEX_CODE), fragmentCode(DEFAULT_FRAGMENT_CODE) {}
-
-Shader::~Shader() {}
 
 
 void Shader::setMat4(const std::string& name, glm::mat4 value) const {
@@ -42,16 +46,9 @@ void Shader::setMat4(const std::string& name, glm::mat4 value) const {
 }
 
 
-void Shader::init() {
+void Shader::vertexInit() {
 	const GLchar* vShaderCode = this->vertexCode.c_str();
-	const GLchar* fShaderCode = this->fragmentCode.c_str();
 
-	constexpr unsigned int INFOLOG_SIZE = 512;
-
-	GLint successChecker;
-	GLchar infoLog[INFOLOG_SIZE];
-
-	/* vertex */
 	this->vertex = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(this->vertex, 1, &vShaderCode, nullptr);
 	glCompileShader(this->vertex);
@@ -63,8 +60,11 @@ void Shader::init() {
 		glGetShaderInfoLog(this->vertex, INFOLOG_SIZE, nullptr, infoLog);
 		throw ShaderException(infoLog);
 	}
+}
 
-	/* fragment */
+void Shader::fragmentInit() {
+	const GLchar* fShaderCode = this->fragmentCode.c_str();
+
 	this->fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(this->fragment, 1, &fShaderCode, nullptr);
 	glCompileShader(this->fragment);
@@ -76,8 +76,9 @@ void Shader::init() {
 		glGetShaderInfoLog(this->fragment, INFOLOG_SIZE, nullptr, infoLog);
 		throw ShaderException(infoLog);
 	}
+}
 
-	/* program */
+void Shader::programInit() {
 	this->id = glCreateProgram();
 	glAttachShader(this->id, this->vertex);
 	glAttachShader(this->id, this->fragment);
@@ -89,6 +90,17 @@ void Shader::init() {
 	if (!successChecker) {
 		glGetProgramInfoLog(this->id, INFOLOG_SIZE, nullptr, infoLog);
 		throw ShaderException(infoLog);
+	}
+}
+
+
+void Shader::init() {
+	try {
+		this->vertexInit();
+		this->fragmentInit();
+		this->programInit();
+	} catch (...) {
+		throw;
 	}
 }
 
