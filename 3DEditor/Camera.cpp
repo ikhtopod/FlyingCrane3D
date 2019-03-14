@@ -18,7 +18,7 @@ const float Camera::DEFAULT_CAMERA_FOV = 45.0f;
 const float Camera::MIN_CAMERA_FOV = 1.0f;
 const float Camera::MAX_CAMERA_FOV = 120.0f;
 
-const glm::vec3 Camera::DEFAULT_CAMERA_POSITION = glm::vec3 { 0.0f, 0.0f, 3.0f };
+const glm::vec3 Camera::DEFAULT_CAMERA_POSITION = glm::vec3 { 0.0f, 1.0f, 4.0f };
 
 
 void Camera::updateCameraVectors() {
