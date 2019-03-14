@@ -5,7 +5,7 @@
 /* Start default shaders */
 
 const std::string Shader::DEFAULT_VERTEX_SOURCE =
-R"(#version 330 core
+R"glsl(#version 330 core
 
 layout (location = 0) in vec3 VertexPosition;
 
@@ -16,10 +16,10 @@ uniform mat4 projection;
 void main(){
 	gl_Position = (projection * view * model) * vec4(VertexPosition, 1.0f);
 }
-)";
+)glsl";
 
 const std::string Shader::DEFAULT_FRAGMENT_SOURCE =
-R"(#version 330 core
+R"glsl(#version 330 core
 
 layout (location = 0) out vec4 FragColor;
 
@@ -29,7 +29,7 @@ uniform vec3 lightColor;
 void main() {
 	FragColor = vec4(objectColor * lightColor, 1.0f);
 }
-)";
+)glsl";
 
 /* End default shaders */
 /***********************/
