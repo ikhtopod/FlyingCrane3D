@@ -31,15 +31,14 @@ GridObject::GridObject(std::string _name, unsigned int _width, unsigned int _hei
 	glm::vec3 point2 { 6.0f, 0.0f, 5.0f };
 	unsigned int num = 0;
 	for (unsigned int i = 0; i <= 10; i++, num += 2) {
-		if (i == 5) {
+		point1.x -= 1;
+		point2.x -= 1;
+
+		if (point1.x == 0) {
 			num -= 2;
-			point1.x -= 1;
-			point2.x -= 1;
 			continue;
 		}
 
-		point1.x -= 1;
-		point2.x -= 1;
 		verticesGrid.push_back(point1);
 		verticesGrid.push_back(point2);
 
@@ -50,15 +49,14 @@ GridObject::GridObject(std::string _name, unsigned int _width, unsigned int _hei
 	glm::vec3 point3 { -5.0f, 0.0f, 6.0f };
 	glm::vec3 point4 { 5.0f, 0.0f, 6.0f };
 	for (unsigned int i = 0; i <= 10; i++, num += 2) {
-		if (i == 5) {
+		point3.z -= 1;
+		point4.z -= 1;
+
+		if (point3.z == 0) {
 			num -= 2;
-			point3.z -= 1;
-			point4.z -= 1;
 			continue;
 		}
 
-		point3.z -= 1;
-		point4.z -= 1;
 		verticesGrid.push_back(point3);
 		verticesGrid.push_back(point4);
 
