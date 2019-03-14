@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <vector>
 #include <cstdlib>
+#include <cstddef>
 #include <cmath>
 #include <stdexcept>
 #include <type_traits>
@@ -36,8 +37,11 @@
 #include "ScreenResolution.h"
 #include "DeltaTime.h"
 #include "Scene.h"
+#include "Vertex.h"
+#include "Polygon.h"
 #include "Mesh.h"
 #include "Object.h"
+#include "GridObject.h"
 #include "Transform.h"
 #include "Position.h"
 #include "Rotation.h"
