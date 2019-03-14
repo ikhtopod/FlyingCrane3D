@@ -13,8 +13,7 @@ private:
 	unsigned int height;
 	unsigned int step;
 public:
-	GridObject() = delete;
-	GridObject(std::string _name);
-	GridObject(std::string _name, unsigned int _width, unsigned int _height, unsigned int _step);
+	GridObject();
+	GridObject(unsigned int _width, unsigned int _height, unsigned int _step);
 	virtual ~GridObject() = default;
 };

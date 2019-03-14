@@ -7,27 +7,20 @@
 
 class Object {
 protected:
-	std::string name;
-
 	Transform transform {};
 	Axis axis {};
 
-	std::vector<Mesh> meshes;
+	std::map<std::string, Mesh> meshes;
 
 public:
-	Object() = delete;
-	Object(std::string _name);
+	Object() = default;
 	virtual ~Object() = default;
 
-	std::string getName();
 	Transform& getTransform();
 
-	void setName(std::string _name);
 	void setTransform(Transform _transform);
 
-
-	void addMesh(Mesh _mesh);
-
+	void addMesh(std::string _name, Mesh _mesh);
 
 	void init();
 	void draw();

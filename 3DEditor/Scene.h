@@ -15,8 +15,8 @@ private:
 	Axis axis {};
 
 public:
-	std::vector<Object> standardObjects {};
-	std::vector<Object> objects {};
+	std::map<std::string, Object> standardObjects {};
+	std::map<std::string, Object> objects {};
 
 public:
 	Scene() = default;
@@ -26,6 +26,9 @@ public:
 	Model& getModel();
 	Transform& getTransform();
 	Axis& getAxis();
+
+	void addStandardObject(std::string _name, Object _object);
+	void addObject(std::string _name, Object _object);
 
 	void init();
 	void draw();

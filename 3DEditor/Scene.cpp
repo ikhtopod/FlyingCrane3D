@@ -17,41 +17,35 @@ Axis& Scene::getAxis() {
 	return this->axis;
 }
 
+void Scene::addStandardObject(std::string _name, Object _object) {
+	if (this->standardObjects.empty() || (this->standardObjects.find(_name) == this->standardObjects.end())) {
+		this->standardObjects.insert({ _name, _object });
+	}
+}
+
+void Scene::addObject(std::string _name, Object _object) {
+	if (this->objects.empty() || (this->objects.find(_name) == this->objects.end())) {
+		this->objects.insert({ _name, _object });
+	}
+}
+
 
 void Scene::init() {
 	// grid
-	this->standardObjects.push_back(GridObject { "grid" });
-
+	this->addStandardObject("grid.001", GridObject {});
 
 	// insert objects
-	std::string objName = "obj_01";
-
-	auto exists_name_pred = [&objName](Object& o) -> bool {
-		return objName == o.getName();
-	};
-
-	auto res = std::find_if(this->objects.begin(), this->objects.end(), exists_name_pred);
-
-	if (res == this->objects.end()) {
-		Object obj1 { objName };
-		obj1.addMesh(Mesh {});
-		this->objects.push_back(obj1);
-	}
-
-	// sort by name
-	auto sort_by_name_pred = [](Object o1, Object o2) -> bool {
-		return o1.getName() < o2.getName();
-	};
-
-	std::sort(this->objects.begin(), this->objects.end(), sort_by_name_pred);
-
+	Object obj1 {};
+	obj1.addMesh("mesh.001", Mesh {});
+	this->addObject("object.001", obj1);
 
 	// init objects
-	for (Object& o : this->standardObjects) {
-		o.init();
+	for (auto& o : this->standardObjects) {
+		o.second.init();
 	}
-	for (Object& o : this->objects) {
-		o.init();
+
+	for (auto& o : this->objects) {
+		o.second.init();
 	}
 }
 
@@ -59,20 +53,22 @@ void Scene::draw() {
 	this->model.update();
 
 	// draw objects
-	for (Object& o : this->standardObjects) {
-		o.draw();
+	for (auto& o : this->standardObjects) {
+		o.second.draw();
 	}
-	for (Object& o : this->objects) {
-		o.draw();
+
+	for (auto& o : this->objects) {
+		o.second.draw();
 	}
 }
 
 void Scene::free() {
 	// free objects
-	for (Object& o : this->standardObjects) {
-		o.free();
+	for (auto& o : this->standardObjects) {
+		o.second.free();
 	}
-	for (Object& o : this->objects) {
-		o.free();
+
+	for (auto& o : this->objects) {
+		o.second.free();
 	}
 }

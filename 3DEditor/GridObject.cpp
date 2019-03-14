@@ -6,11 +6,11 @@ const unsigned int GridObject::DEFAULT_HEIGHT = GridObject::DEFAULT_WIDTH;
 const unsigned int GridObject::DEFAULT_STEP = 1;
 
 
-GridObject::GridObject(std::string _name)
-	: GridObject(_name, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_STEP) {}
+GridObject::GridObject()
+	: GridObject(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_STEP) {}
 
-GridObject::GridObject(std::string _name, unsigned int _width, unsigned int _height, unsigned int _step)
-	: Object(_name), width(_width), height(_height), step(_step) {
+GridObject::GridObject(unsigned int _width, unsigned int _height, unsigned int _step)
+	: Object(), width(_width), height(_height), step(_step) {
 
 	std::vector<Vertex> verticesZ = {
 		glm::vec3 { 0.0f, 0.0f, 5.0f },
@@ -73,8 +73,8 @@ GridObject::GridObject(std::string _name, unsigned int _width, unsigned int _hei
 	meshZ.getShader().setObjectColor(glm::vec3 { 0.0f, 0.0f, 1.0f });
 	meshGrid.getShader().setObjectColor(glm::vec3 { .5f, .5f, .5f });
 
-	this->meshes.push_back(meshX);
-	this->meshes.push_back(meshZ);
-	this->meshes.push_back(meshGrid);
+	this->addMesh("meshX", meshX);
+	this->addMesh("meshZ", meshZ);
+	this->addMesh("meshGrid", meshGrid);
 }
 
