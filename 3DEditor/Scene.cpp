@@ -21,7 +21,7 @@ Axis& Scene::getAxis() {
 void Scene::init() {
 	// camera
 	// grid
-
+	//this->standardObjects.push_back(GridObject { "grid" });
 
 	// insert objects
 	std::string objName = "obj_01";
@@ -43,7 +43,11 @@ void Scene::init() {
 
 	std::sort(this->objects.begin(), this->objects.end(), sort_by_name_pred);
 
+
 	// init objects
+	for (Object& o : this->standardObjects) {
+		o.init();
+	}
 	for (Object& o : this->objects) {
 		o.init();
 	}
@@ -53,6 +57,9 @@ void Scene::draw() {
 	this->model.update();
 
 	// draw objects
+	for (Object& o : this->standardObjects) {
+		o.draw();
+	}
 	for (Object& o : this->objects) {
 		o.draw();
 	}
@@ -60,6 +67,9 @@ void Scene::draw() {
 
 void Scene::free() {
 	// free objects
+	for (Object& o : this->standardObjects) {
+		o.free();
+	}
 	for (Object& o : this->objects) {
 		o.free();
 	}

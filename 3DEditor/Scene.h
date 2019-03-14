@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Object.h"
+#include "GridObject.h"
 #include "Camera.h"
 #include "Model.h"
 #include "Transform.h"
@@ -14,6 +15,7 @@ private:
 	Axis axis {};
 
 public:
+	std::vector<Object> standardObjects {};
 	std::vector<Object> objects {};
 
 public:
