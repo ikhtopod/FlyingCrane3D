@@ -148,10 +148,12 @@
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="ArithmeticVec3.cpp" />
+    <ClCompile Include="GridObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="Rotation.cpp" />
     <ClCompile Include="Scale.cpp" />
@@ -161,6 +163,7 @@
     <ClCompile Include="stdhdr.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Util.cpp" />
+    <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,9 +172,11 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DeltaTime.h" />
     <ClInclude Include="ArithmeticVec3.h" />
+    <ClInclude Include="GridObject.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Polygon.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Rotation.h" />
     <ClInclude Include="Scale.h" />
@@ -181,6 +186,7 @@
     <ClInclude Include="stdhdr.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Util.h" />
+    <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

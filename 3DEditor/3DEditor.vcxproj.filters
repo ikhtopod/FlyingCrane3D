@@ -61,6 +61,15 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Sources\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Sources\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GridObject.cpp">
+      <Filter>Sources\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Polygon.cpp">
+      <Filter>Sources\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -115,6 +124,15 @@
       <Filter>Headers\Object</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GridObject.h">
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Polygon.h">
       <Filter>Headers\Object</Filter>
     </ClInclude>
   </ItemGroup>
