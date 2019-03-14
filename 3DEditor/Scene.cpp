@@ -22,7 +22,6 @@ void Scene::init() {
 	// grid
 	this->standardObjects.push_back(GridObject { "grid" });
 
-	/*
 
 	// insert objects
 	std::string objName = "obj_01";
@@ -34,7 +33,9 @@ void Scene::init() {
 	auto res = std::find_if(this->objects.begin(), this->objects.end(), exists_name_pred);
 
 	if (res == this->objects.end()) {
-		this->objects.push_back(Object { objName });
+		Object obj1 { objName };
+		obj1.addMesh(Mesh {});
+		this->objects.push_back(obj1);
 	}
 
 	// sort by name
@@ -44,7 +45,6 @@ void Scene::init() {
 
 	std::sort(this->objects.begin(), this->objects.end(), sort_by_name_pred);
 
-	*/
 
 	// init objects
 	for (Object& o : this->standardObjects) {
