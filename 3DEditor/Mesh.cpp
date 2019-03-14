@@ -2,8 +2,12 @@
 
 
 const GLsizei Mesh::BUFFER_SIZE = 1;
+const GLenum Mesh::DEFAULT_MESH_TYPE = GL_TRIANGLES;
 
-Mesh::Mesh() {
+
+Mesh::Mesh() : Mesh(DEFAULT_MESH_TYPE) {}
+
+Mesh::Mesh(GLenum _type) : type(_type) {
 	this->vertices = {
 		glm::vec3 { 1.0f, 0.0f, -1.0f },
 		glm::vec3 { 1.0f, 0.0f, 1.0f },
@@ -23,9 +27,36 @@ Mesh::Mesh() {
 }
 
 Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices)
-	: vertices(_vertices), indices(_indices) {}
+	: Mesh(_vertices, _indices, DEFAULT_MESH_TYPE) {}
 
-Mesh::~Mesh() {}
+Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type)
+	: vertices(_vertices), indices(_indices), type(_type) {}
+
+
+Transform& Mesh::getTransform() {
+	return this->transform;
+}
+
+Shader& Mesh::getShader() {
+	return this->shader;
+}
+
+GLenum Mesh::getType() {
+	return this->type;
+}
+
+void Mesh::setTransform(Transform _transform) {
+	this->transform = _transform;
+}
+
+
+void Mesh::setShader(Shader& _shader) {
+	this->shader.free();
+	this->shader = _shader;
+	this->shader.init();
+}
+
+void Mesh::setType(GLenum _type) {}
 
 
 void Mesh::init() {
@@ -50,12 +81,17 @@ void Mesh::init() {
 	//glVertexAttribPointer(Mesh::AttribIndex::NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
 
 	glBindVertexArray(0); // unbind
+
+	this->shader.init();
 }
+
 
 void Mesh::draw() {
 	glBindVertexArray(this->vao);
-	glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, (void*)0);
+	glDrawElements(this->type, this->indices.size(), GL_UNSIGNED_INT, (void*)0);
 	glBindVertexArray(0); // unbind
+
+	this->shader.draw();
 }
 
 
@@ -63,5 +99,7 @@ void Mesh::free() {
 	glDeleteVertexArrays(BUFFER_SIZE, &this->vao);
 	glDeleteBuffers(BUFFER_SIZE, &this->vbo);
 	glDeleteBuffers(BUFFER_SIZE, &this->ebo);
+
+	this->shader.free();
 }
 

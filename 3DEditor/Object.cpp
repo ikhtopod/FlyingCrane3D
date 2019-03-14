@@ -1,37 +1,39 @@
 #include "Object.h"
 
-Object::Object(std::string _name) : name(_name) {
-	this->meshes.push_back(Mesh {});
-}
+
+Object::Object(std::string _name) : name(_name) {}
 
 
 std::string Object::getName() {
 	return this->name;
 }
 
+Transform& Object::getTransform() {
+	return this->transform;
+}
+
 void Object::setName(std::string _name) {
 	this->name = _name;
 }
 
-void Object::init() {
-	this->shader.init();
+void Object::setTransform(Transform _transform) {
+	this->transform = _transform;
+}
 
+
+void Object::init() {
 	for (Mesh& mesh : this->meshes) {
 		mesh.init();
 	}
 }
 
 void Object::draw() {
-	this->shader.draw();
-
 	for (Mesh& mesh : this->meshes) {
 		mesh.draw();
 	}
 }
 
 void Object::free() {
-	this->shader.free();
-
 	for (Mesh& mesh : this->meshes) {
 		mesh.free();
 	}

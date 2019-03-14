@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Object.h"
+#include "Vertex.h"
 
 class GridObject : public Object {
 private:
@@ -12,6 +13,7 @@ private:
 	unsigned int height;
 	unsigned int step;
 public:
+	GridObject() = delete;
 	GridObject(std::string _name);
 	GridObject(std::string _name, unsigned int _width, unsigned int _height, unsigned int _step);
 	virtual ~GridObject() = default;

@@ -19,9 +19,10 @@ Axis& Scene::getAxis() {
 
 
 void Scene::init() {
-	// camera
 	// grid
-	//this->standardObjects.push_back(GridObject { "grid" });
+	this->standardObjects.push_back(GridObject { "grid" });
+
+	/*
 
 	// insert objects
 	std::string objName = "obj_01";
@@ -43,6 +44,7 @@ void Scene::init() {
 
 	std::sort(this->objects.begin(), this->objects.end(), sort_by_name_pred);
 
+	*/
 
 	// init objects
 	for (Object& o : this->standardObjects) {
