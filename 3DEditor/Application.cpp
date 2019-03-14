@@ -77,6 +77,8 @@ void Application::free() {
 }
 
 void Application::mainLoop() {
+	glEnable(GL_MULTISAMPLE);
+
 	glEnable(GL_DEPTH_TEST);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
@@ -89,8 +91,6 @@ void Application::mainLoop() {
 		glfwPollEvents();
 		glfwSwapBuffers(this->window.getWindowPtr());
 	}
-
-	glDisable(GL_DEPTH_TEST);
 }
 
 
