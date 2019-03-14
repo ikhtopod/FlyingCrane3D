@@ -7,31 +7,20 @@
 
 
 class Object {
-private:
-	enum AttribIndex : GLuint {
-		POSITION,
-		//COLOR,
-		//TEXTURE,
-	};
-
-	static const GLsizei BUFFER_SIZE;
-
-private:
+protected:
 	std::string name;
 
 	Transform transform {};
 	Axis axis {};
 
-	Mesh mesh {};
-	Shader shader {};
+	std::vector<Mesh> meshes;
 
-	GLuint vao;
-	GLuint vbo;
+	Shader shader {};
 
 public:
 	Object() = delete;
 	Object(std::string _name);
-	~Object() = default;
+	virtual ~Object() = default;
 
 	std::string getName();
 	void setName(std::string _name);
@@ -40,48 +29,4 @@ public:
 	void draw();
 	void free();
 
-private:
-	float vertices[108] = {
-		-0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f,  0.5f, -0.5f,
-		0.5f,  0.5f, -0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f, -0.5f,  0.5f,
-		0.5f, -0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-
-		0.5f,  0.5f,  0.5f,
-		0.5f,  0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
-
-		-0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f,  0.5f,
-		0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f,  0.5f, -0.5f,
-		0.5f,  0.5f, -0.5f,
-		0.5f,  0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-	};
 };
