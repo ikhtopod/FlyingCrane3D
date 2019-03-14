@@ -2,7 +2,7 @@
 
 
 const float Camera::DEFAULT_MOUSE_PITCH = 0.0f;
-const float Camera::MAX_MOUSE_PITCH = 90.0f;
+const float Camera::MAX_MOUSE_PITCH = 89.0f;
 const float Camera::MIN_MOUSE_PITCH = -MAX_MOUSE_PITCH;
 
 const float Camera::DEFAULT_MOUSE_YAW = -90.0f;
