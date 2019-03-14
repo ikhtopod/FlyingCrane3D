@@ -20,6 +20,10 @@ void Object::setTransform(Transform _transform) {
 	this->transform = _transform;
 }
 
+void Object::addMesh(Mesh _mesh) {
+	this->meshes.push_back(_mesh);
+}
+
 
 void Object::init() {
 	for (Mesh& mesh : this->meshes) {

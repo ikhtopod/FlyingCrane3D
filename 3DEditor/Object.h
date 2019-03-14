@@ -26,6 +26,9 @@ public:
 	void setTransform(Transform _transform);
 
 
+	void addMesh(Mesh _mesh);
+
+
 	void init();
 	void draw();
 	void free();
