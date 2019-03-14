@@ -40,6 +40,14 @@ Shader::Shader() : vertexSource(DEFAULT_VERTEX_SOURCE), fragmentSource(DEFAULT_F
 Shader::Shader(std::string _vertexSource, std::string _fragmentSource)
 	: vertexSource(_vertexSource), fragmentSource(_fragmentSource) {}
 
+glm::vec3 Shader::getObjectColor() {
+	return this->objectColor;
+}
+
+void Shader::setObjectColor(glm::vec3 _color) {
+	this->objectColor = _color;
+}
+
 
 void Shader::setBool(const std::string& name, bool value) const {
 	this->setInt(name, static_cast<int>(value));
@@ -129,7 +137,7 @@ void Shader::draw() {
 	this->setMat4("view", appThis->getScene().getModel().getView());
 	this->setMat4("projection", appThis->getScene().getModel().getProjection());
 
-	this->setVec3("objectColor", glm::vec3 { .7f, .3f, .0f });
+	this->setVec3("objectColor", this->objectColor);
 	this->setVec3("lightColor", glm::vec3 { 1.0f });
 
 	glUseProgram(this->id);

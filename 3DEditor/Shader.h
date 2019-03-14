@@ -16,6 +16,7 @@ private:
 	GLuint vertex;
 	GLuint fragment;
 
+	glm::vec3 objectColor { .7f, .3f, .0f };
 private:
 	static constexpr unsigned int INFOLOG_SIZE = 512;
 
@@ -30,6 +31,9 @@ public:
 	Shader();
 	Shader(std::string _vertexSource, std::string _fragmentSource);
 	~Shader() = default;
+
+	glm::vec3 getObjectColor();
+	void setObjectColor(glm::vec3 _color);
 
 	void setBool(const std::string& name, bool value) const;
 	void setInt(const std::string& name, int value) const;
