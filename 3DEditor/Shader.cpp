@@ -13,10 +13,7 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
-out vec3 Color;
-
 void main(){
-	Color = vec3(0.7f, 0.3f, 0.0f);
 	gl_Position = (projection * view * model) * vec4(VertexPosition, 1.0f);
 }
 )";
@@ -26,10 +23,11 @@ R"(#version 330 core
 
 layout (location = 0) out vec4 FragColor;
 
-in vec3 Color;
+uniform vec3 objectColor;
+uniform vec3 lightColor;
 
 void main() {
-	FragColor = vec4(Color, 1.0f);
+	FragColor = vec4(objectColor * lightColor, 1.0f);
 }
 )";
 
@@ -43,9 +41,26 @@ Shader::Shader(std::string _vertexSource, std::string _fragmentSource)
 	: vertexSource(_vertexSource), fragmentSource(_fragmentSource) {}
 
 
+void Shader::setBool(const std::string& name, bool value) const {
+	this->setInt(name, static_cast<int>(value));
+}
+
+void Shader::setInt(const std::string& name, int value) const {
+	glUniform1i(glGetUniformLocation(this->id, name.c_str()), static_cast<GLint>(value));
+}
+
+void Shader::setFloat(const std::string& name, float value) const {
+	glUniform1f(glGetUniformLocation(this->id, name.c_str()), static_cast<GLfloat>(value));
+}
+
 void Shader::setMat4(const std::string& name, glm::mat4 value) const {
 	GLuint lctn = glGetUniformLocation(this->id, name.c_str());
 	glUniformMatrix4fv(lctn, 1, GL_FALSE, glm::value_ptr(value));
+}
+
+void Shader::setVec3(const std::string& name, glm::vec3 value) const {
+	GLuint lctn = glGetUniformLocation(this->id, name.c_str());
+	glUniform3fv(lctn, 1, &value[0]);
 }
 
 
@@ -113,6 +128,9 @@ void Shader::draw() {
 	this->setMat4("model", appThis->getScene().getModel().getModel());
 	this->setMat4("view", appThis->getScene().getModel().getView());
 	this->setMat4("projection", appThis->getScene().getModel().getProjection());
+
+	this->setVec3("objectColor", glm::vec3 { .7f, .3f, .0f });
+	this->setVec3("lightColor", glm::vec3 { 1.0f });
 
 	glUseProgram(this->id);
 }
