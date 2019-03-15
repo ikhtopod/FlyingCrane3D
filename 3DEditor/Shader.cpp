@@ -9,12 +9,10 @@ R"glsl(#version 330 core
 
 layout (location = 0) in vec3 VertexPosition;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+uniform mat4 mvp; // model-view-projection
 
 void main(){
-	gl_Position = (projection * view * model) * vec4(VertexPosition, 1.0f);
+	gl_Position = mvp * vec4(VertexPosition, 1.0f);
 }
 )glsl";
 
@@ -133,9 +131,7 @@ void Shader::init() {
 void Shader::draw() {
 	Application* appThis = Application::getInstancePtr();
 
-	this->setMat4("model", appThis->getScene().getModel().getModel());
-	this->setMat4("view", appThis->getScene().getModel().getView());
-	this->setMat4("projection", appThis->getScene().getModel().getProjection());
+	this->setMat4("mvp", appThis->getScene().getModel().getModelViewProjection());
 
 	this->setVec3("objectColor", this->objectColor);
 	this->setVec3("lightColor", glm::vec3 { 1.0f });
