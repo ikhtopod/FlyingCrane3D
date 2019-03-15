@@ -7,15 +7,20 @@
 
 class GridObject : public Object {
 private:
-	static const unsigned int DEFAULT_WIDTH;
-	static const unsigned int DEFAULT_HEIGHT;
-	static const unsigned int DEFAULT_STEP;
+	using _uint = unsigned int;
+	using _Cuint = const _uint;
 
-	unsigned int width;
-	unsigned int height;
-	unsigned int step;
+	static GridObject::_Cuint DEFAULT_WIDTH;
+	static GridObject::_Cuint DEFAULT_HEIGHT;
+	static GridObject::_Cuint DEFAULT_STEP;
+
+private:
+	_uint width;
+	_uint height;
+	_uint step;
+
 public:
 	GridObject();
-	GridObject(unsigned int _width, unsigned int _height, unsigned int _step);
+	GridObject(_uint _width, _uint _height);
 	virtual ~GridObject() = default;
 };

@@ -1,67 +1,76 @@
 #include "GridObject.h"
 
 
-const unsigned int GridObject::DEFAULT_WIDTH = 16;
-const unsigned int GridObject::DEFAULT_HEIGHT = GridObject::DEFAULT_WIDTH;
-const unsigned int GridObject::DEFAULT_STEP = 1;
+GridObject::_Cuint GridObject::DEFAULT_WIDTH = 10;
+GridObject::_Cuint GridObject::DEFAULT_HEIGHT = GridObject::DEFAULT_WIDTH;
+GridObject::_Cuint GridObject::DEFAULT_STEP = 1;
 
 
 GridObject::GridObject()
-	: GridObject(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_STEP) {}
+	: GridObject(DEFAULT_WIDTH, DEFAULT_HEIGHT) {}
 
-GridObject::GridObject(unsigned int _width, unsigned int _height, unsigned int _step)
-	: Object(), width(_width), height(_height), step(_step) {
+GridObject::GridObject(_uint _width, _uint _height)
+	: Object(), width(_width), height(_height), step(DEFAULT_STEP) {
 
-	std::vector<Vertex> verticesZ = {
-		glm::vec3 { 0.0f, 0.0f, 5.0f },
-		glm::vec3 { 0.0f, 0.0f, -5.0f },
-	};
-	std::vector<GLuint> indicesZ = { 0, 1 };
+	if (this->width == 0) this->width = DEFAULT_WIDTH;
+	if (this->height == 0) this->height = DEFAULT_HEIGHT;
+
+	const float halfWidth = this->width / 2.0f;
+	const float halfHeight = this->height / 2.0f;
+
 
 	std::vector<Vertex> verticesX = {
-		glm::vec3 { 5.0f, 0.0f, 0.0f },
-		glm::vec3 { -5.0f, 0.0f, 0.0f },
+		glm::vec3 { halfWidth + 1.0f, 0.0f, 0.0f },
+		glm::vec3 { -halfWidth, 0.0f, 0.0f },
 	};
 	std::vector<GLuint> indicesX = { 0, 1 };
+
+	std::vector<Vertex> verticesZ = {
+		glm::vec3 { 0.0f, 0.0f, halfHeight + 1.0f },
+		glm::vec3 { 0.0f, 0.0f, -halfHeight },
+	};
+	std::vector<GLuint> indicesZ = { 0, 1 };
 
 	std::vector<Vertex> verticesGrid {};
 	std::vector<GLuint> indicesGrid {};
 
-	glm::vec3 point1 { 6.0f, 0.0f, -5.0f };
-	glm::vec3 point2 { 6.0f, 0.0f, 5.0f };
-	unsigned int num = 0;
-	for (unsigned int i = 0; i <= 10; i++, num += 2) {
+	_uint stepIndices = 0;
+	_Cuint countPointsInLine = 2;
+
+	glm::vec3 point1 { halfWidth + 1.0f, 0.0f, -halfHeight };
+	glm::vec3 point2 { halfWidth + 1.0f, 0.0f, halfHeight };
+	for (_uint i = 0; i <= this->width; i += this->step, stepIndices += countPointsInLine) {
 		point1.x -= 1;
 		point2.x -= 1;
 
-		if (point1.x == 0) {
-			num -= 2;
+		if (point1.x == 0.0f) {
+			stepIndices -= countPointsInLine;
 			continue;
 		}
 
 		verticesGrid.push_back(point1);
 		verticesGrid.push_back(point2);
 
-		indicesGrid.push_back(num);
-		indicesGrid.push_back(num + 1);
+		indicesGrid.push_back(stepIndices);
+		indicesGrid.push_back(stepIndices + 1);
 	}
 
-	glm::vec3 point3 { -5.0f, 0.0f, 6.0f };
-	glm::vec3 point4 { 5.0f, 0.0f, 6.0f };
-	for (unsigned int i = 0; i <= 10; i++, num += 2) {
+	glm::vec3 point3 { -halfWidth, 0.0f, halfHeight + 1.0f };
+	glm::vec3 point4 { halfWidth, 0.0f, halfHeight + 1.0f };
+	for (_uint i = 0; i <= this->height; i += this->step, stepIndices += countPointsInLine) {
 		point3.z -= 1;
 		point4.z -= 1;
 
-		if (point3.z == 0) {
-			num -= 2;
+		if (point3.z == 0.0f) {
+			stepIndices -= countPointsInLine;
 			continue;
 		}
 
 		verticesGrid.push_back(point3);
 		verticesGrid.push_back(point4);
 
-		indicesGrid.push_back(num);
-		indicesGrid.push_back(num + 1);
+		indicesGrid.push_back(stepIndices);
+		indicesGrid.push_back(stepIndices + 1);
 	}
 
 
