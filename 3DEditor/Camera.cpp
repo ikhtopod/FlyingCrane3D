@@ -50,8 +50,6 @@ Camera::Camera()
 	this->updateCameraVectors();
 }
 
-Camera::~Camera() {}
-
 
 float Camera::getFoV() {
 	return this->fov;

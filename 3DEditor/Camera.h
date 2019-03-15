@@ -45,7 +45,7 @@ private:
 
 public:
 	Camera();
-	~Camera();
+	~Camera() = default;
 
 	float getFoV();
 	float getSpeedMovement();
