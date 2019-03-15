@@ -21,6 +21,9 @@ public:
 	~Window() = default;
 
 	ScreenResolution& getScreen();
+	bool isVSync();
+
+	void setVSync(bool _vSync);
 
 	GLFWwindow& getWindow();
 	GLFWwindow* getWindowPtr();

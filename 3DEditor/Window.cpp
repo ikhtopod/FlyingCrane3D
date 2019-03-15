@@ -17,11 +17,22 @@ Window::Window(std::string sTitle)
 
 Window::Window(std::string sTitle, int sWidth, int sHeight)
 	: screenTitle(sTitle), screen(sWidth, sHeight),
-	vSync(GLFW_TRUE), isHideMouse(false) {}
+	vSync(GLFW_FALSE), isHideMouse(false) {}
 
 
 ScreenResolution& Window::getScreen() {
 	return this->screen;
+}
+
+bool Window::isVSync() {
+	return this->vSync;
+}
+
+void Window::setVSync(bool _vSync) {
+	if (this->vSync != _vSync) {
+		this->vSync = _vSync;
+		glfwSwapInterval(this->vSync);
+	}
 }
 
 
@@ -43,7 +54,7 @@ void Window::init() {
 
 	this->window = glfwCreateWindow(this->screen.getWidth(),
 									this->screen.getHeight(),
-									this->screenTitle.c_str(), 
+									this->screenTitle.c_str(),
 									nullptr, nullptr);
 
 	if (!window) {
