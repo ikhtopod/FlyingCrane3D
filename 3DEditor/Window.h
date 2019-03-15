@@ -18,7 +18,7 @@ public:
 	Window() = delete;
 	Window(std::string sTitle);
 	Window(std::string sTitle, int sWidth, int sHeight);
-	~Window();
+	~Window() = default;
 
 	ScreenResolution& getScreen();
 

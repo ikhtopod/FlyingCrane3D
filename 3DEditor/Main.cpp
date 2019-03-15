@@ -4,7 +4,7 @@ int main() {
 	std::string applicationName = "Application 3D Editor";
 
 	try {
-		Application(applicationName).run();
+		Application(applicationName, 1280, 720).run();
 	} catch (std::exception e) {
 		std::cerr << e.what() << std::endl;
 

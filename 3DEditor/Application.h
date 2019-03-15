@@ -8,6 +8,7 @@
 class Application final : public ITriada {
 private:
 	static Application* instance;
+	static void initInstance(Application*);
 
 	Window window;
 	DeltaTime deltaTime {};
@@ -18,6 +19,7 @@ private:
 public:
 	Application();
 	Application(std::string appTitle);
+	Application(std::string appTitle, int sWidth, int sHeight);
 	~Application() = default;
 
 	static Application& getInstance();

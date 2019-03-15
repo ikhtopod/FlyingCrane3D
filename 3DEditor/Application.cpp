@@ -3,11 +3,23 @@
 
 Application* Application::instance = nullptr;
 
+void Application::initInstance(Application* _this) {
+	if (Application::instance == nullptr) {
+		Application::instance = _this;
+	}
+}
+
+
 Application::Application() : Application("") {}
 
 Application::Application(std::string appTitle) : window(appTitle) {
-	if (Application::instance == nullptr)
-		Application::instance = this;
+	Application::initInstance(this);
+}
+
+Application::Application(std::string appTitle, int sWidth, int sHeight)
+	: window(appTitle, sWidth, sHeight) {
+
+	Application::initInstance(this);
 }
 
 

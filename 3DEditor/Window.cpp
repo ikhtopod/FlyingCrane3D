@@ -11,15 +11,13 @@ void Window::initWindowHints() const {
 
 
 Window::Window(std::string sTitle)
-	: Window(sTitle, ScreenResolution::DEFAULT_SCREEN_WIDTH, ScreenResolution::DEFAULT_SCREEN_HEIGHT) {}
+	: Window(sTitle, ScreenResolution::DEFAULT_SCREEN_WIDTH,
+			 ScreenResolution::DEFAULT_SCREEN_HEIGHT) {}
 
 
 Window::Window(std::string sTitle, int sWidth, int sHeight)
 	: screenTitle(sTitle), screen(sWidth, sHeight),
 	vSync(GLFW_TRUE), isHideMouse(false) {}
-
-
-Window::~Window() {}
 
 
 ScreenResolution& Window::getScreen() {
@@ -43,7 +41,11 @@ void Window::init() {
 
 	initWindowHints();
 
-	this->window = glfwCreateWindow(this->screen.getWidth(), this->screen.getHeight(), this->screenTitle.c_str(), nullptr, nullptr);
+	this->window = glfwCreateWindow(this->screen.getWidth(),
+									this->screen.getHeight(),
+									this->screenTitle.c_str(), 
+									nullptr, nullptr);
+
 	if (!window) {
 		throw WindowException("Error in Window::init(): GLFWwindow is 0");
 	}
