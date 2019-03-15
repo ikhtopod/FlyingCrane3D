@@ -32,7 +32,7 @@ void Scene::addObject(std::string _name, Object _object) {
 
 void Scene::init() {
 	// grid
-	this->addStandardObject("grid.001", GridObject {});
+	this->addStandardObject("grid_8x8.000", GridObject { 8, 8 });
 
 	// insert objects
 	Object pyramid_000 {};
