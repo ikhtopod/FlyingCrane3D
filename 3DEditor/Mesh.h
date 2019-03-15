@@ -37,6 +37,7 @@ public:
 	Mesh(GLenum _type);
 	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices);
 	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type);
+	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader);
 	~Mesh() = default;
 
 	Transform& getTransform();

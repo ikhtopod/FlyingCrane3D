@@ -19,15 +19,17 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 #include <algorithm>
 #include <vector>
 #include <map>
 #include <cstdlib>
 #include <cstddef>
 #include <cmath>
+#include <exception>
 #include <stdexcept>
 #include <type_traits>
-
+#include <filesystem>
 
 
 /* app headers */
@@ -35,6 +37,7 @@
 #include "ITriada.h"
 
 #include "Util.h"
+
 #include "Application.h"
 #include "Window.h"
 #include "ScreenResolution.h"

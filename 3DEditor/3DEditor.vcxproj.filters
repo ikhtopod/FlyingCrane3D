@@ -177,4 +177,12 @@
       <UniqueIdentifier>{668327a0-e97c-4dd4-a1e5-bb48e358a075}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\resources\shaders\GridObjectMeshX.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\resources\shaders\GridObjectMeshX.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+  </ItemGroup>
 </Project>

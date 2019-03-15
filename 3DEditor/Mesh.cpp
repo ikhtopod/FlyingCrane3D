@@ -30,7 +30,10 @@ Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices)
 	: Mesh(_vertices, _indices, DEFAULT_MESH_TYPE) {}
 
 Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type)
-	: vertices(_vertices), indices(_indices), type(_type) {}
+	: Mesh(_vertices, _indices, _type, Shader {}) {}
+
+Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader)
+	: vertices(_vertices), indices(_indices), type(_type), shader(_shader) {}
 
 
 Transform& Mesh::getTransform() {
@@ -87,11 +90,11 @@ void Mesh::init() {
 
 
 void Mesh::draw() {
+	this->shader.draw();
+
 	glBindVertexArray(this->vao);
 	glDrawElements(this->type, this->indices.size(), GL_UNSIGNED_INT, (void*)0);
 	glBindVertexArray(0); // unbind
-
-	this->shader.draw();
 }
 
 

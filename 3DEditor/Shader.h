@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Util.h"
 #include "ITriada.h"
 #include "Application.h"
+
 
 class Shader : public ITriada {
 private:
@@ -17,7 +19,8 @@ private:
 	GLuint vertex;
 	GLuint fragment;
 
-	glm::vec3 objectColor { .7f, .3f, .0f };
+	bool useMVP = true;
+
 private:
 	static constexpr unsigned int INFOLOG_SIZE = 512;
 
@@ -30,11 +33,11 @@ private:
 
 public:
 	Shader();
-	Shader(std::string _vertexSource, std::string _fragmentSource);
+	Shader(std::filesystem::path _vertexPath, std::filesystem::path _fragmentPath);
 	~Shader() = default;
 
-	glm::vec3 getObjectColor();
-	void setObjectColor(glm::vec3 _color);
+	bool getUseMVP();
+	void setUseMVP(bool _useMVP);
 
 	void setBool(const std::string& name, bool value) const;
 	void setInt(const std::string& name, int value) const;

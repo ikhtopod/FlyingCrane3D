@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Util.h"
 #include "Object.h"
 #include "Vertex.h"
+#include "Shader.h"
 
 class GridObject : public Object {
 private:

@@ -190,6 +190,10 @@
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\resources\shaders\GridObjectMeshX.fs" />
+    <None Include="..\resources\shaders\GridObjectMeshX.vs" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

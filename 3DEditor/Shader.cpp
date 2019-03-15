@@ -21,10 +21,9 @@ R"glsl(#version 330 core
 
 layout (location = 0) out vec4 FragColor;
 
-uniform vec3 objectColor;
-uniform vec3 lightColor;
-
 void main() {
+	vec3 objectColor = vec3(.7f, .3f, .0f);
+	vec3 lightColor = vec3( 1.0f );
 	FragColor = vec4(objectColor * lightColor, 1.0f);
 }
 )glsl";
@@ -35,16 +34,19 @@ void main() {
 
 Shader::Shader() : vertexSource(DEFAULT_VERTEX_SOURCE), fragmentSource(DEFAULT_FRAGMENT_SOURCE) {}
 
-Shader::Shader(std::string _vertexSource, std::string _fragmentSource)
-	: vertexSource(_vertexSource), fragmentSource(_fragmentSource) {}
+Shader::Shader(std::filesystem::path _vertexPath, std::filesystem::path _fragmentPath)
+	: vertexSource(Util::getTextFromFile(_vertexPath)),
+	fragmentSource(Util::getTextFromFile(_fragmentPath)) {}
 
-glm::vec3 Shader::getObjectColor() {
-	return this->objectColor;
+
+bool Shader::getUseMVP() {
+	return this->useMVP;
 }
 
-void Shader::setObjectColor(glm::vec3 _color) {
-	this->objectColor = _color;
+void Shader::setUseMVP(bool _useMVP) {
+	this->useMVP = _useMVP;
 }
+
 
 
 void Shader::setBool(const std::string& name, bool value) const {
@@ -131,10 +133,9 @@ void Shader::init() {
 void Shader::draw() {
 	Application* appThis = Application::getInstancePtr();
 
-	this->setMat4("mvp", appThis->getScene().getModel().getModelViewProjection());
-
-	this->setVec3("objectColor", this->objectColor);
-	this->setVec3("lightColor", glm::vec3 { 1.0f });
+	if (this->useMVP) {
+		this->setMat4("mvp", appThis->getScene().getModel().getModelViewProjection());
+	}
 
 	glUseProgram(this->id);
 }

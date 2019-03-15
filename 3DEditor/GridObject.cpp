@@ -65,13 +65,16 @@ GridObject::GridObject(unsigned int _width, unsigned int _height, unsigned int _
 	}
 
 
-	Mesh meshX { verticesX, indicesX, GL_LINES };
-	Mesh meshZ { verticesZ, indicesZ, GL_LINES };
-	Mesh meshGrid { verticesGrid, indicesGrid, GL_LINES };
+	std::filesystem::path meshXVertex { Util::SHADER_DIRECTORY + R"(\GridObjectMeshX.vs)" };
+	std::filesystem::path meshXFragment { Util::SHADER_DIRECTORY + R"(\GridObjectMeshX.fs)" };
+	std::filesystem::path meshZVertex { Util::SHADER_DIRECTORY + R"(\GridObjectMeshZ.vs)" };
+	std::filesystem::path meshZFragment { Util::SHADER_DIRECTORY + R"(\GridObjectMeshZ.fs)" };
+	std::filesystem::path meshGridVertex { Util::SHADER_DIRECTORY + R"(\GridObjectMeshGrid.vs)" };
+	std::filesystem::path meshGridFragment { Util::SHADER_DIRECTORY + R"(\GridObjectMeshGrid.fs)" };
 
-	meshX.getShader().setObjectColor(glm::vec3 { 1.0f, 0.0f, 0.0f });
-	meshZ.getShader().setObjectColor(glm::vec3 { 0.0f, 0.0f, 1.0f });
-	meshGrid.getShader().setObjectColor(glm::vec3 { .5f, .5f, .5f });
+	Mesh meshX { verticesX, indicesX, GL_LINES, Shader { meshXVertex, meshXFragment } };
+	Mesh meshZ { verticesZ, indicesZ, GL_LINES, Shader { meshZVertex, meshZFragment } };
+	Mesh meshGrid { verticesGrid, indicesGrid, GL_LINES, Shader { meshGridVertex, meshGridFragment } };
 
 	this->addMesh("meshX", meshX);
 	this->addMesh("meshZ", meshZ);
