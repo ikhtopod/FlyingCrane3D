@@ -35,9 +35,27 @@ void Scene::init() {
 	this->addStandardObject("grid.001", GridObject {});
 
 	// insert objects
-	Object obj1 {};
-	obj1.addMesh("mesh.001", Mesh {});
-	this->addObject("object.001", obj1);
+	Object pyramid_000 {};
+	Mesh pyramid_mesh_000 {
+		{
+			glm::vec3 { 1.0f, 0.0f, -1.0f },
+			glm::vec3 { 1.0f, 0.0f, 1.0f },
+			glm::vec3 { -1.0f, 0.0f, 1.0f },
+			glm::vec3 { -1.0f, 0.0f, -1.0f },
+			glm::vec3 { 0.0f, 2.0f, 0.0f },
+		},
+		{
+			1, 3, 0,
+			0, 4, 1,
+			1, 4, 2,
+			2, 4, 3,
+			4, 0, 3,
+			1, 2, 3,
+		},
+		GL_TRIANGLES
+	};
+	pyramid_000.addMesh("pyramid_mesh.000", pyramid_mesh_000);
+	this->addObject("pyramid.000", pyramid_000);
 
 	// init objects
 	for (auto& o : this->standardObjects) {
