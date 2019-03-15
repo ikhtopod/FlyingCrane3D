@@ -32,6 +32,8 @@
 
 /* app headers */
 
+#include "ITriada.h"
+
 #include "Util.h"
 #include "Application.h"
 #include "Window.h"

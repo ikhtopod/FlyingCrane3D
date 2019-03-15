@@ -1,11 +1,12 @@
 #pragma once
 
+#include "ITriada.h"
 #include "Transform.h"
 #include "Axis.h"
 #include "Mesh.h"
 
 
-class Object {
+class Object : public ITriada {
 protected:
 	Transform transform {};
 	Axis axis {};
@@ -22,8 +23,8 @@ public:
 
 	void addMesh(std::string _name, Mesh _mesh);
 
-	void init();
-	void draw();
-	void free();
+	virtual void init() override;
+	virtual void draw() override;
+	virtual void free() override;
 
 };

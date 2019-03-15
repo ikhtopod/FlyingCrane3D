@@ -1,11 +1,12 @@
 #pragma once
 
+#include "ITriada.h"
 #include "Shader.h"
 #include "Vertex.h"
 #include "Polygon.h"
 
 
-class Mesh {
+class Mesh : public ITriada {
 private:
 	static const GLsizei BUFFER_SIZE;
 	static const GLenum DEFAULT_MESH_TYPE;
@@ -46,8 +47,8 @@ public:
 	void setShader(Shader& _shader);
 	void setType(GLenum _type);
 
-	void init();
-	void draw();
-	void free();
+	virtual void init() override;
+	virtual void draw() override;
+	virtual void free() override;
 
 };

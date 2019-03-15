@@ -1,8 +1,9 @@
 #pragma once
 
+#include "ITriada.h"
 #include "Application.h"
 
-class Shader {
+class Shader : public ITriada {
 private:
 	static const std::string DEFAULT_VERTEX_SOURCE;
 	static const std::string DEFAULT_FRAGMENT_SOURCE;
@@ -41,9 +42,10 @@ public:
 	void setMat4(const std::string& name, glm::mat4 value) const;
 	void setVec3(const std::string& name, glm::vec3 value) const;
 
-	void init();
-	void draw();
-	void free();
+	virtual void init() override;
+	virtual void draw() override;
+	virtual void free() override;
+
 };
 
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ITriada.h"
 #include "Object.h"
 #include "GridObject.h"
 #include "Camera.h"
@@ -7,7 +8,7 @@
 #include "Transform.h"
 #include "Axis.h"
 
-class Scene final {
+class Scene final : public ITriada {
 private:
 	Camera camera {};
 	Model model {};
@@ -30,7 +31,8 @@ public:
 	void addStandardObject(std::string _name, Object _object);
 	void addObject(std::string _name, Object _object);
 
-	void init();
-	void draw();
-	void free();
+	virtual void init() override;
+	virtual void draw() override;
+	virtual void free() override;
+
 };
