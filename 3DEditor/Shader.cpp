@@ -35,8 +35,9 @@ void main() {
 Shader::Shader() : vertexSource(DEFAULT_VERTEX_SOURCE), fragmentSource(DEFAULT_FRAGMENT_SOURCE) {}
 
 Shader::Shader(std::filesystem::path _vertexPath, std::filesystem::path _fragmentPath)
-	: vertexSource(Util::getTextFromFile(_vertexPath)),
-	fragmentSource(Util::getTextFromFile(_fragmentPath)) {}
+	: vertexPath(_vertexPath), fragmentPath(_fragmentPath),
+	vertexSource(Util::getTextFromFile(vertexPath)),
+	fragmentSource(Util::getTextFromFile(fragmentPath)) {}
 
 
 bool Shader::getUseMVP() {

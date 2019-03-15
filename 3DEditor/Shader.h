@@ -13,6 +13,9 @@ private:
 private:
 	GLuint id;
 
+	std::filesystem::path vertexPath {};
+	std::filesystem::path fragmentPath {};
+
 	std::string vertexSource;
 	std::string fragmentSource;
 
