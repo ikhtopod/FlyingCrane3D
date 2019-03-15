@@ -9,12 +9,14 @@ private:
 	glm::mat4 view { Util::IDENTITY_MATRIX };
 	glm::mat4 projection { Util::IDENTITY_MATRIX };
 public:
-	Model();
-	~Model();
+	Model() = default;
+	~Model() = default;
 
 	glm::mat4 getModel();
 	glm::mat4 getView();
 	glm::mat4 getProjection();
+
+	glm::mat4 getModelViewProjection();
 
 	void setModel(glm::mat4 _model);
 	void setView(glm::mat4 _view);

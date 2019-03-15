@@ -1,11 +1,6 @@
 #include "Model.h"
 
 
-Model::Model() {}
-
-Model::~Model() {}
-
-
 glm::mat4 Model::getModel() {
 	return this->model;
 }
@@ -16,6 +11,10 @@ glm::mat4 Model::getView() {
 
 glm::mat4 Model::getProjection() {
 	return this->projection;
+}
+
+glm::mat4 Model::getModelViewProjection() {
+	return this->projection * this->view * this->model;
 }
 
 
