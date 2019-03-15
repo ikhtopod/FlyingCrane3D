@@ -39,7 +39,7 @@ glm::vec4 Application::getBgColor() {
 void Application::run() {
 	try {
 		this->init();
-		this->mainLoop();
+		this->draw();
 		this->free();
 	} catch (std::exception e) {
 		this->window.close();
@@ -71,12 +71,7 @@ void Application::init() {
 	}
 }
 
-void Application::free() {
-	this->window.close();
-	this->scene.free();
-}
-
-void Application::mainLoop() {
+void Application::draw() {
 	glEnable(GL_MULTISAMPLE);
 
 	glEnable(GL_DEPTH_TEST);
@@ -93,6 +88,10 @@ void Application::mainLoop() {
 	}
 }
 
+void Application::free() {
+	this->window.close();
+	this->scene.free();
+}
 
 void Application::pressedEscape() {
 	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {

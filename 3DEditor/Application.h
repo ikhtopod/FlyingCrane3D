@@ -3,8 +3,9 @@
 #include "Window.h"
 #include "DeltaTime.h"
 #include "Scene.h"
+#include "ITriada.h"
 
-class Application final {
+class Application final : public ITriada {
 private:
 	static Application* instance;
 
@@ -32,9 +33,9 @@ public:
 private:
 	void loadGLLoader() const;
 
-	void init();
-	void free();
-	void mainLoop();
+	virtual void init() override;
+	virtual void draw() override;
+	virtual void free() override;
 
 	void pressedEscape();
 	void keyboardMovement();
