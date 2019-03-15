@@ -67,7 +67,19 @@ void Application::loadGLLoader() const {
 	}
 }
 
-/* ***** */
+
+void Application::mainLoop() {
+	while (!glfwWindowShouldClose(this->window.getWindowPtr())) {
+		this->input();
+		this->rendering();
+
+		glfwPollEvents();
+		glfwSwapBuffers(this->window.getWindowPtr());
+
+		this->deltaTime.update(this->window.isVSync());
+	}
+}
+
 
 void Application::init() {
 	try {
@@ -89,15 +101,7 @@ void Application::draw() {
 	glEnable(GL_DEPTH_TEST);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	while (!glfwWindowShouldClose(this->window.getWindowPtr())) {
-		this->deltaTime.update();
-
-		this->input();
-		this->rendering();
-
-		glfwPollEvents();
-		glfwSwapBuffers(this->window.getWindowPtr());
-	}
+	this->mainLoop();
 }
 
 void Application::free() {

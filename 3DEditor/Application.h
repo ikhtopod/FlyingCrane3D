@@ -11,7 +11,7 @@ private:
 	static void initInstance(Application*);
 
 	Window window;
-	DeltaTime deltaTime {};
+	DeltaTime deltaTime { 60 };
 	Scene scene {};
 
 	glm::vec4 bgColor { .2f, .2f, .3f, 1.0f };
@@ -34,6 +34,8 @@ public:
 
 private:
 	void loadGLLoader() const;
+
+	void mainLoop();
 
 	virtual void init() override;
 	virtual void draw() override;
