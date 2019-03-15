@@ -5,29 +5,13 @@ const GLsizei Mesh::BUFFER_SIZE = 1;
 const GLenum Mesh::DEFAULT_MESH_TYPE = GL_TRIANGLES;
 
 
-Mesh::Mesh() : Mesh(DEFAULT_MESH_TYPE) {}
-
-Mesh::Mesh(GLenum _type) : type(_type) {
+Mesh::Mesh() : type(GL_POINTS) {
 	this->vertices = {
-		glm::vec3 { 1.0f, 0.0f, -1.0f },
-		glm::vec3 { 1.0f, 0.0f, 1.0f },
-		glm::vec3 { -1.0f, 0.0f, 1.0f },
-		glm::vec3 { -1.0f, 0.0f, -1.0f },
-		glm::vec3 { 0.0f, 2.0f, 0.0f },
+		glm::vec3 { 0.0f, 0.0f, 0.0f },
 	};
 
-	this->indices = {
-		1, 3, 0,
-		0, 4, 1,
-		1, 4, 2,
-		2, 4, 3,
-		4, 0, 3,
-		1, 2, 3,
-	};
+	this->indices = { 0 };
 }
-
-Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices)
-	: Mesh(_vertices, _indices, DEFAULT_MESH_TYPE) {}
 
 Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type)
 	: Mesh(_vertices, _indices, _type, Shader {}) {}
