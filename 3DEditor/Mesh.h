@@ -13,7 +13,7 @@ private:
 
 	enum AttribIndex : GLuint {
 		POSITION,
-		// NORMAL,
+		NORMAL,
 		// TEXTURE,
 		// TANGENT,
 		// BITANGENT,
@@ -24,8 +24,8 @@ private:
 	GLuint vbo;
 	GLuint ebo;
 
-	std::vector<Vertex> vertices;
-	std::vector<GLuint> indices;
+	std::vector<Vertex> vertices {};
+	std::vector<GLuint> indices {};
 
 	Transform transform {};
 	Shader shader {};

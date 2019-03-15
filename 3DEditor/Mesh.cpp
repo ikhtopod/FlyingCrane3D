@@ -7,7 +7,10 @@ const GLenum Mesh::DEFAULT_MESH_TYPE = GL_TRIANGLES;
 
 Mesh::Mesh() : type(GL_POINTS) {
 	this->vertices = {
-		glm::vec3 { 0.0f, 0.0f, 0.0f },
+		Vertex {
+			glm::vec3 { 0.0f, 0.0f, 0.0f },
+			glm::vec3 { 0.0f, 1.0f, 0.0f }
+		}
 	};
 
 	this->indices = { 0 };
@@ -64,8 +67,8 @@ void Mesh::init() {
 	glVertexAttribPointer(Mesh::AttribIndex::POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 
 	// vertex normals
-	//glEnableVertexAttribArray(Mesh::AttribIndex::NORMAL);
-	//glVertexAttribPointer(Mesh::AttribIndex::NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+	glEnableVertexAttribArray(Mesh::AttribIndex::NORMAL);
+	glVertexAttribPointer(Mesh::AttribIndex::NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
 
 	glBindVertexArray(0); // unbind
 
@@ -75,7 +78,7 @@ void Mesh::init() {
 
 void Mesh::draw() {
 	this->shader.draw();
-
+	
 	glBindVertexArray(this->vao);
 	glDrawElements(this->type, this->indices.size(), GL_UNSIGNED_INT, (void*)0);
 	glBindVertexArray(0); // unbind

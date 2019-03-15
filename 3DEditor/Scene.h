@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ITriada.h"
+#include "Vertex.h"
 #include "Object.h"
 #include "GridObject.h"
 #include "Camera.h"

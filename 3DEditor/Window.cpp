@@ -17,7 +17,7 @@ Window::Window(std::string sTitle)
 
 Window::Window(std::string sTitle, int sWidth, int sHeight)
 	: screenTitle(sTitle), screen(sWidth, sHeight),
-	vSync(GLFW_FALSE), isHideMouse(false) {}
+	vSync(GLFW_TRUE), isHideMouse(false) {}
 
 
 ScreenResolution& Window::getScreen() {

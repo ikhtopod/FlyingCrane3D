@@ -8,11 +8,19 @@ const std::string Shader::DEFAULT_VERTEX_SOURCE =
 R"glsl(#version 330 core
 
 layout (location = 0) in vec3 VertexPosition;
+layout (location = 1) in vec3 VertexNormal;
 
-uniform mat4 mvp; // model-view-projection
+out vec3 FragPos;
+out vec3 Normal;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
 
 void main(){
-	gl_Position = mvp * vec4(VertexPosition, 1.0f);
+	FragPos = vec3( model * vec4(VertexPosition, 1.0) );
+	Normal = VertexNormal;
+	gl_Position = (projection * view * model) * vec4(VertexPosition, 1.0f);
 }
 )glsl";
 
@@ -21,10 +29,29 @@ R"glsl(#version 330 core
 
 layout (location = 0) out vec4 FragColor;
 
+in vec3 FragPos;
+in vec3 Normal;
+
 void main() {
-	vec3 objectColor = vec3(.7f, .3f, .0f);
+	vec3 lightPos = vec3(1.2f, 1.0f, 2.0f);
 	vec3 lightColor = vec3( 1.0f );
-	FragColor = vec4(objectColor * lightColor, 1.0f);
+	
+	vec3 norm = normalize(Normal);
+	vec3 lightDir = normalize(lightPos - FragPos);
+	
+	float diff = max( dot(norm, lightDir), 0.0 );
+	vec3 diffuse = diff * lightColor;
+	
+	float ambientStrength = 1.0f;
+	//vec3 ambientStrength = vec3(0.2f, 0.2f, 0.3f);
+	vec3 ambient = lightColor * ambientStrength;
+
+	vec3 objectColor = vec3(.7f, .3f, .0f);
+	
+	vec3 result = (ambient + diffuse) * objectColor;
+	//vec3 result = ambient * objectColor;
+	
+	FragColor = vec4(result, 1.0f);
 }
 )glsl";
 
@@ -135,7 +162,9 @@ void Shader::draw() {
 	Application* appThis = Application::getInstancePtr();
 
 	if (this->useMVP) {
-		this->setMat4("mvp", appThis->getScene().getModel().getModelViewProjection());
+		this->setMat4("model", appThis->getScene().getModel().getModel());
+		this->setMat4("view", appThis->getScene().getModel().getView());
+		this->setMat4("projection", appThis->getScene().getModel().getProjection());
 	}
 
 	glUseProgram(this->id);

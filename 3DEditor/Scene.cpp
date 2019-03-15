@@ -36,13 +36,50 @@ void Scene::init() {
 
 	// insert objects
 	Object pyramid_000 {};
-	Mesh pyramid_mesh_000 {
+	Mesh pyramid_mesh_000_flat {
 		{
-			glm::vec3 { 1.0f, 0.0f, -1.0f },
-			glm::vec3 { 1.0f, 0.0f, 1.0f },
-			glm::vec3 { -1.0f, 0.0f, 1.0f },
-			glm::vec3 { -1.0f, 0.0f, -1.0f },
-			glm::vec3 { 0.0f, 2.0f, 0.0f },
+			Vertex{ { 1.0f, 0.0f, 1.0f },  { 0.0f, -1.0f, 0.0f } },
+			Vertex{ { -1.0f, 0.0f, -1.0f }, { 0.0f, -1.0f, 0.0f } },
+			Vertex{ { 1.0f, 0.0f, -1.0f }, { 0.0f, -1.0f, 0.0f } },
+
+			Vertex{ { 1.0f, 0.0f, -1.0f }, { 0.8944f, 0.4472f, 0.0f } },
+			Vertex{ { 0.0f, 2.0f, 0.0f }, { 0.8944f, 0.4472f, 0.0f } },
+			Vertex{ { 1.0f, 0.0f, 1.0f },  { 0.8944f, 0.4472f, 0.0f } },
+
+			Vertex{ { 1.0f, 0.0f, 1.0f },  { 0.0f, 0.4472f, 0.8944f } },
+			Vertex{ { 0.0f, 2.0f, 0.0f }, { 0.0f, 0.4472f, 0.8944f } },
+			Vertex{ { -1.0f, 0.0f, 1.0f }, { 0.0f, 0.4472f, 0.8944f } },
+
+			Vertex{ { -1.0f, 0.0f, 1.0f }, { -0.8944f, 0.4472f, 0.0f } },
+			Vertex{ { 0.0f, 2.0f, 0.0f }, { -0.8944f, 0.4472f, 0.0f } },
+			Vertex{ { -1.0f, 0.0f, -1.0f }, { -0.8944f, 0.4472f, 0.0f } },
+
+			Vertex{ { 0.0f, 2.0f, 0.0f }, { 0.0f, 0.4472f, -0.8944f } },
+			Vertex{ { 1.0f, 0.0f, -1.0f }, { 0.0f, 0.4472f, -0.8944f } },
+			Vertex{ { -1.0f, 0.0f, -1.0f }, { 0.0f, 0.4472f, -0.8944f } },
+
+			Vertex{ { 1.0f, 0.0f, 1.0f },  { 0.0f, -1.0f, 0.0f } },
+			Vertex{ { -1.0f, 0.0f, 1.0f }, { 0.0f, -1.0f, 0.0f } },
+			Vertex{ { -1.0f, 0.0f, -1.0f }, { 0.0f, -1.0f, 0.0f } },
+		},
+		{
+			0, 1, 2,
+			3, 4, 5,
+			6, 7, 8,
+			9, 10, 11,
+			12, 13, 14,
+			15, 16, 17,
+		},
+		GL_TRIANGLES
+	};
+
+	/*Mesh pyramid_mesh_000_smooth {
+		{
+			Vertex{ { 1.0f, 0.0f, -1.0f }, { 0.0f, -1.0f, 0.0f } },
+			Vertex{ { 1.0f, 0.0f, 1.0f },  { 0.8944f, 0.4472f, 0.0f } },
+			Vertex{ { -1.0f, 0.0f, 1.0f }, { 0.0f, 0.4472f, 0.8944f } },
+			Vertex{ { -1.0f, 0.0f, -1.0f }, { -0.8944f, 0.4472f, 0.0f } },
+			Vertex{ { 0.0f, 2.0f, 0.0f }, { 0.0f, 0.4472f, -0.8944f } },
 		},
 		{
 			1, 3, 0,
@@ -53,8 +90,9 @@ void Scene::init() {
 			1, 2, 3,
 		},
 		GL_TRIANGLES
-	};
-	pyramid_000.addMesh("pyramid_mesh.000", pyramid_mesh_000);
+	};*/
+
+	pyramid_000.addMesh("pyramid_mesh.000", pyramid_mesh_000_flat);
 	this->addObject("pyramid.000", pyramid_000);
 
 	// init objects
