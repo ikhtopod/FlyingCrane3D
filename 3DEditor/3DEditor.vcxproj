@@ -173,6 +173,7 @@
     <ClInclude Include="DeltaTime.h" />
     <ClInclude Include="ArithmeticVec3.h" />
     <ClInclude Include="GridObject.h" />
+    <ClInclude Include="ITriada.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />

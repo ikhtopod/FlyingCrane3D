@@ -135,6 +135,9 @@
     <ClInclude Include="Polygon.h">
       <Filter>Headers\Object</Filter>
     </ClInclude>
+    <ClInclude Include="ITriada.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
