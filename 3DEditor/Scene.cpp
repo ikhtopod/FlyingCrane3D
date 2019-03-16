@@ -36,7 +36,7 @@ void Scene::init() {
 
 	// insert objects
 	Object pyramid_000 {};
-	Mesh pyramid_mesh_000_flat {
+	Mesh pyramid_mesh_flat_000 {
 		{
 			Vertex{ { 1.0f, 0.0f, 1.0f },  { 0.0f, -1.0f, 0.0f } },
 			Vertex{ { -1.0f, 0.0f, -1.0f }, { 0.0f, -1.0f, 0.0f } },
@@ -73,7 +73,7 @@ void Scene::init() {
 		GL_TRIANGLES
 	};
 
-	/*Mesh pyramid_mesh_000_smooth {
+	/*Mesh pyramid_mesh_smooth_000 {
 		{
 			Vertex{ { 1.0f, 0.0f, -1.0f }, { 0.0f, -1.0f, 0.0f } },
 			Vertex{ { 1.0f, 0.0f, 1.0f },  { 0.8944f, 0.4472f, 0.0f } },
@@ -92,7 +92,7 @@ void Scene::init() {
 		GL_TRIANGLES
 	};*/
 
-	pyramid_000.addMesh("pyramid_mesh.000", pyramid_mesh_000_flat);
+	pyramid_000.addMesh("pyramid_mesh_flat.000", pyramid_mesh_flat_000);
 	this->addObject("pyramid.000", pyramid_000);
 
 	// init objects
