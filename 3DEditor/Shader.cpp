@@ -161,6 +161,8 @@ void Shader::init() {
 }
 
 void Shader::draw() {
+	glUseProgram(this->id);
+
 	Application* appThis = Application::getInstancePtr();
 
 	if (this->useMVP) {
@@ -168,8 +170,6 @@ void Shader::draw() {
 		this->setMat4("mvp.view", appThis->getScene().getModel().getView());
 		this->setMat4("mvp.projection", appThis->getScene().getModel().getProjection());
 	}
-
-	glUseProgram(this->id);
 }
 
 void Shader::free() {
