@@ -1,27 +1,41 @@
 #pragma once
 
+using std::chrono::duration_cast;
+
 class DeltaTime final {
 private:
-	float deltaTime;
-	double lastTime;
-	float fps;
-	float duration_fps;
+	using Mcrsec = std::chrono::microseconds;
+	using FpsClock = std::chrono::steady_clock;
+	using timePointFps = std::chrono::time_point<FpsClock>;
+
+	static constexpr long long MIN_SLEEP_FOR = 1000LL;
+
+private:
+	Mcrsec deltaTime {};
+	timePointFps lastTime;
+	unsigned int fps;
+	Mcrsec durationFps;
+
+private:
+	static float mcrsecToFloatCast(Mcrsec value);
+	void updateDurationFps();
 
 public:
-	static const int DEFAULT_FPS;
+	static const unsigned int DEFAULT_FPS;
 
 public:
 	DeltaTime();
 	DeltaTime(unsigned int _fps);
 	~DeltaTime() = default;
 
-	float getFPS();
-	void setFPS(float _fps);
+	unsigned int getFps();
+	void setFps(unsigned int _fps);
 
-	float getDurationFPS();
+	float getDurationFps();
 
 	operator float();
 	operator std::string();
+	operator Mcrsec();
 
 	void update();
 	void update(bool isVSync);
