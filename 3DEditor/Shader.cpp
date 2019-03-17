@@ -13,14 +13,16 @@ layout (location = 1) in vec3 VertexNormal;
 out vec3 FragPos;
 out vec3 Normal;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+uniform struct MVP {
+	mat4 model;
+	mat4 view;
+	mat4 projection;
+} mvp;
 
 void main(){
-	FragPos = vec3( model * vec4(VertexPosition, 1.0) );
+	FragPos = vec3( mvp.model * vec4(VertexPosition, 1.0) );
 	Normal = VertexNormal;
-	gl_Position = (projection * view * model) * vec4(VertexPosition, 1.0f);
+	gl_Position = (mvp.projection * mvp.view * mvp.model) * vec4(VertexPosition, 1.0f);
 }
 )glsl";
 
@@ -162,9 +164,9 @@ void Shader::draw() {
 	Application* appThis = Application::getInstancePtr();
 
 	if (this->useMVP) {
-		this->setMat4("model", appThis->getScene().getModel().getModel());
-		this->setMat4("view", appThis->getScene().getModel().getView());
-		this->setMat4("projection", appThis->getScene().getModel().getProjection());
+		this->setMat4("mvp.model", appThis->getScene().getModel().getModel());
+		this->setMat4("mvp.view", appThis->getScene().getModel().getView());
+		this->setMat4("mvp.projection", appThis->getScene().getModel().getProjection());
 	}
 
 	glUseProgram(this->id);

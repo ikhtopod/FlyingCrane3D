@@ -3,10 +3,12 @@
 layout (location = 0) in vec3 VertexPosition;
 layout (location = 1) in vec3 VertexNormal;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+uniform struct MVP {
+	mat4 model;
+	mat4 view;
+	mat4 projection;
+} mvp;
 
 void main(){
-	gl_Position = (projection * view * model) * vec4(VertexPosition, 1.0f);
+	gl_Position = (mvp.projection * mvp.view * mvp.model) * vec4(VertexPosition, 1.0f);
 }
