@@ -11,7 +11,7 @@ private:
 	static void initInstance(Application*);
 
 	Window window;
-	DeltaTime deltaTime { 60 };
+	DeltaTime deltaTime { 120 };
 	Scene scene {};
 
 	glm::vec4 bgColor { .2f, .2f, .3f, 1.0f };

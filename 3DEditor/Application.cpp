@@ -196,7 +196,7 @@ void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, 
 	lastX = static_cast<float>(xPos);
 	lastY = static_cast<float>(yPos);
 
-	appThis->getScene().getCamera().mouseMovement(xOffset, yOffset, appThis->deltaTime);
+	appThis->getScene().getCamera().mouseMovement(xOffset, yOffset);
 }
 
 

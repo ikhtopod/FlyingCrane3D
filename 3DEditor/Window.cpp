@@ -6,7 +6,7 @@ void Window::initWindowHints() const {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	glfwWindowHint(GLFW_SAMPLES, 4); // multisampling MSAA
+	glfwWindowHint(GLFW_SAMPLES, 2); // multisampling MSAA
 }
 
 
@@ -17,7 +17,7 @@ Window::Window(std::string sTitle)
 
 Window::Window(std::string sTitle, int sWidth, int sHeight)
 	: screenTitle(sTitle), screen(sWidth, sHeight),
-	vSync(GLFW_TRUE), isHideMouse(false) {}
+	vSync(GLFW_FALSE), isHideMouse(false) {}
 
 
 ScreenResolution& Window::getScreen() {

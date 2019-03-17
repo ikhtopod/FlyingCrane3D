@@ -55,5 +55,5 @@ public:
 	glm::mat4 GetViewMatrix();
 
 	void keyboardMovement(CameraMovement direction, float deltaTime);
-	void mouseMovement(float xOffset, float yOffset, float deltaTime);
+	void mouseMovement(float xOffset, float yOffset);
 };

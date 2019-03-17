@@ -12,7 +12,7 @@ const float Camera::MAX_MOUSE_YAW = 360.0f;
 const float Camera::DEFAULT_MOUSE_ROLL = 0.0f;
 
 const float Camera::DEFAULT_SPEED_MOVEMENT = 2.5f;
-const float Camera::DEFAULT_MOUSE_SENSITIVITY = 4.0f;
+const float Camera::DEFAULT_MOUSE_SENSITIVITY = 0.1f;
 
 const float Camera::DEFAULT_CAMERA_FOV = 45.0f;
 const float Camera::MIN_CAMERA_FOV = 1.0f;
@@ -88,9 +88,9 @@ void Camera::keyboardMovement(CameraMovement direction, float deltaTime) {
 		this->transform.getPosition().sub(this->axis.getUp() * velocity);
 }
 
-void Camera::mouseMovement(float xOffset, float yOffset, float deltaTime) {
-	xOffset *= this->mouseSensitivity * deltaTime;
-	yOffset *= this->mouseSensitivity * deltaTime;
+void Camera::mouseMovement(float xOffset, float yOffset) {
+	xOffset *= this->mouseSensitivity;
+	yOffset *= this->mouseSensitivity;
 
 	glm::vec3 _rotation = this->transform.getRotation().getValue();
 
