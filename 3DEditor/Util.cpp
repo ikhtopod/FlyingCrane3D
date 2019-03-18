@@ -4,7 +4,6 @@
 /* Constants */
 
 const glm::mat4 Util::IDENTITY_MATRIX = glm::mat4 { 1.0f };
-const std::string Util::SHADER_DIRECTORY = std::string { R"(..\resources\shaders)" };
 
 
 /* Functions */
