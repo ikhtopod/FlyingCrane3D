@@ -55,6 +55,10 @@ Transform& Camera::getTransform() {
 	return this->transform;
 }
 
+Axis& Camera::getAxis() {
+	return this->axis;
+}
+
 float Camera::getFoV() {
 	return this->fov;
 }

@@ -196,5 +196,11 @@
     <None Include="..\resources\shaders\GridObjectMeshZ.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
+    <None Include="..\resources\shaders\DefaultShader.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\resources\shaders\DefaultShader.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

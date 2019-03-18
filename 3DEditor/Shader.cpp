@@ -1,72 +1,37 @@
 #include "Shader.h"
 
 
-/*************************/
-/* Start default shaders */
-
-const std::string Shader::DEFAULT_VERTEX_SOURCE =
-R"glsl(#version 330 core
-
-layout (location = 0) in vec3 VertexPosition;
-layout (location = 1) in vec3 VertexNormal;
-
-out vec3 FragPos;
-out vec3 Normal;
-
-uniform struct MVP {
-	mat4 model;
-	mat4 view;
-	mat4 projection;
-} mvp;
-
-void main(){
-	FragPos = vec3( mvp.model * vec4(VertexPosition, 1.0) );
-	Normal = VertexNormal;
-	gl_Position = (mvp.projection * mvp.view * mvp.model) * vec4(VertexPosition, 1.0f);
-}
-)glsl";
-
-const std::string Shader::DEFAULT_FRAGMENT_SOURCE =
-R"glsl(#version 330 core
-
-layout (location = 0) out vec4 FragColor;
-
-in vec3 FragPos;
-in vec3 Normal;
-
-void main() {
-	vec3 lightPos = vec3(1.2f, 1.0f, 2.0f);
-	vec3 lightColor = vec3( 1.0f );
-	
-	vec3 norm = normalize(Normal);
-	vec3 lightDir = normalize(lightPos - FragPos);
-	
-	float diff = max( dot(norm, lightDir), 0.0 );
-	vec3 diffuse = diff * lightColor;
-	
-	float ambientStrength = 1.0f;
-	//vec3 ambientStrength = vec3(0.2f, 0.2f, 0.3f);
-	vec3 ambient = lightColor * ambientStrength;
-
-	vec3 objectColor = vec3(.7f, .3f, .0f);
-	
-	vec3 result = (ambient + diffuse) * objectColor;
-	//vec3 result = ambient * objectColor;
-	
-	FragColor = vec4(result, 1.0f);
-}
-)glsl";
-
-/* End default shaders */
-/***********************/
+const std::string Shader::SHADER_DIRECTORY { R"(..\resources\shaders)" };
+const Shader::FsPath Shader::DEFAULT_VERTEX_PATH { Shader::SHADER_DIRECTORY + R"(\DefaultShader.vs)" };
+const Shader::FsPath Shader::DEFAULT_FRAGMENT_PATH { Shader::SHADER_DIRECTORY + R"(\DefaultShader.fs)" };
 
 
-Shader::Shader() : vertexSource(DEFAULT_VERTEX_SOURCE), fragmentSource(DEFAULT_FRAGMENT_SOURCE) {}
+Shader::Shader() : Shader(DEFAULT_VERTEX_PATH, DEFAULT_FRAGMENT_PATH) {}
 
-Shader::Shader(std::filesystem::path _vertexPath, std::filesystem::path _fragmentPath)
+Shader::Shader(FsPath _vertexPath, FsPath _fragmentPath)
 	: vertexPath(_vertexPath), fragmentPath(_fragmentPath),
 	vertexSource(Util::getTextFromFile(vertexPath)),
-	fragmentSource(Util::getTextFromFile(fragmentPath)) {}
+	fragmentSource(Util::getTextFromFile(fragmentPath)) {
+
+	this->lambdaDraw = [](Shader* _this) {
+		Application* appThis = Application::getInstancePtr();
+		_this->setVec3("bgColor", glm::vec3 { appThis->getBgColor() });
+		_this->setVec3("lightColor", glm::vec3 { 1.0f });
+		_this->setVec3("objectColor", glm::vec3 { .7f, .3f, .0f });
+		_this->setVec3("cameraPos", appThis->getScene().getCamera().getTransform().getPosition().getValue());
+	};
+}
+
+
+void Shader::setLambdaDraw(LambdaDraw _lambdaDraw) {
+	if (_lambdaDraw != nullptr) {
+		this->lambdaDraw = _lambdaDraw;
+	}
+}
+
+void Shader::resetLambdaDraw() {
+	this->lambdaDraw = [](Shader* _this) {};
+}
 
 
 bool Shader::getUseMVP() {
@@ -170,6 +135,8 @@ void Shader::draw() {
 		this->setMat4("mvp.view", appThis->getScene().getModel().getView());
 		this->setMat4("mvp.projection", appThis->getScene().getModel().getProjection());
 	}
+
+	this->lambdaDraw(this);
 }
 
 void Shader::free() {

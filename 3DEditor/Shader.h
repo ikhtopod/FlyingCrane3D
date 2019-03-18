@@ -7,14 +7,14 @@
 
 class Shader : public ITriada {
 private:
-	static const std::string DEFAULT_VERTEX_SOURCE;
-	static const std::string DEFAULT_FRAGMENT_SOURCE;
+	using FsPath = std::filesystem::path;
+	using LambdaDraw = std::function<void(Shader* _this)>;
 
 private:
 	GLuint id;
 
-	std::filesystem::path vertexPath {};
-	std::filesystem::path fragmentPath {};
+	FsPath vertexPath {};
+	FsPath fragmentPath {};
 
 	std::string vertexSource;
 	std::string fragmentSource;
@@ -22,6 +22,7 @@ private:
 	GLuint vertex;
 	GLuint fragment;
 
+	LambdaDraw lambdaDraw;
 	bool useMVP = true;
 
 private:
@@ -35,9 +36,17 @@ private:
 	void programInit();
 
 public:
+	static const std::string SHADER_DIRECTORY;
+	static const FsPath DEFAULT_VERTEX_PATH;
+	static const FsPath DEFAULT_FRAGMENT_PATH;
+
+public:
 	Shader();
-	Shader(std::filesystem::path _vertexPath, std::filesystem::path _fragmentPath);
+	Shader(FsPath _vertexPath, FsPath _fragmentPath);
 	~Shader() = default;
+
+	void setLambdaDraw(LambdaDraw _lambdaDraw);
+	void resetLambdaDraw();
 
 	bool getUseMVP();
 	void setUseMVP(bool _useMVP);

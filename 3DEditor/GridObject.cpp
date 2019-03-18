@@ -74,16 +74,20 @@ GridObject::GridObject(_uint _width, _uint _height)
 	}
 
 
-	std::filesystem::path meshXVertex { Util::SHADER_DIRECTORY + R"(\GridObjectMeshX.vs)" };
-	std::filesystem::path meshXFragment { Util::SHADER_DIRECTORY + R"(\GridObjectMeshX.fs)" };
-	std::filesystem::path meshZVertex { Util::SHADER_DIRECTORY + R"(\GridObjectMeshZ.vs)" };
-	std::filesystem::path meshZFragment { Util::SHADER_DIRECTORY + R"(\GridObjectMeshZ.fs)" };
-	std::filesystem::path meshGridVertex { Util::SHADER_DIRECTORY + R"(\GridObjectMeshGrid.vs)" };
-	std::filesystem::path meshGridFragment { Util::SHADER_DIRECTORY + R"(\GridObjectMeshGrid.fs)" };
+	std::filesystem::path meshXVertex { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshX.vs)" };
+	std::filesystem::path meshXFragment { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshX.fs)" };
+	std::filesystem::path meshZVertex { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshZ.vs)" };
+	std::filesystem::path meshZFragment { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshZ.fs)" };
+	std::filesystem::path meshGridVertex { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshGrid.vs)" };
+	std::filesystem::path meshGridFragment { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshGrid.fs)" };
 
 	Mesh meshX { verticesX, indicesX, GL_LINES, Shader { meshXVertex, meshXFragment } };
 	Mesh meshZ { verticesZ, indicesZ, GL_LINES, Shader { meshZVertex, meshZFragment } };
 	Mesh meshGrid { verticesGrid, indicesGrid, GL_LINES, Shader { meshGridVertex, meshGridFragment } };
+
+	meshX.getShader().resetLambdaDraw();
+	meshZ.getShader().resetLambdaDraw();
+	meshGrid.getShader().resetLambdaDraw();
 
 	this->addMesh("meshX", meshX);
 	this->addMesh("meshZ", meshZ);

@@ -48,6 +48,7 @@ public:
 	~Camera() = default;
 
 	Transform& getTransform();
+	Axis& getAxis();
 
 	float getFoV();
 	float getSpeedMovement();

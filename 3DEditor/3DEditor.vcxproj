@@ -191,6 +191,8 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\resources\shaders\DefaultShader.fs" />
+    <None Include="..\resources\shaders\DefaultShader.vs" />
     <None Include="..\resources\shaders\GridObjectMeshGrid.fs" />
     <None Include="..\resources\shaders\GridObjectMeshGrid.vs" />
     <None Include="..\resources\shaders\GridObjectMeshX.fs" />
