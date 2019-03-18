@@ -21,7 +21,9 @@ Shader::Shader(FsPath _vertexPath, FsPath _fragmentPath)
 
 
 void Shader::setLambdaDraw(LambdaDraw _lambdaDraw) {
-	this->lambdaDraw = _lambdaDraw;
+	if (_lambdaDraw != nullptr) {
+		this->lambdaDraw = _lambdaDraw;
+	}
 }
 
 void Shader::resetLambdaDraw() {
