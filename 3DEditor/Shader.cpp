@@ -15,6 +15,9 @@ Shader::Shader(FsPath _vertexPath, FsPath _fragmentPath)
 
 	this->lambdaDraw = [](Shader* _this) {
 		Application* appThis = Application::getInstancePtr();
+		_this->setVec3("bgColor", glm::vec3 { appThis->getBgColor() });
+		_this->setVec3("lightColor", glm::vec3 { 1.0f });
+		_this->setVec3("objectColor", glm::vec3 { .7f, .3f, .0f });
 		_this->setVec3("cameraPos", appThis->getScene().getCamera().getTransform().getPosition().getValue());
 	};
 }
