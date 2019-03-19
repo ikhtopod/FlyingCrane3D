@@ -5,7 +5,6 @@ ArithmeticVec3::ArithmeticVec3() : ArithmeticVec3(glm::vec3 { 0.0f }) {}
 
 ArithmeticVec3::ArithmeticVec3(glm::vec3 _value) : value(_value) {}
 
-ArithmeticVec3::~ArithmeticVec3() {}
 
 glm::vec3 ArithmeticVec3::getValue() {
 	return this->value;

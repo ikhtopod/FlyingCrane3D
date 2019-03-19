@@ -29,7 +29,7 @@ private:
 public:
 	Axis();
 	Axis(glm::vec3 _right, glm::vec3 _up, glm::vec3 _front);
-	~Axis();
+	~Axis() = default;
 
 	glm::vec3 getRight();
 	glm::vec3 getUp();

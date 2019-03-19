@@ -6,7 +6,7 @@ private:
 public:
 	ArithmeticVec3();
 	ArithmeticVec3(glm::vec3 _value);
-	virtual ~ArithmeticVec3();
+	virtual ~ArithmeticVec3() = default;
 
 	virtual glm::vec3 getValue();
 	virtual void setValue(const glm::vec3& _value);

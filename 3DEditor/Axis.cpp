@@ -27,8 +27,6 @@ Axis::Axis() : Axis(Axis::RIGHT, Axis::UP, Axis::FRONT) {}
 Axis::Axis(glm::vec3 _right, glm::vec3 _up, glm::vec3 _front)
 	: right(_right), up(_up), front(_front) {}
 
-Axis::~Axis() {}
-
 
 glm::vec3 Axis::getRight() {
 	return this->right;
