@@ -1,11 +1,6 @@
 #include "Transform.h"
 
 
-Transform::Transform() {}
-
-Transform::~Transform() {}
-
-
 Position& Transform::getPosition() {
 	return this->position;
 }
@@ -16,5 +11,19 @@ Rotation& Transform::getRotation() {
 
 Scale& Transform::getScale() {
 	return this->scale;
+}
+
+glm::mat4 Transform::getMatrix() {
+	glm::mat4 matrix = Util::IDENTITY_MATRIX;
+	matrix = glm::translate(matrix, this->position.getValue());
+
+	glm::vec3 rot = this->rotation.getValue();
+	matrix = glm::rotate(matrix, glm::radians(rot.x), Axis::RIGHT);
+	matrix = glm::rotate(matrix, glm::radians(rot.y), Axis::UP);
+	matrix = glm::rotate(matrix, glm::radians(rot.z), Axis::FRONT);
+	
+	matrix = glm::scale(matrix, this->scale.getValue());
+
+	return matrix;
 }
 

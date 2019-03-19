@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Util.h"
+#include "Axis.h"
 #include "Position.h"
 #include "Rotation.h"
 #include "Scale.h"
@@ -9,11 +11,14 @@ private:
 	Position position {};
 	Rotation rotation {};
 	Scale scale {};
+
 public:
-	Transform();
-	~Transform();
+	Transform() = default;
+	~Transform() = default;
 
 	Position& getPosition();
 	Rotation& getRotation();
 	Scale& getScale();
+
+	glm::mat4 getMatrix();
 };
