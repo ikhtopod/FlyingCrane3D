@@ -2,8 +2,11 @@
 
 #include "Util.h"
 #include "ITriada.h"
+#include "Mesh.h"
 #include "Application.h"
 
+
+class Mesh;
 
 class Shader : public ITriada {
 private:
@@ -19,11 +22,13 @@ private:
 	std::string vertexSource;
 	std::string fragmentSource;
 
-	GLuint vertex;
-	GLuint fragment;
+	GLuint vertexCompile;
+	GLuint fragmentCompile;
 
 	LambdaDraw lambdaDraw;
 	bool useMVP = true;
+
+	Mesh* parent = nullptr;
 
 private:
 	static constexpr unsigned int INFOLOG_SIZE = 512;
@@ -49,7 +54,10 @@ public:
 	void resetLambdaDraw();
 
 	bool getUseMVP();
+	Mesh* getParent();
+
 	void setUseMVP(bool _useMVP);
+	void setParent(Mesh* _parent);
 
 	void setBool(const std::string& name, bool value) const;
 	void setInt(const std::string& name, int value) const;

@@ -38,10 +38,17 @@ bool Shader::getUseMVP() {
 	return this->useMVP;
 }
 
+Mesh* Shader::getParent() {
+	return this->parent;
+}
+
 void Shader::setUseMVP(bool _useMVP) {
 	this->useMVP = _useMVP;
 }
 
+void Shader::setParent(Mesh* _parent) {
+	this->parent = _parent;
+}
 
 
 void Shader::setBool(const std::string& name, bool value) const {
@@ -70,15 +77,15 @@ void Shader::setVec3(const std::string& name, glm::vec3 value) const {
 void Shader::vertexInit() {
 	const GLchar* vShaderSource = this->vertexSource.c_str();
 
-	this->vertex = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(this->vertex, 1, &vShaderSource, nullptr);
-	glCompileShader(this->vertex);
+	this->vertexCompile = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(this->vertexCompile, 1, &vShaderSource, nullptr);
+	glCompileShader(this->vertexCompile);
 
 	// print error vertex shader
-	glGetShaderiv(this->vertex, GL_COMPILE_STATUS, &successChecker);
+	glGetShaderiv(this->vertexCompile, GL_COMPILE_STATUS, &successChecker);
 
 	if (!successChecker) {
-		glGetShaderInfoLog(this->vertex, INFOLOG_SIZE, nullptr, infoLog);
+		glGetShaderInfoLog(this->vertexCompile, INFOLOG_SIZE, nullptr, infoLog);
 		throw ShaderException(infoLog);
 	}
 }
@@ -86,23 +93,23 @@ void Shader::vertexInit() {
 void Shader::fragmentInit() {
 	const GLchar* fShaderCode = this->fragmentSource.c_str();
 
-	this->fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(this->fragment, 1, &fShaderCode, nullptr);
-	glCompileShader(this->fragment);
+	this->fragmentCompile = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(this->fragmentCompile, 1, &fShaderCode, nullptr);
+	glCompileShader(this->fragmentCompile);
 
 	// print error fragment shader
-	glGetShaderiv(this->fragment, GL_COMPILE_STATUS, &successChecker);
+	glGetShaderiv(this->fragmentCompile, GL_COMPILE_STATUS, &successChecker);
 
 	if (!successChecker) {
-		glGetShaderInfoLog(this->fragment, INFOLOG_SIZE, nullptr, infoLog);
+		glGetShaderInfoLog(this->fragmentCompile, INFOLOG_SIZE, nullptr, infoLog);
 		throw ShaderException(infoLog);
 	}
 }
 
 void Shader::programInit() {
 	this->id = glCreateProgram();
-	glAttachShader(this->id, this->vertex);
-	glAttachShader(this->id, this->fragment);
+	glAttachShader(this->id, this->vertexCompile);
+	glAttachShader(this->id, this->fragmentCompile);
 	glLinkProgram(this->id);
 
 	// print linking error program shader
@@ -140,8 +147,8 @@ void Shader::draw() {
 }
 
 void Shader::free() {
-	glDeleteShader(this->vertex);
-	glDeleteShader(this->fragment);
+	glDeleteShader(this->vertexCompile);
+	glDeleteShader(this->fragmentCompile);
 	glDeleteProgram(this->id);
 }
 

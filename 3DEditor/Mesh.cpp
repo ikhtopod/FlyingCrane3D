@@ -20,8 +20,15 @@ Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _
 	: Mesh(_vertices, _indices, _type, Shader {}) {}
 
 Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader)
-	: vertices(_vertices), indices(_indices), type(_type), shader(_shader) {}
+	: vertices(_vertices), indices(_indices), type(_type), shader(_shader) {
 
+	this->shader.setParent(this);
+}
+
+
+Object* Mesh::getParent() {
+	return this->parent;
+}
 
 Transform& Mesh::getTransform() {
 	return this->transform;
@@ -35,6 +42,10 @@ GLenum Mesh::getType() {
 	return this->type;
 }
 
+void Mesh::setParent(Object* _parent) {
+	this->parent = _parent;
+}
+
 void Mesh::setTransform(Transform _transform) {
 	this->transform = _transform;
 }
@@ -43,10 +54,9 @@ void Mesh::setTransform(Transform _transform) {
 void Mesh::setShader(Shader& _shader) {
 	this->shader.free();
 	this->shader = _shader;
+	this->shader.setParent(this);
 	this->shader.init();
 }
-
-void Mesh::setType(GLenum _type) {}
 
 
 void Mesh::init() {
@@ -57,10 +67,10 @@ void Mesh::init() {
 	glBindVertexArray(this->vao);
 
 	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-	glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(Vertex), &(this->vertices)[0], GL_STREAM_DRAW); // GL_STATIC_DRAW, GL_DYNAMIC_DRAW, GL_STREAM_DRAW
+	glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(Vertex), &(this->vertices)[0], GL_STATIC_DRAW); // GL_STATIC_DRAW, GL_DYNAMIC_DRAW, GL_STREAM_DRAW
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &(this->indices)[0], GL_STREAM_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &(this->indices)[0], GL_STATIC_DRAW);
 
 	// vertex positions
 	glEnableVertexAttribArray(Mesh::AttribIndex::POSITION);
@@ -78,7 +88,7 @@ void Mesh::init() {
 
 void Mesh::draw() {
 	this->shader.draw();
-	
+
 	glBindVertexArray(this->vao);
 	glDrawElements(this->type, this->indices.size(), GL_UNSIGNED_INT, (void*)0);
 	glBindVertexArray(0); // unbind
