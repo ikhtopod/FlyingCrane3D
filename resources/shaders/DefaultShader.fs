@@ -15,11 +15,12 @@ void main() {
 	vec3 norm = normalize(Normal);
 	
 	// ambient
-    float ambientStrength = 2.0f;
-    vec3 ambient = ambientStrength * bgColor * lightColor;
+	vec3 ambientColor = bgColor + 0.1f;
+    float ambientStrength = 1.5f;
+    vec3 ambient = ambientStrength * ambientColor * lightColor;
     
     // diffuse 
-	vec3 lightDir = normalize(cameraPos); // cameraPos or -vec3(-0.2f, -1.0f, -0.3f)
+	vec3 lightDir = normalize(cameraPos);
     vec3 diffuse = lightColor * max(dot(norm, lightDir), 0.0);
 	
 	// specular
