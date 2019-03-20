@@ -17,13 +17,17 @@ public:
 	Transform& operator+=(const Transform& t1);
 	friend Transform operator+(Transform t1, const Transform& t2);
 
-	glm::vec3 getPosition();
-	glm::vec3 getRotation();
-	glm::vec3 getScale();
+	glm::vec3 getPosition() const;
+	glm::vec3 getRotation() const;
+	glm::vec3 getScale() const;
+
+	glm::mat4 getPositionMat4() const;
+	glm::mat4 getRotationMat4() const;
+	glm::mat4 getScaleMat4() const;
 
 	void setPosition(glm::vec3 _position);
 	void setRotation(glm::vec3 _rotation);
 	void setScale(glm::vec3 _scale);
 
-	glm::mat4 getMatrix();
+	glm::mat4 getMatrix() const;
 };
