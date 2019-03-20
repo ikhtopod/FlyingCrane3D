@@ -18,12 +18,13 @@ Transform& Transform::operator+=(const Transform& t1) {
 	glm::vec3 _skew;
 	glm::vec4 _perspective;
 
-	glm::mat4 _matrix = this->getMatrix() * t1.getMatrix();
+	glm::mat4 _matrix = t1.getMatrix() * this->getMatrix();
+
 	glm::decompose(_matrix, _scale, _rotation, _translation, _skew, _perspective);
 
-	this->position = _translation;
-	this->rotation = glm::eulerAngles(_rotation);
-	this->scale = _scale;
+	this->setPosition(_translation);
+	this->setRotation(glm::degrees(glm::eulerAngles(glm::conjugate(_rotation))));
+	this->setScale(_scale);
 
 	return *this;
 }
@@ -77,5 +78,5 @@ void Transform::setScale(glm::vec3 _scale) {
 
 
 glm::mat4 Transform::getMatrix() const {
-	return this->getPositionMat4() * this->getScaleMat4() * this->getRotationMat4();
+	return this->getPositionMat4() * this->getRotationMat4() * this->getScaleMat4();
 }

@@ -37,6 +37,8 @@ void Object::draw() {
 		mesh.second.setGlobalTransform(this->globalTransform + this->transform);
 		mesh.second.draw();
 	}
+
+	// draw children objects
 }
 
 void Object::free() {
