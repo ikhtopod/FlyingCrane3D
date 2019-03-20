@@ -1,25 +1,26 @@
 #pragma once
 
 #include "Util.h"
-#include "Axis.h"
-#include "Position.h"
-#include "Rotation.h"
-#include "Scale.h"
 
 class Transform final {
 private:
-	Position position {};
-	Rotation rotation {};
-	Scale scale {};
+	glm::vec3 position {};
+	glm::vec3 rotation {};
+	glm::vec3 scale {};
 
 public:
-	Transform() = default;
+	Transform();
+	Transform(glm::vec3 _position, glm::vec3 _rotation, glm::vec3 _scale);
 	Transform(const Transform& transform);
 	~Transform() = default;
 
-	Position& getPosition();
-	Rotation& getRotation();
-	Scale& getScale();
+	glm::vec3 getPosition();
+	glm::vec3 getRotation();
+	glm::vec3 getScale();
+
+	void setPosition(glm::vec3 _position);
+	void setRotation(glm::vec3 _rotation);
+	void setScale(glm::vec3 _scale);
 
 	glm::mat4 getMatrix();
 };

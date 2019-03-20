@@ -31,24 +31,6 @@
     <ClCompile Include="stdhdr.cpp">
       <Filter>Sources\stdhdr</Filter>
     </ClCompile>
-    <ClCompile Include="Axis.cpp">
-      <Filter>Sources\Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="ArithmeticVec3.cpp">
-      <Filter>Sources\Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="Position.cpp">
-      <Filter>Sources\Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="Rotation.cpp">
-      <Filter>Sources\Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="Scale.cpp">
-      <Filter>Sources\Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Sources\Transform</Filter>
-    </ClCompile>
     <ClCompile Include="Util.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -67,8 +49,11 @@
     <ClCompile Include="GridObject.cpp">
       <Filter>Sources\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Polygon.cpp">
-      <Filter>Sources\Object</Filter>
+    <ClCompile Include="Axis.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,24 +81,6 @@
     <ClInclude Include="stdhdr.h">
       <Filter>Headers\stdhdr</Filter>
     </ClInclude>
-    <ClInclude Include="ArithmeticVec3.h">
-      <Filter>Headers\Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="Axis.h">
-      <Filter>Headers\Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Headers\Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="Scale.h">
-      <Filter>Headers\Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="Rotation.h">
-      <Filter>Headers\Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="Position.h">
-      <Filter>Headers\Transform</Filter>
-    </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -132,10 +99,13 @@
     <ClInclude Include="GridObject.h">
       <Filter>Headers\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Polygon.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
     <ClInclude Include="ITriada.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Axis.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -150,18 +120,12 @@
     <Filter Include="Sources\stdhdr">
       <UniqueIdentifier>{2e8a8632-fb26-4004-b5c1-9d38017b1a46}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Transform">
-      <UniqueIdentifier>{fd0343b1-2efc-4a5c-b149-c06af5cd9b7e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers">
       <UniqueIdentifier>{a06894c3-0723-442a-b753-f00a75e469d7}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="Headers\stdhdr">
       <UniqueIdentifier>{7c2d6124-aa75-4fac-b9cf-7355a6e5c4db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Transform">
-      <UniqueIdentifier>{e05e15ff-6576-4df8-b728-3e1c05fc345c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{f6bf6e01-2b70-445e-9370-301f938ef477}</UniqueIdentifier>

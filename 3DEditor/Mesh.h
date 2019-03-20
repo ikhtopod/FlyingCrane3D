@@ -4,7 +4,6 @@
 #include "Object.h"
 #include "Shader.h"
 #include "Vertex.h"
-#include "Polygon.h"
 
 class Object;
 

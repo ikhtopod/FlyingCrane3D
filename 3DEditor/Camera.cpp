@@ -24,7 +24,7 @@ const glm::vec3 Camera::DEFAULT_CAMERA_POSITION = glm::vec3 { 0.0f, 1.0f, 4.0f }
 void Camera::updateCameraVectors() {
 	glm::vec3 front_tmp {};
 
-	glm::vec3 _rotation = this->transform.getRotation().getValue();
+	glm::vec3 _rotation = this->transform.getRotation();
 
 	front_tmp.x = std::cos(glm::radians(_rotation.y)) * std::cos(glm::radians(_rotation.x));
 	front_tmp.y = std::sin(glm::radians(_rotation.x));
@@ -42,10 +42,10 @@ Camera::Camera()
 	mouseSensitivity(DEFAULT_MOUSE_SENSITIVITY),
 	fov(DEFAULT_CAMERA_FOV) {
 
-	this->transform.getPosition().setValue(DEFAULT_CAMERA_POSITION);
+	this->transform.setPosition(DEFAULT_CAMERA_POSITION);
 
 	glm::vec3 _rotation { DEFAULT_MOUSE_PITCH, DEFAULT_MOUSE_YAW, DEFAULT_MOUSE_ROLL };
-	this->transform.getRotation().setValue(_rotation);
+	this->transform.setRotation(_rotation);
 
 	this->updateCameraVectors();
 }
@@ -70,33 +70,37 @@ float Camera::getSpeedMovement() {
 
 glm::mat4 Camera::GetViewMatrix() {
 	return glm::lookAt(
-		this->transform.getPosition().getValue(),
-		this->transform.getPosition().getValue() + this->axis.getFront(),
+		this->transform.getPosition(),
+		this->transform.getPosition() + this->axis.getFront(),
 		this->axis.getUp());
 }
 
 void Camera::keyboardMovement(CameraMovement direction, float deltaTime) {
 	float velocity = this->speedMovement * deltaTime;
 
+	glm::vec3 pos = this->transform.getPosition();
+
 	if (direction == CameraMovement::FORWARD)
-		this->transform.getPosition().add(this->axis.getFront() * velocity);
+		pos += this->axis.getFront() * velocity;
 	if (direction == CameraMovement::BACKWARD)
-		this->transform.getPosition().sub(this->axis.getFront() * velocity);
+		pos -= this->axis.getFront() * velocity;
 	if (direction == CameraMovement::RIGHT)
-		this->transform.getPosition().add(this->axis.getRight() * velocity);
+		pos += this->axis.getRight() * velocity;
 	if (direction == CameraMovement::LEFT)
-		this->transform.getPosition().sub(this->axis.getRight() * velocity);
+		pos -= this->axis.getRight() * velocity;
 	if (direction == CameraMovement::UP)
-		this->transform.getPosition().add(this->axis.getUp() * velocity);
+		pos += this->axis.getUp() * velocity;
 	if (direction == CameraMovement::DOWN)
-		this->transform.getPosition().sub(this->axis.getUp() * velocity);
+		pos -= this->axis.getUp() * velocity;
+
+	this->transform.setPosition(pos);
 }
 
 void Camera::mouseMovement(float xOffset, float yOffset) {
 	xOffset *= this->mouseSensitivity;
 	yOffset *= this->mouseSensitivity;
 
-	glm::vec3 _rotation = this->transform.getRotation().getValue();
+	glm::vec3 _rotation = this->transform.getRotation();
 
 	_rotation.x += yOffset;
 	_rotation.y += xOffset;
@@ -104,7 +108,7 @@ void Camera::mouseMovement(float xOffset, float yOffset) {
 	_rotation.x = std::clamp<float>(_rotation.x, MIN_MOUSE_PITCH, MAX_MOUSE_PITCH);
 	_rotation.y = Util::repeat(_rotation.y, MIN_MOUSE_YAW, MAX_MOUSE_YAW);
 
-	this->transform.getRotation().setValue(_rotation);
+	this->transform.setRotation(_rotation);
 
 	this->updateCameraVectors();
 }
