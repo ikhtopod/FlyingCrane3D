@@ -27,7 +27,7 @@ public:
 	void setParent(Object* _parent);
 	void setTransform(Transform _transform);
 
-	void addMesh(std::string _name, Mesh _mesh);
+	void addMesh(std::string _name, Mesh& _mesh);
 
 	virtual void init() override;
 	virtual void draw() override;

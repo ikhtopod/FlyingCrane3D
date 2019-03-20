@@ -18,10 +18,10 @@ void Object::setTransform(Transform _transform) {
 	this->transform = _transform;
 }
 
-void Object::addMesh(std::string _name, Mesh _mesh) {
+void Object::addMesh(std::string _name, Mesh& _mesh) {
 	if (this->meshes.empty() || (this->meshes.find(_name) == this->meshes.end())) {
-		_mesh.setParent(this);
 		this->meshes.insert({ _name, _mesh });
+		this->meshes[_name].setParent(this);
 	}
 }
 
