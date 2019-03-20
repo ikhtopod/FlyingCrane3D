@@ -56,3 +56,11 @@ public:
 	virtual void free() override;
 
 };
+
+/* Exceptions */
+
+class MeshException : std::exception {
+public:
+	explicit MeshException(char const* const message);
+};
+

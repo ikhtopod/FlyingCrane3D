@@ -105,3 +105,7 @@ void Mesh::free() {
 	this->shader.free();
 }
 
+/* Exceptions */
+
+MeshException::MeshException(char const* const message)
+	: std::exception(message) {}
