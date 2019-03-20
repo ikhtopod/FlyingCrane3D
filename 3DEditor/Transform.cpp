@@ -1,6 +1,13 @@
 #include "Transform.h"
 
 
+Transform::Transform(const Transform& transform) {
+	this->position.setValue(transform.position.getValue());
+	this->rotation.setValue(transform.rotation.getValue());
+	this->scale.setValue(transform.scale.getValue());
+}
+
+
 Position& Transform::getPosition() {
 	return this->position;
 }
@@ -21,7 +28,7 @@ glm::mat4 Transform::getMatrix() {
 	matrix = glm::rotate(matrix, glm::radians(rot.x), Axis::RIGHT);
 	matrix = glm::rotate(matrix, glm::radians(rot.y), Axis::UP);
 	matrix = glm::rotate(matrix, glm::radians(rot.z), Axis::FRONT);
-	
+
 	matrix = glm::scale(matrix, this->scale.getValue());
 
 	return matrix;

@@ -14,6 +14,7 @@ private:
 
 public:
 	Transform() = default;
+	Transform(const Transform& transform);
 	~Transform() = default;
 
 	Position& getPosition();
