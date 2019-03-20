@@ -14,6 +14,8 @@ Mesh::Mesh() : type(GL_POINTS) {
 	};
 
 	this->indices = { 0 };
+
+	this->shader.setParent(this);
 }
 
 Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type)
