@@ -15,9 +15,8 @@ void main() {
 	vec3 norm = normalize(Normal);
 	
 	// ambient
-	vec3 ambientColor = bgColor + 0.1f;
-    float ambientStrength = 1.5f;
-    vec3 ambient = ambientStrength * ambientColor * lightColor;
+    float ambientStrength = 1.0f;
+    vec3 ambient = ambientStrength * bgColor * lightColor;
     
     // diffuse 
 	vec3 lightDir = normalize(cameraPos);

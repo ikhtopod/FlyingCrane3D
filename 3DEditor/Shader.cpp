@@ -17,7 +17,7 @@ Shader::Shader(FsPath _vertexPath, FsPath _fragmentPath)
 		Application* appThis = Application::getInstancePtr();
 		_this->setVec3("bgColor", glm::vec3 { appThis->getBgColor() });
 		_this->setVec3("lightColor", glm::vec3 { 1.0f });
-		_this->setVec3("objectColor", glm::vec3 { .5f, .5f, .5f });
+		_this->setVec3("objectColor", glm::vec3 { 0.78f, 0.78f, 0.78f });
 		_this->setVec3("cameraPos", appThis->getScene().getCamera().getTransform().getPosition());
 	};
 }
