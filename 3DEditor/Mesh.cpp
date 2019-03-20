@@ -7,30 +7,18 @@ const GLenum Mesh::DEFAULT_MESH_TYPE = GL_TRIANGLES;
 
 Mesh::Mesh() : type(GL_POINTS) {
 	this->vertices = {
-		Vertex {
-			glm::vec3 { 0.0f, 0.0f, 0.0f },
-			glm::vec3 { 0.0f, 1.0f, 0.0f }
-		}
+		Vertex { { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }	}
 	};
 
 	this->indices = { 0 };
-
-	this->shader.setParent(this);
 }
 
 Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type)
 	: Mesh(_vertices, _indices, _type, Shader {}) {}
 
 Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader)
-	: vertices(_vertices), indices(_indices), type(_type), shader(_shader) {
+	: vertices(_vertices), indices(_indices), type(_type), shader(_shader) {}
 
-	this->shader.setParent(this);
-}
-
-
-Object* Mesh::getParent() {
-	return this->parent;
-}
 
 Transform& Mesh::getTransform() {
 	return this->transform;
@@ -44,10 +32,6 @@ GLenum Mesh::getType() {
 	return this->type;
 }
 
-void Mesh::setParent(Object* _parent) {
-	this->parent = _parent;
-}
-
 void Mesh::setTransform(Transform _transform) {
 	this->transform = _transform;
 }
@@ -56,7 +40,6 @@ void Mesh::setTransform(Transform _transform) {
 void Mesh::setShader(Shader& _shader) {
 	this->shader.free();
 	this->shader = _shader;
-	this->shader.setParent(this);
 	this->shader.init();
 }
 

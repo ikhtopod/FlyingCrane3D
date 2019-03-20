@@ -38,16 +38,8 @@ bool Shader::getUseMVP() {
 	return this->useMVP;
 }
 
-Mesh* Shader::getParent() {
-	return this->parent;
-}
-
 void Shader::setUseMVP(bool _useMVP) {
 	this->useMVP = _useMVP;
-}
-
-void Shader::setParent(Mesh* _parent) {
-	this->parent = _parent;
 }
 
 

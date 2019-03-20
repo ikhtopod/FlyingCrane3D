@@ -10,9 +10,8 @@ class Mesh;
 
 class Object : public ITriada {
 protected:
-	Object* parent = nullptr;
-
 	Transform transform {};
+	Transform globalTransform {};
 	Axis axis {};
 
 	std::map<std::string, Mesh> meshes;
@@ -21,10 +20,8 @@ public:
 	Object() = default;
 	virtual ~Object() = default;
 
-	Object* getParent();
 	Transform& getTransform();
 
-	void setParent(Object* _parent);
 	void setTransform(Transform _transform);
 
 	void addMesh(std::string _name, Mesh& _mesh);

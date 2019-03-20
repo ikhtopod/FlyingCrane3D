@@ -29,9 +29,8 @@ private:
 	std::vector<Vertex> vertices {};
 	std::vector<GLuint> indices {};
 
-	Object* parent = nullptr;
-
 	Transform transform {};
+	Transform globalTransform {};
 	Shader shader {};
 
 	GLenum type { GL_TRIANGLES };
@@ -42,12 +41,10 @@ public:
 	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader);
 	~Mesh() = default;
 
-	Object* getParent();
 	Transform& getTransform();
 	Shader& getShader();
 	GLenum getType();
 
-	void setParent(Object* _parent);
 	void setTransform(Transform _transform);
 	void setShader(Shader& _shader);
 

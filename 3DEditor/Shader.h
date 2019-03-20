@@ -28,8 +28,6 @@ private:
 	LambdaDraw lambdaDraw;
 	bool useMVP = true;
 
-	Mesh* parent = nullptr;
-
 private:
 	static constexpr unsigned int INFOLOG_SIZE = 512;
 
@@ -54,10 +52,7 @@ public:
 	void resetLambdaDraw();
 
 	bool getUseMVP();
-	Mesh* getParent();
-
 	void setUseMVP(bool _useMVP);
-	void setParent(Mesh* _parent);
 
 	void setBool(const std::string& name, bool value) const;
 	void setInt(const std::string& name, int value) const;
