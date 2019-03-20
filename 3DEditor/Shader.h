@@ -28,6 +28,8 @@ private:
 	LambdaDraw lambdaDraw;
 	bool useMVP = true;
 
+	Transform globalTransform {};
+
 private:
 	static constexpr unsigned int INFOLOG_SIZE = 512;
 
@@ -51,7 +53,10 @@ public:
 	void setLambdaDraw(LambdaDraw _lambdaDraw);
 	void resetLambdaDraw();
 
+	Transform& getGlobalTransform();
 	bool getUseMVP();
+
+	void setGlobalTransform(Transform _gTransform);
 	void setUseMVP(bool _useMVP);
 
 	void setBool(const std::string& name, bool value) const;

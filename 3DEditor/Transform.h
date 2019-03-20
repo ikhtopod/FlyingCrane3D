@@ -14,6 +14,9 @@ public:
 	Transform(const Transform& transform);
 	~Transform() = default;
 
+	Transform& operator+=(const Transform& t1);
+	friend Transform operator+(Transform t1, const Transform& t2);
+
 	glm::vec3 getPosition();
 	glm::vec3 getRotation();
 	glm::vec3 getScale();

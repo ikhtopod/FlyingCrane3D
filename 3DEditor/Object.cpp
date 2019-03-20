@@ -5,10 +5,19 @@ Transform& Object::getTransform() {
 	return this->transform;
 }
 
+Transform& Object::getGlobalTransform() {
+	return this->globalTransform;
+}
+
 
 void Object::setTransform(Transform _transform) {
 	this->transform = _transform;
 }
+
+void Object::setGlobalTransform(Transform _gTransform) {
+	this->globalTransform = _gTransform;
+}
+
 
 void Object::addMesh(std::string _name, Mesh& _mesh) {
 	if (this->meshes.empty() || (this->meshes.find(_name) == this->meshes.end())) {
@@ -25,6 +34,7 @@ void Object::init() {
 
 void Object::draw() {
 	for (auto& mesh : this->meshes) {
+		mesh.second.setGlobalTransform(this->globalTransform + this->transform);
 		mesh.second.draw();
 	}
 }

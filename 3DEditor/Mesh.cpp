@@ -20,6 +20,10 @@ Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _
 	: vertices(_vertices), indices(_indices), type(_type), shader(_shader) {}
 
 
+Transform& Mesh::getGlobalTransform() {
+	return this->globalTransform;
+}
+
 Transform& Mesh::getTransform() {
 	return this->transform;
 }
@@ -30,6 +34,10 @@ Shader& Mesh::getShader() {
 
 GLenum Mesh::getType() {
 	return this->type;
+}
+
+void Mesh::setGlobalTransform(Transform _gTransform) {
+	this->globalTransform = _gTransform;
 }
 
 void Mesh::setTransform(Transform _transform) {
@@ -72,6 +80,7 @@ void Mesh::init() {
 
 
 void Mesh::draw() {
+	this->shader.setGlobalTransform(this->globalTransform + this->transform);
 	this->shader.draw();
 
 	glBindVertexArray(this->vao);

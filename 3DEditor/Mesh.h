@@ -40,10 +40,12 @@ public:
 	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader);
 	~Mesh() = default;
 
+	Transform& getGlobalTransform();
 	Transform& getTransform();
 	Shader& getShader();
 	GLenum getType();
 
+	void setGlobalTransform(Transform _gTransform);
 	void setTransform(Transform _transform);
 	void setShader(Shader& _shader);
 

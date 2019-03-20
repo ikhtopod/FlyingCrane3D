@@ -7,6 +7,18 @@ Transform::Transform()
 Transform::Transform(const Transform& transform)
 	: position(transform.position), rotation(transform.rotation), scale(transform.scale) {}
 
+Transform& Transform::operator+=(const Transform& t1) {
+	this->position += t1.position;
+	this->rotation += t1.rotation;
+	this->scale *= t1.scale;
+	return *this;
+}
+
+Transform operator+(Transform t1, const Transform& t2) {
+	t1 += t2;
+	return t1;
+}
+
 
 glm::vec3 Transform::getPosition() {
 	return this->position;
@@ -51,4 +63,3 @@ glm::mat4 Transform::getMatrix() {
 
 	return matrix;
 }
-

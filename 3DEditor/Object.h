@@ -21,8 +21,10 @@ public:
 	virtual ~Object() = default;
 
 	Transform& getTransform();
+	Transform& getGlobalTransform();
 
 	void setTransform(Transform _transform);
+	void setGlobalTransform(Transform _gTransform);
 
 	void addMesh(std::string _name, Mesh& _mesh);
 
