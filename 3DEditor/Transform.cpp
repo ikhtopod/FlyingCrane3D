@@ -18,12 +18,15 @@ Transform& Transform::operator+=(const Transform& t1) {
 	glm::vec3 _skew;
 	glm::vec4 _perspective;
 
-	glm::mat4 _matrix = t1.getMatrix() * this->getMatrix();
+	//glm::mat4 _matrix = this->getMatrix() * t1.getMatrix();
+	glm::mat4 _matrix = this->getPositionMat4() * t1.getPositionMat4()
+		* this->getRotationMat4() * t1.getRotationMat4()
+		* this->getScaleMat4() * t1.getScaleMat4();
 
 	glm::decompose(_matrix, _scale, _rotation, _translation, _skew, _perspective);
 
 	this->setPosition(_translation);
-	this->setRotation(glm::degrees(glm::eulerAngles(glm::conjugate(_rotation))));
+	this->setRotation(glm::degrees(glm::eulerAngles(_rotation)));
 	this->setScale(_scale);
 
 	return *this;
