@@ -33,7 +33,8 @@ void FreeCamera::mouseInput(float xPos, float yPos) {
 	_rotation.x += (lastMousePosition.y - yPos) * this->mouseSensitivity.x;
 	_rotation.y += (xPos - lastMousePosition.x) * this->mouseSensitivity.y;
 
-	lastMousePosition = glm::vec2 { xPos, yPos };
+	lastMousePosition.x = xPos;
+	lastMousePosition.y = yPos;
 
 	_rotation.x = std::clamp<float>(_rotation.x, MIN_MOUSE_PITCH, MAX_MOUSE_PITCH);
 	_rotation.y = Util::repeat(_rotation.y, MIN_MOUSE_YAW, MAX_MOUSE_YAW);

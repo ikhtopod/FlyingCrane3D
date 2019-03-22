@@ -16,12 +16,13 @@ CameraType CameraSwitcher::getType() {
 void CameraSwitcher::setType(CameraType _type) {
 	this->cameras[_type]->setTransform(this->cameras[this->type]->getTransform());
 	this->cameras[_type]->setAxis(this->cameras[this->type]->getAxis());
+	this->cameras[_type]->setLastMousePosition(this->cameras[this->type]->getLastMousePosition());
 	this->type = _type;
 
-	this->setInputMode();
+	this->updateInputMode();
 }
 
-void CameraSwitcher::setInputMode() {
+void CameraSwitcher::updateInputMode() {
 	GLFWwindow* window = Application::getInstancePtr()->getWindow().getWindowPtr();
 
 	switch (this->type) {

@@ -59,6 +59,10 @@ Axis& Camera::getAxis() {
 	return this->axis;
 }
 
+glm::vec2 Camera::getLastMousePosition() {
+	return this->lastMousePosition;
+}
+
 float Camera::getFoV() {
 	return this->fov;
 }
@@ -73,6 +77,10 @@ void Camera::setTransform(const Transform& _transform) {
 
 void Camera::setAxis(const Axis& _axis) {
 	this->axis = _axis;
+}
+
+void Camera::setLastMousePosition(glm::vec2 _LastMousePosition) {
+	this->lastMousePosition = _LastMousePosition;
 }
 
 glm::mat4 Camera::GetViewMatrix() {

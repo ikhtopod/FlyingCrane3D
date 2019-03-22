@@ -19,7 +19,7 @@ private:
 	std::unordered_map<CameraType, std::shared_ptr<Camera>> cameras {};
 
 private:
-	void setInputMode();
+	void updateInputMode();
 
 public:
 	CameraSwitcher();

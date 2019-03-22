@@ -39,6 +39,8 @@ protected:
 	Transform transform {};
 	Axis axis {};
 
+	glm::vec2 lastMousePosition {};
+
 	float speedMovement;
 	glm::vec2 mouseSensitivity;
 	float fov;
@@ -52,11 +54,13 @@ public:
 
 	Transform& getTransform();
 	Axis& getAxis();
+	glm::vec2 getLastMousePosition();
 	float getFoV();
 	float getSpeedMovement();
 
 	void setTransform(const Transform& _transform);
 	void setAxis(const Axis& _axis);
+	void setLastMousePosition(glm::vec2 _LastMousePosition);
 
 	glm::mat4 GetViewMatrix();
 };

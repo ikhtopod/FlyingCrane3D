@@ -15,4 +15,7 @@ TargetCamera::TargetCamera()
 
 void TargetCamera::keyboardInput() {}
 
-void TargetCamera::mouseInput(float xPos, float yPos) {}
+void TargetCamera::mouseInput(float xPos, float yPos) {
+	lastMousePosition.x = xPos;
+	lastMousePosition.y = yPos;
+}
