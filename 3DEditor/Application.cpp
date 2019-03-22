@@ -155,6 +155,7 @@ Application::Callback::~Callback() {}
 void Application::Callback::assignAll() {
 	Application* _this = Application::getInstancePtr();
 	glfwSetWindowUserPointer(_this->getWindow().getWindowPtr(), _this);
+
 	glfwSetFramebufferSizeCallback(_this->getWindow().getWindowPtr(), Application::Callback::resizeWindow);
 	glfwSetCursorPosCallback(_this->getWindow().getWindowPtr(), Application::Callback::mouseMovementCallback);
 }

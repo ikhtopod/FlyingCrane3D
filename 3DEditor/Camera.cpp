@@ -73,10 +73,14 @@ float Camera::getSpeedMovement() {
 
 void Camera::setTransform(const Transform& _transform) {
 	this->transform = _transform;
+
+	this->updateCameraVectors();
 }
 
 void Camera::setAxis(const Axis& _axis) {
 	this->axis = _axis;
+
+	this->updateCameraVectors();
 }
 
 void Camera::setLastMousePosition(glm::vec2 _LastMousePosition) {
