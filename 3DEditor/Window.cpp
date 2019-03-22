@@ -16,8 +16,7 @@ Window::Window(std::string sTitle)
 
 
 Window::Window(std::string sTitle, int sWidth, int sHeight)
-	: screenTitle(sTitle), screen(sWidth, sHeight),
-	vSync(GLFW_FALSE), isHideMouse(false) {}
+	: screenTitle(sTitle), screen(sWidth, sHeight), vSync(GLFW_FALSE) {}
 
 
 ScreenResolution& Window::getScreen() {
@@ -65,11 +64,6 @@ void Window::init() {
 
 	// On/off v-sync. Если v-sync включен, то fps ограничевается до 60 кадров
 	glfwSwapInterval(this->vSync);
-
-	// Спрятать мышь
-	if (isHideMouse) {
-		glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	}
 }
 
 void Window::close() {

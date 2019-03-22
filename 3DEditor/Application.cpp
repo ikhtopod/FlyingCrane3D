@@ -87,8 +87,6 @@ void Application::init() {
 		this->loadGLLoader();
 		Application::Callback::assignAll();
 
-		glfwSetInputMode(this->window.getWindowPtr(), GLFW_CURSOR, GLFW_CURSOR_DISABLED); // hide cursor
-
 		this->scene.init();
 	} catch (std::exception e) {
 		throw e;
@@ -119,9 +117,23 @@ void Application::keyboardInput() {
 	this->scene.getCamera().keyboardInput();
 }
 
+void Application::switchCameraInput() {
+	static bool prevState = GLFW_RELEASE;
+
+	int state = glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_TAB);
+
+	if (state == GLFW_PRESS && prevState == GLFW_RELEASE) {
+		this->scene.getCameraSwitcher().switchCamera();
+		prevState = state;
+	} else if (state == GLFW_RELEASE && prevState == GLFW_PRESS) {
+		prevState = state;
+	}
+}
+
 void Application::input() {
 	this->pressedExitButton();
 	this->keyboardInput();
+	this->switchCameraInput();
 }
 
 void Application::clearColor() {

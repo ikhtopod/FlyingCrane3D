@@ -9,7 +9,6 @@ private:
 	GLFWwindow* window;
 	std::string screenTitle;
 	bool vSync;
-	bool isHideMouse;
 
 private:
 	void initWindowHints() const;

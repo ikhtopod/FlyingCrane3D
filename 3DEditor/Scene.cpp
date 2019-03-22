@@ -1,8 +1,12 @@
 #include "Scene.h"
 
 
+CameraSwitcher& Scene::getCameraSwitcher() {
+	return this->cameraSwitcher;
+}
+
 Camera& Scene::getCamera() {
-	return this->camera;
+	return *(this->cameraSwitcher.getCamera());
 }
 
 Model& Scene::getModel() {

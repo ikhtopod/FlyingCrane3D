@@ -5,12 +5,13 @@
 #include "Object.h"
 #include "GridObject.h"
 #include "Camera.h"
+#include "CameraSwitcher.h"
 #include "Model.h"
 #include "Transform.h"
 
 class Scene final : public ITriada {
 private:
-	Camera camera {};
+	CameraSwitcher cameraSwitcher {};
 	Model model {};
 	Transform transform {};
 
@@ -22,6 +23,7 @@ public:
 	Scene() = default;
 	~Scene() = default;
 
+	CameraSwitcher& getCameraSwitcher();
 	Camera& getCamera();
 	Model& getModel();
 	Transform& getTransform();

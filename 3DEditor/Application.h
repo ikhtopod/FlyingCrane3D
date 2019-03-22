@@ -43,6 +43,7 @@ private:
 
 	void pressedExitButton();
 	void keyboardInput();
+	void switchCameraInput();
 	void input();
 
 	void clearColor();
