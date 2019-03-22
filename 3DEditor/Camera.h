@@ -6,7 +6,13 @@
 #include "Axis.h"
 
 
-class Camera {
+class ICamera {
+public:
+	virtual void keyboardInput() = 0;
+	virtual void mouseInput(float xPos, float yPos) = 0;
+};
+
+class Camera : public ICamera {
 public:
 	static const float DEFAULT_MOUSE_PITCH;
 	static const float MIN_MOUSE_PITCH;
@@ -51,7 +57,4 @@ public:
 	float getSpeedMovement();
 
 	glm::mat4 GetViewMatrix();
-
-	void keyboardInput();
-	void mouseInput(float xPos, float yPos);
 };
