@@ -138,6 +138,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Axis.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraSwitcher.cpp" />
     <ClCompile Include="DeltaTime.cpp" />
     <ClCompile Include="E:\Program Files\glad\gl_3_3_core\src\glad.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -147,6 +148,7 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="GridObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -156,6 +158,7 @@
     <ClCompile Include="ScreenResolution.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdhdr.cpp" />
+    <ClCompile Include="TargetCamera.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Vertex.cpp" />
@@ -165,7 +168,9 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Axis.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraSwitcher.h" />
     <ClInclude Include="DeltaTime.h" />
+    <ClInclude Include="FreeCamera.h" />
     <ClInclude Include="GridObject.h" />
     <ClInclude Include="ITriada.h" />
     <ClInclude Include="Mesh.h" />
@@ -175,6 +180,7 @@
     <ClInclude Include="ScreenResolution.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stdhdr.h" />
+    <ClInclude Include="TargetCamera.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Vertex.h" />

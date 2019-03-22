@@ -55,6 +55,15 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="CameraSwitcher.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeCamera.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetCamera.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -106,6 +115,15 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Axis.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraSwitcher.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeCamera.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetCamera.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

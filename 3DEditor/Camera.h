@@ -10,7 +10,7 @@ enum class CameraMovement {
 	UP, DOWN
 };
 
-class Camera final {
+class Camera {
 public:
 	static const float DEFAULT_MOUSE_PITCH;
 	static const float MIN_MOUSE_PITCH;
@@ -45,7 +45,7 @@ private:
 
 public:
 	Camera();
-	~Camera() = default;
+	virtual ~Camera() = default;
 
 	Transform& getTransform();
 	Axis& getAxis();
