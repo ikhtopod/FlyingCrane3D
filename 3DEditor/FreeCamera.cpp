@@ -28,8 +28,6 @@ void FreeCamera::keyboardInput() {
 
 
 void FreeCamera::mouseInput(float xPos, float yPos) {
-	static glm::vec2 lastMousePosition { xPos, yPos };
-
 	glm::vec3 _rotation = this->transform.getRotation();
 
 	_rotation.x += (lastMousePosition.y - yPos) * this->mouseSensitivity.x;

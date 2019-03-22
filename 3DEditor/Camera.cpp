@@ -67,6 +67,13 @@ float Camera::getSpeedMovement() {
 	return this->speedMovement;
 }
 
+void Camera::setTransform(const Transform& _transform) {
+	this->transform = _transform;
+}
+
+void Camera::setAxis(const Axis& _axis) {
+	this->axis = _axis;
+}
 
 glm::mat4 Camera::GetViewMatrix() {
 	return glm::lookAt(

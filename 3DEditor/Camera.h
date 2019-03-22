@@ -52,9 +52,11 @@ public:
 
 	Transform& getTransform();
 	Axis& getAxis();
-
 	float getFoV();
 	float getSpeedMovement();
+
+	void setTransform(const Transform& _transform);
+	void setAxis(const Axis& _axis);
 
 	glm::mat4 GetViewMatrix();
 };
