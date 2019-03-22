@@ -23,7 +23,8 @@ public:
 	static const float DEFAULT_MOUSE_ROLL;
 
 	static const float DEFAULT_SPEED_MOVEMENT;
-	static const float DEFAULT_MOUSE_SENSITIVITY;
+	static const float DEFAULT_MOUSE_SENSITIVITY_X;
+	static const float DEFAULT_MOUSE_SENSITIVITY_Y;
 
 	static const float DEFAULT_CAMERA_FOV;
 	static const float MIN_CAMERA_FOV;
@@ -32,15 +33,15 @@ public:
 	static const glm::vec3 DEFAULT_CAMERA_POSITION;
 
 
-private:
+protected:
 	Transform transform {};
 	Axis axis {};
 
 	float speedMovement;
-	float mouseSensitivity;
+	glm::vec2 mouseSensitivity;
 	float fov;
 
-private:
+protected:
 	void updateCameraVectors();
 
 public:
@@ -55,6 +56,6 @@ public:
 
 	glm::mat4 GetViewMatrix();
 
-	void keyboardMovement(CameraMovement direction, float deltaTime);
-	void mouseMovement(float xOffset, float yOffset);
+	void keyboardInput(CameraMovement direction, float deltaTime);
+	void mouseInput(float xPos, float yPos);
 };

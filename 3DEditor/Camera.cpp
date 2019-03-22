@@ -12,7 +12,8 @@ const float Camera::MAX_MOUSE_YAW = 360.0f;
 const float Camera::DEFAULT_MOUSE_ROLL = 0.0f;
 
 const float Camera::DEFAULT_SPEED_MOVEMENT = 2.5f;
-const float Camera::DEFAULT_MOUSE_SENSITIVITY = 0.1f;
+const float Camera::DEFAULT_MOUSE_SENSITIVITY_X = 0.12f;
+const float Camera::DEFAULT_MOUSE_SENSITIVITY_Y = 0.1f;
 
 const float Camera::DEFAULT_CAMERA_FOV = 45.0f;
 const float Camera::MIN_CAMERA_FOV = 1.0f;
@@ -38,9 +39,8 @@ void Camera::updateCameraVectors() {
 
 
 Camera::Camera()
-	: speedMovement(DEFAULT_SPEED_MOVEMENT),
-	mouseSensitivity(DEFAULT_MOUSE_SENSITIVITY),
-	fov(DEFAULT_CAMERA_FOV) {
+	: speedMovement(DEFAULT_SPEED_MOVEMENT), fov(DEFAULT_CAMERA_FOV),
+	mouseSensitivity(DEFAULT_MOUSE_SENSITIVITY_X, DEFAULT_MOUSE_SENSITIVITY_Y) {
 
 	this->transform.setPosition(DEFAULT_CAMERA_POSITION);
 
@@ -75,7 +75,7 @@ glm::mat4 Camera::GetViewMatrix() {
 		this->axis.getUp());
 }
 
-void Camera::keyboardMovement(CameraMovement direction, float deltaTime) {
+void Camera::keyboardInput(CameraMovement direction, float deltaTime) {
 	float velocity = this->speedMovement * deltaTime;
 
 	glm::vec3 pos = this->transform.getPosition();
@@ -96,14 +96,16 @@ void Camera::keyboardMovement(CameraMovement direction, float deltaTime) {
 	this->transform.setPosition(pos);
 }
 
-void Camera::mouseMovement(float xOffset, float yOffset) {
-	xOffset *= this->mouseSensitivity;
-	yOffset *= this->mouseSensitivity;
+
+void Camera::mouseInput(float xPos, float yPos) {
+	static glm::vec2 lastMousePosition { xPos, yPos };
 
 	glm::vec3 _rotation = this->transform.getRotation();
 
-	_rotation.x += yOffset;
-	_rotation.y += xOffset;
+	_rotation.x += (lastMousePosition.y - yPos) * this->mouseSensitivity.x;
+	_rotation.y += (xPos - lastMousePosition.x) * this->mouseSensitivity.y;
+
+	lastMousePosition = glm::vec2 { xPos, yPos };
 
 	_rotation.x = std::clamp<float>(_rotation.x, MIN_MOUSE_PITCH, MAX_MOUSE_PITCH);
 	_rotation.y = Util::repeat(_rotation.y, MIN_MOUSE_YAW, MAX_MOUSE_YAW);

@@ -117,27 +117,27 @@ void Application::pressedEscape() {
 
 void Application::keyboardMovement() {
 	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_W) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardMovement(CameraMovement::FORWARD, deltaTime);
+		this->scene.getCamera().keyboardInput(CameraMovement::FORWARD, deltaTime);
 	}
 
 	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_S) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardMovement(CameraMovement::BACKWARD, deltaTime);
+		this->scene.getCamera().keyboardInput(CameraMovement::BACKWARD, deltaTime);
 	}
 
 	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_A) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardMovement(CameraMovement::LEFT, deltaTime);
+		this->scene.getCamera().keyboardInput(CameraMovement::LEFT, deltaTime);
 	}
 
 	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_D) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardMovement(CameraMovement::RIGHT, deltaTime);
+		this->scene.getCamera().keyboardInput(CameraMovement::RIGHT, deltaTime);
 	}
 
 	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_E) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardMovement(CameraMovement::UP, deltaTime);
+		this->scene.getCamera().keyboardInput(CameraMovement::UP, deltaTime);
 	}
 
 	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_Q) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardMovement(CameraMovement::DOWN, deltaTime);
+		this->scene.getCamera().keyboardInput(CameraMovement::DOWN, deltaTime);
 	}
 }
 
@@ -163,40 +163,24 @@ Application::Callback::~Callback() {}
 
 
 void Application::Callback::assignAll() {
-	Application* appThis = Application::getInstancePtr();
-	glfwSetWindowUserPointer(appThis->getWindow().getWindowPtr(), appThis);
-	glfwSetFramebufferSizeCallback(appThis->getWindow().getWindowPtr(), Application::Callback::resizeWindow);
-	glfwSetCursorPosCallback(appThis->getWindow().getWindowPtr(), Application::Callback::mouseMovementCallback);
+	Application* _this = Application::getInstancePtr();
+	glfwSetWindowUserPointer(_this->getWindow().getWindowPtr(), _this);
+	glfwSetFramebufferSizeCallback(_this->getWindow().getWindowPtr(), Application::Callback::resizeWindow);
+	glfwSetCursorPosCallback(_this->getWindow().getWindowPtr(), Application::Callback::mouseMovementCallback);
 }
 
 
 void Application::Callback::resizeWindow(GLFWwindow* win, int width, int height) {
-	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
+	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
 
-	appThis->getWindow().getScreen().setWidthHeight(width, height);
+	_this->getWindow().getScreen().setWidthHeight(width, height);
 
 	glViewport(0, 0, width, height);
 }
 
 void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, double yPos) {
-	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
-
-	static bool firstMouse = true;
-	static float lastX = static_cast<float>(appThis->getInstance().getWindow().getScreen().getWidth());
-	static float lastY = static_cast<float>(appThis->getInstance().getWindow().getScreen().getHeight());
-
-	if (firstMouse) {
-		lastX = static_cast<float>(xPos);
-		lastY = static_cast<float>(yPos);
-		firstMouse = false;
-	}
-
-	float xOffset = static_cast<float>(xPos) - lastX;
-	float yOffset = lastY - static_cast<float>(yPos);
-	lastX = static_cast<float>(xPos);
-	lastY = static_cast<float>(yPos);
-
-	appThis->getScene().getCamera().mouseMovement(xOffset, yOffset);
+	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
+	_this->getScene().getCamera().mouseInput(static_cast<float>(xPos), static_cast<float>(yPos));
 }
 
 
