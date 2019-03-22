@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Util.h"
+#include "DeltaTime.h"
 #include "Transform.h"
 #include "Axis.h"
 
@@ -56,6 +57,6 @@ public:
 
 	glm::mat4 GetViewMatrix();
 
-	void keyboardInput(CameraMovement direction, float deltaTime);
+	void keyboardInput();
 	void mouseInput(float xPos, float yPos);
 };

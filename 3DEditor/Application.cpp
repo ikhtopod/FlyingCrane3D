@@ -115,35 +115,13 @@ void Application::pressedEscape() {
 	}
 }
 
-void Application::keyboardMovement() {
-	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_W) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardInput(CameraMovement::FORWARD, deltaTime);
-	}
-
-	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_S) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardInput(CameraMovement::BACKWARD, deltaTime);
-	}
-
-	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_A) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardInput(CameraMovement::LEFT, deltaTime);
-	}
-
-	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_D) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardInput(CameraMovement::RIGHT, deltaTime);
-	}
-
-	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_E) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardInput(CameraMovement::UP, deltaTime);
-	}
-
-	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_Q) == GLFW_PRESS) {
-		this->scene.getCamera().keyboardInput(CameraMovement::DOWN, deltaTime);
-	}
+void Application::keyboardInput() {
+	this->scene.getCamera().keyboardInput();
 }
 
 void Application::input() {
 	this->pressedEscape();
-	this->keyboardMovement();
+	this->keyboardInput();
 }
 
 void Application::clearColor() {

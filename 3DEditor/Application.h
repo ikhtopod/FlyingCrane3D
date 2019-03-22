@@ -42,7 +42,7 @@ private:
 	virtual void free() override;
 
 	void pressedEscape();
-	void keyboardMovement();
+	void keyboardInput();
 	void input();
 
 	void clearColor();

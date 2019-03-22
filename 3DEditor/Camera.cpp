@@ -75,22 +75,26 @@ glm::mat4 Camera::GetViewMatrix() {
 		this->axis.getUp());
 }
 
-void Camera::keyboardInput(CameraMovement direction, float deltaTime) {
-	float velocity = this->speedMovement * deltaTime;
+void Camera::keyboardInput() {
+	Application* appThis = Application::getInstancePtr();
+	GLFWwindow* window = appThis->getWindow().getWindowPtr();
+	DeltaTime& delta = appThis->getDeltaTime();
+	
+	float velocity = this->speedMovement * delta;
 
 	glm::vec3 pos = this->transform.getPosition();
 
-	if (direction == CameraMovement::FORWARD)
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		pos += this->axis.getFront() * velocity;
-	if (direction == CameraMovement::BACKWARD)
-		pos -= this->axis.getFront() * velocity;
-	if (direction == CameraMovement::RIGHT)
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		pos += this->axis.getRight() * velocity;
-	if (direction == CameraMovement::LEFT)
-		pos -= this->axis.getRight() * velocity;
-	if (direction == CameraMovement::UP)
+	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
 		pos += this->axis.getUp() * velocity;
-	if (direction == CameraMovement::DOWN)
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		pos -= this->axis.getFront() * velocity;
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		pos -= this->axis.getRight() * velocity;
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
 		pos -= this->axis.getUp() * velocity;
 
 	this->transform.setPosition(pos);
