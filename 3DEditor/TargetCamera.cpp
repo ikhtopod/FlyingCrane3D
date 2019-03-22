@@ -1,16 +1,15 @@
 #include "TargetCamera.h"
 
-const float TargetCamera::DEFAULT_DISTANCE = 4.0f;
+const float TargetCamera::DEFAULT_DISTANCE = 6.0f;
 const float TargetCamera::MIN_DISTANCE = 1.0f;
 const float TargetCamera::MAX_DISTANCE = 20.0f;
 const float TargetCamera::STEP_DISTANCE = 0.2f;
 
 
 TargetCamera::TargetCamera()
-	: Camera(), distance(TargetCamera::DEFAULT_DISTANCE) {
-	std::cout << glm::smoothstep(23.0f, 47.0f, 0.5f) << std::endl;
-	targetPosition = this->transform.getPosition() - this->axis.getFront() * distance;
-}
+	: Camera(),
+	distance(TargetCamera::DEFAULT_DISTANCE), targetPosition(0.0f) {}
+
 
 glm::vec3 TargetCamera::getTargetPosition() {
 	return this->targetPosition;
@@ -30,7 +29,7 @@ void TargetCamera::setDistance(float _distance) {
 
 
 void TargetCamera::move() {
-	
+
 
 
 	this->updateCameraVectors();
@@ -64,8 +63,9 @@ void TargetCamera::keyboardInput() {
 }
 
 void TargetCamera::mouseInput(float xPos, float yPos) {
-	this->setLastMousePosition({ xPos, yPos });
 
+
+	this->setLastMousePosition({ xPos, yPos });
 
 	this->updateCameraVectors();
 }
