@@ -109,7 +109,7 @@ void Application::free() {
 	this->scene.free();
 }
 
-void Application::pressedEscape() {
+void Application::pressedExitButton() {
 	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(this->window.getWindowPtr(), GLFW_TRUE);
 	}
@@ -120,7 +120,7 @@ void Application::keyboardInput() {
 }
 
 void Application::input() {
-	this->pressedEscape();
+	this->pressedExitButton();
 	this->keyboardInput();
 }
 

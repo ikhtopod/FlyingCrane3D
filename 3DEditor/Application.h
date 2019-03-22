@@ -41,7 +41,7 @@ private:
 	virtual void draw() override;
 	virtual void free() override;
 
-	void pressedEscape();
+	void pressedExitButton();
 	void keyboardInput();
 	void input();
 
