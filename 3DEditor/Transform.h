@@ -9,8 +9,12 @@ private:
 	glm::vec3 scale {};
 
 public:
+	static Transform matrixToTransform(glm::mat4 _matrix);
+
+public:
 	Transform();
 	Transform(glm::vec3 _position, glm::vec3 _rotation, glm::vec3 _scale);
+	Transform(glm::mat4 matrix);
 	Transform(const Transform& transform);
 	~Transform() = default;
 

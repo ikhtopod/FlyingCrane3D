@@ -1,6 +1,19 @@
 #include "Transform.h"
 
 
+Transform Transform::matrixToTransform(glm::mat4 _matrix) {
+	glm::vec3 _scale;
+	glm::quat _rotation;
+	glm::vec3 _translation;
+	glm::vec3 _skew;
+	glm::vec4 _perspective;
+
+	glm::decompose(_matrix, _scale, _rotation, _translation, _skew, _perspective);
+
+	return Transform { _translation, glm::degrees(glm::eulerAngles(_rotation)), _scale };
+}
+
+
 Transform::Transform()
 	: Transform(glm::vec3 { 0.0f }, glm::vec3 { 0.0f }, glm::vec3 { 1.0f }) {}
 
@@ -10,24 +23,25 @@ Transform::Transform(const Transform& transform)
 Transform::Transform(glm::vec3 _position, glm::vec3 _rotation, glm::vec3 _scale)
 	: position(_position), rotation(_rotation), scale(_scale) {}
 
+Transform::Transform(glm::mat4 matrix) {
+	Transform t = Transform::matrixToTransform(matrix);
+
+	this->setPosition(t.getPosition());
+	this->setRotation(t.getRotation());
+	this->setScale(t.getScale());
+}
+
 
 Transform& Transform::operator+=(const Transform& t1) {
-	glm::vec3 _scale;
-	glm::quat _rotation;
-	glm::vec3 _translation;
-	glm::vec3 _skew;
-	glm::vec4 _perspective;
-
-	//glm::mat4 _matrix = this->getMatrix() * t1.getMatrix();
 	glm::mat4 _matrix = this->getPositionMat4() * t1.getPositionMat4()
 		* this->getRotationMat4() * t1.getRotationMat4()
 		* this->getScaleMat4() * t1.getScaleMat4();
 
-	glm::decompose(_matrix, _scale, _rotation, _translation, _skew, _perspective);
+	Transform t = Transform::matrixToTransform(_matrix);
 
-	this->setPosition(_translation);
-	this->setRotation(glm::degrees(glm::eulerAngles(_rotation)));
-	this->setScale(_scale);
+	this->setPosition(t.getPosition());
+	this->setRotation(t.getRotation());
+	this->setScale(t.getScale());
 
 	return *this;
 }
