@@ -5,11 +5,6 @@
 #include "Transform.h"
 #include "Axis.h"
 
-enum class CameraMovement {
-	FORWARD, BACKWARD,
-	LEFT, RIGHT,
-	UP, DOWN
-};
 
 class Camera {
 public:
