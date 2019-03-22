@@ -30,11 +30,11 @@ void FreeCamera::keyboardInput() {
 void FreeCamera::mouseInput(float xPos, float yPos) {
 	glm::vec3 _rotation = this->transform.getRotation();
 
-	_rotation.x += (lastMousePosition.y - yPos) * this->mouseSensitivity.x;
-	_rotation.y += (xPos - lastMousePosition.x) * this->mouseSensitivity.y;
+	_rotation.x += (this->lastMousePosition.y - yPos) * this->mouseSensitivity.x;
+	_rotation.y += (xPos - this->lastMousePosition.x) * this->mouseSensitivity.y;
 
-	lastMousePosition.x = xPos;
-	lastMousePosition.y = yPos;
+	this->lastMousePosition.x = xPos;
+	this->lastMousePosition.y = yPos;
 
 	_rotation.x = std::clamp<float>(_rotation.x, MIN_MOUSE_PITCH, MAX_MOUSE_PITCH);
 	_rotation.y = Util::repeat(_rotation.y, MIN_MOUSE_YAW, MAX_MOUSE_YAW);
