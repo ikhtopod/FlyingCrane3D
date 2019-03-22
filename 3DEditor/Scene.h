@@ -7,14 +7,12 @@
 #include "Camera.h"
 #include "Model.h"
 #include "Transform.h"
-#include "Axis.h"
 
 class Scene final : public ITriada {
 private:
 	Camera camera {};
 	Model model {};
 	Transform transform {};
-	Axis axis {};
 
 public:
 	std::map<std::string, Object> standardObjects {};
@@ -27,7 +25,6 @@ public:
 	Camera& getCamera();
 	Model& getModel();
 	Transform& getTransform();
-	Axis& getAxis();
 
 	void addStandardObject(std::string _name, Object _object);
 	void addObject(std::string _name, Object _object);
