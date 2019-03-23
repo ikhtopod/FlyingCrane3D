@@ -14,6 +14,9 @@ private:
 	glm::vec3 targetPosition;
 	float distance;
 
+private:
+	void updatePosition();
+
 public:
 	TargetCamera();
 
@@ -24,8 +27,8 @@ public:
 	void setDistance(float _distance);
 
 	void move();
-	void spin();
-	void zoom();
+	void spin(float xPos, float yPos);
+	void zoom(float xOffset, float yOffset);
 
 public:
 	virtual void keyboardInput() override;

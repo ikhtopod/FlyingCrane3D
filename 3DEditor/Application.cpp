@@ -176,12 +176,21 @@ void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, 
 	_this->getScene().getCamera().mouseInput(static_cast<float>(xPos), static_cast<float>(yPos));
 }
 
-void Application::Callback::mouseButtonCallback(GLFWwindow * win, int button, int action, int mods) {
+void Application::Callback::mouseButtonCallback(GLFWwindow* win, int button, int action, int mods) {
 	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
+
+	if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
+		if (action == GLFW_PRESS) {
+			_this->getScene().getCameraSwitcher().setType(CameraType::TARGET);
+		} else if (action == GLFW_RELEASE) {
+			_this->getScene().getCameraSwitcher().setType(CameraType::FIXED);
+		}
+	}
+
 	_this->getScene().getCamera().mouseButtonInput(button, action, mods);
 }
 
-void Application::Callback::scrollCallback(GLFWwindow * win, double xOffset, double yOffset) {
+void Application::Callback::scrollCallback(GLFWwindow* win, double xOffset, double yOffset) {
 	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
 	_this->getScene().getCamera().mouseScrollInput(static_cast<float>(xOffset), static_cast<float>(yOffset));
 }

@@ -11,6 +11,17 @@ TargetCamera::TargetCamera()
 	distance(TargetCamera::DEFAULT_DISTANCE), targetPosition(0.0f) {}
 
 
+void TargetCamera::updatePosition() {
+	glm::vec3 pos = this->targetPosition;
+
+	pos -= this->axis.getFront() * this->distance;
+	pos += this->axis.getUp() * this->distance;
+	pos -= this->axis.getUp() * this->distance;
+
+	this->transform.setPosition(pos);
+}
+
+
 glm::vec3 TargetCamera::getTargetPosition() {
 	return this->targetPosition;
 }
@@ -32,27 +43,7 @@ void TargetCamera::move() {
 
 }
 
-void TargetCamera::spin() {
-
-}
-
-void TargetCamera::zoom() {
-
-}
-
-
-void TargetCamera::keyboardInput() {
-	Application* appThis = Application::getInstancePtr();
-	GLFWwindow* window = appThis->getWindow().getWindowPtr();
-	DeltaTime& delta = appThis->getDeltaTime();
-
-	float velocity = this->speedMovement * delta;
-
-
-
-}
-
-void TargetCamera::mouseInput(float xPos, float yPos) {
+void TargetCamera::spin(float xPos, float yPos) {
 	glm::vec3 _rotation = this->transform.getRotation();
 
 	_rotation.x += (this->lastMousePosition.y - yPos) * this->mouseSensitivity.x;
@@ -67,14 +58,21 @@ void TargetCamera::mouseInput(float xPos, float yPos) {
 
 	this->updateCameraVectors();
 
+	this->updatePosition();
+}
 
-	glm::vec3 pos = this->targetPosition;
+void TargetCamera::zoom(float xOffset, float yOffset) {
+	this->distance -= STEP_DISTANCE * yOffset;
+	this->distance = std::clamp<float>(this->distance, MIN_DISTANCE, MAX_DISTANCE);
 
-	pos -= this->axis.getFront() * this->distance;
-	pos += this->axis.getUp() * this->distance;
-	pos -= this->axis.getUp() * this->distance;
+	this->updatePosition();
+}
 
-	this->transform.setPosition(pos);
+
+void TargetCamera::keyboardInput() {}
+
+void TargetCamera::mouseInput(float xPos, float yPos) {
+	this->spin(xPos, yPos);
 }
 
 void TargetCamera::mouseButtonInput(int button, int action, int mods) {
@@ -82,15 +80,5 @@ void TargetCamera::mouseButtonInput(int button, int action, int mods) {
 }
 
 void TargetCamera::mouseScrollInput(float xOffset, float yOffset) {
-	this->distance -= STEP_DISTANCE * yOffset;
-
-	this->distance = std::clamp<float>(this->distance, MIN_DISTANCE, MAX_DISTANCE);
-
-	glm::vec3 pos = this->targetPosition;
-
-	pos -= this->axis.getFront() * this->distance;
-	pos += this->axis.getUp() * this->distance;
-	pos -= this->axis.getUp() * this->distance;
-
-	this->transform.setPosition(pos);
+	this->zoom(xOffset, yOffset);
 }
