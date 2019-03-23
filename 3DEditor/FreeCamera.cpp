@@ -24,8 +24,6 @@ void FreeCamera::keyboardInput() {
 		pos -= this->axis.getUp() * velocity;
 
 	this->transform.setPosition(pos);
-
-	this->updateCameraVectors();
 }
 
 
@@ -44,3 +42,7 @@ void FreeCamera::mouseInput(float xPos, float yPos) {
 
 	this->updateCameraVectors();
 }
+
+void FreeCamera::mouseButtonInput(int button, int action, int mods) {}
+
+void FreeCamera::mouseScrollInput(float xOffset, float yOffset) {}

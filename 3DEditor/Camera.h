@@ -10,6 +10,8 @@ class ICamera {
 public:
 	virtual void keyboardInput() = 0;
 	virtual void mouseInput(float xPos, float yPos) = 0;
+	virtual void mouseButtonInput(int button, int action, int mods) = 0;
+	virtual void mouseScrollInput(float xOffset, float yOffset) = 0;
 };
 
 class Camera : public ICamera {

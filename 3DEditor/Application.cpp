@@ -158,6 +158,8 @@ void Application::Callback::assignAll() {
 
 	glfwSetFramebufferSizeCallback(_this->getWindow().getWindowPtr(), Application::Callback::resizeWindow);
 	glfwSetCursorPosCallback(_this->getWindow().getWindowPtr(), Application::Callback::mouseMovementCallback);
+	glfwSetMouseButtonCallback(_this->getWindow().getWindowPtr(), Application::Callback::mouseButtonCallback);
+	glfwSetScrollCallback(_this->getWindow().getWindowPtr(), Application::Callback::scrollCallback);
 }
 
 
@@ -172,6 +174,16 @@ void Application::Callback::resizeWindow(GLFWwindow* win, int width, int height)
 void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, double yPos) {
 	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
 	_this->getScene().getCamera().mouseInput(static_cast<float>(xPos), static_cast<float>(yPos));
+}
+
+void Application::Callback::mouseButtonCallback(GLFWwindow * win, int button, int action, int mods) {
+	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
+	_this->getScene().getCamera().mouseButtonInput(button, action, mods);
+}
+
+void Application::Callback::scrollCallback(GLFWwindow * win, double xOffset, double yOffset) {
+	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
+	_this->getScene().getCamera().mouseScrollInput(static_cast<float>(xOffset), static_cast<float>(yOffset));
 }
 
 
