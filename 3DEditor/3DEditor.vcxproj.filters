@@ -58,9 +58,6 @@
     <ClCompile Include="FreeCamera.cpp">
       <Filter>Sources\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="FixedCamera.cpp">
-      <Filter>Sources\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="CameraSwitcher.cpp">
       <Filter>Sources\Camera</Filter>
     </ClCompile>
@@ -121,9 +118,6 @@
       <Filter>Headers\Camera</Filter>
     </ClInclude>
     <ClInclude Include="FreeCamera.h">
-      <Filter>Headers\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="FixedCamera.h">
       <Filter>Headers\Camera</Filter>
     </ClInclude>
     <ClInclude Include="CameraSwitcher.h">

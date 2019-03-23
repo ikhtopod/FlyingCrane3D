@@ -1,13 +1,12 @@
 #pragma once
 
 #include "Camera.h"
-#include "FixedCamera.h"
 #include "TargetCamera.h"
 #include "FreeCamera.h"
 
 
 enum class CameraType : unsigned short {
-	FIXED, TARGET, FREE
+	TARGET, FREE
 };
 
 

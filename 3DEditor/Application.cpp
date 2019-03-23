@@ -182,8 +182,6 @@ void Application::Callback::mouseButtonCallback(GLFWwindow* win, int button, int
 	if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
 		if (action == GLFW_PRESS) {
 			_this->getScene().getCameraSwitcher().setType(CameraType::TARGET);
-		} else if (action == GLFW_RELEASE) {
-			_this->getScene().getCameraSwitcher().setType(CameraType::FIXED);
 		}
 	}
 

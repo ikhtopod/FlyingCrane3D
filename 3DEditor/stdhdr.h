@@ -55,7 +55,6 @@
 #include "Window.h"
 #include "CameraSwitcher.h"
 #include "Camera.h"
-#include "FixedCamera.h"
 #include "TargetCamera.h"
 #include "FreeCamera.h"
 #include "Scene.h"

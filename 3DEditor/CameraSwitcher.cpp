@@ -1,11 +1,10 @@
 #include "CameraSwitcher.h"
 
 
-const CameraType CameraSwitcher::DEFAULT_CAMERA_TYPE = CameraType::FIXED;
+const CameraType CameraSwitcher::DEFAULT_CAMERA_TYPE = CameraType::TARGET;
 
 
 CameraSwitcher::CameraSwitcher() : type(CameraSwitcher::DEFAULT_CAMERA_TYPE) {
-	cameras.insert({ CameraType::FIXED, std::make_shared<FixedCamera>() });
 	cameras.insert({ CameraType::TARGET, std::make_shared<TargetCamera>() });
 	cameras.insert({ CameraType::FREE, std::make_shared<FreeCamera>() });
 }
@@ -31,11 +30,8 @@ void CameraSwitcher::updateInputMode() {
 	GLFWwindow* window = Application::getInstancePtr()->getWindow().getWindowPtr();
 
 	switch (this->type) {
-		case CameraType::FIXED:
-			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-			break;
 		case CameraType::TARGET:
-			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			break;
 		case CameraType::FREE:
 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -52,14 +48,11 @@ std::shared_ptr<Camera> CameraSwitcher::getCamera() {
 
 void CameraSwitcher::switchCamera() {
 	switch (this->type) {
-		case CameraType::FIXED:
-			this->setType(CameraType::FREE);
-			break;
 		case CameraType::TARGET:
 			this->setType(CameraType::FREE);
 			break;
 		case CameraType::FREE:
-			this->setType(CameraType::FIXED);
+			this->setType(CameraType::TARGET);
 			break;
 		default:
 			this->setType(CameraSwitcher::DEFAULT_CAMERA_TYPE);
