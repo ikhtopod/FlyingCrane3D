@@ -148,6 +148,7 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="FixedCamera.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="GridObject.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraSwitcher.h" />
     <ClInclude Include="DeltaTime.h" />
+    <ClInclude Include="FixedCamera.h" />
     <ClInclude Include="FreeCamera.h" />
     <ClInclude Include="GridObject.h" />
     <ClInclude Include="ITriada.h" />
