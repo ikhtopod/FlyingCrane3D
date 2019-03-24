@@ -1,8 +1,12 @@
 #include "Scene.h"
 
 
+CameraSwitcher& Scene::getCameraSwitcher() {
+	return this->cameraSwitcher;
+}
+
 Camera& Scene::getCamera() {
-	return this->camera;
+	return *(this->cameraSwitcher.getCamera());
 }
 
 Model& Scene::getModel() {
@@ -11,10 +15,6 @@ Model& Scene::getModel() {
 
 Transform& Scene::getTransform() {
 	return this->transform;
-}
-
-Axis& Scene::getAxis() {
-	return this->axis;
 }
 
 void Scene::addStandardObject(std::string _name, Object _object) {
@@ -95,7 +95,6 @@ void Scene::init() {
 	pyramid_000.addMesh("pyramid_mesh_flat.000", pyramid_mesh_flat_000);
 	this->addObject("pyramid.000", pyramid_000);
 
-	// init objects
 	for (auto& o : this->standardObjects) {
 		o.second.init();
 	}
@@ -108,7 +107,6 @@ void Scene::init() {
 void Scene::draw() {
 	this->model.update();
 
-	// draw objects
 	for (auto& o : this->standardObjects) {
 		o.second.setGlobalTransform(this->transform);
 		o.second.draw();
@@ -121,7 +119,6 @@ void Scene::draw() {
 }
 
 void Scene::free() {
-	// free objects
 	for (auto& o : this->standardObjects) {
 		o.second.free();
 	}

@@ -30,12 +30,14 @@
 #include <algorithm>
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <cstdlib>
 #include <cstddef>
 #include <cmath>
 #include <exception>
 #include <stdexcept>
 #include <type_traits>
+#include <memory>
 #include <filesystem>
 #include <chrono>
 #include <thread>
@@ -47,10 +49,14 @@
 
 #include "Util.h"
 
+#include "DeltaTime.h"
+#include "ScreenResolution.h"
 #include "Application.h"
 #include "Window.h"
-#include "ScreenResolution.h"
-#include "DeltaTime.h"
+#include "CameraSwitcher.h"
+#include "Camera.h"
+#include "TargetCamera.h"
+#include "FreeCamera.h"
 #include "Scene.h"
 #include "Vertex.h"
 #include "Mesh.h"
@@ -58,7 +64,6 @@
 #include "GridObject.h"
 #include "Axis.h"
 #include "Shader.h"
-#include "Camera.h"
 #include "Model.h"
 
 

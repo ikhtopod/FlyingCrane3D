@@ -2,7 +2,6 @@
 
 #include "ITriada.h"
 #include "Transform.h"
-#include "Axis.h"
 #include "Mesh.h"
 
 
@@ -12,7 +11,6 @@ class Object : public ITriada {
 protected:
 	Transform transform {};
 	Transform globalTransform {};
-	Axis axis {};
 
 	std::map<std::string, Mesh> meshes;
 

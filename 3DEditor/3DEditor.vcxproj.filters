@@ -4,9 +4,6 @@
     <ClCompile Include="Application.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="DeltaTime.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -55,12 +52,21 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="TargetCamera.cpp">
+      <Filter>Sources\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeCamera.cpp">
+      <Filter>Sources\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraSwitcher.cpp">
+      <Filter>Sources\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Sources\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="DeltaTime.h">
@@ -108,6 +114,18 @@
     <ClInclude Include="Axis.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="TargetCamera.h">
+      <Filter>Headers\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeCamera.h">
+      <Filter>Headers\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraSwitcher.h">
+      <Filter>Headers\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Headers\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
@@ -139,6 +157,12 @@
     </Filter>
     <Filter Include="Sources\Object">
       <UniqueIdentifier>{668327a0-e97c-4dd4-a1e5-bb48e358a075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Camera">
+      <UniqueIdentifier>{956c6f42-0a24-4540-baf9-8cb7d96a697a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Camera">
+      <UniqueIdentifier>{7c8f2d5c-43fe-4fea-bb1b-5e7cc54617ed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

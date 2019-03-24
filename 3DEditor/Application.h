@@ -41,8 +41,9 @@ private:
 	virtual void draw() override;
 	virtual void free() override;
 
-	void pressedEscape();
-	void keyboardMovement();
+	void pressedExitButton();
+	void keyboardInput();
+	void switchCameraInput();
 	void input();
 
 	void clearColor();
@@ -57,6 +58,8 @@ private:
 	private:
 		static void resizeWindow(GLFWwindow* win, int width, int height);
 		static void mouseMovementCallback(GLFWwindow* win, double xPos, double yPos);
+		static void mouseButtonCallback(GLFWwindow* win, int button, int action, int mods);
+		static void scrollCallback(GLFWwindow* win, double xOffset, double yOffset);
 	};
 };
 

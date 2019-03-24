@@ -1,24 +1,25 @@
 #include "Camera.h"
 
 
-const float Camera::DEFAULT_MOUSE_PITCH = 0.0f;
+const float Camera::DEFAULT_MOUSE_PITCH = -30.0f;
 const float Camera::MAX_MOUSE_PITCH = 89.0f;
 const float Camera::MIN_MOUSE_PITCH = -MAX_MOUSE_PITCH;
 
-const float Camera::DEFAULT_MOUSE_YAW = -90.0f;
+const float Camera::DEFAULT_MOUSE_YAW = 230.0f;
 const float Camera::MIN_MOUSE_YAW = 0.0f;
 const float Camera::MAX_MOUSE_YAW = 360.0f;
 
 const float Camera::DEFAULT_MOUSE_ROLL = 0.0f;
 
-const float Camera::DEFAULT_SPEED_MOVEMENT = 2.5f;
-const float Camera::DEFAULT_MOUSE_SENSITIVITY = 0.1f;
+const float Camera::DEFAULT_SPEED_MOVEMENT = 7.5f;
+const float Camera::STEP_SPEED_MOVEMENT = 0.2f;
+
+const float Camera::DEFAULT_MOUSE_SENSITIVITY_X = 0.08f;
+const float Camera::DEFAULT_MOUSE_SENSITIVITY_Y = 0.07f;
 
 const float Camera::DEFAULT_CAMERA_FOV = 45.0f;
 const float Camera::MIN_CAMERA_FOV = 1.0f;
 const float Camera::MAX_CAMERA_FOV = 120.0f;
-
-const glm::vec3 Camera::DEFAULT_CAMERA_POSITION = glm::vec3 { 0.0f, 1.0f, 4.0f };
 
 
 void Camera::updateCameraVectors() {
@@ -38,11 +39,8 @@ void Camera::updateCameraVectors() {
 
 
 Camera::Camera()
-	: speedMovement(DEFAULT_SPEED_MOVEMENT),
-	mouseSensitivity(DEFAULT_MOUSE_SENSITIVITY),
-	fov(DEFAULT_CAMERA_FOV) {
-
-	this->transform.setPosition(DEFAULT_CAMERA_POSITION);
+	: speedMovement(DEFAULT_SPEED_MOVEMENT), fov(DEFAULT_CAMERA_FOV),
+	mouseSensitivity(DEFAULT_MOUSE_SENSITIVITY_X, DEFAULT_MOUSE_SENSITIVITY_Y) {
 
 	glm::vec3 _rotation { DEFAULT_MOUSE_PITCH, DEFAULT_MOUSE_YAW, DEFAULT_MOUSE_ROLL };
 	this->transform.setRotation(_rotation);
@@ -59,56 +57,37 @@ Axis& Camera::getAxis() {
 	return this->axis;
 }
 
-float Camera::getFoV() {
+glm::vec2 Camera::getLastMousePosition() const {
+	return this->lastMousePosition;
+}
+
+float Camera::getFoV() const {
 	return this->fov;
 }
 
-float Camera::getSpeedMovement() {
+float Camera::getSpeedMovement() const {
 	return this->speedMovement;
 }
 
+void Camera::setTransform(const Transform& _transform) {
+	this->transform = _transform;
 
-glm::mat4 Camera::GetViewMatrix() {
+	this->updateCameraVectors();
+}
+
+void Camera::setAxis(const Axis& _axis) {
+	this->axis = _axis;
+
+	this->updateCameraVectors();
+}
+
+void Camera::setLastMousePosition(const glm::vec2& _LastMousePosition) {
+	this->lastMousePosition = _LastMousePosition;
+}
+
+glm::mat4 Camera::GetViewMatrix() const {
 	return glm::lookAt(
 		this->transform.getPosition(),
 		this->transform.getPosition() + this->axis.getFront(),
 		this->axis.getUp());
-}
-
-void Camera::keyboardMovement(CameraMovement direction, float deltaTime) {
-	float velocity = this->speedMovement * deltaTime;
-
-	glm::vec3 pos = this->transform.getPosition();
-
-	if (direction == CameraMovement::FORWARD)
-		pos += this->axis.getFront() * velocity;
-	if (direction == CameraMovement::BACKWARD)
-		pos -= this->axis.getFront() * velocity;
-	if (direction == CameraMovement::RIGHT)
-		pos += this->axis.getRight() * velocity;
-	if (direction == CameraMovement::LEFT)
-		pos -= this->axis.getRight() * velocity;
-	if (direction == CameraMovement::UP)
-		pos += this->axis.getUp() * velocity;
-	if (direction == CameraMovement::DOWN)
-		pos -= this->axis.getUp() * velocity;
-
-	this->transform.setPosition(pos);
-}
-
-void Camera::mouseMovement(float xOffset, float yOffset) {
-	xOffset *= this->mouseSensitivity;
-	yOffset *= this->mouseSensitivity;
-
-	glm::vec3 _rotation = this->transform.getRotation();
-
-	_rotation.x += yOffset;
-	_rotation.y += xOffset;
-
-	_rotation.x = std::clamp<float>(_rotation.x, MIN_MOUSE_PITCH, MAX_MOUSE_PITCH);
-	_rotation.y = Util::repeat(_rotation.y, MIN_MOUSE_YAW, MAX_MOUSE_YAW);
-
-	this->transform.setRotation(_rotation);
-
-	this->updateCameraVectors();
 }

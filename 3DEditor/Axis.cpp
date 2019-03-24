@@ -28,15 +28,15 @@ Axis::Axis(glm::vec3 _right, glm::vec3 _up, glm::vec3 _front)
 	: right(_right), up(_up), front(_front) {}
 
 
-glm::vec3 Axis::getRight() {
+glm::vec3 Axis::getRight() const {
 	return this->right;
 }
 
-glm::vec3 Axis::getUp() {
+glm::vec3 Axis::getUp() const {
 	return this->up;
 }
 
-glm::vec3 Axis::getFront() {
+glm::vec3 Axis::getFront() const {
 	return this->front;
 }
 

@@ -1,16 +1,24 @@
 #pragma once
 
 #include "Util.h"
+#include "DeltaTime.h"
 #include "Transform.h"
 #include "Axis.h"
 
-enum class CameraMovement {
-	FORWARD, BACKWARD,
-	LEFT, RIGHT,
-	UP, DOWN
+
+class ICamera {
+public:
+	//virtual void move() = 0;
+	virtual void spin() = 0;
+	virtual void spin(float xPos, float yPos) = 0;
+	virtual void keyboardInput() = 0;
+	virtual void mouseInput(float xPos, float yPos) = 0;
+	virtual void mouseButtonInput(int button, int action, int mods) = 0;
+	virtual void mouseScrollInput(float xOffset, float yOffset) = 0;
 };
 
-class Camera final {
+
+class Camera : public ICamera {
 public:
 	static const float DEFAULT_MOUSE_PITCH;
 	static const float MIN_MOUSE_PITCH;
@@ -23,38 +31,41 @@ public:
 	static const float DEFAULT_MOUSE_ROLL;
 
 	static const float DEFAULT_SPEED_MOVEMENT;
-	static const float DEFAULT_MOUSE_SENSITIVITY;
+	static const float STEP_SPEED_MOVEMENT;
+
+	static const float DEFAULT_MOUSE_SENSITIVITY_X;
+	static const float DEFAULT_MOUSE_SENSITIVITY_Y;
 
 	static const float DEFAULT_CAMERA_FOV;
 	static const float MIN_CAMERA_FOV;
 	static const float MAX_CAMERA_FOV;
 
-	static const glm::vec3 DEFAULT_CAMERA_POSITION;
-
-
-private:
+protected:
 	Transform transform {};
 	Axis axis {};
 
+	glm::vec2 lastMousePosition {};
+
 	float speedMovement;
-	float mouseSensitivity;
+	glm::vec2 mouseSensitivity;
 	float fov;
 
-private:
+protected:
 	void updateCameraVectors();
 
 public:
 	Camera();
-	~Camera() = default;
+	virtual ~Camera() = default;
 
 	Transform& getTransform();
 	Axis& getAxis();
+	glm::vec2 getLastMousePosition() const;
+	float getFoV() const;
+	float getSpeedMovement() const;
 
-	float getFoV();
-	float getSpeedMovement();
+	void setTransform(const Transform& _transform);
+	void setAxis(const Axis& _axis);
+	void setLastMousePosition(const glm::vec2& _LastMousePosition);
 
-	glm::mat4 GetViewMatrix();
-
-	void keyboardMovement(CameraMovement direction, float deltaTime);
-	void mouseMovement(float xOffset, float yOffset);
+	glm::mat4 GetViewMatrix() const;
 };
