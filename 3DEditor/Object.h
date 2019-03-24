@@ -14,6 +14,8 @@ protected:
 
 	std::map<std::string, Mesh> meshes;
 
+	bool isSelected = false;
+
 public:
 	Object() = default;
 	virtual ~Object() = default;

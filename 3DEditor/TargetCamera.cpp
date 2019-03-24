@@ -5,6 +5,8 @@ const float TargetCamera::MIN_DISTANCE = 1.0f;
 const float TargetCamera::MAX_DISTANCE = 20.0f;
 const float TargetCamera::STEP_DISTANCE = 0.5f;
 
+const float TargetCamera::CONSTRAINT_MOUSE = 10.0f;
+
 
 TargetCamera::TargetCamera()
 	: Camera(), distance(TargetCamera::DEFAULT_DISTANCE) {
@@ -20,6 +22,44 @@ void TargetCamera::updatePosition() {
 void TargetCamera::normalizeTargetPosition() {
 	this->targetPosition = this->transform.getPosition();
 	this->targetPosition += this->axis.getFront() * this->distance;
+}
+
+void TargetCamera::constraintCursor() {
+	Window& window = Application::getInstancePtr()->getWindow();
+
+	glm::vec2 lmPos = this->lastMousePosition;
+
+	float constraintWidth =
+		window.getScreen().getWidth() - CONSTRAINT_MOUSE;
+	float constraintHeight =
+		window.getScreen().getHeight() - CONSTRAINT_MOUSE;
+
+	bool isChanged = false;
+
+	if (lmPos.x < CONSTRAINT_MOUSE) {
+		lmPos.x = constraintWidth - CONSTRAINT_MOUSE;
+		isChanged = true;
+	}
+
+	if (lmPos.x > constraintWidth) {
+		lmPos.x = CONSTRAINT_MOUSE + CONSTRAINT_MOUSE;
+		isChanged = true;
+	}
+
+	if (lmPos.y < CONSTRAINT_MOUSE) {
+		lmPos.y = constraintHeight - CONSTRAINT_MOUSE;
+		isChanged = true;
+	}
+
+	if (lmPos.y > constraintHeight) {
+		lmPos.y = CONSTRAINT_MOUSE + CONSTRAINT_MOUSE;
+		isChanged = true;
+	}
+
+	if (isChanged) {
+		glfwSetCursorPos(window.getWindowPtr(), lmPos.x, lmPos.y);
+		this->setLastMousePosition(lmPos);
+	}
 }
 
 
@@ -46,12 +86,7 @@ void TargetCamera::move(float xPos, float yPos) {
 	newPos -= (this->axis.getUp() * (this->lastMousePosition.y - yPos)) * this->mouseSensitivity.y * 0.1f;
 	this->transform.setPosition(newPos);
 
-
 	this->normalizeTargetPosition();
-
-	//this->updateCameraVectors();
-
-	//this->updatePosition();
 }
 
 void TargetCamera::spin() {
@@ -98,8 +133,6 @@ void TargetCamera::mouseButtonInput(int button, int action, int mods) {
 	if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS) {
 		this->middleMousePressed = true;
 
-		glfwSetInputMode(Application::getInstancePtr()->getWindow().getWindowPtr(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
 		if (mods == GLFW_MOD_SHIFT) {
 			this->keyShiftPressed = true;
 		} else {
@@ -107,7 +140,6 @@ void TargetCamera::mouseButtonInput(int button, int action, int mods) {
 		}
 	} else {
 		this->middleMousePressed = false;
-		glfwSetInputMode(Application::getInstancePtr()->getWindow().getWindowPtr(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
 }
 
@@ -123,6 +155,10 @@ void TargetCamera::mouseInput(float xPos, float yPos) {
 	}
 
 	this->setLastMousePosition({ xPos, yPos });
+
+	if (this->middleMousePressed) {
+		this->constraintCursor();
+	}
 }
 
 void TargetCamera::mouseScrollInput(float xOffset, float yOffset) {

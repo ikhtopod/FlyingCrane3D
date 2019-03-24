@@ -28,6 +28,13 @@ glm::vec3 Util::repeat(glm::vec3 val, float _min, float _max) {
 	return val;
 }
 
+glm::vec2 Util::repeat(glm::vec2 val, float _min, float _max) {
+	val.x = Util::repeat(val.x, _min, _max);
+	val.y = Util::repeat(val.y, _min, _max);
+
+	return val;
+}
+
 std::string Util::getTextFromFile(const std::filesystem::path& filePath) {
 	if (!std::filesystem::exists(filePath)) {
 		throw std::exception { (filePath.string() + " isn't exists").c_str() };
