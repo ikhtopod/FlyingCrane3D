@@ -156,6 +156,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ScreenResolution.cpp" />
+    <ClCompile Include="Selection.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdhdr.cpp" />
     <ClCompile Include="TargetCamera.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ScreenResolution.h" />
+    <ClInclude Include="Selection.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stdhdr.h" />
     <ClInclude Include="TargetCamera.h" />

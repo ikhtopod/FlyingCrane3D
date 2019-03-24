@@ -25,9 +25,6 @@
     <ClCompile Include="E:\Program Files\glad\gl_3_3_core\src\glad.c">
       <Filter>Sources\lib</Filter>
     </ClCompile>
-    <ClCompile Include="stdhdr.cpp">
-      <Filter>Sources\stdhdr</Filter>
-    </ClCompile>
     <ClCompile Include="Util.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -64,6 +61,12 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Sources\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Selection.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="stdhdr.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -83,9 +86,6 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="stdhdr.h">
-      <Filter>Headers\stdhdr</Filter>
     </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Headers</Filter>
@@ -126,6 +126,12 @@
     <ClInclude Include="Camera.h">
       <Filter>Headers\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Selection.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="stdhdr.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
@@ -135,15 +141,9 @@
     <Filter Include="Sources\lib">
       <UniqueIdentifier>{a7a0bd80-141c-41d6-9b21-058ecba5f25a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\stdhdr">
-      <UniqueIdentifier>{2e8a8632-fb26-4004-b5c1-9d38017b1a46}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers">
       <UniqueIdentifier>{a06894c3-0723-442a-b753-f00a75e469d7}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Headers\stdhdr">
-      <UniqueIdentifier>{7c2d6124-aa75-4fac-b9cf-7355a6e5c4db}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{f6bf6e01-2b70-445e-9370-301f938ef477}</UniqueIdentifier>
