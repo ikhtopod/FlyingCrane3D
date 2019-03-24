@@ -8,7 +8,6 @@
 
 class ICamera {
 public:
-	//virtual void move() = 0;
 	virtual void spin() = 0;
 	virtual void spin(float xPos, float yPos) = 0;
 	virtual void keyboardInput() = 0;
