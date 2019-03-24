@@ -10,6 +10,8 @@ public:
 	static const float MAX_DISTANCE;
 	static const float STEP_DISTANCE;
 
+	static const float CONSTRAINT_MOUSE;
+
 private:
 	glm::vec3 targetPosition {};
 	float distance;
@@ -20,6 +22,7 @@ private:
 private:
 	void updatePosition();
 	void normalizeTargetPosition();
+	void constraintCursor();
 
 public:
 	TargetCamera();
