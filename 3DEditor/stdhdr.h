@@ -59,6 +59,7 @@
 #include "FreeCamera.h"
 #include "Scene.h"
 #include "Vertex.h"
+#include "Selection.h"
 #include "Mesh.h"
 #include "Object.h"
 #include "GridObject.h"

@@ -61,6 +61,12 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Sources\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Selection.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="stdhdr.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -119,6 +125,12 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Headers\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Selection.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="stdhdr.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
