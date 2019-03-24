@@ -1,7 +1,7 @@
 #include "FreeCamera.h"
 
 
-void FreeCamera::keyboardInput() {
+void FreeCamera::move() {
 	Application* appThis = Application::getInstancePtr();
 	GLFWwindow* window = appThis->getWindow().getWindowPtr();
 	DeltaTime& delta = appThis->getDeltaTime();
@@ -26,14 +26,15 @@ void FreeCamera::keyboardInput() {
 	this->transform.setPosition(pos);
 }
 
+void FreeCamera::spin() {
+	this->spin(this->lastMousePosition.x, this->lastMousePosition.y);
+}
 
-void FreeCamera::mouseInput(float xPos, float yPos) {
+void FreeCamera::spin(float xPos, float yPos) {
 	glm::vec3 _rotation = this->transform.getRotation();
 
 	_rotation.x += (this->lastMousePosition.y - yPos) * this->mouseSensitivity.x;
 	_rotation.y += (xPos - this->lastMousePosition.x) * this->mouseSensitivity.y;
-
-	this->setLastMousePosition({ xPos, yPos });
 
 	_rotation.x = std::clamp<float>(_rotation.x, MIN_MOUSE_PITCH, MAX_MOUSE_PITCH);
 	_rotation.y = Util::repeat(_rotation.y, MIN_MOUSE_YAW, MAX_MOUSE_YAW);
@@ -43,6 +44,25 @@ void FreeCamera::mouseInput(float xPos, float yPos) {
 	this->updateCameraVectors();
 }
 
-void FreeCamera::mouseButtonInput(int button, int action, int mods) {}
+void FreeCamera::changeSpeed(float xOffset, float yOffset) {
+	this->speedMovement += STEP_SPEED_MOVEMENT * yOffset;
+	if (this->speedMovement < 0.0f) this->speedMovement = 0.0f;
+}
 
-void FreeCamera::mouseScrollInput(float xOffset, float yOffset) {}
+
+void FreeCamera::keyboardInput() {
+	this->move();
+}
+
+void FreeCamera::mouseInput(float xPos, float yPos) {
+	if (this->lastMousePosition.x == xPos && this->lastMousePosition.y == yPos) return;
+
+	this->spin(xPos, yPos);
+	this->setLastMousePosition({ xPos, yPos });
+}
+
+void FreeCamera::mouseScrollInput(float xOffset, float yOffset) {
+	this->changeSpeed(xOffset, yOffset);
+}
+
+void FreeCamera::mouseButtonInput(int button, int action, int mods) {}

@@ -3,13 +3,18 @@
 #include "Util.h"
 
 class Transform final {
+public:
+	static const glm::vec3 DEFAULT_POSITION;
+	static const glm::vec3 DEFAULT_ROTATION;
+	static const glm::vec3 DEFAULT_SCALE;
+
+public:
+	static Transform matrixToTransform(const glm::mat4& _matrix);
+
 private:
 	glm::vec3 position {};
 	glm::vec3 rotation {};
 	glm::vec3 scale {};
-
-public:
-	static Transform matrixToTransform(glm::mat4 _matrix);
 
 public:
 	Transform();
@@ -17,6 +22,8 @@ public:
 	Transform(glm::mat4 matrix);
 	Transform(const Transform& transform);
 	~Transform() = default;
+
+	Transform& operator=(const Transform& t1);
 
 	Transform& operator+=(const Transform& t1);
 	friend Transform operator+(Transform t1, const Transform& t2);
@@ -29,9 +36,9 @@ public:
 	glm::mat4 getRotationMat4() const;
 	glm::mat4 getScaleMat4() const;
 
-	void setPosition(glm::vec3 _position);
-	void setRotation(glm::vec3 _rotation);
-	void setScale(glm::vec3 _scale);
+	void setPosition(const glm::vec3& _position);
+	void setRotation(const glm::vec3& _rotation);
+	void setScale(const glm::vec3& _scale);
 
 	glm::mat4 getMatrix() const;
 };

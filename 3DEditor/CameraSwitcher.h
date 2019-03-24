@@ -19,13 +19,13 @@ private:
 	std::unordered_map<CameraType, std::shared_ptr<Camera>> cameras {};
 
 private:
-	void updateInputMode();
+	void updateInputMode() const;
 
 public:
 	CameraSwitcher();
 	~CameraSwitcher() = default;
 
-	CameraType getType();
+	CameraType getType() const;
 	void setType(CameraType _type);
 
 	std::shared_ptr<Camera> getCamera();

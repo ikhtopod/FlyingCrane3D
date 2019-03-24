@@ -11,11 +11,15 @@ public:
 	static const float STEP_DISTANCE;
 
 private:
-	glm::vec3 targetPosition;
+	glm::vec3 targetPosition {};
 	float distance;
+
+	bool middleMousePressed = false;
+	bool keyShiftPressed = false;
 
 private:
 	void updatePosition();
+	void normalizeTargetPosition();
 
 public:
 	TargetCamera();
@@ -26,11 +30,12 @@ public:
 	void setTargetPosition(glm::vec3 _targetPosition);
 	void setDistance(float _distance);
 
-	void move();
-	void spin(float xPos, float yPos);
+	void move(float xPos, float yPos);
 	void zoom(float xOffset, float yOffset);
 
 public:
+	virtual void spin() override;
+	virtual void spin(float xPos, float yPos) override;
 	virtual void keyboardInput() override;
 	virtual void mouseInput(float xPos, float yPos) override;
 	virtual void mouseButtonInput(int button, int action, int mods) override;

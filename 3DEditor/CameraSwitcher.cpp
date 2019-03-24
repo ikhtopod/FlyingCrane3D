@@ -9,24 +9,31 @@ CameraSwitcher::CameraSwitcher() : type(CameraSwitcher::DEFAULT_CAMERA_TYPE) {
 	cameras.insert({ CameraType::FREE, std::make_shared<FreeCamera>() });
 }
 
-CameraType CameraSwitcher::getType() {
+CameraType CameraSwitcher::getType() const {
 	return this->type;
 }
 
 void CameraSwitcher::setType(CameraType _type) {
 	if (this->type == _type) return;
 
+	GLFWwindow* window = Application::getInstancePtr()->getWindow().getWindowPtr();
+
 	if (this->cameras.find(_type) != this->cameras.end()) {
 		this->cameras[_type]->setTransform(this->cameras[this->type]->getTransform());
 		this->cameras[_type]->setAxis(this->cameras[this->type]->getAxis());
-		this->cameras[_type]->setLastMousePosition(this->cameras[this->type]->getLastMousePosition());
+
+		if (_type == CameraType::FREE) {
+			this->cameras[_type]->setLastMousePosition(this->cameras[this->type]->getLastMousePosition());
+		}
+
+		this->cameras[_type]->spin();
 		this->type = _type;
 
 		this->updateInputMode();
 	}
 }
 
-void CameraSwitcher::updateInputMode() {
+void CameraSwitcher::updateInputMode() const {
 	GLFWwindow* window = Application::getInstancePtr()->getWindow().getWindowPtr();
 
 	switch (this->type) {

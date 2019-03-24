@@ -31,9 +31,9 @@ public:
 	Axis(glm::vec3 _right, glm::vec3 _up, glm::vec3 _front);
 	~Axis() = default;
 
-	glm::vec3 getRight();
-	glm::vec3 getUp();
-	glm::vec3 getFront();
+	glm::vec3 getRight() const;
+	glm::vec3 getUp() const;
+	glm::vec3 getFront() const;
 
 	void setRight(glm::vec3 _right);
 	void setUp(glm::vec3 _up);

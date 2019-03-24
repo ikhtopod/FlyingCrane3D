@@ -178,13 +178,6 @@ void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, 
 
 void Application::Callback::mouseButtonCallback(GLFWwindow* win, int button, int action, int mods) {
 	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
-
-	if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
-		if (action == GLFW_PRESS) {
-			_this->getScene().getCameraSwitcher().setType(CameraType::TARGET);
-		}
-	}
-
 	_this->getScene().getCamera().mouseButtonInput(button, action, mods);
 }
 

@@ -1,7 +1,12 @@
 #include "Transform.h"
 
 
-Transform Transform::matrixToTransform(glm::mat4 _matrix) {
+const glm::vec3 Transform::DEFAULT_POSITION = glm::vec3 { 0.0f };
+const glm::vec3 Transform::DEFAULT_ROTATION = glm::vec3 { 0.0f };
+const glm::vec3 Transform::DEFAULT_SCALE = glm::vec3 { 1.0f };
+
+
+Transform Transform::matrixToTransform(const glm::mat4& _matrix) {
 	glm::vec3 _scale;
 	glm::quat _rotation;
 	glm::vec3 _translation;
@@ -15,7 +20,7 @@ Transform Transform::matrixToTransform(glm::mat4 _matrix) {
 
 
 Transform::Transform()
-	: Transform(glm::vec3 { 0.0f }, glm::vec3 { 0.0f }, glm::vec3 { 1.0f }) {}
+	: Transform(DEFAULT_POSITION, DEFAULT_ROTATION, DEFAULT_SCALE) {}
 
 Transform::Transform(const Transform& transform)
 	: position(transform.position), rotation(transform.rotation), scale(transform.scale) {}
@@ -31,6 +36,14 @@ Transform::Transform(glm::mat4 matrix) {
 	this->setScale(t.getScale());
 }
 
+
+Transform& Transform::operator=(const Transform& t1) {
+	this->setPosition(t1.getPosition());
+	this->setRotation(t1.getRotation());
+	this->setScale(t1.getScale());
+
+	return *this;
+}
 
 Transform& Transform::operator+=(const Transform& t1) {
 	glm::mat4 _matrix = this->getPositionMat4() * t1.getPositionMat4()
@@ -81,15 +94,15 @@ glm::mat4 Transform::getScaleMat4() const {
 }
 
 
-void Transform::setPosition(glm::vec3 _position) {
+void Transform::setPosition(const glm::vec3& _position) {
 	this->position = _position;
 }
 
-void Transform::setRotation(glm::vec3 _rotation) {
+void Transform::setRotation(const glm::vec3& _rotation) {
 	this->rotation = _rotation;
 }
 
-void Transform::setScale(glm::vec3 _scale) {
+void Transform::setScale(const glm::vec3& _scale) {
 	this->scale = _scale;
 }
 

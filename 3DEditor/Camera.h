@@ -8,11 +8,15 @@
 
 class ICamera {
 public:
+	//virtual void move() = 0;
+	virtual void spin() = 0;
+	virtual void spin(float xPos, float yPos) = 0;
 	virtual void keyboardInput() = 0;
 	virtual void mouseInput(float xPos, float yPos) = 0;
 	virtual void mouseButtonInput(int button, int action, int mods) = 0;
 	virtual void mouseScrollInput(float xOffset, float yOffset) = 0;
 };
+
 
 class Camera : public ICamera {
 public:
@@ -27,15 +31,14 @@ public:
 	static const float DEFAULT_MOUSE_ROLL;
 
 	static const float DEFAULT_SPEED_MOVEMENT;
+	static const float STEP_SPEED_MOVEMENT;
+
 	static const float DEFAULT_MOUSE_SENSITIVITY_X;
 	static const float DEFAULT_MOUSE_SENSITIVITY_Y;
 
 	static const float DEFAULT_CAMERA_FOV;
 	static const float MIN_CAMERA_FOV;
 	static const float MAX_CAMERA_FOV;
-
-	static const glm::vec3 DEFAULT_CAMERA_POSITION;
-
 
 protected:
 	Transform transform {};
@@ -56,13 +59,13 @@ public:
 
 	Transform& getTransform();
 	Axis& getAxis();
-	glm::vec2 getLastMousePosition();
-	float getFoV();
-	float getSpeedMovement();
+	glm::vec2 getLastMousePosition() const;
+	float getFoV() const;
+	float getSpeedMovement() const;
 
 	void setTransform(const Transform& _transform);
 	void setAxis(const Axis& _axis);
-	void setLastMousePosition(glm::vec2 _LastMousePosition);
+	void setLastMousePosition(const glm::vec2& _LastMousePosition);
 
-	glm::mat4 GetViewMatrix();
+	glm::mat4 GetViewMatrix() const;
 };
