@@ -21,11 +21,11 @@ int ScreenResolution::getHeight() {
 	return this->height;
 }
 
-int ScreenResolution::getHalfWidth() {
+double ScreenResolution::getHalfWidth() {
 	return this->halfWidth;
 }
 
-int ScreenResolution::getHalfHeight() {
+double ScreenResolution::getHalfHeight() {
 	return this->halfHeight;
 }
 
