@@ -4,6 +4,10 @@ class ScreenResolution final {
 private:
 	int width;
 	int height;
+
+	double halfWidth;
+	double halfHeight;
+
 public:
 	static const int DEFAULT_SCREEN_WIDTH;
 	static const int DEFAULT_SCREEN_HEIGHT;
@@ -11,12 +15,14 @@ public:
 public:
 	ScreenResolution();
 	ScreenResolution(int sWidth, int sHeight);
-	~ScreenResolution();
+	~ScreenResolution() = default;
 
 	int getWidth();
-	void setWidth(int _width);
-
 	int getHeight();
+	int getHalfWidth();
+	int getHalfHeight();
+
+	void setWidth(int _width);
 	void setHeight(int _height);
 
 	void setWidthHeight(int _width, int _height);
