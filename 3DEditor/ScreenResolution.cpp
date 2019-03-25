@@ -9,27 +9,35 @@ ScreenResolution::ScreenResolution()
 	: ScreenResolution(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT) {}
 
 ScreenResolution::ScreenResolution(int sWidth, int sHeight)
-	: width(sWidth), height(sHeight) {}
-
-
-ScreenResolution::~ScreenResolution() {}
+	: width(sWidth), height(sHeight),
+	halfWidth(sWidth / 2.0), halfHeight(sHeight / 2.0) {}
 
 
 int ScreenResolution::getWidth() {
 	return this->width;
 }
 
-void ScreenResolution::setWidth(int _width) {
-	this->width = _width;
-}
-
-
 int ScreenResolution::getHeight() {
 	return this->height;
 }
 
+int ScreenResolution::getHalfWidth() {
+	return this->halfWidth;
+}
+
+int ScreenResolution::getHalfHeight() {
+	return this->halfHeight;
+}
+
+
+void ScreenResolution::setWidth(int _width) {
+	this->width = _width;
+	this->halfWidth = _width / 2.0;
+}
+
 void ScreenResolution::setHeight(int _height) {
 	this->height = _height;
+	this->halfHeight = _height / 2.0;
 }
 
 
