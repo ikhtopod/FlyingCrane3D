@@ -19,8 +19,8 @@ public:
 
 	int getWidth();
 	int getHeight();
-	int getHalfWidth();
-	int getHalfHeight();
+	double getHalfWidth();
+	double getHalfHeight();
 
 	void setWidth(int _width);
 	void setHeight(int _height);
