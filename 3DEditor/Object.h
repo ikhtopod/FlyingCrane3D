@@ -14,6 +14,7 @@ protected:
 
 	std::map<std::string, Mesh> meshes;
 
+public:
 	bool isSelected = false;
 
 public:

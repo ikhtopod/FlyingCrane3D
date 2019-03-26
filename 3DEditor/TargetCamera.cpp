@@ -1,8 +1,8 @@
 #include "TargetCamera.h"
 
-const float TargetCamera::DEFAULT_DISTANCE = 8.0f;
-const float TargetCamera::MIN_DISTANCE = 1.0f;
-const float TargetCamera::MAX_DISTANCE = 20.0f;
+const float TargetCamera::DEFAULT_DISTANCE = 12.0f;
+const float TargetCamera::MIN_DISTANCE = 0.5f;
+const float TargetCamera::MAX_DISTANCE = 40.0f;
 const float TargetCamera::STEP_DISTANCE = 0.5f;
 
 const float TargetCamera::CONSTRAINT_MOUSE = 10.0f;

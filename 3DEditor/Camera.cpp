@@ -17,7 +17,7 @@ const float Camera::STEP_SPEED_MOVEMENT = 0.2f;
 const float Camera::DEFAULT_MOUSE_SENSITIVITY_X = 0.08f;
 const float Camera::DEFAULT_MOUSE_SENSITIVITY_Y = 0.07f;
 
-const float Camera::DEFAULT_CAMERA_FOV = 45.0f;
+const float Camera::DEFAULT_CAMERA_FOV = 35.0f;
 const float Camera::MIN_CAMERA_FOV = 1.0f;
 const float Camera::MAX_CAMERA_FOV = 120.0f;
 
