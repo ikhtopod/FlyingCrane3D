@@ -60,8 +60,7 @@ Transform& Transform::operator+=(const Transform& t1) {
 }
 
 Transform operator+(Transform t1, const Transform& t2) {
-	t1 += t2;
-	return t1;
+	return t1 += t2;
 }
 
 

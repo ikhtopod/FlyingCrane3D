@@ -21,11 +21,7 @@ void CameraSwitcher::setType(CameraType _type) {
 	if (this->cameras.find(_type) != this->cameras.end()) {
 		this->cameras[_type]->setTransform(this->cameras[this->type]->getTransform());
 		this->cameras[_type]->setAxis(this->cameras[this->type]->getAxis());
-
-		if (_type == CameraType::FREE) {
-			this->cameras[_type]->setLastMousePosition(this->cameras[this->type]->getLastMousePosition());
-		}
-
+		this->cameras[_type]->setLastMousePosition(this->cameras[this->type]->getLastMousePosition());
 		this->cameras[_type]->spin();
 		this->type = _type;
 

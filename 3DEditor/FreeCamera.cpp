@@ -4,9 +4,8 @@
 void FreeCamera::move() {
 	Application* appThis = Application::getInstancePtr();
 	GLFWwindow* window = appThis->getWindow().getWindowPtr();
-	DeltaTime& delta = appThis->getDeltaTime();
 
-	float velocity = this->speedMovement * delta;
+	float velocity = this->speedMovement * appThis->getDeltaTime();
 
 	glm::vec3 pos = this->transform.getPosition();
 
