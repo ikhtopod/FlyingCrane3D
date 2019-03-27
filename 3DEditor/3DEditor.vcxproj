@@ -150,6 +150,7 @@
     </ClCompile>
     <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="GridObject.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="DeltaTime.h" />
     <ClInclude Include="FreeCamera.h" />
     <ClInclude Include="GridObject.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="ITriada.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />

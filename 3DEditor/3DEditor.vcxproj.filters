@@ -67,6 +67,9 @@
     <ClCompile Include="stdhdr.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -130,6 +133,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="stdhdr.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

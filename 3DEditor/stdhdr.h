@@ -53,6 +53,7 @@
 #include "ScreenResolution.h"
 #include "Application.h"
 #include "Window.h"
+#include "GUI.h"
 #include "CameraSwitcher.h"
 #include "Camera.h"
 #include "TargetCamera.h"

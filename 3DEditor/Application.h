@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Window.h"
+#include "GUI.h"
 #include "DeltaTime.h"
 #include "Scene.h"
 #include "ITriada.h"
@@ -11,6 +12,7 @@ private:
 	static void initInstance(Application*);
 
 	Window window;
+	GUI gui;
 	DeltaTime deltaTime { 120 };
 	Scene scene {};
 
