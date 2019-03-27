@@ -60,7 +60,7 @@ void Mesh::init() {
 	glBindVertexArray(this->vao);
 
 	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-	glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(Vertex), &(this->vertices)[0], GL_STREAM_DRAW); // GL_STATIC_DRAW, GL_DYNAMIC_DRAW, GL_STREAM_DRAW
+	glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(Vertex), &(this->vertices)[0], GL_STREAM_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &(this->indices)[0], GL_STREAM_DRAW);
