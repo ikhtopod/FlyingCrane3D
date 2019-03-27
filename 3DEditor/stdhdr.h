@@ -21,6 +21,9 @@
 #include <glm/gtx/matrix_decompose.hpp>
 
 // future include: imgui
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
 #include <iostream>
 #include <fstream>
