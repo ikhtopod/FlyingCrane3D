@@ -3,7 +3,6 @@
 #ifndef STDHDR_H
 #define STDHDR_H
 
-
 #include <glad\glad.h>
 #include <GLFW\glfw3.h>
 
@@ -22,6 +21,10 @@
 
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
+
+#undef IMGUI_IMPL_OPENGL_LOADER_GL3W
+#undef IMGUI_IMPL_OPENGL_LOADER_GLEW
+#define IMGUI_IMPL_OPENGL_LOADER_GLAD
 #include <imgui_impl_opengl3.h>
 
 #include <iostream>

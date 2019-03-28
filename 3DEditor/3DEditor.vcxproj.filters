@@ -70,6 +70,24 @@
     <ClCompile Include="GUI.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_widgets.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_demo.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_draw.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_impl_glfw.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_impl_opengl3.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -138,6 +156,30 @@
     <ClInclude Include="GUI.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imconfig.h">
+      <Filter>Headers\lib\imGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui.h">
+      <Filter>Headers\lib\imGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_impl_glfw.h">
+      <Filter>Headers\lib\imGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_internal.h">
+      <Filter>Headers\lib\imGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_rectpack.h">
+      <Filter>Headers\lib\imGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_textedit.h">
+      <Filter>Headers\lib\imGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_truetype.h">
+      <Filter>Headers\lib\imGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_impl_opengl3.h">
+      <Filter>Headers\lib\imGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
@@ -169,6 +211,15 @@
     </Filter>
     <Filter Include="Sources\Camera">
       <UniqueIdentifier>{7c8f2d5c-43fe-4fea-bb1b-5e7cc54617ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lib\imGui">
+      <UniqueIdentifier>{a0742bfc-6fa8-4596-b691-95ec3213021e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\lib">
+      <UniqueIdentifier>{3269860b-6927-453f-b52a-2b92ff7cb72a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\lib\imGui">
+      <UniqueIdentifier>{a0e27067-1181-43d1-b3df-9f0da3ce5ade}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -399,3 +399,6 @@ dkms.conf
 
 # Compiled Static libraries
 *.lai
+
+### imgui ###
+imgui.ini

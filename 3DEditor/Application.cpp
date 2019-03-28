@@ -60,8 +60,8 @@ void Application::run() {
 }
 
 
-
 void Application::loadGLLoader() const {
+	gladLoadGL();
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 		throw ApplicationException("Error in Application::loadGLLoader: gladLoadGLLoader is 0");
 	}
@@ -74,6 +74,7 @@ void Application::mainLoop() {
 		this->rendering();
 
 		glfwPollEvents();
+		this->gui.draw();
 		glfwSwapBuffers(this->window.getWindowPtr());
 
 		this->deltaTime.update(this->window.isVSync());
@@ -86,7 +87,7 @@ void Application::init() {
 		this->window.init();
 		this->loadGLLoader();
 		Application::Callback::assignAll();
-
+		this->gui.init();
 		this->scene.init();
 	} catch (std::exception e) {
 		throw e;
@@ -104,6 +105,7 @@ void Application::draw() {
 
 void Application::free() {
 	this->window.close();
+	this->gui.free();
 	this->scene.free();
 }
 
