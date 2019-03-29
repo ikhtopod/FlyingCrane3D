@@ -1,12 +1,45 @@
 #include "GUI.h"
 
+const std::string GUI::FONT_DIRECTORY = "../resources/fonts";
+const std::string GUI::FONT_PATH = FONT_DIRECTORY + "/Roboto-Regular.ttf";
+const float GUI::DEFAULT_FONT_SIZE = 16.0f;
+
+
+GUI::GUI() : fontSize(GUI::DEFAULT_FONT_SIZE) {}
+
+
+float GUI::getFontSize() {
+	return this->fontSize;
+}
+
+void GUI::setFontSize(float _fontSize) {
+	this->fontSize = _fontSize;
+}
+
+
+void GUI::initFont() {
+	ImGuiIO& io = ImGui::GetIO();
+
+	static const ImWchar ranges[] = { 0x0020, 0xFFFF, 0 };
+
+	ImFontConfig icons_config;
+	icons_config.MergeMode = false;
+
+	io.Fonts->AddFontFromFileTTF(FONT_PATH.c_str(), this->fontSize, &icons_config, ranges);
+
+	io.Fonts->AddFontDefault();
+}
+
 
 void GUI::init() {
 	this->bgColor = Application::getInstancePtr()->getBgColor();
 
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	// ImGuiIO& io = ImGui::GetIO(); //(void)io;
+	ImGui::GetIO().IniFilename = nullptr;
+
+	this->initFont();
 
 	ImGui::StyleColorsDark();
 
@@ -15,55 +48,72 @@ void GUI::init() {
 }
 
 void GUI::draw() {
-	static bool show_demo_window = true;
-	static bool show_another_window = false;
-
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplGlfw_NewFrame();
-	ImGui::NewFrame();
-
-	if (show_demo_window) {
-		ImGui::ShowDemoWindow(&show_demo_window);
-	}
-
-	{
-		static float f = 0.0f;
-		static int counter = 0;
-
-		ImGui::Begin("Hello, world!");
-
-		ImGui::Text("This is some useful text.");
-		ImGui::Checkbox("Demo Window", &show_demo_window);
-		ImGui::Checkbox("Another Window", &show_another_window);
-
-		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-		ImGui::ColorEdit3("clear color", &(this->bgColor)[0]);
-
-		if (ImGui::Button("Button")) {
-			counter++;
-		}
-		ImGui::SameLine();
-		ImGui::Text("counter = %d", counter);
-
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		ImGui::End();
-	}
-
-	if (show_another_window) {
-		ImGui::Begin("Another Window", &show_another_window);
-		ImGui::Text("Hello from another window!");
-		if (ImGui::Button("Close Me")) {
-			show_another_window = false;
-		}
-		ImGui::End();
-	}
-
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	this->draw_NewFrame();
+	this->draw_GUI();
+	this->draw_Render();
 }
 
 void GUI::free() {
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
+}
+
+void GUI::draw_NewFrame() {
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplGlfw_NewFrame();
+	ImGui::NewFrame();
+}
+
+void GUI::draw_GUI() {
+	this->showMainMenuBar();
+}
+
+void GUI::draw_Render() {
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+
+void GUI::showMainMenuBar() {
+	static bool showAboutWindow = false;
+
+	if (ImGui::BeginMainMenuBar()) {
+		if (ImGui::BeginMenu("Файл")) {
+			if (ImGui::MenuItem("Новый", "Ctrl + N", false, false)) {}
+			if (ImGui::MenuItem("Открыть", "Ctrl + O", false, false)) {}
+			if (ImGui::MenuItem("Сохранить", "Ctrl + S", false, false)) {}
+			ImGui::Separator();
+			if (ImGui::MenuItem("Импортировать", "", false, false)) {}
+			if (ImGui::MenuItem("Экспортировать", "", false, false)) {}
+			ImGui::Separator();
+			if (ImGui::MenuItem("Выход", "Ctrl + Q")) {
+				Application::getInstancePtr()->quit();
+			}
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("Редактировать")) {
+			if (ImGui::MenuItem("Настройки", "Ctrl + P")) {}
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("Справка")) {
+			if (ImGui::MenuItem("О проекте", "F1", &showAboutWindow)) {}
+			ImGui::EndMenu();
+		}
+
+		if (showAboutWindow) {
+			ImGui::Begin("О проекте", &showAboutWindow);
+
+			ImGui::Text("Дипломный проект на тему:\n\n");
+			ImGui::Text("\"Разработка программной платформы интерактивной 3D-визуализации\"\n\n");
+			ImGui::Separator();
+			ImGui::Text("Виталий Лифанов. Группа ЗП3-2д");
+
+			ImGui::End();
+		}
+
+		ImGui::EndMainMenuBar();
+	}
 }

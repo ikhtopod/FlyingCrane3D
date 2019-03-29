@@ -59,6 +59,10 @@ void Application::run() {
 	}
 }
 
+void Application::quit() {
+	glfwSetWindowShouldClose(this->window.getWindowPtr(), GLFW_TRUE);
+}
+
 
 void Application::loadGLLoader() const {
 	gladLoadGL();
@@ -109,12 +113,6 @@ void Application::free() {
 	this->scene.free();
 }
 
-void Application::pressedExitButton() {
-	if (glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-		glfwSetWindowShouldClose(this->window.getWindowPtr(), GLFW_TRUE);
-	}
-}
-
 void Application::keyboardInput() {
 	this->scene.getCamera().keyboardInput();
 }
@@ -133,7 +131,6 @@ void Application::switchCameraInput() {
 }
 
 void Application::input() {
-	this->pressedExitButton();
 	this->keyboardInput();
 	this->switchCameraInput();
 }

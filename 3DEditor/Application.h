@@ -34,6 +34,9 @@ public:
 
 	void run();
 
+public:
+	void quit();
+
 private:
 	void loadGLLoader() const;
 
@@ -43,7 +46,6 @@ private:
 	virtual void draw() override;
 	virtual void free() override;
 
-	void pressedExitButton();
 	void keyboardInput();
 	void switchCameraInput();
 	void input();
