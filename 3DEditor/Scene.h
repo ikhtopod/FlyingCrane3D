@@ -8,12 +8,14 @@
 #include "CameraSwitcher.h"
 #include "Model.h"
 #include "Transform.h"
+#include "Selection.h"
 
 class Scene final : public ITriada {
 private:
 	CameraSwitcher cameraSwitcher {};
 	Model model {};
 	Transform transform {};
+	Selection selection {};
 
 public:
 	std::map<std::string, Object> standardObjects {};
@@ -27,6 +29,7 @@ public:
 	Camera& getCamera();
 	Model& getModel();
 	Transform& getTransform();
+	Selection& getSelection();
 
 	void addStandardObject(std::string _name, Object _object);
 	void addObject(std::string _name, Object _object);

@@ -17,6 +17,10 @@ Transform& Scene::getTransform() {
 	return this->transform;
 }
 
+Selection& Scene::getSelection() {
+	return this->selection;
+}
+
 void Scene::addStandardObject(std::string _name, Object _object) {
 	if (this->standardObjects.empty() || (this->standardObjects.find(_name) == this->standardObjects.end())) {
 		this->standardObjects.insert({ _name, _object });
