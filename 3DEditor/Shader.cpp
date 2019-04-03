@@ -73,6 +73,11 @@ void Shader::setVec3(const std::string& name, glm::vec3 value) const {
 	glUniform3fv(lctn, 1, &value[0]);
 }
 
+void Shader::setVec4(const std::string& name, glm::vec4 value) const {
+	GLuint lctn = glGetUniformLocation(this->id, name.c_str());
+	glUniform4fv(lctn, 1, &value[0]);
+}
+
 
 void Shader::vertexInit() {
 	const GLchar* vShaderSource = this->vertexSource.c_str();
