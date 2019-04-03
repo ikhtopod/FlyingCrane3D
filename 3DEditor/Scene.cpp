@@ -21,6 +21,10 @@ Selection& Scene::getSelection() {
 	return this->selection;
 }
 
+std::map<std::string, Object>& Scene::getObjects() {
+	return this->objects;
+}
+
 void Scene::addStandardObject(std::string _name, Object _object) {
 	if (this->standardObjects.empty() || (this->standardObjects.find(_name) == this->standardObjects.end())) {
 		this->standardObjects.insert({ _name, _object });
@@ -35,6 +39,10 @@ void Scene::addObject(std::string _name, Object _object) {
 
 
 void Scene::init() {
+	this->selection.init();
+
+	/***********************************/
+
 	// grid
 	this->addStandardObject("grid_8x8.000", GridObject { 8, 8 });
 
@@ -99,6 +107,12 @@ void Scene::init() {
 	pyramid_000.addMesh("pyramid_mesh_flat.000", pyramid_mesh_flat_000);
 	this->addObject("pyramid.000", pyramid_000);
 
+	Object pyramid_001 = pyramid_000;
+	pyramid_001.getTransform().setPosition(glm::vec3 { -3.0f, 0.0f, -1.0f });
+	this->addObject("pyramid.001", pyramid_001);
+
+	/***********************************/
+
 	for (auto& o : this->standardObjects) {
 		o.second.init();
 	}
@@ -106,6 +120,7 @@ void Scene::init() {
 	for (auto& o : this->objects) {
 		o.second.init();
 	}
+
 }
 
 void Scene::draw() {
@@ -130,4 +145,6 @@ void Scene::free() {
 	for (auto& o : this->objects) {
 		o.second.free();
 	}
+
+	this->selection.free();
 }

@@ -19,6 +19,10 @@ void Object::setGlobalTransform(Transform _gTransform) {
 }
 
 
+std::map<std::string, Mesh>& Object::getMeshes() {
+	return this->meshes;
+}
+
 void Object::addMesh(std::string _name, Mesh& _mesh) {
 	if (this->meshes.empty() || (this->meshes.find(_name) == this->meshes.end())) {
 		this->meshes.insert({ _name, _mesh });

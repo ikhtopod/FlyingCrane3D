@@ -44,6 +44,10 @@ Scene& Application::getScene() {
 	return this->scene;
 }
 
+TriadaMode Application::getCurrentMode() {
+	return this->currentMode;
+}
+
 glm::vec4 Application::getBgColor() {
 	return this->bgColor;
 }
@@ -54,9 +58,12 @@ void Application::run() {
 		this->draw();
 		this->free();
 	} catch (std::exception e) {
+		this->currentMode = TriadaMode::NONE;
 		this->window.close();
 		throw e;
 	}
+
+	this->currentMode = TriadaMode::NONE;
 }
 
 void Application::quit() {
@@ -73,12 +80,14 @@ void Application::loadGLLoader() const {
 
 
 void Application::mainLoop() {
+	// WARNING: Последовательность вызовов функций важна!!!
 	while (!glfwWindowShouldClose(this->window.getWindowPtr())) {
+		glfwPollEvents();
+		
 		this->input();
 		this->rendering();
-
-		glfwPollEvents();
 		this->gui.draw();
+
 		glfwSwapBuffers(this->window.getWindowPtr());
 
 		this->deltaTime.update(this->window.isVSync());
@@ -87,6 +96,8 @@ void Application::mainLoop() {
 
 
 void Application::init() {
+	this->currentMode = TriadaMode::INIT;
+
 	try {
 		this->window.init();
 		this->loadGLLoader();
@@ -94,23 +105,34 @@ void Application::init() {
 		this->gui.init();
 		this->scene.init();
 	} catch (std::exception e) {
+		this->currentMode = TriadaMode::NONE;
 		throw e;
 	}
+
+	this->currentMode = TriadaMode::NONE;
 }
 
 void Application::draw() {
+	this->currentMode = TriadaMode::DRAW;
+
 	glEnable(GL_MULTISAMPLE);
 
 	glEnable(GL_DEPTH_TEST);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	this->mainLoop();
+
+	this->currentMode = TriadaMode::NONE;
 }
 
 void Application::free() {
+	this->currentMode = TriadaMode::FREE;
+
 	this->window.close();
 	this->gui.free();
 	this->scene.free();
+
+	this->currentMode = TriadaMode::NONE;
 }
 
 void Application::keyboardInput() {
@@ -125,9 +147,9 @@ void Application::switchCameraInput() {
 
 	if (state == GLFW_PRESS && prevState == GLFW_RELEASE) {
 		this->scene.getCameraSwitcher().switchCamera();
-		prevState = state;
+		prevState = GLFW_PRESS;
 	} else if (state == GLFW_RELEASE && prevState == GLFW_PRESS) {
-		prevState = state;
+		prevState = GLFW_RELEASE;
 	}
 }
 
@@ -164,26 +186,38 @@ void Application::Callback::assignAll() {
 
 
 void Application::Callback::resizeWindow(GLFWwindow* win, int width, int height) {
-	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
+	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
 
-	_this->getWindow().getScreen().setWidthHeight(width, height);
+	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
+
+	appThis->getWindow().getScreen().setWidthHeight(width, height);
 
 	glViewport(0, 0, width, height);
 }
 
 void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, double yPos) {
-	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
-	_this->getScene().getCamera().mouseInput(static_cast<float>(xPos), static_cast<float>(yPos));
+	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
+
+	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
+
+	appThis->getScene().getCamera().mouseInput(static_cast<float>(xPos), static_cast<float>(yPos));
 }
 
 void Application::Callback::mouseButtonCallback(GLFWwindow* win, int button, int action, int mods) {
-	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
-	_this->getScene().getCamera().mouseButtonInput(button, action, mods);
+	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
+	
+	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
+
+	appThis->getScene().getCamera().mouseButtonInput(button, action, mods);
+	appThis->getScene().getSelection().select(button, action, mods);
 }
 
 void Application::Callback::scrollCallback(GLFWwindow* win, double xOffset, double yOffset) {
-	Application* _this = static_cast<Application*>(glfwGetWindowUserPointer(win));
-	_this->getScene().getCamera().mouseScrollInput(static_cast<float>(xOffset), static_cast<float>(yOffset));
+	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
+
+	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
+
+	appThis->getScene().getCamera().mouseScrollInput(static_cast<float>(xOffset), static_cast<float>(yOffset));
 }
 
 

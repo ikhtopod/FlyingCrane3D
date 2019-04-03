@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "ITriada.h"
 
+
 class Application final : public ITriada {
 private:
 	static Application* instance;
@@ -15,6 +16,8 @@ private:
 	GUI gui;
 	DeltaTime deltaTime { 120 };
 	Scene scene {};
+
+	TriadaMode currentMode = TriadaMode::NONE;
 
 	glm::vec4 bgColor { .2f, .2f, .3f, 1.0f };
 
@@ -30,6 +33,7 @@ public:
 	Window& getWindow();
 	DeltaTime& getDeltaTime();
 	Scene& getScene();
+	TriadaMode getCurrentMode();
 	glm::vec4 getBgColor();
 
 	void run();
