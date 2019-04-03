@@ -8,7 +8,7 @@ private:
 	using FpsClock = std::chrono::steady_clock;
 	using timePointFps = std::chrono::time_point<FpsClock>;
 
-	static constexpr long long MIN_SLEEP_FOR = 1000LL;
+	static constexpr long long MIN_SLEEP_FOR = 500LL;
 
 private:
 	Mcrsec deltaTime {};
