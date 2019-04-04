@@ -25,6 +25,7 @@ private:
 	GLuint vertexCompile;
 	GLuint fragmentCompile;
 
+	// uniform вызовы для нестандартных шейдеров
 	LambdaDraw lambdaDraw;
 	bool useMVP = true;
 
@@ -64,6 +65,7 @@ public:
 	void setFloat(const std::string& name, float value) const;
 	void setMat4(const std::string& name, glm::mat4 value) const;
 	void setVec3(const std::string& name, glm::vec3 value) const;
+	void setVec4(const std::string& name, glm::vec4 value) const;
 
 	virtual void init() override;
 	virtual void draw() override;

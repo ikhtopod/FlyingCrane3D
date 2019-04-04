@@ -35,6 +35,14 @@ glm::vec2 Util::repeat(glm::vec2 val, float _min, float _max) {
 	return val;
 }
 
+
+// maximum combinations = 4'294'967'296
+glm::vec4 Util::generateRGBAColorById(uint32_t colorId) {
+	char *rgba = reinterpret_cast<char*>(&colorId);
+	return glm::vec4 { rgba[0], rgba[1], rgba[2], rgba[3] };
+}
+
+
 std::string Util::getTextFromFile(const std::filesystem::path& filePath) {
 	if (!std::filesystem::exists(filePath)) {
 		throw std::exception { (filePath.string() + " isn't exists").c_str() };
@@ -60,4 +68,3 @@ std::string Util::getTextFromFile(const std::filesystem::path& filePath) {
 
 	return res.str();
 }
-

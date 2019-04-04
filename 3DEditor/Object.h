@@ -3,6 +3,7 @@
 #include "ITriada.h"
 #include "Transform.h"
 #include "Mesh.h"
+#include "Shader.h"
 
 
 class Mesh;
@@ -15,7 +16,8 @@ protected:
 	std::map<std::string, Mesh> meshes;
 
 public:
-	bool isSelected = false;
+	bool canSelect = true;
+	glm::vec4 colorSelect = glm::vec4 {};
 
 public:
 	Object() = default;
@@ -27,7 +29,12 @@ public:
 	void setTransform(Transform _transform);
 	void setGlobalTransform(Transform _gTransform);
 
+	std::map<std::string, Mesh>& getMeshes();
 	void addMesh(std::string _name, Mesh& _mesh);
+	void setShadersAllMeshes(Shader& _shader);
+	void resetShadersAllMeshes();
+
+	void drawMeshes();
 
 	virtual void init() override;
 	virtual void draw() override;

@@ -255,6 +255,8 @@
     <None Include="..\resources\shaders\GridObjectMeshX.vs" />
     <None Include="..\resources\shaders\GridObjectMeshZ.fs" />
     <None Include="..\resources\shaders\GridObjectMeshZ.vs" />
+    <None Include="..\resources\shaders\Selection.fs" />
+    <None Include="..\resources\shaders\Selection.vs" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\resources\fonts\Roboto-Regular.ttf" />

@@ -251,6 +251,12 @@
     <None Include="..\resources\shaders\DefaultShader.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
+    <None Include="..\resources\shaders\Selection.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\resources\shaders\Selection.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\resources\fonts\Roboto-Regular.ttf">

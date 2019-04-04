@@ -9,6 +9,7 @@ class GridObject : public Object {
 private:
 	using _uint = unsigned int;
 	using _Cuint = const _uint;
+	using FsPath = std::filesystem::path;
 
 	static GridObject::_Cuint DEFAULT_WIDTH;
 	static GridObject::_Cuint DEFAULT_HEIGHT;
