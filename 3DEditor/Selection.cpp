@@ -73,12 +73,11 @@ void Selection::selectObject() {
 		obj.second.colorSelect = glm::vec4 { counter, 0.0f, 0.0f, 255.0f };
 
 		for (auto& mesh : obj.second.getMeshes()) {
-			Shader prevShader = mesh.second.getShader();
-
 			this->shader.setLambdaDraw([&obj](Shader* _this) {
 				_this->setVec4("colorCode", obj.second.colorSelect);
 			});
 
+			Shader prevShader = mesh.second.getShader();
 			mesh.second.setShader(this->shader);
 			mesh.second.setGlobalTransform(obj.second.getGlobalTransform() + obj.second.getTransform());
 			mesh.second.draw();
@@ -88,17 +87,17 @@ void Selection::selectObject() {
 
 	// Смотрим, какой цвет под курсором мыши был у пикселя при нажатии
 	GLint screenHeight = appThis->getWindow().getScreen().getHeight();
-	GLubyte result[4];
-	glReadPixels(static_cast<int>(xPos), screenHeight - static_cast<int>(yPos), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, result);
+	GLubyte colorUnderCursor[4];
+	glReadPixels(static_cast<int>(xPos), screenHeight - static_cast<int>(yPos), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, colorUnderCursor);
 
 	// Сохранить текущие выбранные объекты
 	for (auto& obj : appThis->getScene().getObjects()) {
 		if (!obj.second.canSelect) continue;
 
-		if (obj.second.colorSelect.r == result[0] &&
-			obj.second.colorSelect.g == result[1] &&
-			obj.second.colorSelect.b == result[2] &&
-			obj.second.colorSelect.a == result[3]) {
+		if (obj.second.colorSelect.r == colorUnderCursor[0] &&
+			obj.second.colorSelect.g == colorUnderCursor[1] &&
+			obj.second.colorSelect.b == colorUnderCursor[2] &&
+			obj.second.colorSelect.a == colorUnderCursor[3]) {
 
 			if (this->selectedObjects.find(obj.first) == this->selectedObjects.end()) {
 				this->selectedObjects.insert({ obj.first, &obj.second });
