@@ -29,6 +29,25 @@ void Object::addMesh(std::string _name, Mesh& _mesh) {
 	}
 }
 
+void Object::setShadersAllMeshes(Shader& _shader) {
+	for (auto& mesh : this->meshes) {
+		mesh.second.setShader(_shader);
+	}
+}
+
+void Object::resetShadersAllMeshes() {
+	for (auto& mesh : this->meshes) {
+		mesh.second.resetShaderToNative();
+	}
+}
+
+void Object::drawMeshes() {
+	for (auto& mesh : this->meshes) {
+		mesh.second.setGlobalTransform(this->globalTransform + this->transform);
+		mesh.second.draw();
+	}
+}
+
 
 void Object::init() {
 	for (auto& mesh : this->meshes) {
@@ -37,10 +56,7 @@ void Object::init() {
 }
 
 void Object::draw() {
-	for (auto& mesh : this->meshes) {
-		mesh.second.setGlobalTransform(this->globalTransform + this->transform);
-		mesh.second.draw();
-	}
+	this->drawMeshes();
 
 	// draw children objects
 }

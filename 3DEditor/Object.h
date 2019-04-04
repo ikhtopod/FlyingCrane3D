@@ -2,6 +2,7 @@
 
 #include "ITriada.h"
 #include "Transform.h"
+#include "Shader.h"
 #include "Mesh.h"
 
 
@@ -30,6 +31,10 @@ public:
 
 	std::map<std::string, Mesh>& getMeshes();
 	void addMesh(std::string _name, Mesh& _mesh);
+	void setShadersAllMeshes(Shader& _shader);
+	void resetShadersAllMeshes();
+
+	void drawMeshes();
 
 	virtual void init() override;
 	virtual void draw() override;
