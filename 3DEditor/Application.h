@@ -5,6 +5,7 @@
 #include "DeltaTime.h"
 #include "Scene.h"
 #include "ITriada.h"
+#include "Selection.h"
 
 
 class Application final : public ITriada {

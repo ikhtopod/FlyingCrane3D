@@ -83,7 +83,7 @@ void Application::mainLoop() {
 	// WARNING: Последовательность вызовов функций важна!!!
 	while (!glfwWindowShouldClose(this->window.getWindowPtr())) {
 		glfwPollEvents();
-		
+
 		this->input();
 		this->rendering();
 		this->gui.draw();
@@ -136,7 +136,7 @@ void Application::free() {
 }
 
 void Application::keyboardInput() {
-	this->scene.getSelection().changeModeInput();
+	this->scene.getSelection().keyboardInput();
 	this->scene.getCamera().keyboardInput();
 }
 
@@ -200,16 +200,20 @@ void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, 
 
 	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
 
-	appThis->getScene().getCamera().mouseInput(static_cast<float>(xPos), static_cast<float>(yPos));
+	float xPos_f = static_cast<float>(xPos);
+	float yPos_f = static_cast<float>(yPos);
+	appThis->scene.getSelection().mouseInput();
+	appThis->getScene().getCamera().mouseInput(xPos_f, yPos_f);
 }
 
 void Application::Callback::mouseButtonCallback(GLFWwindow* win, int button, int action, int mods) {
 	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
-	
+
 	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
 
 	appThis->getScene().getCamera().mouseButtonInput(button, action, mods);
 	appThis->getScene().getSelection().select(button, action, mods);
+	appThis->scene.getSelection().resetTransformAction();
 }
 
 void Application::Callback::scrollCallback(GLFWwindow* win, double xOffset, double yOffset) {

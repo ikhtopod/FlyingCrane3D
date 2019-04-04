@@ -1,10 +1,7 @@
 #include "Selection.h"
 
-const SelectionMode Selection::DEFAULT_SELECTION_MODE = SelectionMode::OBJECT;
-
-
 Selection::Selection() :
-	mode(DEFAULT_SELECTION_MODE),
+	mode(SelectionMode::OBJECT), transformMode(SelectionTransformMode::NONE),
 	shader(R"(..\resources\shaders\Selection.vs)", R"(..\resources\shaders\Selection.fs)") {}
 
 
@@ -20,22 +17,43 @@ void Selection::setMode(SelectionMode _mode) {
 	}
 }
 
-void Selection::changeModeInput() {
+SelectionTransformMode Selection::getTransformMode() {
+	return this->transformMode;
+}
+
+void Selection::setTransformMode(SelectionTransformMode _transformMode) {
+	if (this->transformMode != _transformMode) {
+		this->transformMode = _transformMode;
+	}
+}
+
+void Selection::keyboardInput() {
 	Application* appThis = Application::getInstancePtr();
 	GLFWwindow* window = appThis->getWindow().getWindowPtr();
 
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
 		this->setMode(SelectionMode::POINT);
-	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
 		this->setMode(SelectionMode::EDGE);
-	else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
 		this->setMode(SelectionMode::FACE);
-	else if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
 		this->setMode(SelectionMode::OBJECT);
+
+	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+		this->setTransformMode(SelectionTransformMode::MOVE);
+	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+		this->setTransformMode(SelectionTransformMode::ROTATE);
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		this->setTransformMode(SelectionTransformMode::SCALE);
+
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		this->resetTransformAction();
 }
 
 void Selection::select(int button, int action, int mods) {
 	if (button != GLFW_MOUSE_BUTTON_LEFT) return;
+	if (this->transformMode != SelectionTransformMode::NONE) return;
 
 	static bool prevState = GLFW_RELEASE;
 
@@ -58,6 +76,55 @@ void Selection::select(int button, int action, int mods) {
 	} else if (action == GLFW_RELEASE && prevState == GLFW_PRESS) {
 		prevState = GLFW_RELEASE;
 	}
+}
+
+
+void Selection::moveObject() {
+	Application* appThis = Application::getInstancePtr();
+	double xPos = 0.0;
+	double yPos = 0.0;
+
+	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &xPos, &yPos);
+
+	for (auto&[objKey, objValue] : this->selectedObjects) {
+		// set transform selected object
+	}
+}
+
+void Selection::moveAction() {
+	switch (this->mode) {
+		case SelectionMode::OBJECT:
+			this->moveObject();
+			break;
+		case SelectionMode::POINT:
+			break;
+		case SelectionMode::EDGE:
+			break;
+		case SelectionMode::FACE:
+			break;
+	}
+}
+
+void Selection::resetTransformAction() {
+	this->setTransformMode(SelectionTransformMode::NONE);
+}
+
+void Selection::transformAction() {
+	switch (this->transformMode) {
+		case SelectionTransformMode::MOVE:
+			this->moveAction();
+			break;
+		case SelectionTransformMode::ROTATE:
+			break;
+		case SelectionTransformMode::SCALE:
+			break;
+		default:
+			break;
+	}
+}
+
+void Selection::mouseInput() {
+	this->transformAction();
 }
 
 void Selection::selectObject() {

@@ -10,12 +10,16 @@ enum class SelectionMode {
 	OBJECT
 };
 
-class Selection : public ITriada {
-public:
-	static const SelectionMode DEFAULT_SELECTION_MODE;
+enum class SelectionTransformMode {
+	NONE,
+	MOVE, ROTATE, SCALE
+};
 
+
+class Selection : public ITriada {
 private:
 	SelectionMode mode;
+	SelectionTransformMode transformMode;
 	Shader shader;
 
 	std::map<std::string, Object*> selectedObjects {};
@@ -30,11 +34,20 @@ public:
 	SelectionMode getMode();
 	void setMode(SelectionMode _mode);
 
+	SelectionTransformMode getTransformMode();
+	void setTransformMode(SelectionTransformMode _transformMode);
+
 public:
-	void changeModeInput();
+	void keyboardInput();
 
 public:
 	void select(int button, int action, int mods);
+
+	void moveObject();
+	void moveAction();
+	void resetTransformAction();
+	void transformAction();
+	void mouseInput();
 
 	virtual void init() override;
 	virtual void draw() override;
