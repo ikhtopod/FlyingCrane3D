@@ -206,6 +206,11 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ScreenResolution.cpp" />
     <ClCompile Include="Selection.cpp" />
+    <ClCompile Include="SelectionEdge.cpp" />
+    <ClCompile Include="SelectionFace.cpp" />
+    <ClCompile Include="SelectionObject.cpp" />
+    <ClCompile Include="SelectionPoint.cpp" />
+    <ClCompile Include="SelectionSwitcher.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdhdr.cpp" />
     <ClCompile Include="TargetCamera.cpp" />
@@ -238,6 +243,11 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ScreenResolution.h" />
     <ClInclude Include="Selection.h" />
+    <ClInclude Include="SelectionEdge.h" />
+    <ClInclude Include="SelectionFace.h" />
+    <ClInclude Include="SelectionObject.h" />
+    <ClInclude Include="SelectionPoint.h" />
+    <ClInclude Include="SelectionSwitcher.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stdhdr.h" />
     <ClInclude Include="TargetCamera.h" />
