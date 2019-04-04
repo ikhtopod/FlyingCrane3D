@@ -11,13 +11,16 @@ Mesh::Mesh() : type(GL_POINTS) {
 	};
 
 	this->indices = { 0 };
+
+	this->shader = this->nativeShader;
 }
 
 Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type)
 	: Mesh(_vertices, _indices, _type, Shader {}) {}
 
 Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader)
-	: vertices(_vertices), indices(_indices), type(_type), shader(_shader) {}
+	: vertices(_vertices), indices(_indices), type(_type),
+	nativeShader(_shader), shader(nativeShader) {}
 
 
 Transform& Mesh::getGlobalTransform() {
@@ -46,9 +49,13 @@ void Mesh::setTransform(Transform _transform) {
 
 
 void Mesh::setShader(Shader& _shader) {
-	this->shader.free();
+	//this->shader.free();
 	this->shader = _shader;
-	this->shader.init();
+	//this->shader.init();
+}
+
+void Mesh::resetShaderToNative() {
+	this->setShader(this->nativeShader);
 }
 
 

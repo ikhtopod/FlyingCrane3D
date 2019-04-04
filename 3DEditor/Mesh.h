@@ -30,6 +30,7 @@ private:
 
 	Transform transform {};
 	Transform globalTransform {};
+	Shader nativeShader {};
 	Shader shader {};
 
 	GLenum type { GL_TRIANGLES };
@@ -48,6 +49,8 @@ public:
 	void setGlobalTransform(Transform _gTransform);
 	void setTransform(Transform _transform);
 	void setShader(Shader& _shader);
+
+	void resetShaderToNative();
 
 	virtual void init() override;
 	virtual void draw() override;
