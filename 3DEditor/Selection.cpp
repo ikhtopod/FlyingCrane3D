@@ -46,6 +46,12 @@ void Selection::select(int button, int action, int mods) {
 				if (mods != GLFW_MOD_SHIFT) this->selectedObjects.clear();
 				this->selectObject();
 				break;
+			case SelectionMode::POINT:
+				break;
+			case SelectionMode::EDGE:
+				break;
+			case SelectionMode::FACE:
+				break;
 		}
 
 		prevState = GLFW_PRESS;
@@ -61,16 +67,15 @@ void Selection::selectObject() {
 
 	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &xPos, &yPos);
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Назначаем цвета объектам и отрисовываем
-	int counter = 0;
+	uint32_t colorId = 0;
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.canSelect) continue;
 
-		counter += 50;
-		objValue.colorSelect = glm::vec4 { counter, 0.0f, 0.0f, 255.0f };
+		objValue.colorSelect = Util::generateRGBAColorById(++colorId);
 
 		for (auto&[meshKey, meshValue] : objValue.getMeshes()) {
 			this->shader.setLambdaDraw([&objValue](Shader* _this) {

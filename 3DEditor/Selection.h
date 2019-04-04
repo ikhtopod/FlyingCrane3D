@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Util.h"
 #include "ITriada.h"
 #include "Application.h"
 #include "Shader.h"
