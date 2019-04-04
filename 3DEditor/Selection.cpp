@@ -66,22 +66,22 @@ void Selection::selectObject() {
 
 	// Назначаем цвета объектам и отрисовываем
 	int counter = 0;
-	for (auto& obj : appThis->getScene().getObjects()) {
-		if (!obj.second.canSelect) continue;
+	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
+		if (!objValue.canSelect) continue;
 
 		counter += 50;
-		obj.second.colorSelect = glm::vec4 { counter, 0.0f, 0.0f, 255.0f };
+		objValue.colorSelect = glm::vec4 { counter, 0.0f, 0.0f, 255.0f };
 
-		for (auto& mesh : obj.second.getMeshes()) {
-			this->shader.setLambdaDraw([&obj](Shader* _this) {
-				_this->setVec4("colorCode", obj.second.colorSelect);
+		for (auto&[meshKey, meshValue] : objValue.getMeshes()) {
+			this->shader.setLambdaDraw([&objValue](Shader* _this) {
+				_this->setVec4("colorCode", objValue.colorSelect);
 			});
 
-			Shader prevShader = mesh.second.getShader();
-			mesh.second.setShader(this->shader);
-			mesh.second.setGlobalTransform(obj.second.getGlobalTransform() + obj.second.getTransform());
-			mesh.second.draw();
-			mesh.second.setShader(prevShader);
+			Shader prevShader = meshValue.getShader();
+			meshValue.setShader(this->shader);
+			meshValue.setGlobalTransform(objValue.getGlobalTransform() + objValue.getTransform());
+			meshValue.draw();
+			meshValue.setShader(prevShader);
 		}//rof
 	}//rof
 
@@ -91,21 +91,21 @@ void Selection::selectObject() {
 	glReadPixels(static_cast<int>(xPos), screenHeight - static_cast<int>(yPos), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, colorUnderCursor);
 
 	// Сохранить текущие выбранные объекты
-	for (auto& obj : appThis->getScene().getObjects()) {
-		if (!obj.second.canSelect) continue;
+	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
+		if (!objValue.canSelect) continue;
 
-		if (obj.second.colorSelect.r == colorUnderCursor[0] &&
-			obj.second.colorSelect.g == colorUnderCursor[1] &&
-			obj.second.colorSelect.b == colorUnderCursor[2] &&
-			obj.second.colorSelect.a == colorUnderCursor[3]) {
+		if (objValue.colorSelect.r == colorUnderCursor[0] &&
+			objValue.colorSelect.g == colorUnderCursor[1] &&
+			objValue.colorSelect.b == colorUnderCursor[2] &&
+			objValue.colorSelect.a == colorUnderCursor[3]) {
 
-			if (this->selectedObjects.find(obj.first) == this->selectedObjects.end()) {
-				this->selectedObjects.insert({ obj.first, &obj.second });
+			if (this->selectedObjects.find(objKey) == this->selectedObjects.end()) {
+				this->selectedObjects.insert({ objKey, &objValue });
 				break;
 			} else {
-				if (this->selectedObjects[obj.first] == nullptr) {
-					this->selectedObjects.erase(obj.first);
-					this->selectedObjects.insert({ obj.first, &obj.second });
+				if (this->selectedObjects[objKey] == nullptr) {
+					this->selectedObjects.erase(objKey);
+					this->selectedObjects.insert({ objKey, &objValue });
 					break;
 				}//fi
 			}//fi
