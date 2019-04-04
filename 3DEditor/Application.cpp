@@ -171,8 +171,6 @@ void Application::rendering() {
 
 /* Callback */
 
-Application::Callback::~Callback() {}
-
 
 void Application::Callback::assignAll() {
 	Application* _this = Application::getInstancePtr();

@@ -62,7 +62,7 @@ private:
 	class Callback final {
 	public:
 		Callback() = delete;
-		~Callback();
+		~Callback() = delete;
 		static void assignAll();
 	private:
 		static void resizeWindow(GLFWwindow* win, int width, int height);
