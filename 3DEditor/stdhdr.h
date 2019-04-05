@@ -31,6 +31,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <numeric>
 #include <functional>
 #include <algorithm>
 #include <vector>
