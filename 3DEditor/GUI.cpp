@@ -101,13 +101,13 @@ void GUI::showMainMenuBar() {
 
 		if (ImGui::BeginMenu("Справка")) {
 			if (ImGui::MenuItem("Горячие клавиши", "", &showHotKeys)) {}
-			
+
 			if (ImGui::BeginMenu("Статистика")) {
 				ImGui::Text(("FPS: " + std::to_string(ImGui::GetIO().Framerate)).c_str(), "");
 				ImGui::Separator();
 				ImGui::EndMenu();
 			}
-			
+
 			ImGui::Separator();
 			if (ImGui::MenuItem("О проекте", "F1", &showAboutWindow)) {}
 			ImGui::EndMenu();
@@ -141,6 +141,10 @@ void GUI::showMainMenuBar() {
 			ImGui::Text("Зажать СКМ: вращение вокруг целевой точки");
 			ImGui::Text("Shift + СКМ: смещение камеры и целевой точки в стороны");
 			ImGui::Text("Крутить СКМ: изменение расстояния от целевой точки"); ImGui::NewLine();
+			ImGui::Separator();
+			ImGui::Text("Проекция:"); ImGui::NewLine();
+			ImGui::Text("O: ортографическая");
+			ImGui::Text("P: перспективная"); ImGui::NewLine();
 			ImGui::Separator();
 			ImGui::Text("Выделение:"); ImGui::NewLine();
 			ImGui::Text("ЛКМ: выделить объект");

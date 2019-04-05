@@ -77,6 +77,9 @@ void TargetCamera::setTargetPosition(glm::vec3 _targetPosition) {
 
 void TargetCamera::setDistance(float _distance) {
 	this->distance = _distance;
+
+	Application::getInstancePtr()->getScene()
+		.getModel().getOrthoProj().setScaleByDistance(this->distance);
 }
 
 
@@ -112,7 +115,7 @@ void TargetCamera::spin(float xPos, float yPos) {
 
 void TargetCamera::zoom(float xOffset, float yOffset) {
 	this->distance -= STEP_DISTANCE * yOffset;
-	this->distance = std::clamp<float>(this->distance, MIN_DISTANCE, MAX_DISTANCE);
+	this->setDistance(std::clamp<float>(this->distance, MIN_DISTANCE, MAX_DISTANCE));
 
 	this->updatePosition();
 }

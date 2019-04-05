@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Camera.h"
+#include "Projection.h"
 
 
 class TargetCamera : public Camera {

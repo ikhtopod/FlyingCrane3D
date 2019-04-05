@@ -153,10 +153,38 @@ void Application::switchCameraInput() {
 	}
 }
 
+void Application::switchProjectionInput() {
+	static bool prevStateP = GLFW_RELEASE;
+	static bool prevStateO = GLFW_RELEASE;
+
+	int stateP = glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_P);
+
+	if (stateP == GLFW_PRESS && prevStateP == GLFW_RELEASE) {
+		this->scene.getModel().getOrthoProj().setProjectionType(ProjectionType::PERSPECTIVE);
+		prevStateP = GLFW_PRESS;
+		return;
+	} else if (stateP == GLFW_RELEASE && prevStateP == GLFW_PRESS) {
+		prevStateP = GLFW_RELEASE;
+	}
+
+	int stateO = glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_O);
+
+	if (stateO == GLFW_PRESS && prevStateO == GLFW_RELEASE) {
+		if (this->scene.getCameraSwitcher().getType() == CameraType::TARGET) {
+			this->scene.getModel().getOrthoProj().setProjectionType(ProjectionType::ORTHOGRAPHIC);
+		}
+		prevStateO = GLFW_PRESS;
+		return;
+	} else if (stateO == GLFW_RELEASE && prevStateO == GLFW_PRESS) {
+		prevStateO = GLFW_RELEASE;
+	}
+}
+
 void Application::input() {
 	this->keyboardInput();
 	this->switchCameraInput();
 	this->scene.getSelectionSwitcher().switchSelectionInput();
+	this->switchProjectionInput();
 }
 
 void Application::clearColor() {
@@ -217,7 +245,10 @@ void Application::Callback::scrollCallback(GLFWwindow* win, double xOffset, doub
 
 	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
 
-	appThis->getScene().getCamera().mouseScrollInput(static_cast<float>(xOffset), static_cast<float>(yOffset));
+	float xOffset_f = static_cast<float>(xOffset);
+	float yOffset_f = static_cast<float>(yOffset);
+
+	appThis->getScene().getCamera().mouseScrollInput(xOffset_f, yOffset_f);
 }
 
 

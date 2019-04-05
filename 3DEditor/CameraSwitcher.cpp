@@ -50,9 +50,13 @@ std::shared_ptr<Camera> CameraSwitcher::getCamera() {
 }
 
 void CameraSwitcher::switchCamera() {
+	Application* appThis = Application::getInstancePtr();
+
 	switch (this->type) {
 		case CameraType::TARGET:
-			this->setType(CameraType::FREE);
+			if (appThis->getScene().getModel().getOrthoProj().isPerspective()) {
+				this->setType(CameraType::FREE);
+			}
 			break;
 		case CameraType::FREE:
 			this->setType(CameraType::TARGET);

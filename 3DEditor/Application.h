@@ -4,6 +4,7 @@
 #include "GUI.h"
 #include "DeltaTime.h"
 #include "Scene.h"
+#include "Projection.h"
 #include "ITriada.h"
 #include "Selection.h"
 
@@ -53,6 +54,7 @@ private:
 
 	void keyboardInput();
 	void switchCameraInput();
+	void switchProjectionInput();
 	void input();
 
 	void clearColor();

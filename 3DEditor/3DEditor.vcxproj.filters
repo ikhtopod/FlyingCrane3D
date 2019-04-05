@@ -106,6 +106,9 @@
     <ClCompile Include="SelectionInfo.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Projection.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -214,6 +217,9 @@
       <Filter>Headers\Selection</Filter>
     </ClInclude>
     <ClInclude Include="SelectionInfo.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Projection.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
