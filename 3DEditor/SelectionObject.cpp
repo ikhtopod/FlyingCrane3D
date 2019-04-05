@@ -66,6 +66,11 @@ glm::vec3 SelectionObject::getCentroid() {
 		uniquePositions.push_back(pos);
 	}
 
+	auto sortPred = [](const glm::vec3& lhs, const glm::vec3& rhs) -> bool {
+		return lhs.x < rhs.x && lhs.y < rhs.y && lhs.z < rhs.z;
+	};
+
+	std::sort(uniquePositions.begin(), uniquePositions.end(), sortPred);
 	uniquePositions.erase(std::unique(uniquePositions.begin(), uniquePositions.end()), uniquePositions.end());
 
 	centroid = std::accumulate(std::next(uniquePositions.begin()), uniquePositions.end(),
