@@ -180,11 +180,31 @@ void Application::switchProjectionInput() {
 	}
 }
 
+void Application::focusingOnSelectedObjects() {
+	static bool prevState = GLFW_RELEASE;
+
+	int state = glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_F);
+
+	if (state == GLFW_PRESS && prevState == GLFW_RELEASE) {
+		if (this->scene.getCameraSwitcher().getType() == CameraType::TARGET) {
+			if (!this->scene.getSelection().getSelectedObjects().empty()) {
+				std::shared_ptr<TargetCamera> tc =
+					std::dynamic_pointer_cast<TargetCamera>(this->scene.getCameraSwitcher().getCamera());
+				tc->setTargetPosition(this->scene.getSelection().getCentroid());
+			}//fi
+		}//fi
+		prevState = GLFW_PRESS;
+	} else if (state == GLFW_RELEASE && prevState == GLFW_PRESS) {
+		prevState = GLFW_RELEASE;
+	}//fi
+}
+
 void Application::input() {
 	this->keyboardInput();
 	this->switchCameraInput();
 	this->scene.getSelectionSwitcher().switchSelectionInput();
 	this->switchProjectionInput();
+	this->focusingOnSelectedObjects();
 }
 
 void Application::clearColor() {
@@ -256,5 +276,3 @@ void Application::Callback::scrollCallback(GLFWwindow* win, double xOffset, doub
 
 ApplicationException::ApplicationException(char const* const message)
 	: std::exception(message) {}
-
-

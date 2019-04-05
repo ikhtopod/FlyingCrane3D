@@ -73,6 +73,7 @@ float TargetCamera::getDistance() {
 
 void TargetCamera::setTargetPosition(glm::vec3 _targetPosition) {
 	this->targetPosition = _targetPosition;
+	this->updatePosition();
 }
 
 void TargetCamera::setDistance(float _distance) {

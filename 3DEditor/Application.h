@@ -55,6 +55,7 @@ private:
 	void keyboardInput();
 	void switchCameraInput();
 	void switchProjectionInput();
+	void focusingOnSelectedObjects();
 	void input();
 
 	void clearColor();

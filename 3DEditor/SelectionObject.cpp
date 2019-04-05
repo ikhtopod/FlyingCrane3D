@@ -55,6 +55,26 @@ void SelectionObject::select() {
 	}//rof
 }
 
+glm::vec3 SelectionObject::getCentroid() {
+	glm::vec3 centroid { 0.0f };
+	if (this->selectedObjects.empty()) return centroid;
+
+	std::vector<glm::vec3> uniquePositions {};
+
+	for (auto&[objKey, objValue] : this->selectedObjects) {
+		glm::vec3 pos = (objValue->getGlobalTransform() + objValue->getTransform()).getPosition();
+		uniquePositions.push_back(pos);
+	}
+
+	uniquePositions.erase(std::unique(uniquePositions.begin(), uniquePositions.end()), uniquePositions.end());
+
+	centroid = std::accumulate(std::next(uniquePositions.begin()), uniquePositions.end(),
+							   uniquePositions[0], std::plus<glm::vec3>());
+	centroid /= static_cast<float>(uniquePositions.size());
+
+	return centroid;
+}
+
 void SelectionObject::moving() {
 	Application* appThis = Application::getInstancePtr();
 	double xPos = 0.0;
@@ -70,4 +90,3 @@ void SelectionObject::moving() {
 void SelectionObject::rotation() { /* dummy */ }
 
 void SelectionObject::scaling() { /* dummy */ }
-

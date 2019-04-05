@@ -11,12 +11,13 @@ protected:
 	virtual void select() = 0;
 
 public:
+	virtual glm::vec3 getCentroid() = 0;
+
 	virtual void moving() = 0;
 	virtual void rotation() = 0;
 	virtual void scaling() = 0;
 
 };
-
 
 class Selection : public ITriada, public ISelection {
 protected:
