@@ -264,6 +264,7 @@ void Application::Callback::scrollCallback(GLFWwindow* win, double xOffset, doub
 	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
 
 	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
+	if (ImGui::IsMouseHoveringAnyWindow()) return;
 
 	float xOffset_f = static_cast<float>(xOffset);
 	float yOffset_f = static_cast<float>(yOffset);

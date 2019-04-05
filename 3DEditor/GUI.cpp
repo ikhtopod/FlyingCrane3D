@@ -128,7 +128,7 @@ void GUI::showMainMenuBar() {
 		}
 
 		if (showHotKeys) {
-			ImGui::Begin("Горячие клавиши", &showHotKeys);
+			ImGui::Begin("Горячие клавиши", &showHotKeys, ImVec2(400, 400), -1.0f, ImGuiWindowFlags_NoResize);
 
 			ImGui::Text("Tab: переключить камеру"); ImGui::NewLine();
 			ImGui::Separator();
@@ -148,7 +148,8 @@ void GUI::showMainMenuBar() {
 			ImGui::Separator();
 			ImGui::Text("Выделение:"); ImGui::NewLine();
 			ImGui::Text("ЛКМ: выделить объект");
-			ImGui::Text("Shift + ЛКМ: выделить несколько объектов"); ImGui::NewLine();
+			ImGui::Text("Shift + ЛКМ: выделить несколько объектов");
+			ImGui::Text("F: центрировать камеру на выделенных объектах"); ImGui::NewLine();
 			ImGui::Text("Сменить режим выделения:"); ImGui::NewLine();
 			ImGui::Text("1: выделение вершин");
 			ImGui::Text("2: выделение ребер");
