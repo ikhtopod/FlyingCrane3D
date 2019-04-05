@@ -208,6 +208,7 @@
     <ClCompile Include="Selection.cpp" />
     <ClCompile Include="SelectionEdge.cpp" />
     <ClCompile Include="SelectionFace.cpp" />
+    <ClCompile Include="SelectionInfo.cpp" />
     <ClCompile Include="SelectionObject.cpp" />
     <ClCompile Include="SelectionPoint.cpp" />
     <ClCompile Include="SelectionSwitcher.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="Selection.h" />
     <ClInclude Include="SelectionEdge.h" />
     <ClInclude Include="SelectionFace.h" />
+    <ClInclude Include="SelectionInfo.h" />
     <ClInclude Include="SelectionObject.h" />
     <ClInclude Include="SelectionPoint.h" />
     <ClInclude Include="SelectionSwitcher.h" />

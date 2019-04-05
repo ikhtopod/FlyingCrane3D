@@ -65,6 +65,7 @@
 #include "FreeCamera.h"
 #include "Scene.h"
 #include "Vertex.h"
+#include "SelectionInfo.h"
 #include "SelectionSwitcher.h"
 #include "Selection.h"
 #include "SelectionObject.h"

@@ -14,19 +14,15 @@ CameraType CameraSwitcher::getType() const {
 }
 
 void CameraSwitcher::setType(CameraType _type) {
-	if (this->type == _type) return;
+	if (this->type == _type || !this->hasCamera(_type)) return;
 
-	GLFWwindow* window = Application::getInstancePtr()->getWindow().getWindowPtr();
+	this->cameras[_type]->setTransform(this->getCamera()->getTransform());
+	this->cameras[_type]->setAxis(this->getCamera()->getAxis());
+	this->cameras[_type]->setLastMousePosition(this->getCamera()->getLastMousePosition());
+	this->cameras[_type]->spin();
+	this->type = _type;
 
-	if (this->cameras.find(_type) != this->cameras.end()) {
-		this->cameras[_type]->setTransform(this->cameras[this->type]->getTransform());
-		this->cameras[_type]->setAxis(this->cameras[this->type]->getAxis());
-		this->cameras[_type]->setLastMousePosition(this->cameras[this->type]->getLastMousePosition());
-		this->cameras[_type]->spin();
-		this->type = _type;
-
-		this->updateInputMode();
-	}
+	this->updateInputMode();
 }
 
 void CameraSwitcher::updateInputMode() const {
@@ -43,6 +39,10 @@ void CameraSwitcher::updateInputMode() const {
 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			break;
 	}
+}
+
+bool CameraSwitcher::hasCamera(CameraType _type) {
+	return this->cameras.find(_type) != this->cameras.end();
 }
 
 std::shared_ptr<Camera> CameraSwitcher::getCamera() {

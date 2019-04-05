@@ -103,6 +103,9 @@
     <ClCompile Include="SelectionPoint.cpp">
       <Filter>Sources\Selection</Filter>
     </ClCompile>
+    <ClCompile Include="SelectionInfo.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -209,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="SelectionSwitcher.h">
       <Filter>Headers\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionInfo.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,8 @@
 #include "GridObject.h"
 #include "Camera.h"
 #include "CameraSwitcher.h"
+#include "Selection.h"
+#include "SelectionSwitcher.h"
 #include "Model.h"
 #include "Transform.h"
 #include "Selection.h"
@@ -13,9 +15,9 @@
 class Scene final : public ITriada {
 private:
 	CameraSwitcher cameraSwitcher {};
+	SelectionSwitcher selectionSwitcher {};
 	Model model {};
 	Transform transform {};
-	Selection selection {};
 
 private:
 	std::map<std::string, Object> standardObjects {};
@@ -27,9 +29,10 @@ public:
 
 	CameraSwitcher& getCameraSwitcher();
 	Camera& getCamera();
+	SelectionSwitcher& getSelectionSwitcher();
+	Selection& getSelection();
 	Model& getModel();
 	Transform& getTransform();
-	Selection& getSelection();
 
 	std::map<std::string, Object>& getObjects();
 

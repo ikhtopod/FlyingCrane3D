@@ -9,6 +9,10 @@ Transform& Object::getGlobalTransform() {
 	return this->globalTransform;
 }
 
+SelectionInfo& Object::getSelectionInfo() {
+	return this->selectionInfo;
+}
+
 
 void Object::setTransform(Transform _transform) {
 	this->transform = _transform;
@@ -16,6 +20,10 @@ void Object::setTransform(Transform _transform) {
 
 void Object::setGlobalTransform(Transform _gTransform) {
 	this->globalTransform = _gTransform;
+}
+
+void Object::setSelectionInfo(SelectionInfo _selectionInfo) {
+	this->selectionInfo = _selectionInfo;
 }
 
 

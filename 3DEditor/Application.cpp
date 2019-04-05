@@ -136,7 +136,6 @@ void Application::free() {
 }
 
 void Application::keyboardInput() {
-	this->scene.getSelection().keyboardInput();
 	this->scene.getCamera().keyboardInput();
 }
 
@@ -156,6 +155,7 @@ void Application::switchCameraInput() {
 void Application::input() {
 	this->keyboardInput();
 	this->switchCameraInput();
+	this->scene.getSelectionSwitcher().switchSelectionInput();
 }
 
 void Application::clearColor() {
@@ -170,7 +170,6 @@ void Application::rendering() {
 
 
 /* Callback */
-
 
 void Application::Callback::assignAll() {
 	Application* _this = Application::getInstancePtr();
@@ -200,7 +199,6 @@ void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, 
 
 	float xPos_f = static_cast<float>(xPos);
 	float yPos_f = static_cast<float>(yPos);
-	appThis->scene.getSelection().mouseInput();
 	appThis->getScene().getCamera().mouseInput(xPos_f, yPos_f);
 }
 
@@ -210,8 +208,7 @@ void Application::Callback::mouseButtonCallback(GLFWwindow* win, int button, int
 	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
 
 	appThis->getScene().getCamera().mouseButtonInput(button, action, mods);
-	appThis->getScene().getSelection().select(button, action, mods);
-	appThis->scene.getSelection().resetTransformAction();
+	appThis->getScene().getSelection().mouseButtonInput(button, action, mods);
 }
 
 void Application::Callback::scrollCallback(GLFWwindow* win, double xOffset, double yOffset) {

@@ -28,6 +28,8 @@ public:
 	CameraType getType() const;
 	void setType(CameraType _type);
 
+	bool hasCamera(CameraType _type);
+
 	std::shared_ptr<Camera> getCamera();
 	void switchCamera();
 };

@@ -3,8 +3,10 @@
 #include "Selection.h"
 
 class SelectionEdge : public Selection {
-public:
-	SelectionEdge() = default;
-	~SelectionEdge() = default;
+	virtual void select() override;
+
+	virtual void moving() override;
+	virtual void rotation() override;
+	virtual void scaling() override;
 };
 

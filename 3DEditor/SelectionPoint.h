@@ -3,8 +3,10 @@
 #include "Selection.h"
 
 class SelectionPoint : public Selection {
-public:
-	SelectionPoint() = default;
-	~SelectionPoint() = default;
+	virtual void select() override;
+
+	virtual void moving() override;
+	virtual void rotation() override;
+	virtual void scaling() override;
 };
 
