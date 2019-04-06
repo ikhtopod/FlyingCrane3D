@@ -5,6 +5,10 @@ Transform& Object::getTransform() {
 	return this->transform;
 }
 
+Transform& Object::getParentTransform() {
+	return this->parentTransform;
+}
+
 Transform& Object::getGlobalTransform() {
 	return this->globalTransform;
 }
@@ -16,6 +20,12 @@ SelectionInfo& Object::getSelectionInfo() {
 
 void Object::setTransform(Transform _transform) {
 	this->transform = _transform;
+	this->setGlobalTransform(this->getParentTransform() + this->getTransform());
+}
+
+void Object::setParentTransform(Transform _gTransform) {
+	this->parentTransform = _gTransform;
+	this->setGlobalTransform(this->getParentTransform() + this->getTransform());
 }
 
 void Object::setGlobalTransform(Transform _gTransform) {
@@ -51,7 +61,7 @@ void Object::resetShadersAllMeshes() {
 
 void Object::drawMeshes() {
 	for (auto& mesh : this->meshes) {
-		mesh.second.setParentTransform(this->globalTransform + this->transform);
+		mesh.second.setParentTransform(this->parentTransform + this->transform);
 		mesh.second.draw();
 	}
 }

@@ -25,7 +25,7 @@ void SelectionObject::select() {
 
 			Shader prevShader = meshValue.getShader();
 			meshValue.setShader(this->shader);
-			meshValue.setGlobalTransform(objValue.getGlobalTransform() + objValue.getTransform());
+			meshValue.setGlobalTransform(objValue.getParentTransform() + objValue.getTransform());
 			meshValue.draw();
 			meshValue.setShader(prevShader);
 		}//rof
@@ -62,8 +62,7 @@ glm::vec3 SelectionObject::getCentroid() {
 	std::vector<glm::vec3> uniquePositions {};
 
 	for (auto&[objKey, objValue] : this->selectedObjects) {
-		glm::vec3 pos = (objValue->getGlobalTransform() + objValue->getTransform()).getPosition();
-		uniquePositions.push_back(pos);
+		uniquePositions.push_back(objValue->getGlobalTransform().getPosition());
 	}
 
 	auto sortPred = [](const glm::vec3& lhs, const glm::vec3& rhs) -> bool {

@@ -12,6 +12,7 @@ class Mesh;
 class Object : public ITriada {
 protected:
 	Transform transform {};
+	Transform parentTransform {};
 	Transform globalTransform {};
 
 	std::map<std::string, Mesh> meshes;
@@ -23,10 +24,12 @@ public:
 	virtual ~Object() = default;
 
 	Transform& getTransform();
+	Transform& getParentTransform();
 	Transform& getGlobalTransform();
 	SelectionInfo& getSelectionInfo();
 
 	void setTransform(Transform _transform);
+	void setParentTransform(Transform _gTransform);
 	void setGlobalTransform(Transform _gTransform);
 	void setSelectionInfo(SelectionInfo _selectionInfo);
 

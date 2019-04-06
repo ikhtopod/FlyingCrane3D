@@ -131,12 +131,12 @@ void Scene::draw() {
 	this->model.update();
 
 	for (auto& o : this->standardObjects) {
-		o.second.setGlobalTransform(this->transform);
+		o.second.setParentTransform(this->transform);
 		o.second.draw();
 	}
 
 	for (auto& o : this->objects) {
-		o.second.setGlobalTransform(this->transform);
+		o.second.setParentTransform(this->transform);
 		o.second.draw();
 	}
 }
