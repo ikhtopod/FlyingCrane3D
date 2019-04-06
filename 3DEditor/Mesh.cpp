@@ -87,7 +87,7 @@ void Mesh::init() {
 
 
 void Mesh::draw() {
-	this->shader.setGlobalTransform(this->globalTransform + this->transform);
+	this->shader.setParentTransform(this->globalTransform + this->transform);
 	this->shader.draw();
 
 	glBindVertexArray(this->vao);

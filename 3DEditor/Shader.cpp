@@ -34,16 +34,16 @@ void Shader::resetLambdaDraw() {
 }
 
 
-Transform& Shader::getGlobalTransform() {
-	return this->globalTransform;
+Transform& Shader::getParentTransform() {
+	return this->parentTransform;
 }
 
 bool Shader::getUseMVP() {
 	return this->useMVP;
 }
 
-void Shader::setGlobalTransform(Transform _gTransform) {
-	this->globalTransform = _gTransform;
+void Shader::setParentTransform(Transform _pTransform) {
+	this->parentTransform = _pTransform;
 }
 
 void Shader::setUseMVP(bool _useMVP) {
@@ -147,7 +147,7 @@ void Shader::draw() {
 		this->setMat4("mvp.view", appThis->getScene().getModel().getView());
 		this->setMat4("mvp.projection", appThis->getScene().getModel().getProjection());
 
-		this->setMat4("transform", this->getGlobalTransform().getMatrix());
+		this->setMat4("transform", this->getParentTransform().getMatrix());
 	}
 
 	this->lambdaDraw(this);
