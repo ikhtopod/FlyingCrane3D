@@ -95,7 +95,7 @@ void GUI::showMainMenuBar() {
 		}
 
 		if (ImGui::BeginMenu("Редактировать")) {
-			if (ImGui::MenuItem("Настройки", "Ctrl + P")) {}
+			if (ImGui::MenuItem("Настройки", "Ctrl + P", false, false)) {}
 			ImGui::EndMenu();
 		}
 
