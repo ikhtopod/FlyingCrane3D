@@ -51,7 +51,7 @@ void Object::resetShadersAllMeshes() {
 
 void Object::drawMeshes() {
 	for (auto& mesh : this->meshes) {
-		mesh.second.setGlobalTransform(this->globalTransform + this->transform);
+		mesh.second.setParentTransform(this->globalTransform + this->transform);
 		mesh.second.draw();
 	}
 }

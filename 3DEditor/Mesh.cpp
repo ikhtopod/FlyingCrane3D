@@ -31,6 +31,10 @@ Transform& Mesh::getTransform() {
 	return this->transform;
 }
 
+Transform& Mesh::getParentTransform() {
+	return this->parentTransform;
+}
+
 Shader& Mesh::getShader() {
 	return this->shader;
 }
@@ -45,6 +49,12 @@ void Mesh::setGlobalTransform(Transform _gTransform) {
 
 void Mesh::setTransform(Transform _transform) {
 	this->transform = _transform;
+	this->setGlobalTransform(this->getParentTransform() + this->getTransform());
+}
+
+void Mesh::setParentTransform(Transform _pTransform) {
+	this->parentTransform = _pTransform;
+	this->setGlobalTransform(this->getParentTransform() + this->getTransform());
 }
 
 
@@ -87,7 +97,7 @@ void Mesh::init() {
 
 
 void Mesh::draw() {
-	this->shader.setParentTransform(this->globalTransform + this->transform);
+	this->shader.setParentTransform(this->getGlobalTransform());
 	this->shader.draw();
 
 	glBindVertexArray(this->vao);
