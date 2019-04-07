@@ -62,8 +62,13 @@ glm::vec3 SelectionObject::getCentroid() {
 	std::vector<glm::vec3> uniquePositions {};
 
 	for (auto&[objKey, objValue] : this->selectedObjects) {
-		uniquePositions.push_back(objValue->getGlobalTransform().getPosition());
-	}
+		for (auto&[meshKey, meshValue] : objValue->getMeshes()) {
+			for (Vertex& v : meshValue.getVertices()) {
+				glm::vec3 pos = v.position + objValue->getGlobalTransform().getPosition();
+				uniquePositions.push_back(pos);
+			}//rof
+		}//rof
+	}//rof
 
 	auto sortPred = [](const glm::vec3& lhs, const glm::vec3& rhs) -> bool {
 		return lhs.x < rhs.x && lhs.y < rhs.y && lhs.z < rhs.z;

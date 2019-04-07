@@ -42,6 +42,8 @@ public:
 	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader);
 	~Mesh() = default;
 
+	std::vector<Vertex>& getVertices();
+
 	Transform& getTransform();
 	Transform& getParentTransform();
 	Transform& getGlobalTransform();

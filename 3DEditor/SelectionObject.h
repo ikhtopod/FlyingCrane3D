@@ -3,6 +3,7 @@
 #include "Util.h"
 #include "Selection.h"
 #include "Application.h"
+#include "Vertex.h"
 #include "Shader.h"
 #include "SelectionInfo.h"
 

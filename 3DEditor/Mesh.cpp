@@ -27,6 +27,10 @@ Transform& Mesh::getGlobalTransform() {
 	return this->globalTransform;
 }
 
+std::vector<Vertex>& Mesh::getVertices() {
+	return this->vertices;
+}
+
 Transform& Mesh::getTransform() {
 	return this->transform;
 }
