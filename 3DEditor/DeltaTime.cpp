@@ -1,7 +1,7 @@
 #include "DeltaTime.h"
 
 
-const unsigned int DeltaTime::DEFAULT_FPS = 60;
+const unsigned int DeltaTime::DEFAULT_FPS = 120;
 
 
 float DeltaTime::mcrsecToFloatCast(Mcrsec value) {
