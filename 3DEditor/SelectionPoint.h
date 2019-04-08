@@ -10,6 +10,4 @@ class SelectionPoint : public Selection {
 	virtual void moving() override;
 	virtual void rotation() override;
 	virtual void scaling() override;
-
 };
-

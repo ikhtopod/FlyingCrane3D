@@ -23,13 +23,14 @@ void Selection::mouseButtonInput(int button, int action, int mods) {
 	static bool prevState = GLFW_RELEASE;
 
 	if (action == GLFW_PRESS && prevState == GLFW_RELEASE) {
-		if (mods != GLFW_MOD_SHIFT)
+		if (mods != GLFW_MOD_SHIFT) {
 			this->clearSelectedObjects();
+		}//fi
 		this->select();
 		prevState = GLFW_PRESS;
 	} else if (action == GLFW_RELEASE && prevState == GLFW_PRESS) {
 		prevState = GLFW_RELEASE;
-	}
+	}//esle fi
 }
 
 

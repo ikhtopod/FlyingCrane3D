@@ -146,7 +146,12 @@ void Application::switchCameraInput() {
 	int state = glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_TAB);
 
 	if (state == GLFW_PRESS && prevState == GLFW_RELEASE) {
-		this->scene.getCameraSwitcher().switchCamera();
+		if ((this->scene.getCameraSwitcher().getType() == CameraType::TARGET &&
+			 this->scene.getSelectionSwitcher().getActionMode() == SelectionActionMode::NONE) ||
+			this->scene.getCameraSwitcher().getType() == CameraType::FREE) {
+
+			this->scene.getCameraSwitcher().switchCamera();
+		}
 		prevState = GLFW_PRESS;
 	} else if (state == GLFW_RELEASE && prevState == GLFW_PRESS) {
 		prevState = GLFW_RELEASE;
@@ -186,12 +191,15 @@ void Application::focusingOnSelectedObjects() {
 	int state = glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_F);
 
 	if (state == GLFW_PRESS && prevState == GLFW_RELEASE) {
-		if (this->scene.getCameraSwitcher().getType() == CameraType::TARGET) {
+		if (this->scene.getCameraSwitcher().getType() == CameraType::TARGET &&
+			this->scene.getSelectionSwitcher().getActionMode() == SelectionActionMode::NONE) {
+
 			if (!this->scene.getSelection().getSelectedObjects().empty()) {
 				std::shared_ptr<TargetCamera> tc =
 					std::dynamic_pointer_cast<TargetCamera>(this->scene.getCameraSwitcher().getCamera());
 				tc->setTargetPosition(this->scene.getSelection().getCentroid());
 			}//fi
+
 		}//fi
 		prevState = GLFW_PRESS;
 	} else if (state == GLFW_RELEASE && prevState == GLFW_PRESS) {
@@ -203,6 +211,9 @@ void Application::input() {
 	this->keyboardInput();
 	this->switchCameraInput();
 	this->scene.getSelectionSwitcher().switchSelectionInput();
+	if (this->scene.getCameraSwitcher().getType() == CameraType::TARGET) {
+		this->scene.getSelectionSwitcher().switchActionInput();
+	}
 	this->switchProjectionInput();
 	this->focusingOnSelectedObjects();
 }
@@ -257,7 +268,14 @@ void Application::Callback::mouseButtonCallback(GLFWwindow* win, int button, int
 	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
 
 	appThis->getScene().getCamera().mouseButtonInput(button, action, mods);
-	appThis->getScene().getSelection().mouseButtonInput(button, action, mods);
+
+	if (appThis->scene.getCameraSwitcher().getType() == CameraType::TARGET &&
+		appThis->scene.getSelectionSwitcher().getActionMode() != SelectionActionMode::NONE) {
+
+		appThis->scene.getSelectionSwitcher().mouseActionInput(button, action, mods);
+	} else {
+		appThis->getScene().getSelection().mouseButtonInput(button, action, mods);
+	}
 }
 
 void Application::Callback::scrollCallback(GLFWwindow* win, double xOffset, double yOffset) {

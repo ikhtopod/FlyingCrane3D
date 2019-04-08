@@ -15,6 +15,4 @@ class SelectionObject : public Selection {
 	virtual void moving() override;
 	virtual void rotation() override;
 	virtual void scaling() override;
-
 };
-

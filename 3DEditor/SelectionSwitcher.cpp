@@ -17,7 +17,7 @@ SelectionMode SelectionSwitcher::getMode() {
 
 void SelectionSwitcher::setMode(SelectionMode _mode) {
 	if (this->mode == _mode || !this->hasSelection(_mode)) return;
-	
+
 	this->getSelection()->clearSelectedObjects();
 	this->mode = _mode;
 
@@ -25,6 +25,22 @@ void SelectionSwitcher::setMode(SelectionMode _mode) {
 
 bool SelectionSwitcher::hasSelection(SelectionMode _mode) {
 	return this->selections.find(_mode) != this->selections.end();
+}
+
+SelectionActionMode SelectionSwitcher::getActionMode() {
+	return this->actionMode;
+}
+
+void SelectionSwitcher::setActionMode(SelectionActionMode _actionMode) {
+	if (this->actionMode == _actionMode) return;
+
+	this->actionMode = _actionMode;
+}
+
+void SelectionSwitcher::resetActionMode() {
+	if (this->actionMode == SelectionActionMode::NONE) return;
+
+	this->actionMode = SelectionActionMode::NONE;
 }
 
 std::shared_ptr<Selection> SelectionSwitcher::getSelection() {
@@ -42,6 +58,45 @@ void SelectionSwitcher::switchSelectionInput() {
 		this->setMode(SelectionMode::FACE);
 	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
 		this->setMode(SelectionMode::OBJECT);
+}
+
+void SelectionSwitcher::switchActionInput() {
+	GLFWwindow* window = Application::getInstancePtr()->getWindow().getWindowPtr();
+
+	if (this->getSelection()->getSelectedObjects().empty()) {
+
+	} else {
+		if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+			this->setActionMode(SelectionActionMode::MOVING);
+		if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+			this->setActionMode(SelectionActionMode::ROTATION);
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+			this->setActionMode(SelectionActionMode::SCALING);
+
+		if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
+			this->resetActionMode();
+		}
+	}
+
+	switch (this->actionMode) {
+		case SelectionActionMode::MOVING:
+			this->getSelection()->moving();
+			break;
+		case SelectionActionMode::ROTATION:
+			this->getSelection()->rotation();
+			break;
+		case SelectionActionMode::SCALING:
+			this->getSelection()->scaling();
+			break;
+	}
+}
+
+void SelectionSwitcher::mouseActionInput(int button, int action, int mods) {
+	if (this->actionMode == SelectionActionMode::NONE) return;
+
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+		this->resetActionMode();
+	}
 }
 
 void SelectionSwitcher::init() {
