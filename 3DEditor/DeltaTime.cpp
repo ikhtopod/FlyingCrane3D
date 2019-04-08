@@ -54,12 +54,9 @@ void DeltaTime::update() {
 
 void DeltaTime::update(bool isVSync) {
 	if (!isVSync) {
-		Mcrsec residualDeltaTime = duration_cast<Mcrsec>(FpsClock::now() - this->lastTime);
-
-		Mcrsec residual = duration_cast<Mcrsec>(this->durationFps - residualDeltaTime);
-		if (residual.count() > DeltaTime::MIN_SLEEP_FOR) {
-			std::this_thread::sleep_for(residual);
-		}
+		Mcrsec elapsed = duration_cast<Mcrsec>(FpsClock::now() - this->lastTime);
+		Mcrsec delay = duration_cast<Mcrsec>(this->durationFps - elapsed);
+		std::this_thread::sleep_for(delay);
 	}
 
 	this->update();

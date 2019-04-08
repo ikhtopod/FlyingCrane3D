@@ -90,8 +90,8 @@ void Application::mainLoop() {
 
 		glfwSwapBuffers(this->window.getWindowPtr());
 
-		this->deltaTime.update();
-		//this->deltaTime.update(this->window.isVSync());
+		//this->deltaTime.update();
+		this->deltaTime.update(this->window.isVSync());
 	}
 }
 
