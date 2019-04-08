@@ -95,19 +95,19 @@ void GUI::showMainMenuBar() {
 		}
 
 		if (ImGui::BeginMenu("Редактировать")) {
-			if (ImGui::MenuItem("Настройки", "Ctrl + P")) {}
+			if (ImGui::MenuItem("Настройки", "Ctrl + P", false, false)) {}
 			ImGui::EndMenu();
 		}
 
 		if (ImGui::BeginMenu("Справка")) {
 			if (ImGui::MenuItem("Горячие клавиши", "", &showHotKeys)) {}
-			
+
 			if (ImGui::BeginMenu("Статистика")) {
 				ImGui::Text(("FPS: " + std::to_string(ImGui::GetIO().Framerate)).c_str(), "");
 				ImGui::Separator();
 				ImGui::EndMenu();
 			}
-			
+
 			ImGui::Separator();
 			if (ImGui::MenuItem("О проекте", "F1", &showAboutWindow)) {}
 			ImGui::EndMenu();
@@ -128,7 +128,7 @@ void GUI::showMainMenuBar() {
 		}
 
 		if (showHotKeys) {
-			ImGui::Begin("Горячие клавиши", &showHotKeys);
+			ImGui::Begin("Горячие клавиши", &showHotKeys, ImVec2(400, 400), -1.0f, ImGuiWindowFlags_NoResize);
 
 			ImGui::Text("Tab: переключить камеру"); ImGui::NewLine();
 			ImGui::Separator();
@@ -142,9 +142,14 @@ void GUI::showMainMenuBar() {
 			ImGui::Text("Shift + СКМ: смещение камеры и целевой точки в стороны");
 			ImGui::Text("Крутить СКМ: изменение расстояния от целевой точки"); ImGui::NewLine();
 			ImGui::Separator();
+			ImGui::Text("Проекция:"); ImGui::NewLine();
+			ImGui::Text("O: ортографическая");
+			ImGui::Text("P: перспективная"); ImGui::NewLine();
+			ImGui::Separator();
 			ImGui::Text("Выделение:"); ImGui::NewLine();
 			ImGui::Text("ЛКМ: выделить объект");
-			ImGui::Text("Shift + ЛКМ: выделить несколько объектов"); ImGui::NewLine();
+			ImGui::Text("Shift + ЛКМ: выделить несколько объектов");
+			ImGui::Text("F: центрировать камеру на выделенных объектах"); ImGui::NewLine();
 			ImGui::Text("Сменить режим выделения:"); ImGui::NewLine();
 			ImGui::Text("1: выделение вершин");
 			ImGui::Text("2: выделение ребер");

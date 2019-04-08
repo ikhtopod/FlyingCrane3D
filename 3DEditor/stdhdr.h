@@ -31,6 +31,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <numeric>
 #include <functional>
 #include <algorithm>
 #include <vector>
@@ -65,12 +66,19 @@
 #include "FreeCamera.h"
 #include "Scene.h"
 #include "Vertex.h"
+#include "SelectionInfo.h"
+#include "SelectionSwitcher.h"
 #include "Selection.h"
+#include "SelectionObject.h"
+#include "SelectionPoint.h"
+#include "SelectionEdge.h"
+#include "SelectionFace.h"
 #include "Mesh.h"
 #include "Object.h"
 #include "GridObject.h"
 #include "Axis.h"
 #include "Shader.h"
+#include "Projection.h"
 #include "Model.h"
 
 

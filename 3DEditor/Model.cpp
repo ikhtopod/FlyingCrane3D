@@ -30,18 +30,15 @@ void Model::setProjection(glm::mat4 _projection) {
 	this->projection = _projection;
 }
 
+Projection& Model::getOrthoProj() {
+	return this->orthoProj;
+}
+
 
 void Model::update() {
 	Application* appThis = Application::getInstancePtr();
 
-	float winWidth = static_cast<float>(appThis->getWindow().getScreen().getWidth());
-	float winHeight = static_cast<float>(appThis->getWindow().getScreen().getHeight());
-
-	float fov = appThis->getScene().getCamera().getFoV();
-
-	glm::mat4 persp = glm::perspective(glm::radians(fov), winWidth / winHeight, 0.1f, 100.0f);
-
-	this->setProjection(persp);
+	this->setProjection(this->orthoProj.getMatrix());
 	this->setView(appThis->getScene().getCamera().GetViewMatrix());
 	this->setModel(Util::IDENTITY_MATRIX);
 }

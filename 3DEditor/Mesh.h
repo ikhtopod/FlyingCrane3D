@@ -29,6 +29,7 @@ private:
 	std::vector<GLuint> indices {};
 
 	Transform transform {};
+	Transform parentTransform {};
 	Transform globalTransform {};
 	Shader nativeShader {};
 	Shader shader {};
@@ -41,13 +42,17 @@ public:
 	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader);
 	~Mesh() = default;
 
-	Transform& getGlobalTransform();
+	std::vector<Vertex>& getVertices();
+
 	Transform& getTransform();
+	Transform& getParentTransform();
+	Transform& getGlobalTransform();
 	Shader& getShader();
 	GLenum getType();
 
-	void setGlobalTransform(Transform _gTransform);
 	void setTransform(Transform _transform);
+	void setParentTransform(Transform _pTransform);
+	void setGlobalTransform(Transform _gTransform);
 	void setShader(Shader& _shader);
 
 	void resetShaderToNative();

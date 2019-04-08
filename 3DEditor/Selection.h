@@ -1,40 +1,39 @@
 #pragma once
 
-#include "Util.h"
 #include "ITriada.h"
 #include "Application.h"
 #include "Shader.h"
+#include "SelectionInfo.h"
 
-enum class SelectionMode {
-	POINT, EDGE, FACE,
-	OBJECT
+
+class ISelection {
+protected:
+	virtual void select() = 0;
+
+public:
+	virtual glm::vec3 getCentroid() = 0;
+
+	virtual void moving() = 0;
+	virtual void rotation() = 0;
+	virtual void scaling() = 0;
 };
 
-class Selection : public ITriada {
-public:
-	static const SelectionMode DEFAULT_SELECTION_MODE;
-
-private:
-	SelectionMode mode;
+class Selection : public ITriada, public ISelection {
+protected:
 	Shader shader;
 
 	std::map<std::string, Object*> selectedObjects {};
-
-private:
-	void selectObject();
 
 public:
 	Selection();
 	~Selection() = default;
 
-	SelectionMode getMode();
-	void setMode(SelectionMode _mode);
+	std::map<std::string, Object*>& getSelectedObjects();
+	bool hasSelectedObjects(std::string name);
+	void clearSelectedObjects();
 
 public:
-	void changeModeInput();
-
-public:
-	void select(int button, int action, int mods);
+	void mouseButtonInput(int button, int action, int mods);
 
 	virtual void init() override;
 	virtual void draw() override;

@@ -4,7 +4,9 @@
 #include "GUI.h"
 #include "DeltaTime.h"
 #include "Scene.h"
+#include "Projection.h"
 #include "ITriada.h"
+#include "Selection.h"
 
 
 class Application final : public ITriada {
@@ -14,7 +16,7 @@ private:
 
 	Window window;
 	GUI gui;
-	DeltaTime deltaTime { 120 };
+	DeltaTime deltaTime;
 	Scene scene {};
 
 	TriadaMode currentMode = TriadaMode::NONE;
@@ -52,6 +54,8 @@ private:
 
 	void keyboardInput();
 	void switchCameraInput();
+	void switchProjectionInput();
+	void focusingOnSelectedObjects();
 	void input();
 
 	void clearColor();
@@ -61,7 +65,7 @@ private:
 	class Callback final {
 	public:
 		Callback() = delete;
-		~Callback();
+		~Callback() = delete;
 		static void assignAll();
 	private:
 		static void resizeWindow(GLFWwindow* win, int width, int height);

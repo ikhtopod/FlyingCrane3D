@@ -17,8 +17,12 @@ Transform& Scene::getTransform() {
 	return this->transform;
 }
 
+SelectionSwitcher& Scene::getSelectionSwitcher() {
+	return this->selectionSwitcher;
+}
+
 Selection& Scene::getSelection() {
-	return this->selection;
+	return *(this->selectionSwitcher.getSelection());
 }
 
 std::map<std::string, Object>& Scene::getObjects() {
@@ -39,7 +43,7 @@ void Scene::addObject(std::string _name, Object _object) {
 
 
 void Scene::init() {
-	this->selection.init();
+	this->selectionSwitcher.init();
 
 	/***********************************/
 
@@ -127,12 +131,12 @@ void Scene::draw() {
 	this->model.update();
 
 	for (auto& o : this->standardObjects) {
-		o.second.setGlobalTransform(this->transform);
+		o.second.setParentTransform(this->transform);
 		o.second.draw();
 	}
 
 	for (auto& o : this->objects) {
-		o.second.setGlobalTransform(this->transform);
+		o.second.setParentTransform(this->transform);
 		o.second.draw();
 	}
 }
@@ -146,5 +150,5 @@ void Scene::free() {
 		o.second.free();
 	}
 
-	this->selection.free();
+	this->selectionSwitcher.free();
 }
