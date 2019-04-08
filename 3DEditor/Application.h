@@ -16,7 +16,7 @@ private:
 
 	Window window;
 	GUI gui;
-	DeltaTime deltaTime { 120 };
+	DeltaTime deltaTime;
 	Scene scene {};
 
 	TriadaMode currentMode = TriadaMode::NONE;

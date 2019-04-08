@@ -12,12 +12,12 @@ void Application::initInstance(Application* _this) {
 
 Application::Application() : Application("") {}
 
-Application::Application(std::string appTitle) : window(appTitle) {
-	Application::initInstance(this);
-}
+Application::Application(std::string appTitle)
+	: Application(appTitle, ScreenResolution::DEFAULT_SCREEN_WIDTH,
+				  ScreenResolution::DEFAULT_SCREEN_HEIGHT) {}
 
 Application::Application(std::string appTitle, int sWidth, int sHeight)
-	: window(appTitle, sWidth, sHeight) {
+	: window(appTitle, sWidth, sHeight), deltaTime(120) {
 
 	Application::initInstance(this);
 }
