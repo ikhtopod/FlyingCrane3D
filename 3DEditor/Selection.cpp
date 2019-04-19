@@ -16,6 +16,10 @@ void Selection::clearSelectedObjects() {
 	this->selectedObjects.clear();
 }
 
+void Selection::updateRelativeMousePosition(float relPosX, float relPosY) {
+	relativeMousePosition = glm::vec2 { relPosX, relPosY };
+}
+
 
 void Selection::mouseButtonInput(int button, int action, int mods) {
 	if (button != GLFW_MOUSE_BUTTON_LEFT) return;
@@ -26,7 +30,9 @@ void Selection::mouseButtonInput(int button, int action, int mods) {
 		if (mods != GLFW_MOD_SHIFT) {
 			this->clearSelectedObjects();
 		}//fi
+
 		this->select();
+
 		prevState = GLFW_PRESS;
 	} else if (action == GLFW_RELEASE && prevState == GLFW_PRESS) {
 		prevState = GLFW_RELEASE;
