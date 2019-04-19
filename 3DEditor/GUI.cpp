@@ -156,6 +156,11 @@ void GUI::showMainMenuBar() {
 			ImGui::Text("3: выделение граней");
 			ImGui::Text("4: выделение объектов");
 			ImGui::Separator();
+			ImGui::Text("Действия с выделенными объектами:"); ImGui::NewLine();
+			ImGui::Text("G: перемещение");
+			ImGui::Text("R: вращение");
+			ImGui::Text("S: масштабирование"); ImGui::NewLine();
+			ImGui::Separator();
 
 			ImGui::End();
 		}
