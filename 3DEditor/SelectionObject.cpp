@@ -77,22 +77,44 @@ glm::vec3 SelectionObject::getCentroid() {
 	std::sort(uniquePositions.begin(), uniquePositions.end(), sortPred);
 	uniquePositions.erase(std::unique(uniquePositions.begin(), uniquePositions.end()), uniquePositions.end());
 
-	centroid = std::accumulate(std::next(uniquePositions.begin()), uniquePositions.end(),
-							   uniquePositions[0], std::plus<glm::vec3>());
-	centroid /= static_cast<float>(uniquePositions.size());
+	if (uniquePositions.size() > 1) {
+		centroid = std::accumulate(std::next(uniquePositions.begin()), uniquePositions.end(),
+								   uniquePositions[0], std::plus<glm::vec3>());
+		centroid /= static_cast<float>(uniquePositions.size());
+	} else {
+		centroid = uniquePositions[0];
+	}
 
 	return centroid;
 }
 
 void SelectionObject::moving() {
 	Application* appThis = Application::getInstancePtr();
-	double xPos = 0.0;
-	double yPos = 0.0;
+	double currentMouseX = 0.0;
+	double currentMouseY = 0.0;
 
-	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &xPos, &yPos);
+	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &currentMouseX, &currentMouseY);
+
+	float diffMouseX = static_cast<float>(currentMouseX) - prevMousePosition.x;
+	float diffMouseY = static_cast<float>(currentMouseY) - prevMousePosition.y;
+
+	if (diffMouseX == 0.0f && diffMouseY == 0.0f) {
+		return;
+	}
+
+	prevMousePosition = glm::vec2 { static_cast<float>(currentMouseX), static_cast<float>(currentMouseY) };
+	diffMousePosition = glm::vec2 { diffMouseY, diffMouseX };
+
+	Model& model = appThis->getScene().getModel();
+
+	glm::vec3 worldCoordinate = model.getView() * glm::vec4 { diffMousePosition * 0.01f, 0.0f, 0.0f };
 
 	for (auto&[objKey, objValue] : this->selectedObjects) {
-		// set transform selected object
+		objValue->getTransform().setPosition(objValue->getTransform().getPosition() + worldCoordinate);
+
+		std::cout << "x: " << worldCoordinate.x << "; "
+			<< "y: " << worldCoordinate.y << "; "
+			<< "z: " << worldCoordinate.z << std::endl;
 	}
 }
 

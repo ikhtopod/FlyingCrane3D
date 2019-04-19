@@ -20,7 +20,8 @@ public:
 
 class Selection : public ITriada, public ISelection {
 protected:
-	glm::vec2 relativeMousePosition {};
+	glm::vec2 prevMousePosition {};
+	glm::vec2 diffMousePosition {};
 
 	Shader shader;
 
@@ -34,7 +35,7 @@ public:
 	bool hasSelectedObjects(std::string name);
 	void clearSelectedObjects();
 
-	void updateRelativeMousePosition(float relPosX, float relPosY);
+	void updateMousePosition(float relPosX, float relPosY);
 
 public:
 	void mouseButtonInput(int button, int action, int mods);

@@ -16,8 +16,9 @@ void Selection::clearSelectedObjects() {
 	this->selectedObjects.clear();
 }
 
-void Selection::updateRelativeMousePosition(float relPosX, float relPosY) {
-	relativeMousePosition = glm::vec2 { relPosX, relPosY };
+void Selection::updateMousePosition(float relPosX, float relPosY) {
+	prevMousePosition = glm::vec2 { relPosX, relPosY };
+	diffMousePosition = prevMousePosition;
 }
 
 

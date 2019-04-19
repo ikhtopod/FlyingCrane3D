@@ -69,7 +69,7 @@ void SelectionSwitcher::switchActionInput() {
 			double posY = 0.0;
 			glfwGetCursorPos(window, &posX, &posY);
 
-			this->getSelection()->updateRelativeMousePosition(
+			this->getSelection()->updateMousePosition(
 				static_cast<float>(posX), static_cast<float>(posY)
 			);
 		}
