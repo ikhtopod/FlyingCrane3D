@@ -6,8 +6,7 @@
 #include "Vertex.h"
 #include "Shader.h"
 #include "SelectionInfo.h"
-#include "Model.h"
-#include "ScreenResolution.h"
+#include "Axis.h"
 
 class SelectionObject : public Selection {
 	virtual void select() override;

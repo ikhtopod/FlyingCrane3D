@@ -95,8 +95,8 @@ void SelectionObject::moving() {
 
 	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &currentMouseX, &currentMouseY);
 
-	float diffMouseX = static_cast<float>(currentMouseX) - prevMousePosition.x;
-	float diffMouseY = static_cast<float>(currentMouseY) - prevMousePosition.y;
+	float diffMouseX = prevMousePosition.y - static_cast<float>(currentMouseY);
+	float diffMouseY = static_cast<float>(currentMouseX) - prevMousePosition.x;
 
 	if (diffMouseX == 0.0f && diffMouseY == 0.0f) {
 		return;
@@ -105,16 +105,14 @@ void SelectionObject::moving() {
 	prevMousePosition = glm::vec2 { static_cast<float>(currentMouseX), static_cast<float>(currentMouseY) };
 	diffMousePosition = glm::vec2 { diffMouseY, diffMouseX };
 
-	Model& model = appThis->getScene().getModel();
-
-	glm::vec3 worldCoordinate = model.getView() * glm::vec4 { diffMousePosition * 0.01f, 0.0f, 0.0f };
+	Axis& cameraAxis = appThis->getScene().getCamera().getAxis();
+	float deltaTime = appThis->getDeltaTime();
 
 	for (auto&[objKey, objValue] : this->selectedObjects) {
-		objValue->getTransform().setPosition(objValue->getTransform().getPosition() + worldCoordinate);
-
-		std::cout << "x: " << worldCoordinate.x << "; "
-			<< "y: " << worldCoordinate.y << "; "
-			<< "z: " << worldCoordinate.z << std::endl;
+		glm::vec3 newPos = objValue->getTransform().getPosition();
+		newPos += (cameraAxis.getRight() * diffMousePosition.x) * deltaTime;
+		newPos += (cameraAxis.getUp() * diffMousePosition.y) * deltaTime;
+		objValue->getTransform().setPosition(newPos);
 	}
 }
 
