@@ -108,4 +108,19 @@ void SelectionObject::moving() {
 
 void SelectionObject::rotation() { /* dummy */ }
 
-void SelectionObject::scaling() { /* dummy */ }
+void SelectionObject::scaling() {
+	this->updateMousePosition();
+
+	if (this->diffIsZero()) return;
+
+	Application* appThis = Application::getInstancePtr();
+
+	Axis& cameraAxis = appThis->getScene().getCamera().getAxis();
+	float deltaTime = appThis->getDeltaTime();
+
+	for (auto&[objKey, objValue] : this->selectedObjects) {
+		glm::vec3 newScale = objValue->getTransform().getScale();
+		newScale += ((diffMousePosition.x + diffMousePosition.y) / 2.0f) * deltaTime;
+		objValue->getTransform().setScale(newScale);
+	}
+}
