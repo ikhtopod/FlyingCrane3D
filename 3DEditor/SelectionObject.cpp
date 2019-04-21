@@ -113,10 +113,7 @@ void SelectionObject::scaling() {
 
 	if (this->diffIsZero()) return;
 
-	Application* appThis = Application::getInstancePtr();
-
-	Axis& cameraAxis = appThis->getScene().getCamera().getAxis();
-	float deltaTime = appThis->getDeltaTime();
+	float deltaTime = Application::getInstancePtr()->getDeltaTime();
 
 	for (auto&[objKey, objValue] : this->selectedObjects) {
 		glm::vec3 newScale = objValue->getTransform().getScale();
