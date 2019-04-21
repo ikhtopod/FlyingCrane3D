@@ -16,8 +16,18 @@ void Selection::clearSelectedObjects() {
 	this->selectedObjects.clear();
 }
 
-void Selection::updateMousePosition(float relPosX, float relPosY) {
-	prevMousePosition = glm::vec2 { relPosX, relPosY };
+void Selection::updateMousePosition() {
+	Application* appThis = Application::getInstancePtr();
+	double currentMouseX = 0.0;
+	double currentMouseY = 0.0;
+
+	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &currentMouseX, &currentMouseY);
+
+	this->updateMousePosition(currentMouseX, currentMouseY);
+}
+
+void Selection::updateMousePosition(float currentMouseX, float currentMouseY) {
+	prevMousePosition = glm::vec2 { currentMouseX, currentMouseY };
 	diffMousePosition = prevMousePosition;
 }
 

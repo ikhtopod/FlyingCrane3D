@@ -35,7 +35,8 @@ public:
 	bool hasSelectedObjects(std::string name);
 	void clearSelectedObjects();
 
-	void updateMousePosition(float relPosX, float relPosY);
+	void updateMousePosition();
+	void updateMousePosition(float currentMouseX, float currentMouseY);
 
 public:
 	void mouseButtonInput(int button, int action, int mods);
