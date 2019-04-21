@@ -89,21 +89,11 @@ glm::vec3 SelectionObject::getCentroid() {
 }
 
 void SelectionObject::moving() {
+	this->updateMousePosition();
+
+	if (this->diffIsZero()) return;
+
 	Application* appThis = Application::getInstancePtr();
-	double currentMouseX = 0.0;
-	double currentMouseY = 0.0;
-
-	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &currentMouseX, &currentMouseY);
-
-	float diffMouseX = prevMousePosition.y - static_cast<float>(currentMouseY);
-	float diffMouseY = static_cast<float>(currentMouseX) - prevMousePosition.x;
-
-	if (diffMouseX == 0.0f && diffMouseY == 0.0f) {
-		return;
-	}
-
-	prevMousePosition = glm::vec2 { static_cast<float>(currentMouseX), static_cast<float>(currentMouseY) };
-	diffMousePosition = glm::vec2 { diffMouseY, diffMouseX };
 
 	Axis& cameraAxis = appThis->getScene().getCamera().getAxis();
 	float deltaTime = appThis->getDeltaTime();

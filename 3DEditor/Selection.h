@@ -27,6 +27,9 @@ protected:
 
 	std::map<std::string, Object*> selectedObjects {};
 
+protected:
+	bool diffIsZero();
+
 public:
 	Selection();
 	~Selection() = default;

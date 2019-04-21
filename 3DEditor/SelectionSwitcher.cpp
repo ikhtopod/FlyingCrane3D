@@ -70,7 +70,8 @@ void SelectionSwitcher::switchActionInput() {
 			glfwGetCursorPos(window, &posX, &posY);
 
 			this->getSelection()->updateMousePosition(
-				static_cast<float>(posX), static_cast<float>(posY)
+				static_cast<float>(posX), 
+				static_cast<float>(posY)
 			);
 		}
 

@@ -4,6 +4,11 @@ Selection::Selection() :
 	shader(R"(..\resources\shaders\Selection.vs)",
 		   R"(..\resources\shaders\Selection.fs)") {}
 
+
+bool Selection::diffIsZero() {
+	return this->diffMousePosition.x == 0.0f && this->diffMousePosition.y == 0.0f;
+}
+
 std::map<std::string, Object*>& Selection::getSelectedObjects() {
 	return this->selectedObjects;
 }
@@ -23,14 +28,22 @@ void Selection::updateMousePosition() {
 
 	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &currentMouseX, &currentMouseY);
 
-	this->updateMousePosition(currentMouseX, currentMouseY);
+	this->updateMousePosition(static_cast<float>(currentMouseX), static_cast<float>(currentMouseY));
 }
 
 void Selection::updateMousePosition(float currentMouseX, float currentMouseY) {
-	prevMousePosition = glm::vec2 { currentMouseX, currentMouseY };
-	diffMousePosition = prevMousePosition;
-}
+	if (this->prevMousePosition.x == currentMouseX &&
+		this->prevMousePosition.y == currentMouseY) {
 
+		this->diffMousePosition = glm::vec2 { };
+	} else {
+		float diffMouseX = prevMousePosition.y - static_cast<float>(currentMouseY);
+		float diffMouseY = static_cast<float>(currentMouseX) - prevMousePosition.x;
+
+		prevMousePosition = glm::vec2 { currentMouseX, currentMouseY };
+		diffMousePosition = glm::vec2 { diffMouseY, diffMouseX };
+	}
+}
 
 void Selection::mouseButtonInput(int button, int action, int mods) {
 	if (button != GLFW_MOUSE_BUTTON_LEFT) return;
