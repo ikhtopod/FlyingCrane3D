@@ -106,7 +106,25 @@ void SelectionObject::moving() {
 	}
 }
 
-void SelectionObject::rotation() { /* dummy */ }
+void SelectionObject::rotation() {
+	const static float STEP = 10.0f;
+
+	this->updateMousePosition();
+
+	if (this->diffIsZero()) return;
+
+	Application* appThis = Application::getInstancePtr();
+
+	Axis& cameraAxis = appThis->getScene().getCamera().getAxis();
+	float deltaTime = appThis->getDeltaTime();
+
+	for (auto&[objKey, objValue] : this->selectedObjects) {
+		glm::vec3 newRot = objValue->getTransform().getRotation();
+		newRot -= (cameraAxis.getRight() * diffMousePosition.y) * STEP * deltaTime;
+		newRot += (cameraAxis.getUp() * diffMousePosition.x) * STEP * deltaTime;
+		objValue->getTransform().setRotation(newRot);
+	}
+}
 
 void SelectionObject::scaling() {
 	this->updateMousePosition();
