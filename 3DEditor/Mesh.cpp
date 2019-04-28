@@ -31,6 +31,14 @@ std::vector<Vertex>& Mesh::getVertices() {
 	return this->vertices;
 }
 
+std::vector<Edge>& Mesh::getEdges() {
+	return this->edges;
+}
+
+std::vector<Face>& Mesh::getFaces() {
+	return this->faces;
+}
+
 Transform& Mesh::getTransform() {
 	return this->transform;
 }

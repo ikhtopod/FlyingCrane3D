@@ -4,6 +4,8 @@
 #include "Object.h"
 #include "Shader.h"
 #include "Vertex.h"
+#include "Edge.h"
+#include "Face.h"
 
 class Object;
 
@@ -23,6 +25,8 @@ private:
 	GLuint ebo;
 
 	std::vector<Vertex> vertices {};
+	std::vector<Edge> edges {};
+	std::vector<Face> faces {};
 	std::vector<GLuint> indices {};
 
 	Transform transform {};
@@ -40,6 +44,8 @@ public:
 	~Mesh() = default;
 
 	std::vector<Vertex>& getVertices();
+	std::vector<Edge>& getEdges();
+	std::vector<Face>& getFaces();
 
 	Transform& getTransform();
 	Transform& getParentTransform();
