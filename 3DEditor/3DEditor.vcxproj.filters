@@ -112,6 +112,9 @@
     <ClCompile Include="Edge.cpp">
       <Filter>Sources\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Face.cpp">
+      <Filter>Sources\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -226,6 +229,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Edge.h">
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Face.h">
       <Filter>Headers\Object</Filter>
     </ClInclude>
   </ItemGroup>
