@@ -15,9 +15,6 @@ private:
 	enum AttribIndex : GLuint {
 		POSITION,
 		NORMAL,
-		// TEXTURE,
-		// TANGENT,
-		// BITANGENT,
 	};
 
 private:
