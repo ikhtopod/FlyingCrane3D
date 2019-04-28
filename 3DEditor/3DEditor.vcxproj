@@ -196,6 +196,7 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="Edge.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="GridObject.cpp" />
     <ClCompile Include="GUI.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_rectpack.h" />
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_textedit.h" />
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_truetype.h" />
+    <ClInclude Include="Edge.h" />
     <ClInclude Include="FreeCamera.h" />
     <ClInclude Include="GridObject.h" />
     <ClInclude Include="GUI.h" />
