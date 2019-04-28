@@ -63,6 +63,9 @@ private:
 
 private:
 	class Callback final {
+	private:
+		using AppCall = Application::Callback;
+
 	public:
 		Callback() = delete;
 		~Callback() = delete;

@@ -235,10 +235,10 @@ void Application::Callback::assignAll() {
 	Application* _this = Application::getInstancePtr();
 	glfwSetWindowUserPointer(_this->getWindow().getWindowPtr(), _this);
 
-	glfwSetFramebufferSizeCallback(_this->getWindow().getWindowPtr(), Application::Callback::resizeWindow);
-	glfwSetCursorPosCallback(_this->getWindow().getWindowPtr(), Application::Callback::mouseMovementCallback);
-	glfwSetMouseButtonCallback(_this->getWindow().getWindowPtr(), Application::Callback::mouseButtonCallback);
-	glfwSetScrollCallback(_this->getWindow().getWindowPtr(), Application::Callback::scrollCallback);
+	glfwSetFramebufferSizeCallback(_this->getWindow().getWindowPtr(), AppCall::resizeWindow);
+	glfwSetCursorPosCallback(_this->getWindow().getWindowPtr(), AppCall::mouseMovementCallback);
+	glfwSetMouseButtonCallback(_this->getWindow().getWindowPtr(), AppCall::mouseButtonCallback);
+	glfwSetScrollCallback(_this->getWindow().getWindowPtr(), AppCall::scrollCallback);
 }
 
 
