@@ -22,7 +22,7 @@ public:
 	static const SelectionMode DEFAULT_SELECTION_MODE;
 
 private:
-	SelectionMode mode;
+	SelectionMode selectionMode;
 	SelectionActionMode actionMode;
 
 	std::unordered_map<SelectionMode, std::shared_ptr<Selection>> selections {};
@@ -31,8 +31,8 @@ public:
 	SelectionSwitcher();
 	~SelectionSwitcher() = default;
 
-	SelectionMode getMode();
-	void setMode(SelectionMode _mode);
+	SelectionMode getSelectionMode();
+	void setSelectionMode(SelectionMode _mode);
 	bool hasSelection(SelectionMode _mode);
 
 	SelectionActionMode getActionMode();

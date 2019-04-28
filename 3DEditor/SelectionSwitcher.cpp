@@ -4,27 +4,27 @@
 const SelectionMode SelectionSwitcher::DEFAULT_SELECTION_MODE = SelectionMode::OBJECT;
 
 
-SelectionSwitcher::SelectionSwitcher() : mode(DEFAULT_SELECTION_MODE) {
+SelectionSwitcher::SelectionSwitcher() : selectionMode(DEFAULT_SELECTION_MODE) {
 	selections.insert({ SelectionMode::POINT, std::make_shared<SelectionPoint>() });
 	selections.insert({ SelectionMode::EDGE, std::make_shared<SelectionEdge>() });
 	selections.insert({ SelectionMode::FACE, std::make_shared<SelectionFace>() });
 	selections.insert({ SelectionMode::OBJECT, std::make_shared<SelectionObject>() });
 }
 
-SelectionMode SelectionSwitcher::getMode() {
-	return this->mode;
+SelectionMode SelectionSwitcher::getSelectionMode() {
+	return this->selectionMode;
 }
 
-void SelectionSwitcher::setMode(SelectionMode _mode) {
-	if (this->mode == _mode || !this->hasSelection(_mode)) return;
+void SelectionSwitcher::setSelectionMode(SelectionMode _selectionMode) {
+	if (this->selectionMode == _selectionMode || !this->hasSelection(_selectionMode)) return;
 
 	this->getSelection()->clearSelectedObjects();
-	this->mode = _mode;
+	this->selectionMode = _selectionMode;
 
 }
 
-bool SelectionSwitcher::hasSelection(SelectionMode _mode) {
-	return this->selections.find(_mode) != this->selections.end();
+bool SelectionSwitcher::hasSelection(SelectionMode _selectionMode) {
+	return this->selections.find(_selectionMode) != this->selections.end();
 }
 
 SelectionActionMode SelectionSwitcher::getActionMode() {
@@ -44,20 +44,20 @@ void SelectionSwitcher::resetActionMode() {
 }
 
 std::shared_ptr<Selection> SelectionSwitcher::getSelection() {
-	return this->selections[this->mode];
+	return this->selections[this->selectionMode];
 }
 
 void SelectionSwitcher::switchSelectionInput() {
 	GLFWwindow* window = Application::getInstancePtr()->getWindow().getWindowPtr();
 
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
-		this->setMode(SelectionMode::POINT);
+		this->setSelectionMode(SelectionMode::POINT);
 	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
-		this->setMode(SelectionMode::EDGE);
+		this->setSelectionMode(SelectionMode::EDGE);
 	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
-		this->setMode(SelectionMode::FACE);
+		this->setSelectionMode(SelectionMode::FACE);
 	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
-		this->setMode(SelectionMode::OBJECT);
+		this->setSelectionMode(SelectionMode::OBJECT);
 }
 
 void SelectionSwitcher::switchActionInput() {
@@ -70,7 +70,7 @@ void SelectionSwitcher::switchActionInput() {
 			glfwGetCursorPos(window, &posX, &posY);
 
 			this->getSelection()->updateMousePosition(
-				static_cast<float>(posX), 
+				static_cast<float>(posX),
 				static_cast<float>(posY)
 			);
 		}
@@ -119,7 +119,7 @@ void SelectionSwitcher::draw() {
 }
 
 void SelectionSwitcher::free() {
-	for (auto& sel : this->selections) {
-		sel.second->free();
+	for (auto& selection : this->selections) {
+		selection.second->free();
 	}
 }
