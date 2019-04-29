@@ -6,7 +6,7 @@ const GLenum Mesh::DEFAULT_MESH_TYPE = GL_TRIANGLES;
 
 
 Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices)
-	: Mesh(_vertices, _indices, Mesh::DEFAULT_MESH_TYPE, Shader {}) {}
+	: Mesh(_vertices, _indices, Mesh::DEFAULT_MESH_TYPE) {}
 
 Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type)
 	: Mesh(_vertices, _indices, _type, Shader {}) {}
