@@ -5,14 +5,14 @@ const GLsizei Mesh::BUFFER_SIZE = 1;
 const GLenum Mesh::DEFAULT_MESH_TYPE = GL_TRIANGLES;
 
 
-Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices)
-	: Mesh(_vertices, _indices, Mesh::DEFAULT_MESH_TYPE) {}
+Mesh::Mesh(PolymeshRepresentation _polymesh)
+	: Mesh(_polymesh, Mesh::DEFAULT_MESH_TYPE) {}
 
-Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type)
-	: Mesh(_vertices, _indices, _type, Shader {}) {}
+Mesh::Mesh(PolymeshRepresentation _polymesh, GLenum _type)
+	: Mesh(_polymesh, _type, Shader {}) {}
 
-Mesh::Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader)
-	: vertices(_vertices), indices(_indices), type(_type),
+Mesh::Mesh(PolymeshRepresentation _polymesh, GLenum _type, Shader _shader)
+	: polymesh(_polymesh), type(_type), 
 	nativeShader(_shader), shader(nativeShader) {}
 
 
@@ -20,16 +20,8 @@ Transform& Mesh::getGlobalTransform() {
 	return this->globalTransform;
 }
 
-std::vector<Vertex>& Mesh::getVertices() {
-	return this->vertices;
-}
-
-std::vector<Edge>& Mesh::getEdges() {
-	return this->edges;
-}
-
-std::vector<Face>& Mesh::getFaces() {
-	return this->faces;
+PolymeshRepresentation& Mesh::getPolymesh() {
+	return this->polymesh;
 }
 
 Transform& Mesh::getTransform() {
@@ -86,10 +78,10 @@ void Mesh::init() {
 	glBindVertexArray(this->vao);
 
 	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-	glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(Vertex), &(this->vertices)[0], GL_STREAM_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, this->polymesh.getVertices().size() * sizeof(Vertex), &(this->polymesh.getVertices())[0], GL_STREAM_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &(this->indices)[0], GL_STREAM_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->polymesh.getIndices().size() * sizeof(GLuint), &(this->polymesh.getIndices())[0], GL_STREAM_DRAW);
 
 	// vertex positions
 	glEnableVertexAttribArray(Mesh::AttribIndex::POSITION);
@@ -110,7 +102,7 @@ void Mesh::draw() {
 	this->shader.draw();
 
 	glBindVertexArray(this->vao);
-	glDrawElements(this->type, this->indices.size(), GL_UNSIGNED_INT, (void*)0);
+	glDrawElements(this->type, this->polymesh.getIndices().size(), GL_UNSIGNED_INT, (void*)0);
 	glBindVertexArray(0); // unbind
 }
 

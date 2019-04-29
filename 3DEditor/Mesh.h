@@ -6,10 +6,12 @@
 #include "Vertex.h"
 #include "Edge.h"
 #include "Face.h"
+#include "PolymeshRepresentation.h"
+
 
 class Object;
 
-class Mesh : public ITriada {
+class Mesh final : public ITriada {
 private:
 	static const GLsizei BUFFER_SIZE;
 	static const GLenum DEFAULT_MESH_TYPE;
@@ -20,18 +22,14 @@ private:
 	};
 
 private:
-	GLuint vao;
-	GLuint vbo;
-	GLuint ebo;
+	GLuint vao, vbo, ebo;
 
-	std::vector<Vertex> vertices {};
-	std::vector<Edge> edges {};
-	std::vector<Face> faces {};
-	std::vector<GLuint> indices {};
+	PolymeshRepresentation polymesh;
 
 	Transform transform {};
 	Transform parentTransform {};
 	Transform globalTransform {};
+
 	Shader nativeShader {};
 	Shader shader {};
 
@@ -40,15 +38,12 @@ private:
 	Mesh() = delete;
 
 public:
-	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices);
-	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type);
-	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader);
+	Mesh(PolymeshRepresentation _polymesh);
+	Mesh(PolymeshRepresentation _polymesh, GLenum _type);
+	Mesh(PolymeshRepresentation _polymesh, GLenum _type, Shader _shader);
 	~Mesh() = default;
 
-	std::vector<Vertex>& getVertices();
-	std::vector<Edge>& getEdges();
-	std::vector<Face>& getFaces();
-
+	PolymeshRepresentation& getPolymesh();
 	Transform& getTransform();
 	Transform& getParentTransform();
 	Transform& getGlobalTransform();

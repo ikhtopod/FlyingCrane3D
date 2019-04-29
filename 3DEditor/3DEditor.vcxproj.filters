@@ -115,6 +115,9 @@
     <ClCompile Include="Face.cpp">
       <Filter>Sources\Object</Filter>
     </ClCompile>
+    <ClCompile Include="PolymeshRepresentation.cpp">
+      <Filter>Sources\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -232,6 +235,9 @@
       <Filter>Headers\Object</Filter>
     </ClInclude>
     <ClInclude Include="Face.h">
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PolymeshRepresentation.h">
       <Filter>Headers\Object</Filter>
     </ClInclude>
   </ItemGroup>

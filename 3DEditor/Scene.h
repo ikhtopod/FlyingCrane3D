@@ -2,6 +2,7 @@
 
 #include "ITriada.h"
 #include "Vertex.h"
+#include "PolymeshRepresentation.h"
 #include "Object.h"
 #include "GridObject.h"
 #include "Camera.h"

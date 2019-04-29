@@ -68,6 +68,7 @@
 #include "Vertex.h"
 #include "Edge.h"
 #include "Face.h"
+#include "PolymeshRepresentation.h"
 #include "SelectionInfo.h"
 #include "SelectionSwitcher.h"
 #include "Selection.h"

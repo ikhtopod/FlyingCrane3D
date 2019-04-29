@@ -51,8 +51,7 @@ void Scene::init() {
 	this->addStandardObject("grid_8x8.000", GridObject { 8, 8 });
 
 	// insert objects
-	Object pyramid_000 {};
-	Mesh pyramid_mesh_flat_000 {
+	PolymeshRepresentation pyramid_polymesh_flat_000 {
 		{
 			Vertex{ { 1.0f, 0.0f, 1.0f },  { 0.0f, -1.0f, 0.0f } },
 			Vertex{ { -1.0f, 0.0f, -1.0f }, { 0.0f, -1.0f, 0.0f } },
@@ -85,28 +84,10 @@ void Scene::init() {
 			9, 10, 11,
 			12, 13, 14,
 			15, 16, 17,
-		},
-		GL_TRIANGLES
+		}
 	};
-
-	/*Mesh pyramid_mesh_smooth_000 {
-		{
-			Vertex{ { 1.0f, 0.0f, -1.0f }, { 0.0f, -1.0f, 0.0f } },
-			Vertex{ { 1.0f, 0.0f, 1.0f },  { 0.8944f, 0.4472f, 0.0f } },
-			Vertex{ { -1.0f, 0.0f, 1.0f }, { 0.0f, 0.4472f, 0.8944f } },
-			Vertex{ { -1.0f, 0.0f, -1.0f }, { -0.8944f, 0.4472f, 0.0f } },
-			Vertex{ { 0.0f, 2.0f, 0.0f }, { 0.0f, 0.4472f, -0.8944f } },
-		},
-		{
-			1, 3, 0,
-			0, 4, 1,
-			1, 4, 2,
-			2, 4, 3,
-			4, 0, 3,
-			1, 2, 3,
-		},
-		GL_TRIANGLES
-	};*/
+	Mesh pyramid_mesh_flat_000 { pyramid_polymesh_flat_000, GL_TRIANGLES };
+	Object pyramid_000 {};
 
 	pyramid_000.addMesh("pyramid_mesh_flat.000", pyramid_mesh_flat_000);
 	this->addObject("pyramid.000", pyramid_000);

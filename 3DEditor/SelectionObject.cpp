@@ -63,7 +63,7 @@ glm::vec3 SelectionObject::getCentroid() {
 
 	for (auto&[objKey, objValue] : this->selectedObjects) {
 		for (auto&[meshKey, meshValue] : objValue->getMeshes()) {
-			for (Vertex& v : meshValue.getVertices()) {
+			for (Vertex& v : meshValue.getPolymesh().getVertices()) {
 				glm::vec3 pos = v.position + objValue->getGlobalTransform().getPosition();
 				uniquePositions.push_back(pos);
 			}//rof

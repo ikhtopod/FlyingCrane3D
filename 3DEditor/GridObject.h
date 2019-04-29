@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "Vertex.h"
 #include "Shader.h"
+#include "PolymeshRepresentation.h"
 
 class GridObject : public Object {
 private:

@@ -83,9 +83,14 @@ GridObject::GridObject(_uint _width, _uint _height)
 	FsPath meshGridVertex { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshGrid.vs)" };
 	FsPath meshGridFragment { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshGrid.fs)" };
 
-	Mesh meshX { verticesX, indicesX, GL_LINES, Shader { meshXVertex, meshXFragment } };
-	Mesh meshZ { verticesZ, indicesZ, GL_LINES, Shader { meshZVertex, meshZFragment } };
-	Mesh meshGrid { verticesGrid, indicesGrid, GL_LINES, Shader { meshGridVertex, meshGridFragment } };
+
+	PolymeshRepresentation polymeshX { verticesX, indicesX };
+	PolymeshRepresentation polymeshZ { verticesZ, indicesZ };
+	PolymeshRepresentation polymeshGrid { verticesGrid, indicesGrid };
+
+	Mesh meshX { polymeshX, GL_LINES, Shader { meshXVertex, meshXFragment } };
+	Mesh meshZ { polymeshZ, GL_LINES, Shader { meshZVertex, meshZFragment } };
+	Mesh meshGrid { polymeshGrid, GL_LINES, Shader { meshGridVertex, meshGridFragment } };
 
 	meshX.getShader().resetLambdaDraw();
 	meshZ.getShader().resetLambdaDraw();
