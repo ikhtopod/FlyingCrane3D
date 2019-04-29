@@ -43,7 +43,7 @@ void PolymeshRepresentation::update() {
 		}//fi
 
 		// list unique edges
-		for (Edge edge : { Edge { v1, v2 }, Edge { v2, v3 }, Edge { v3,v1 } }) {
+		for (Edge edge : { Edge { v1, v2 }, Edge { v2, v3 }, Edge { v3, v1 } }) {
 			auto pred_e = [&edge](const Edge& e) {
 				return (edge == e);
 			};
