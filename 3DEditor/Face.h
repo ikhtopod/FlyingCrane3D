@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Edge.h"
+#include "Vertex.h"
 
 class Face {
-private:
-	Edge* first;
-	Edge* second;
-	Edge* third;
+public:
+	Vertex& first;
+	Vertex& second;
+	Vertex& third;
 
 	Face() = delete;
-
-public:
-	Face(Edge* _first, Edge* _second, Edge* _third);
+	Face(Vertex& _first, Vertex& _second, Vertex& _third);
 	~Face() = default;
+
+	bool operator==(const Face& face) const;
 };
 
