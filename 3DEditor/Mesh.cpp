@@ -76,6 +76,10 @@ void Mesh::setShader(Shader& _shader) {
 	//this->shader.init();
 }
 
+void Mesh::setType(GLenum _type) {
+	this->type = _type;
+}
+
 void Mesh::resetShaderToNative() {
 	this->setShader(this->nativeShader);
 }

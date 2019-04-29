@@ -57,6 +57,7 @@ public:
 	void setParentTransform(Transform _pTransform);
 	void setGlobalTransform(Transform _gTransform);
 	void setShader(Shader& _shader);
+	void setType(GLenum _type);
 
 	void resetShaderToNative();
 
