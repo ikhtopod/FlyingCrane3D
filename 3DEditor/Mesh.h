@@ -37,8 +37,9 @@ private:
 
 	GLenum type { GL_TRIANGLES };
 
+	Mesh() = delete;
+
 public:
-	Mesh();
 	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type);
 	Mesh(std::vector<Vertex> _vertices, std::vector<GLuint> _indices, GLenum _type, Shader _shader);
 	~Mesh() = default;
