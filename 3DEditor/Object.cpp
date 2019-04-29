@@ -23,8 +23,8 @@ void Object::setTransform(Transform _transform) {
 	this->setGlobalTransform(this->getParentTransform() + this->getTransform());
 }
 
-void Object::setParentTransform(Transform _gTransform) {
-	this->parentTransform = _gTransform;
+void Object::setParentTransform(Transform _pTransform) {
+	this->parentTransform = _pTransform;
 	this->setGlobalTransform(this->getParentTransform() + this->getTransform());
 }
 
@@ -59,10 +59,27 @@ void Object::resetShadersAllMeshes() {
 	}
 }
 
+std::map<std::string, Object>& Object::getChildrens() {
+	return this->childrens;
+}
+
+void Object::addChildren(std::string _name, Object& _object) {
+	if (this->childrens.empty() || (this->childrens.find(_name) == this->childrens.end())) {
+		this->childrens.insert({ _name, _object });
+	}
+}
+
 void Object::drawMeshes() {
 	for (auto& mesh : this->meshes) {
 		mesh.second.setParentTransform(this->parentTransform + this->transform);
 		mesh.second.draw();
+	}
+}
+
+void Object::drawChildrens() {
+	for (auto& children : this->childrens) {
+		children.second.setParentTransform(this->parentTransform + this->transform);
+		children.second.draw();
 	}
 }
 
@@ -75,8 +92,7 @@ void Object::init() {
 
 void Object::draw() {
 	this->drawMeshes();
-
-	// draw children objects
+	this->drawChildrens();
 }
 
 void Object::free() {

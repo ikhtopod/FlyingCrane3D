@@ -15,7 +15,8 @@ protected:
 	Transform parentTransform {};
 	Transform globalTransform {};
 
-	std::map<std::string, Mesh> meshes;
+	std::map<std::string, Mesh> meshes {};
+	std::map<std::string, Object> childrens {};
 
 	SelectionInfo selectionInfo {};
 
@@ -29,7 +30,7 @@ public:
 	SelectionInfo& getSelectionInfo();
 
 	void setTransform(Transform _transform);
-	void setParentTransform(Transform _gTransform);
+	void setParentTransform(Transform _pTransform);
 	void setGlobalTransform(Transform _gTransform);
 	void setSelectionInfo(SelectionInfo _selectionInfo);
 
@@ -38,7 +39,11 @@ public:
 	void setShadersAllMeshes(Shader& _shader);
 	void resetShadersAllMeshes();
 
+	std::map<std::string, Object>& getChildrens();
+	void addChildren(std::string _name, Object& _object);
+
 	void drawMeshes();
+	void drawChildrens();
 
 	virtual void init() override;
 	virtual void draw() override;
