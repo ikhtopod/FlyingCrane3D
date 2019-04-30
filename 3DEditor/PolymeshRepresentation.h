@@ -6,7 +6,7 @@
 
 class PolymeshRepresentation final {
 private:
-	std::vector<GLuint> indices {};
+	std::vector<GLuint> indicesMesh {};
 
 	std::vector<Vertex> vertices {};
 	std::vector<Edge> edges {};
@@ -18,7 +18,7 @@ public:
 	PolymeshRepresentation(std::vector<Vertex> _vertices, std::vector<GLuint> _indices);
 	~PolymeshRepresentation() = default;
 
-	std::vector<GLuint>& getIndices();
+	std::vector<GLuint>& getIndicesMesh();
 
 	std::vector<Vertex>& getVertices();
 	std::vector<Edge>& getEdges();

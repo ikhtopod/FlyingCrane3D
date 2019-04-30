@@ -3,13 +3,13 @@
 
 PolymeshRepresentation::PolymeshRepresentation(
 	std::vector<Vertex> _vertices, std::vector<GLuint> _indices)
-	: vertices(_vertices), indices(_indices) {
+	: vertices(_vertices), indicesMesh(_indices) {
 
 	this->update();
 }
 
-std::vector<GLuint>& PolymeshRepresentation::getIndices() {
-	return this->indices;
+std::vector<GLuint>& PolymeshRepresentation::getIndicesMesh() {
+	return this->indicesMesh;
 }
 
 std::vector<Vertex>& PolymeshRepresentation::getVertices() {
@@ -25,12 +25,12 @@ std::vector<Face>& PolymeshRepresentation::getFaces() {
 }
 
 void PolymeshRepresentation::update() {
-	for (std::size_t i = 0; i < this->indices.size(); i += 3) {
-		Vertex& v1 = this->vertices[this->indices[i]];
-		Vertex& v2 = (i + 1) < this->indices.size() ?
-			this->vertices[this->indices[i + 1]] : this->vertices[this->indices[i]];
-		Vertex& v3 = (i + 2) < this->indices.size() ?
-			this->vertices[this->indices[i + 2]] : this->vertices[this->indices[i + 1]];
+	for (std::size_t i = 0; i < this->indicesMesh.size(); i += 3) {
+		Vertex& v1 = this->vertices[this->indicesMesh[i]];
+		Vertex& v2 = (i + 1) < this->indicesMesh.size() ?
+			this->vertices[this->indicesMesh[i + 1]] : this->vertices[this->indicesMesh[i]];
+		Vertex& v3 = (i + 2) < this->indicesMesh.size() ?
+			this->vertices[this->indicesMesh[i + 2]] : this->vertices[this->indicesMesh[i + 1]];
 
 		// list unique faces
 		Face face { v1, v2, v3 };
