@@ -118,6 +118,12 @@
     <ClCompile Include="PolymeshRepresentation.cpp">
       <Filter>Sources\Object</Filter>
     </ClCompile>
+    <ClCompile Include="MeshBase.cpp">
+      <Filter>Sources\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshElement.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -239,6 +245,12 @@
     </ClInclude>
     <ClInclude Include="PolymeshRepresentation.h">
       <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshBase.h">
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshElement.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
