@@ -109,8 +109,8 @@ void SelectionSwitcher::mouseActionInput(int button, int action, int mods) {
 }
 
 void SelectionSwitcher::init() {
-	for (auto& sel : this->selections) {
-		sel.second->init();
+	for (auto& selection : this->selections) {
+		selection.second->init();
 	}
 }
 
