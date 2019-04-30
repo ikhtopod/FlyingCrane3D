@@ -81,7 +81,7 @@ void Mesh::init() {
 	glBufferData(GL_ARRAY_BUFFER, this->polymesh.getVertices().size() * sizeof(Vertex), &(this->polymesh.getVertices())[0], GL_STREAM_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->polymesh.getIndices().size() * sizeof(GLuint), &(this->polymesh.getIndices())[0], GL_STREAM_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->polymesh.getIndicesMesh().size() * sizeof(GLuint), &(this->polymesh.getIndicesMesh())[0], GL_STREAM_DRAW);
 
 	// vertex positions
 	glEnableVertexAttribArray(Mesh::AttribIndex::POSITION);
@@ -102,7 +102,7 @@ void Mesh::draw() {
 	this->shader.draw();
 
 	glBindVertexArray(this->vao);
-	glDrawElements(this->type, this->polymesh.getIndices().size(), GL_UNSIGNED_INT, (void*)0);
+	glDrawElements(this->type, this->polymesh.getIndicesMesh().size(), GL_UNSIGNED_INT, (void*)0);
 	glBindVertexArray(0); // unbind
 }
 

@@ -22,14 +22,14 @@ GridObject::GridObject(_uint _width, _uint _height)
 
 
 	std::vector<Vertex> verticesX = {
-		glm::vec3 { halfWidth + 1.0f, 0.0f, 0.0f },
-		glm::vec3 { -halfWidth, 0.0f, 0.0f },
+		{ glm::vec3 { halfWidth + 1.0f, 0.0f, 0.0f }, 0 },
+		{ glm::vec3 { -halfWidth, 0.0f, 0.0f }, 1 },
 	};
 	std::vector<GLuint> indicesX = { 0, 1 };
 
 	std::vector<Vertex> verticesZ = {
-		glm::vec3 { 0.0f, 0.0f, halfHeight + 1.0f },
-		glm::vec3 { 0.0f, 0.0f, -halfHeight },
+		{ glm::vec3 { 0.0f, 0.0f, halfHeight + 1.0f }, 0 },
+		{ glm::vec3 { 0.0f, 0.0f, -halfHeight }, 1 },
 	};
 	std::vector<GLuint> indicesZ = { 0, 1 };
 
@@ -50,8 +50,8 @@ GridObject::GridObject(_uint _width, _uint _height)
 			continue;
 		}
 
-		verticesGrid.push_back(point1);
-		verticesGrid.push_back(point2);
+		verticesGrid.push_back({ point1, stepIndices });
+		verticesGrid.push_back({ point2, stepIndices + 1 });
 
 		indicesGrid.push_back(stepIndices);
 		indicesGrid.push_back(stepIndices + 1);
@@ -68,8 +68,8 @@ GridObject::GridObject(_uint _width, _uint _height)
 			continue;
 		}
 
-		verticesGrid.push_back(point3);
-		verticesGrid.push_back(point4);
+		verticesGrid.push_back({ point3, stepIndices });
+		verticesGrid.push_back({ point4, stepIndices + 1 });
 
 		indicesGrid.push_back(stepIndices);
 		indicesGrid.push_back(stepIndices + 1);

@@ -8,7 +8,7 @@
 #include "SelectionFace.h"
 
 enum class SelectionMode {
-	POINT, EDGE, FACE,
+	VERTEX, EDGE, FACE,
 	OBJECT
 };
 

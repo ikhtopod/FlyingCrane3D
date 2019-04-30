@@ -5,7 +5,7 @@ const SelectionMode SelectionSwitcher::DEFAULT_SELECTION_MODE = SelectionMode::O
 
 
 SelectionSwitcher::SelectionSwitcher() : selectionMode(DEFAULT_SELECTION_MODE) {
-	selections.insert({ SelectionMode::POINT, std::make_shared<SelectionPoint>() });
+	selections.insert({ SelectionMode::VERTEX, std::make_shared<SelectionPoint>() });
 	selections.insert({ SelectionMode::EDGE, std::make_shared<SelectionEdge>() });
 	selections.insert({ SelectionMode::FACE, std::make_shared<SelectionFace>() });
 	selections.insert({ SelectionMode::OBJECT, std::make_shared<SelectionObject>() });
@@ -51,7 +51,7 @@ void SelectionSwitcher::switchSelectionInput() {
 	GLFWwindow* window = Application::getInstancePtr()->getWindow().getWindowPtr();
 
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
-		this->setSelectionMode(SelectionMode::POINT);
+		this->setSelectionMode(SelectionMode::VERTEX);
 	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
 		this->setSelectionMode(SelectionMode::EDGE);
 	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
@@ -109,8 +109,8 @@ void SelectionSwitcher::mouseActionInput(int button, int action, int mods) {
 }
 
 void SelectionSwitcher::init() {
-	for (auto& sel : this->selections) {
-		sel.second->init();
+	for (auto& selection : this->selections) {
+		selection.second->init();
 	}
 }
 
