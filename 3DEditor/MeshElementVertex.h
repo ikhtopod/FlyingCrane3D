@@ -14,7 +14,6 @@ private:
 public:
 	MeshElementVertex() = delete;
 	MeshElementVertex(Vertex _vertex);
-	MeshElementVertex(Vertex _vertex, Shader _shader);
 	virtual ~MeshElementVertex() = default;
 
 	virtual void init() override;
