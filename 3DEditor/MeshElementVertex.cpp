@@ -2,6 +2,7 @@
 
 
 const GLenum MeshElementVertex::DEFAULT_MESH_TYPE = GL_POINTS;
+const GLfloat MeshElementVertex::DEFAULT_POINT_SIZE = 6;
 
 MeshElementVertex::MeshElementVertex(Vertex _vertex) :
 	MeshElementVertex(_vertex,
@@ -49,11 +50,11 @@ void MeshElementVertex::draw() {
 	this->shader.setParentTransform(this->getGlobalTransform());
 	this->shader.draw();
 
-	glPointSize(6);
+	glPointSize(DEFAULT_POINT_SIZE);
 	glBindVertexArray(this->vao);
 	glDrawElements(this->type, this->indices.size(), GL_UNSIGNED_INT, (void*)0);
 	glBindVertexArray(0); // unbind
-	glPointSize(1);
+	glPointSize(1.0f);
 }
 
 void MeshElementVertex::free() {

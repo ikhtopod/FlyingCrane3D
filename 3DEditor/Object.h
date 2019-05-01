@@ -50,8 +50,10 @@ public:
 	std::map<std::string, Object>& getChildrens();
 	void addChildren(std::string _name, Object& _object);
 
-	void drawMeshes();
 	void drawMeshVertices();
+
+	void drawElements();
+	void drawMeshes();
 	void drawChildrens();
 
 	virtual void init() override;

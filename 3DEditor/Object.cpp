@@ -100,14 +100,29 @@ void Object::drawMeshes() {
 }
 
 void Object::drawMeshVertices() {
-	if (!this->selectionInfo.canSelect) return;
-
 	for (auto&[key, value] : this->meshVertices) {
 		for (auto& mesh : value) {
 			mesh.setParentTransform(this->parentTransform + this->transform);
 			mesh.draw();
 		}//rof
 	}//rof
+}
+
+void Object::drawElements() {
+	if (!this->selectionInfo.canSelect) return;
+
+	SelectionMode sm = Application::getInstancePtr()->
+		getScene().getSelectionSwitcher().getSelectionMode();
+
+	switch (sm) {
+		case SelectionMode::VERTEX:
+			this->drawMeshVertices();
+			break;
+		case SelectionMode::EDGE:
+			break;
+		case SelectionMode::FACE:
+			break;
+	}
 }
 
 void Object::drawChildrens() {
@@ -131,19 +146,7 @@ void Object::init() {
 }
 
 void Object::draw() {
-	SelectionMode sm = Application::getInstancePtr()->
-		getScene().getSelectionSwitcher().getSelectionMode();
-
-	switch (sm) {
-		case SelectionMode::VERTEX:
-			this->drawMeshVertices();
-			break;
-		case SelectionMode::EDGE:
-			break;
-		case SelectionMode::FACE:
-			break;
-	}//hctiws
-
+	this->drawElements();
 	this->drawMeshes();
 	this->drawChildrens();
 }
