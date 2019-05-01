@@ -42,4 +42,6 @@ public:
 	void setType(GLenum _type);
 
 	void resetShaderToNative();
+
+	virtual void free() override;
 };
