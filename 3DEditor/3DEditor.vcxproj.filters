@@ -122,7 +122,10 @@
       <Filter>Sources\Object</Filter>
     </ClCompile>
     <ClCompile Include="MeshElement.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Sources\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshElementVertex.cpp">
+      <Filter>Sources\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -250,7 +253,10 @@
       <Filter>Headers\Object</Filter>
     </ClInclude>
     <ClInclude Include="MeshElement.h">
-      <Filter>Headers</Filter>
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshElementVertex.h">
+      <Filter>Headers\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -333,6 +339,12 @@
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="..\resources\shaders\Selection.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\resources\shaders\mesh-element-shader.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\resources\shaders\mesh-element-shader.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
   </ItemGroup>

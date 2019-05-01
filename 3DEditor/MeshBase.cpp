@@ -3,6 +3,9 @@
 const GLsizei MeshBase::BUFFER_SIZE = 1;
 
 
+MeshBase::MeshBase() :
+	type(GL_TRIANGLES), nativeShader(), shader(nativeShader) {}
+
 MeshBase::MeshBase(GLenum _type, Shader _shader) :
 	type(_type), nativeShader(_shader), shader(_shader) {}
 

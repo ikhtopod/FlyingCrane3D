@@ -24,9 +24,10 @@ protected:
 
 	GLenum type;
 
-public:
-	MeshBase() = delete;
+	MeshBase();
 	MeshBase(GLenum _type, Shader _shader);
+
+public:
 	virtual ~MeshBase() = default;
 
 	Transform& getTransform();
