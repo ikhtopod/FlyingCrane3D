@@ -50,7 +50,7 @@ void Mesh::init() {
 void Mesh::draw() {
 	this->shader.setParentTransform(this->getGlobalTransform());
 	this->shader.draw();
-	
+
 	glBindVertexArray(this->vao);
 	glDrawElements(this->type, this->polymesh.getIndicesMesh().size(),
 				   GL_UNSIGNED_INT, (void*)0);

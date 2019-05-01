@@ -30,9 +30,9 @@ protected:
 public:
 	virtual ~MeshBase() = default;
 
-	GLuint getVAO();
-	GLuint getVBO();
-	GLuint getEBO();
+	GLuint& getVAO();
+	GLuint& getVBO();
+	GLuint& getEBO();
 
 	Transform& getTransform();
 	Transform& getParentTransform();

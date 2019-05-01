@@ -14,15 +14,15 @@ Transform& MeshBase::getGlobalTransform() {
 	return this->globalTransform;
 }
 
-GLuint MeshBase::getVAO() {
+GLuint& MeshBase::getVAO() {
 	return this->vao;
 }
 
-GLuint MeshBase::getVBO() {
+GLuint& MeshBase::getVBO() {
 	return this->vbo;
 }
 
-GLuint MeshBase::getEBO() {
+GLuint& MeshBase::getEBO() {
 	return this->ebo;
 }
 

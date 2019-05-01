@@ -52,7 +52,7 @@ void Object::updateMeshVertices() {
 		this->meshVertices.insert({ meshName, std::vector<MeshElementVertex> {} });
 
 		for (Vertex& vertex : mesh.getPolymesh().getVertices()) {
-			MeshElementVertex mev { vertex, mesh.getVAO(), mesh.getVBO() };
+			MeshElementVertex mev { vertex };
 			this->meshVertices[meshName].push_back(mev);
 			this->meshVertices[meshName].back().init();
 		}//rof

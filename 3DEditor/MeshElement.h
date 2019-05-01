@@ -4,6 +4,7 @@
 
 class MeshElement : public MeshBase {
 protected:
+	std::vector<Vertex> vertices {};
 	std::vector<GLuint> indices {};
 
 protected:

@@ -9,12 +9,11 @@ private:
 
 private:
 	using FsPath = std::filesystem::path;
-	Vertex vertex;
 
 public:
 	MeshElementVertex() = delete;
-	MeshElementVertex(Vertex _vertex, GLuint _vao, GLuint _vbo);
-	MeshElementVertex(Vertex _vertex, GLuint _vao, GLuint _vbo, Shader _shader);
+	MeshElementVertex(Vertex _vertex);
+	MeshElementVertex(Vertex _vertex, Shader _shader);
 	virtual ~MeshElementVertex() = default;
 
 	virtual void init() override;
