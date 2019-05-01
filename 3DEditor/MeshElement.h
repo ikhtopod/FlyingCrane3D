@@ -18,4 +18,7 @@ public:
 	virtual ~MeshElement() = default;
 
 	bool isSelected = false;
+
+	virtual void init() override;
+	virtual void draw() override;
 };

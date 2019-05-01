@@ -15,8 +15,4 @@ public:
 	MeshElementVertex() = delete;
 	MeshElementVertex(Vertex _vertex);
 	virtual ~MeshElementVertex() = default;
-
-	virtual void init() override;
-	virtual void draw() override;
-	virtual void free() override;
 };

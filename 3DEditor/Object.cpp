@@ -100,12 +100,16 @@ void Object::drawMeshes() {
 }
 
 void Object::drawMeshVertices() {
+	glPointSize(6.0f);
+
 	for (auto&[key, value] : this->meshVertices) {
 		for (auto& mesh : value) {
 			mesh.setParentTransform(this->parentTransform + this->transform);
 			mesh.draw();
 		}//rof
 	}//rof
+	
+	glPointSize(1.0f);
 }
 
 void Object::drawElements() {
