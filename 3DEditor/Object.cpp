@@ -59,7 +59,7 @@ void Object::updateMeshVertices() {
 	}//rof
 }
 
-std::map<std::string, Mesh>& Object::getMeshes() {
+Object::UnorderedMapMesh& Object::getMeshes() {
 	return this->meshes;
 }
 
@@ -82,7 +82,7 @@ void Object::resetShadersAllMeshes() {
 	}//rof
 }
 
-std::map<std::string, Object>& Object::getChildrens() {
+Object::UnorderedMapObject& Object::getChildrens() {
 	return this->childrens;
 }
 

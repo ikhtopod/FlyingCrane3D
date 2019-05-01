@@ -7,6 +7,7 @@
 #include "Edge.h"
 #include "Face.h"
 #include "Mesh.h"
+#include "MeshElement.h"
 #include "MeshElementVertex.h"
 #include "Shader.h"
 
@@ -16,13 +17,31 @@ class MeshElementVertex;
 
 class Object : public ITriada {
 protected:
+	// явл€етс€ ли класс D подклассом класса B
+	template<class B, class D>
+	using IsBaseOf = std::enable_if_t<std::is_base_of_v<B, D>>;
+
+	// явл€етс€ ли класс D подклассом класса MeshElement
+	template<class D>
+	using IsBaseOfMeshElement = IsBaseOf<MeshElement, D>;
+
+	// ќтображение списка объектов, €вл€ющихс€ подклассами класса MeshElement
+	template<typename T, typename = IsBaseOfMeshElement<T>>
+	using MapMeshElements = std::unordered_map<std::string, std::vector<T>>;
+
+	template<class T>
+	using UnorderedMap = std::unordered_map<std::string, T>;
+	using UnorderedMapMesh = UnorderedMap<Mesh>;
+	using UnorderedMapObject = UnorderedMap<Object>;
+
+protected:
 	Transform transform {};
 	Transform parentTransform {};
 	Transform globalTransform {};
 
-	std::map<std::string, Mesh> meshes {};
-	std::map<std::string, std::vector<MeshElementVertex>> meshVertices {};
-	std::map<std::string, Object> childrens {};
+	MapMeshElements<MeshElementVertex> meshVertices {};
+	UnorderedMapMesh meshes {};
+	UnorderedMapObject childrens {};
 
 	SelectionInfo selectionInfo {};
 
@@ -40,14 +59,14 @@ public:
 	void setGlobalTransform(Transform _gTransform);
 	void setSelectionInfo(SelectionInfo _selectionInfo);
 
-	std::map<std::string, Mesh>& getMeshes();
+	UnorderedMapMesh& getMeshes();
 	void addMesh(std::string _name, Mesh& _mesh);
 	void setShadersAllMeshes(Shader& _shader);
 	void resetShadersAllMeshes();
 
 	void updateMeshVertices();
 
-	std::map<std::string, Object>& getChildrens();
+	UnorderedMapObject& getChildrens();
 	void addChildren(std::string _name, Object& _object);
 
 	void drawMeshVertices();
