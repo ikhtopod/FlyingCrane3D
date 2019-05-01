@@ -30,6 +30,10 @@ protected:
 public:
 	virtual ~MeshBase() = default;
 
+	GLuint getVAO();
+	GLuint getVBO();
+	GLuint getEBO();
+
 	Transform& getTransform();
 	Transform& getParentTransform();
 	Transform& getGlobalTransform();
@@ -43,6 +47,4 @@ public:
 	void setType(GLenum _type);
 
 	void resetShaderToNative();
-
-	virtual void free() override;
 };

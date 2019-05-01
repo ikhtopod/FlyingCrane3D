@@ -3,11 +3,16 @@
 #include "ITriada.h"
 #include "Transform.h"
 #include "SelectionInfo.h"
+#include "Vertex.h"
+#include "Edge.h"
+#include "Face.h"
 #include "Mesh.h"
+#include "MeshElementVertex.h"
 #include "Shader.h"
 
 
 class Mesh;
+class MeshElementVertex;
 
 class Object : public ITriada {
 protected:
@@ -16,6 +21,7 @@ protected:
 	Transform globalTransform {};
 
 	std::map<std::string, Mesh> meshes {};
+	std::map<std::string, std::vector<MeshElementVertex>> meshVertices {};
 	std::map<std::string, Object> childrens {};
 
 	SelectionInfo selectionInfo {};
@@ -39,10 +45,13 @@ public:
 	void setShadersAllMeshes(Shader& _shader);
 	void resetShadersAllMeshes();
 
+	void updateMeshVertices();
+
 	std::map<std::string, Object>& getChildrens();
 	void addChildren(std::string _name, Object& _object);
 
 	void drawMeshes();
+	void drawMeshVertices();
 	void drawChildrens();
 
 	virtual void init() override;

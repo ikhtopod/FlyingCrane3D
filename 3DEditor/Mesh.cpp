@@ -47,13 +47,20 @@ void Mesh::init() {
 	this->shader.init();
 }
 
-
 void Mesh::draw() {
 	this->shader.setParentTransform(this->getGlobalTransform());
 	this->shader.draw();
-
+	
 	glBindVertexArray(this->vao);
 	glDrawElements(this->type, this->polymesh.getIndicesMesh().size(),
 				   GL_UNSIGNED_INT, (void*)0);
 	glBindVertexArray(0); // unbind
+}
+
+void Mesh::free() {
+	glDeleteVertexArrays(BUFFER_SIZE, &this->vao);
+	glDeleteBuffers(BUFFER_SIZE, &this->vbo);
+	glDeleteBuffers(BUFFER_SIZE, &this->ebo);
+
+	this->shader.free();
 }

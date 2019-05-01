@@ -37,6 +37,28 @@ void Object::setSelectionInfo(SelectionInfo _selectionInfo) {
 }
 
 
+void Object::updateMeshVertices() {
+	for (auto&[key, value] : this->meshVertices) {
+		for (auto& mesh : value) {
+			mesh.free();
+		}//rof
+
+		value.clear();
+	}//rof
+
+	this->meshVertices.clear();
+
+	for (auto&[meshName, mesh] : this->meshes) {
+		this->meshVertices.insert({ meshName, std::vector<MeshElementVertex> {} });
+
+		for (Vertex& vertex : mesh.getPolymesh().getVertices()) {
+			MeshElementVertex mev { vertex, mesh.getVAO(), mesh.getVBO() };
+			this->meshVertices[meshName].push_back(mev);
+			this->meshVertices[meshName].back().init();
+		}//rof
+	}//rof
+}
+
 std::map<std::string, Mesh>& Object::getMeshes() {
 	return this->meshes;
 }
@@ -44,19 +66,20 @@ std::map<std::string, Mesh>& Object::getMeshes() {
 void Object::addMesh(std::string _name, Mesh& _mesh) {
 	if (this->meshes.empty() || (this->meshes.find(_name) == this->meshes.end())) {
 		this->meshes.insert({ _name, _mesh });
-	}
+		this->updateMeshVertices();
+	}//fi
 }
 
 void Object::setShadersAllMeshes(Shader& _shader) {
-	for (auto& mesh : this->meshes) {
-		mesh.second.setShader(_shader);
-	}
+	for (auto&[meshName, mesh] : this->meshes) {
+		mesh.setShader(_shader);
+	}//rof
 }
 
 void Object::resetShadersAllMeshes() {
-	for (auto& mesh : this->meshes) {
-		mesh.second.resetShaderToNative();
-	}
+	for (auto&[meshName, mesh] : this->meshes) {
+		mesh.resetShaderToNative();
+	}//rof
 }
 
 std::map<std::string, Object>& Object::getChildrens() {
@@ -66,37 +89,73 @@ std::map<std::string, Object>& Object::getChildrens() {
 void Object::addChildren(std::string _name, Object& _object) {
 	if (this->childrens.empty() || (this->childrens.find(_name) == this->childrens.end())) {
 		this->childrens.insert({ _name, _object });
-	}
+	}//fi
 }
 
 void Object::drawMeshes() {
-	for (auto& mesh : this->meshes) {
-		mesh.second.setParentTransform(this->parentTransform + this->transform);
-		mesh.second.draw();
-	}
+	for (auto&[meshName, mesh] : this->meshes) {
+		mesh.setParentTransform(this->parentTransform + this->transform);
+		mesh.draw();
+	}//rof
+}
+
+void Object::drawMeshVertices() {
+	if (!this->selectionInfo.canSelect) return;
+
+	for (auto&[key, value] : this->meshVertices) {
+		for (auto& mesh : value) {
+			mesh.setParentTransform(this->parentTransform + this->transform);
+			mesh.draw();
+		}//rof
+	}//rof
 }
 
 void Object::drawChildrens() {
 	for (auto& children : this->childrens) {
 		children.second.setParentTransform(this->parentTransform + this->transform);
 		children.second.draw();
-	}
+	}//rof
 }
 
 
 void Object::init() {
-	for (auto& mesh : this->meshes) {
-		mesh.second.init();
-	}
+	for (auto&[meshName, mesh] : this->meshes) {
+		mesh.init();
+	}//rof
+
+	for (auto&[key, value] : this->meshVertices) {
+		for (auto& mesh : value) {
+			mesh.init();
+		}//rof
+	}//rof
 }
 
 void Object::draw() {
+	SelectionMode sm = Application::getInstancePtr()->
+		getScene().getSelectionSwitcher().getSelectionMode();
+
+	switch (sm) {
+		case SelectionMode::VERTEX:
+			this->drawMeshVertices();
+			break;
+		case SelectionMode::EDGE:
+			break;
+		case SelectionMode::FACE:
+			break;
+	}//hctiws
+
 	this->drawMeshes();
 	this->drawChildrens();
 }
 
 void Object::free() {
-	for (auto& mesh : this->meshes) {
-		mesh.second.free();
-	}
+	for (auto&[meshName, mesh] : this->meshes) {
+		mesh.free();
+	}//rof
+
+	for (auto&[key, value] : this->meshVertices) {
+		for (auto& mesh : value) {
+			mesh.free();
+		}//rof
+	}//rof
 }

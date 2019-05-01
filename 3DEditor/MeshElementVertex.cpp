@@ -3,38 +3,36 @@
 
 const GLenum MeshElementVertex::DEFAULT_MESH_TYPE = GL_POINTS;
 
-MeshElementVertex::MeshElementVertex(Vertex _vertex) :
-	MeshElementVertex(_vertex,
+MeshElementVertex::MeshElementVertex(Vertex _vertex, GLuint _vao, GLuint _vbo) :
+	MeshElementVertex(_vertex, _vao, _vbo,
 					  Shader {
 						  R"(..\resources\shaders\mesh-element-shader.vs)",
 						  R"(..\resources\shaders\mesh-element-shader.fs)"
 					  }
 	) {}
 
-MeshElementVertex::MeshElementVertex(Vertex _vertex, Shader _shader) :
+MeshElementVertex::MeshElementVertex(Vertex _vertex, GLuint _vao, GLuint _vbo, Shader _shader) :
 	MeshElement(DEFAULT_MESH_TYPE, _shader), vertex(_vertex) {
 
-	this->count_vertices = 1;
+	this->vao = _vao;
+	this->vbo = _vbo;
+	this->indices.push_back(vertex.index);
 }
 
 
 void MeshElementVertex::init() {
-	glGenVertexArrays(BUFFER_SIZE, &this->vao);
-	glGenBuffers(BUFFER_SIZE, &this->vbo);
 	glGenBuffers(BUFFER_SIZE, &this->ebo);
 
 	glBindVertexArray(this->vao);
-
 	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-	glBufferData(GL_ARRAY_BUFFER, this->count_vertices * sizeof(Vertex), &vertex, GL_STREAM_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->count_vertices * sizeof(GLuint),
-				 &vertex.index, GL_STREAM_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint),
+				 &(this->indices)[0], GL_STREAM_DRAW);
 
 	// vertex positions
 	glEnableVertexAttribArray(MeshBase::AttribIndex::POSITION);
-	glVertexAttribPointer(MeshBase::AttribIndex::POSITION, this->count_vertices,
+	glVertexAttribPointer(MeshBase::AttribIndex::POSITION, 3,
 						  GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 
 	glBindVertexArray(0); // unbind
@@ -48,6 +46,12 @@ void MeshElementVertex::draw() {
 	this->shader.draw();
 
 	glBindVertexArray(this->vao);
-	glDrawElements(this->type, this->count_vertices, GL_UNSIGNED_INT, (void*)0);
+	glDrawElements(this->type, this->indices.size(), GL_UNSIGNED_INT, (void*)0);
 	glBindVertexArray(0); // unbind
+}
+
+void MeshElementVertex::free() {
+	glDeleteBuffers(BUFFER_SIZE, &this->ebo);
+
+	this->shader.free();
 }

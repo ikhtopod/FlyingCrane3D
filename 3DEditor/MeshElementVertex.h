@@ -13,10 +13,11 @@ private:
 
 public:
 	MeshElementVertex() = delete;
-	MeshElementVertex(Vertex _vertex);
-	MeshElementVertex(Vertex _vertex, Shader _shader);
+	MeshElementVertex(Vertex _vertex, GLuint _vao, GLuint _vbo);
+	MeshElementVertex(Vertex _vertex, GLuint _vao, GLuint _vbo, Shader _shader);
 	virtual ~MeshElementVertex() = default;
 
 	virtual void init() override;
 	virtual void draw() override;
+	virtual void free() override;
 };

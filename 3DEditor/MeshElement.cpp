@@ -2,4 +2,4 @@
 
 
 MeshElement::MeshElement(GLenum _type, Shader _shader) :
-	MeshBase(_type, _shader), count_vertices(0) {}
+	MeshBase(_type, _shader) {}

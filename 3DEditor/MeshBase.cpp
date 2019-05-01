@@ -14,6 +14,18 @@ Transform& MeshBase::getGlobalTransform() {
 	return this->globalTransform;
 }
 
+GLuint MeshBase::getVAO() {
+	return this->vao;
+}
+
+GLuint MeshBase::getVBO() {
+	return this->vbo;
+}
+
+GLuint MeshBase::getEBO() {
+	return this->ebo;
+}
+
 Transform& MeshBase::getTransform() {
 	return this->transform;
 }
@@ -56,13 +68,4 @@ void MeshBase::setType(GLenum _type) {
 
 void MeshBase::resetShaderToNative() {
 	this->setShader(this->nativeShader);
-}
-
-
-void MeshBase::free() {
-	glDeleteVertexArrays(BUFFER_SIZE, &this->vao);
-	glDeleteBuffers(BUFFER_SIZE, &this->vbo);
-	glDeleteBuffers(BUFFER_SIZE, &this->ebo);
-
-	this->shader.free();
 }
