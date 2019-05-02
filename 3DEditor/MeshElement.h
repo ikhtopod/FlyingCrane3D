@@ -15,9 +15,10 @@ protected:
 	std::vector<GLuint> indices {};
 
 public:
-	virtual ~MeshElement() = default;
-
 	bool isSelected = false;
+
+public:
+	virtual ~MeshElement() = default;
 
 	virtual void init() override;
 	virtual void draw() override;
