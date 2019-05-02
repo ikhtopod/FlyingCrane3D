@@ -81,6 +81,7 @@
 #include "MeshElement.h"
 #include "MeshElementVertex.h"
 #include "MeshElementEdge.h"
+#include "MeshElementFace.h"
 #include "Object.h"
 #include "GridObject.h"
 #include "Axis.h"

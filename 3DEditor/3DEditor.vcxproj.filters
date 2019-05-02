@@ -28,16 +28,10 @@
     <ClCompile Include="Util.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Sources\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Sources\Object</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>Sources\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Vertex.cpp">
       <Filter>Sources\Object</Filter>
     </ClCompile>
     <ClCompile Include="GridObject.cpp">
@@ -109,26 +103,35 @@
     <ClCompile Include="Projection.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Edge.cpp">
-      <Filter>Sources\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Face.cpp">
-      <Filter>Sources\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="PolymeshRepresentation.cpp">
-      <Filter>Sources\Object</Filter>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Sources\Object\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="MeshBase.cpp">
-      <Filter>Sources\Object</Filter>
+      <Filter>Sources\Object\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="MeshElement.cpp">
-      <Filter>Sources\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshElementVertex.cpp">
-      <Filter>Sources\Object</Filter>
+      <Filter>Sources\Object\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="MeshElementEdge.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Sources\Object\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshElementFace.cpp">
+      <Filter>Sources\Object\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshElementVertex.cpp">
+      <Filter>Sources\Object\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Edge.cpp">
+      <Filter>Sources\Object\Representation</Filter>
+    </ClCompile>
+    <ClCompile Include="Face.cpp">
+      <Filter>Sources\Object\Representation</Filter>
+    </ClCompile>
+    <ClCompile Include="PolymeshRepresentation.cpp">
+      <Filter>Sources\Object\Representation</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Sources\Object\Representation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,16 +156,10 @@
     <ClInclude Include="Util.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Headers\Object</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
       <Filter>Headers\Object</Filter>
     </ClInclude>
     <ClInclude Include="GridObject.h">
@@ -243,26 +240,35 @@
     <ClInclude Include="Projection.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Edge.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Face.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="PolymeshRepresentation.h">
-      <Filter>Headers\Object</Filter>
+    <ClInclude Include="Mesh.h">
+      <Filter>Headers\Object\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="MeshBase.h">
-      <Filter>Headers\Object</Filter>
+      <Filter>Headers\Object\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="MeshElement.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshElementVertex.h">
-      <Filter>Headers\Object</Filter>
+      <Filter>Headers\Object\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="MeshElementEdge.h">
-      <Filter>Headers</Filter>
+      <Filter>Headers\Object\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshElementFace.h">
+      <Filter>Headers\Object\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshElementVertex.h">
+      <Filter>Headers\Object\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Edge.h">
+      <Filter>Headers\Object\Representation</Filter>
+    </ClInclude>
+    <ClInclude Include="Face.h">
+      <Filter>Headers\Object\Representation</Filter>
+    </ClInclude>
+    <ClInclude Include="PolymeshRepresentation.h">
+      <Filter>Headers\Object\Representation</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Headers\Object\Representation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +320,18 @@
     </Filter>
     <Filter Include="Sources\Selection">
       <UniqueIdentifier>{436628c7-8b72-4fe5-8259-f57977ee2333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Object\Mesh">
+      <UniqueIdentifier>{e98bdc8f-6d12-481c-8f3a-8b01a893486f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Object\Mesh">
+      <UniqueIdentifier>{5f4de296-cab1-42f8-99bd-7a91a6ae7d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Object\Representation">
+      <UniqueIdentifier>{4082f283-8bb6-4dcb-ad6c-2abc3006b31b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Object\Representation">
+      <UniqueIdentifier>{50dbb87f-53aa-4301-b7db-d88aaed45487}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -81,9 +81,32 @@ void Object::updateMeshEdges() {
 	}//rof
 }
 
+void Object::updateMeshFaces() {
+	for (auto&[key, value] : this->meshFaces) {
+		for (auto& mesh : value) {
+			mesh.free();
+		}//rof
+
+		value.clear();
+	}//rof
+
+	this->meshFaces.clear();
+
+	for (auto&[meshName, mesh] : this->meshes) {
+		this->meshFaces.insert({ meshName, std::vector<MeshElementFace> {} });
+
+		for (Face& face : mesh.getPolymesh().getFaces()) {
+			MeshElementFace me { face };
+			this->meshFaces[meshName].push_back(me);
+			this->meshFaces[meshName].back().init();
+		}//rof
+	}//rof
+}
+
 void Object::updateMeshElements() {
 	this->updateMeshVertices();
 	this->updateMeshEdges();
+	this->updateMeshFaces();
 }
 
 
@@ -147,6 +170,15 @@ void Object::drawMeshEdges() {
 	glLineWidth(1.0f);
 }
 
+void Object::drawMeshFaces() {
+	for (auto&[key, value] : this->meshFaces) {
+		for (MeshElementFace& mesh : value) {
+			mesh.setParentTransform(this->parentTransform + this->transform);
+			mesh.draw();
+		}//rof
+	}//rof
+}
+
 void Object::drawElements() {
 	if (!this->selectionInfo.canSelect) return;
 
@@ -161,6 +193,7 @@ void Object::drawElements() {
 			this->drawMeshEdges();
 			break;
 		case SelectionMode::FACE:
+			this->drawMeshFaces();
 			break;
 	}
 }

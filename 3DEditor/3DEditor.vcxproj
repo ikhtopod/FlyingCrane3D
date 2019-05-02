@@ -206,6 +206,7 @@
     <ClCompile Include="MeshBase.cpp" />
     <ClCompile Include="MeshElement.cpp" />
     <ClCompile Include="MeshElementEdge.cpp" />
+    <ClCompile Include="MeshElementFace.cpp" />
     <ClCompile Include="MeshElementVertex.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -252,6 +253,7 @@
     <ClInclude Include="MeshBase.h" />
     <ClInclude Include="MeshElement.h" />
     <ClInclude Include="MeshElementEdge.h" />
+    <ClInclude Include="MeshElementFace.h" />
     <ClInclude Include="MeshElementVertex.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />

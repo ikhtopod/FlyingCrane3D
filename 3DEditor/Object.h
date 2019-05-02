@@ -10,12 +10,14 @@
 #include "MeshElement.h"
 #include "MeshElementVertex.h"
 #include "MeshElementEdge.h"
+#include "MeshElementFace.h"
 #include "Shader.h"
 
 
 class Mesh;
 class MeshElementVertex;
 class MeshElementEdge;
+class MeshElementFace;
 
 class Object : public ITriada {
 protected:
@@ -43,6 +45,7 @@ protected:
 
 	UMapMeshElements<MeshElementVertex> meshVertices {};
 	UMapMeshElements<MeshElementEdge> meshEdges {};
+	UMapMeshElements<MeshElementFace> meshFaces {};
 	UMapMesh meshes {};
 	UMapObject childrens {};
 
@@ -69,6 +72,7 @@ public:
 
 	void updateMeshVertices();
 	void updateMeshEdges();
+	void updateMeshFaces();
 
 	void updateMeshElements();
 
@@ -77,6 +81,7 @@ public:
 
 	void drawMeshVertices();
 	void drawMeshEdges();
+	void drawMeshFaces();
 
 	void drawElements();
 	void drawMeshes();
