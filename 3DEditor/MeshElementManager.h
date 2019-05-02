@@ -48,16 +48,16 @@ public:
 private:
 	void updateSelectionMode();
 
-	void updateMeshVertices();
-	void updateMeshEdges();
-	void updateMeshFaces();
+	void updateVertices();
+	void updateEdges();
+	void updateFaces();
 
-	void drawMeshVertices();
-	void drawMeshEdges();
-	void drawMeshFaces();
+	void drawVertices();
+	void drawEdges();
+	void drawFaces();
 
 public:
-	void updateMeshElements(UMapMesh* _meshes);
+	void update(UMapMesh* _meshes);
 
 	Transform& getTransform();
 	void setTransform(Transform _transform);

@@ -44,7 +44,7 @@ Object::UMapMesh& Object::getMeshes() {
 void Object::addMesh(std::string _name, Mesh& _mesh) {
 	if (this->meshes.empty() || (this->meshes.find(_name) == this->meshes.end())) {
 		this->meshes.insert({ _name, _mesh });
-		this->mem.updateMeshElements(&this->meshes);
+		this->mem.update(&this->meshes);
 	}//fi
 }
 

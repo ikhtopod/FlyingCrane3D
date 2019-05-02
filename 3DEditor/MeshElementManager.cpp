@@ -6,7 +6,7 @@ void MeshElementManager::updateSelectionMode() {
 		getScene().getSelectionSwitcher().getSelectionMode();
 }
 
-void MeshElementManager::updateMeshVertices() {
+void MeshElementManager::updateVertices() {
 	for (auto&[key, value] : this->vertices) {
 		for (auto& mesh : value) {
 			mesh.free();
@@ -30,7 +30,7 @@ void MeshElementManager::updateMeshVertices() {
 	}//rof
 }
 
-void MeshElementManager::updateMeshEdges() {
+void MeshElementManager::updateEdges() {
 	for (auto&[key, value] : this->edges) {
 		for (auto& mesh : value) {
 			mesh.free();
@@ -54,7 +54,7 @@ void MeshElementManager::updateMeshEdges() {
 	}//rof
 }
 
-void MeshElementManager::updateMeshFaces() {
+void MeshElementManager::updateFaces() {
 	for (auto&[key, value] : this->faces) {
 		for (auto& mesh : value) {
 			mesh.free();
@@ -78,7 +78,7 @@ void MeshElementManager::updateMeshFaces() {
 	}//rof
 }
 
-void MeshElementManager::drawMeshVertices() {
+void MeshElementManager::drawVertices() {
 	for (auto&[key, value] : this->vertices) {
 		for (MeshElementVertex& mesh : value) {
 			mesh.setParentTransform(this->transform);
@@ -87,7 +87,7 @@ void MeshElementManager::drawMeshVertices() {
 	}//rof
 }
 
-void MeshElementManager::drawMeshEdges() {
+void MeshElementManager::drawEdges() {
 	for (auto&[key, value] : this->edges) {
 		for (MeshElementEdge& mesh : value) {
 			mesh.setParentTransform(this->transform);
@@ -96,7 +96,7 @@ void MeshElementManager::drawMeshEdges() {
 	}//rof
 }
 
-void MeshElementManager::drawMeshFaces() {
+void MeshElementManager::drawFaces() {
 	for (auto&[key, value] : this->faces) {
 		for (MeshElementFace& mesh : value) {
 			mesh.setParentTransform(this->transform);
@@ -107,12 +107,12 @@ void MeshElementManager::drawMeshFaces() {
 
 
 
-void MeshElementManager::updateMeshElements(UMapMesh* _meshes) {
+void MeshElementManager::update(UMapMesh* _meshes) {
 	this->meshes = _meshes;
 
-	this->updateMeshVertices();
-	this->updateMeshEdges();
-	this->updateMeshFaces();
+	this->updateVertices();
+	this->updateEdges();
+	this->updateFaces();
 }
 
 
@@ -150,15 +150,15 @@ void MeshElementManager::draw() {
 
 	switch (this->currentSelectionMode) {
 		case SelectionMode::VERTEX:
-			this->drawMeshVertices();
+			this->drawVertices();
 			break;
 		case SelectionMode::EDGE:
 			glLineWidth(2.0f);
-			this->drawMeshEdges();
+			this->drawEdges();
 			glLineWidth(1.0f);
 			break;
 		case SelectionMode::FACE:
-			this->drawMeshFaces();
+			this->drawFaces();
 			break;
 	}
 }
