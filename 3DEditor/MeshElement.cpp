@@ -44,6 +44,10 @@ void MeshElement::init() {
 
 	this->shader.init();
 	this->shader.resetLambdaDraw();
+
+	this->shader.setLambdaDraw([this](Shader* _this) {
+		_this->setBool("isSelected", this->isSelected);
+	});
 }
 
 void MeshElement::draw() {

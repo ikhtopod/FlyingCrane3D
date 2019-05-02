@@ -117,7 +117,7 @@ void Application::draw() {
 	this->currentMode = TriadaMode::DRAW;
 
 	glEnable(GL_MULTISAMPLE);
-
+	glEnable(GL_PROGRAM_POINT_SIZE);
 	glEnable(GL_DEPTH_TEST);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 

@@ -1,7 +1,10 @@
 #version 330 core
 
-layout (location = 0) out vec4 FragColor;
+const vec4 MAIN_COLOR = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+const vec4 SELECT_COLOR = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+uniform bool isSelected;
 
 void main() {
-    FragColor = vec4(0.0f, 1.0f, 0.0f, 1.0f);
+	gl_FragColor = isSelected ? SELECT_COLOR : MAIN_COLOR;
 }
