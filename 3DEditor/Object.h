@@ -27,21 +27,21 @@ protected:
 
 	// ќтображение списка объектов, €вл€ющихс€ подклассами класса MeshElement
 	template<typename T, typename = IsBaseOfMeshElement<T>>
-	using MapMeshElements = std::unordered_map<std::string, std::vector<T>>;
+	using UMapMeshElements = std::unordered_map<std::string, std::vector<T>>;
 
 	template<class T>
-	using UnorderedMap = std::unordered_map<std::string, T>;
-	using UnorderedMapMesh = UnorderedMap<Mesh>;
-	using UnorderedMapObject = UnorderedMap<Object>;
+	using UMap = std::unordered_map<std::string, T>;
+	using UMapMesh = UMap<Mesh>;
+	using UMapObject = UMap<Object>;
 
 protected:
 	Transform transform {};
 	Transform parentTransform {};
 	Transform globalTransform {};
 
-	MapMeshElements<MeshElementVertex> meshVertices {};
-	UnorderedMapMesh meshes {};
-	UnorderedMapObject childrens {};
+	UMapMeshElements<MeshElementVertex> meshVertices {};
+	UMapMesh meshes {};
+	UMapObject childrens {};
 
 	SelectionInfo selectionInfo {};
 
@@ -59,14 +59,14 @@ public:
 	void setGlobalTransform(Transform _gTransform);
 	void setSelectionInfo(SelectionInfo _selectionInfo);
 
-	UnorderedMapMesh& getMeshes();
+	UMapMesh& getMeshes();
 	void addMesh(std::string _name, Mesh& _mesh);
 	void setShadersAllMeshes(Shader& _shader);
 	void resetShadersAllMeshes();
 
 	void updateMeshVertices();
 
-	UnorderedMapObject& getChildrens();
+	UMapObject& getChildrens();
 	void addChildren(std::string _name, Object& _object);
 
 	void drawMeshVertices();

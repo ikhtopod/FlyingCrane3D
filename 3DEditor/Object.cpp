@@ -59,7 +59,7 @@ void Object::updateMeshVertices() {
 	}//rof
 }
 
-Object::UnorderedMapMesh& Object::getMeshes() {
+Object::UMapMesh& Object::getMeshes() {
 	return this->meshes;
 }
 
@@ -82,7 +82,7 @@ void Object::resetShadersAllMeshes() {
 	}//rof
 }
 
-Object::UnorderedMapObject& Object::getChildrens() {
+Object::UMapObject& Object::getChildrens() {
 	return this->childrens;
 }
 
