@@ -6,8 +6,10 @@ void MeshElementManager::updateSelectionMode() {
 		getScene().getSelectionSwitcher().getSelectionMode();
 }
 
-void MeshElementManager::updateVertices() {
-	for (auto&[key, value] : this->vertices) {
+
+template<typename T>
+void MeshElementManager::cleaner(T* data) {
+	for (auto&[key, value] : *data) {
 		for (auto& mesh : value) {
 			mesh.free();
 		}//rof
@@ -15,9 +17,40 @@ void MeshElementManager::updateVertices() {
 		value.clear();
 	}//rof
 
-	this->vertices.clear();
+	data->clear();
+}
 
-	if (this->meshes == nullptr) return;
+template<typename T>
+void MeshElementManager::initializer(T* data) {
+	for (auto&[key, value] : *data) {
+		for (auto& mesh : value) {
+			mesh.init();
+		}//rof
+	}//rof
+}
+
+template<typename T>
+void MeshElementManager::painter(T* data, Transform _transform) {
+	for (auto&[key, value] : *data) {
+		for (auto& mesh : value) {
+			mesh.setParentTransform(_transform);
+			mesh.draw();
+		}//rof
+	}//rof
+}
+
+template<typename T>
+void MeshElementManager::liberator(T* data) {
+	for (auto&[key, value] : *data) {
+		for (auto& mesh : value) {
+			mesh.free();
+		}//rof
+	}//rof
+}
+
+
+void MeshElementManager::updateVertices() {
+	cleaner<decltype(this->vertices)>(&this->vertices);
 
 	for (auto&[meshName, mesh] : *this->meshes) {
 		this->vertices.insert({ meshName, std::vector<MeshElementVertex> {} });
@@ -31,17 +64,7 @@ void MeshElementManager::updateVertices() {
 }
 
 void MeshElementManager::updateEdges() {
-	for (auto&[key, value] : this->edges) {
-		for (auto& mesh : value) {
-			mesh.free();
-		}//rof
-
-		value.clear();
-	}//rof
-
-	this->edges.clear();
-
-	if (this->meshes == nullptr) return;
+	cleaner<decltype(this->edges)>(&this->edges);
 
 	for (auto&[meshName, mesh] : *this->meshes) {
 		this->edges.insert({ meshName, std::vector<MeshElementEdge> {} });
@@ -55,17 +78,7 @@ void MeshElementManager::updateEdges() {
 }
 
 void MeshElementManager::updateFaces() {
-	for (auto&[key, value] : this->faces) {
-		for (auto& mesh : value) {
-			mesh.free();
-		}//rof
-
-		value.clear();
-	}//rof
-
-	this->faces.clear();
-
-	if (this->meshes == nullptr) return;
+	cleaner<decltype(this->faces)>(&this->faces);
 
 	for (auto&[meshName, mesh] : *this->meshes) {
 		this->faces.insert({ meshName, std::vector<MeshElementFace> {} });
@@ -78,36 +91,10 @@ void MeshElementManager::updateFaces() {
 	}//rof
 }
 
-void MeshElementManager::drawVertices() {
-	for (auto&[key, value] : this->vertices) {
-		for (MeshElementVertex& mesh : value) {
-			mesh.setParentTransform(this->transform);
-			mesh.draw();
-		}//rof
-	}//rof
-}
-
-void MeshElementManager::drawEdges() {
-	for (auto&[key, value] : this->edges) {
-		for (MeshElementEdge& mesh : value) {
-			mesh.setParentTransform(this->transform);
-			mesh.draw();
-		}//rof
-	}//rof
-}
-
-void MeshElementManager::drawFaces() {
-	for (auto&[key, value] : this->faces) {
-		for (MeshElementFace& mesh : value) {
-			mesh.setParentTransform(this->transform);
-			mesh.draw();
-		}//rof
-	}//rof
-}
-
-
 
 void MeshElementManager::update(UMapMesh* _meshes) {
+	if (_meshes == nullptr) return;
+
 	this->meshes = _meshes;
 
 	this->updateVertices();
@@ -126,23 +113,9 @@ void MeshElementManager::setTransform(Transform _transform) {
 
 
 void MeshElementManager::init() {
-	for (auto&[key, value] : this->vertices) {
-		for (auto& mesh : value) {
-			mesh.init();
-		}//rof
-	}//rof
-
-	for (auto&[key, value] : this->edges) {
-		for (auto& mesh : value) {
-			mesh.init();
-		}//rof
-	}//rof
-
-	for (auto&[key, value] : this->faces) {
-		for (auto& mesh : value) {
-			mesh.init();
-		}//rof
-	}//rof
+	initializer<decltype(this->vertices)>(&this->vertices);
+	initializer<decltype(this->edges)>(&this->edges);
+	initializer<decltype(this->faces)>(&this->faces);
 }
 
 void MeshElementManager::draw() {
@@ -150,37 +123,23 @@ void MeshElementManager::draw() {
 
 	switch (this->currentSelectionMode) {
 		case SelectionMode::VERTEX:
-			this->drawVertices();
+			painter<decltype(this->vertices)>(&this->vertices, this->transform);
 			break;
 		case SelectionMode::EDGE:
 			glLineWidth(2.0f);
-			this->drawEdges();
+			painter<decltype(this->edges)>(&this->edges, this->transform);
 			glLineWidth(1.0f);
 			break;
 		case SelectionMode::FACE:
-			this->drawFaces();
+			painter<decltype(this->faces)>(&this->faces, this->transform);
 			break;
 	}
 }
 
 void MeshElementManager::free() {
-	for (auto&[key, value] : this->vertices) {
-		for (auto& mesh : value) {
-			mesh.free();
-		}//rof
-	}//rof
-
-	for (auto&[key, value] : this->edges) {
-		for (auto& mesh : value) {
-			mesh.free();
-		}//rof
-	}//rof
-
-	for (auto&[key, value] : this->faces) {
-		for (auto& mesh : value) {
-			mesh.free();
-		}//rof
-	}//rof
+	liberator<decltype(this->vertices)>(&this->vertices);
+	liberator<decltype(this->edges)>(&this->edges);
+	liberator<decltype(this->faces)>(&this->faces);
 }
 
 

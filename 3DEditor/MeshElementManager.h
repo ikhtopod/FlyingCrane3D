@@ -46,15 +46,24 @@ public:
 	~MeshElementManager() = default;
 
 private:
+	template<typename T>
+	static void cleaner(T* data);
+
+	template<typename T>
+	static void initializer(T* data);
+
+	template<typename T>
+	static void painter(T* data, Transform _transform);
+
+	template<typename T>
+	static void liberator(T* data);
+
+private:
 	void updateSelectionMode();
 
 	void updateVertices();
 	void updateEdges();
 	void updateFaces();
-
-	void drawVertices();
-	void drawEdges();
-	void drawFaces();
 
 public:
 	void update(UMapMesh* _meshes);
