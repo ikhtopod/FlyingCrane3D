@@ -133,6 +133,9 @@
     <ClCompile Include="Vertex.cpp">
       <Filter>Sources\Object\Representation</Filter>
     </ClCompile>
+    <ClCompile Include="MeshElementManager.cpp">
+      <Filter>Sources\Object\Mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -269,6 +272,9 @@
     </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Headers\Object\Representation</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshElementManager.h">
+      <Filter>Headers\Object\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,36 +3,18 @@
 #include "ITriada.h"
 #include "Transform.h"
 #include "SelectionInfo.h"
-#include "Vertex.h"
-#include "Edge.h"
-#include "Face.h"
 #include "Mesh.h"
-#include "MeshElement.h"
-#include "MeshElementVertex.h"
-#include "MeshElementEdge.h"
-#include "MeshElementFace.h"
+#include "MeshElementManager.h"
 #include "Shader.h"
 
 
 class Mesh;
-class MeshElementVertex;
-class MeshElementEdge;
-class MeshElementFace;
+//class MeshElementVertex;
+//class MeshElementEdge;
+//class MeshElementFace;
 
 class Object : public ITriada {
 protected:
-	// явл€етс€ ли класс D подклассом класса B
-	template<class B, class D>
-	using IsBaseOf = std::enable_if_t<std::is_base_of_v<B, D>>;
-
-	// явл€етс€ ли класс D подклассом класса MeshElement
-	template<class D>
-	using IsBaseOfMeshElement = IsBaseOf<MeshElement, D>;
-
-	// ќтображение списка объектов, €вл€ющихс€ подклассами класса MeshElement
-	template<typename T, typename = IsBaseOfMeshElement<T>>
-	using UMapMeshElements = std::unordered_map<std::string, std::vector<T>>;
-
 	template<class T>
 	using UMap = std::unordered_map<std::string, T>;
 	using UMapMesh = UMap<Mesh>;
@@ -43,9 +25,8 @@ protected:
 	Transform parentTransform {};
 	Transform globalTransform {};
 
-	UMapMeshElements<MeshElementVertex> meshVertices {};
-	UMapMeshElements<MeshElementEdge> meshEdges {};
-	UMapMeshElements<MeshElementFace> meshFaces {};
+	MeshElementManager mem {};
+
 	UMapMesh meshes {};
 	UMapObject childrens {};
 
@@ -70,20 +51,9 @@ public:
 	void setShadersAllMeshes(Shader& _shader);
 	void resetShadersAllMeshes();
 
-	void updateMeshVertices();
-	void updateMeshEdges();
-	void updateMeshFaces();
-
-	void updateMeshElements();
-
 	UMapObject& getChildrens();
 	void addChildren(std::string _name, Object& _object);
 
-	void drawMeshVertices();
-	void drawMeshEdges();
-	void drawMeshFaces();
-
-	void drawElements();
 	void drawMeshes();
 	void drawChildrens();
 

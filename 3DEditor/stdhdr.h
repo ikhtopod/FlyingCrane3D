@@ -84,6 +84,7 @@
 #include "MeshElementFace.h"
 #include "Object.h"
 #include "GridObject.h"
+#include "MeshElementManager.h"
 #include "Axis.h"
 #include "Shader.h"
 #include "Projection.h"

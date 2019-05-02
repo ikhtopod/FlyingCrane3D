@@ -1,0 +1,68 @@
+#pragma once
+
+#include "ITriada.h"
+#include "Transform.h"
+#include "Vertex.h"
+#include "Edge.h"
+#include "Face.h"
+#include "Mesh.h"
+#include "MeshElement.h"
+#include "MeshElementVertex.h"
+#include "MeshElementEdge.h"
+#include "MeshElementFace.h"
+#include "SelectionSwitcher.h"
+
+
+class MeshElementManager final : public ITriada {
+private:
+	// явл€етс€ ли класс D подклассом класса B
+	template<class B, class D>
+	using IsBaseOf = std::enable_if_t<std::is_base_of_v<B, D>>;
+
+	// явл€етс€ ли класс D подклассом класса MeshElement
+	template<class D>
+	using IsBaseOfMeshElement = IsBaseOf<MeshElement, D>;
+
+	// ќтображение списка объектов, €вл€ющихс€ подклассами класса MeshElement
+	template<typename T, typename = IsBaseOfMeshElement<T>>
+	using UMapMeshElements = std::unordered_map<std::string, std::vector<T>>;
+
+	template<class T>
+	using UMap = std::unordered_map<std::string, T>;
+	using UMapMesh = UMap<Mesh>;
+
+private:
+	UMapMeshElements<MeshElementVertex> vertices {};
+	UMapMeshElements<MeshElementEdge> edges {};
+	UMapMeshElements<MeshElementFace> faces {};
+
+	SelectionMode currentSelectionMode = SelectionMode::OBJECT;
+
+	Transform transform {};
+	UMapMesh* meshes = nullptr;
+
+public:
+	MeshElementManager() = default;
+	~MeshElementManager() = default;
+
+private:
+	void updateSelectionMode();
+
+	void updateMeshVertices();
+	void updateMeshEdges();
+	void updateMeshFaces();
+
+	void drawMeshVertices();
+	void drawMeshEdges();
+	void drawMeshFaces();
+
+public:
+	void updateMeshElements(UMapMesh* _meshes);
+
+	Transform& getTransform();
+	void setTransform(Transform _transform);
+
+	virtual void init() override;
+	virtual void draw() override;
+	virtual void free() override;
+};

@@ -37,79 +37,6 @@ void Object::setSelectionInfo(SelectionInfo _selectionInfo) {
 }
 
 
-void Object::updateMeshVertices() {
-	for (auto&[key, value] : this->meshVertices) {
-		for (auto& mesh : value) {
-			mesh.free();
-		}//rof
-
-		value.clear();
-	}//rof
-
-	this->meshVertices.clear();
-
-	for (auto&[meshName, mesh] : this->meshes) {
-		this->meshVertices.insert({ meshName, std::vector<MeshElementVertex> {} });
-
-		for (Vertex& vertex : mesh.getPolymesh().getVertices()) {
-			MeshElementVertex me { vertex };
-			this->meshVertices[meshName].push_back(me);
-			this->meshVertices[meshName].back().init();
-		}//rof
-	}//rof
-}
-
-void Object::updateMeshEdges() {
-	for (auto&[key, value] : this->meshEdges) {
-		for (auto& mesh : value) {
-			mesh.free();
-		}//rof
-
-		value.clear();
-	}//rof
-
-	this->meshEdges.clear();
-
-	for (auto&[meshName, mesh] : this->meshes) {
-		this->meshEdges.insert({ meshName, std::vector<MeshElementEdge> {} });
-
-		for (Edge& edge : mesh.getPolymesh().getEdges()) {
-			MeshElementEdge me { edge };
-			this->meshEdges[meshName].push_back(me);
-			this->meshEdges[meshName].back().init();
-		}//rof
-	}//rof
-}
-
-void Object::updateMeshFaces() {
-	for (auto&[key, value] : this->meshFaces) {
-		for (auto& mesh : value) {
-			mesh.free();
-		}//rof
-
-		value.clear();
-	}//rof
-
-	this->meshFaces.clear();
-
-	for (auto&[meshName, mesh] : this->meshes) {
-		this->meshFaces.insert({ meshName, std::vector<MeshElementFace> {} });
-
-		for (Face& face : mesh.getPolymesh().getFaces()) {
-			MeshElementFace me { face };
-			this->meshFaces[meshName].push_back(me);
-			this->meshFaces[meshName].back().init();
-		}//rof
-	}//rof
-}
-
-void Object::updateMeshElements() {
-	this->updateMeshVertices();
-	this->updateMeshEdges();
-	this->updateMeshFaces();
-}
-
-
 Object::UMapMesh& Object::getMeshes() {
 	return this->meshes;
 }
@@ -117,7 +44,7 @@ Object::UMapMesh& Object::getMeshes() {
 void Object::addMesh(std::string _name, Mesh& _mesh) {
 	if (this->meshes.empty() || (this->meshes.find(_name) == this->meshes.end())) {
 		this->meshes.insert({ _name, _mesh });
-		this->updateMeshElements();
+		this->mem.updateMeshElements(&this->meshes);
 	}//fi
 }
 
@@ -150,54 +77,6 @@ void Object::drawMeshes() {
 	}//rof
 }
 
-void Object::drawMeshVertices() {
-	for (auto&[key, value] : this->meshVertices) {
-		for (MeshElementVertex& mesh : value) {
-			mesh.setParentTransform(this->parentTransform + this->transform);
-			mesh.draw();
-		}//rof
-	}//rof
-}
-
-void Object::drawMeshEdges() {
-	glLineWidth(2.0f);
-	for (auto&[key, value] : this->meshEdges) {
-		for (MeshElementEdge& mesh : value) {
-			mesh.setParentTransform(this->parentTransform + this->transform);
-			mesh.draw();
-		}//rof
-	}//rof
-	glLineWidth(1.0f);
-}
-
-void Object::drawMeshFaces() {
-	for (auto&[key, value] : this->meshFaces) {
-		for (MeshElementFace& mesh : value) {
-			mesh.setParentTransform(this->parentTransform + this->transform);
-			mesh.draw();
-		}//rof
-	}//rof
-}
-
-void Object::drawElements() {
-	if (!this->selectionInfo.canSelect) return;
-
-	SelectionMode sm = Application::getInstancePtr()->
-		getScene().getSelectionSwitcher().getSelectionMode();
-
-	switch (sm) {
-		case SelectionMode::VERTEX:
-			this->drawMeshVertices();
-			break;
-		case SelectionMode::EDGE:
-			this->drawMeshEdges();
-			break;
-		case SelectionMode::FACE:
-			this->drawMeshFaces();
-			break;
-	}
-}
-
 void Object::drawChildrens() {
 	for (auto& children : this->childrens) {
 		children.second.setParentTransform(this->parentTransform + this->transform);
@@ -211,15 +90,15 @@ void Object::init() {
 		mesh.init();
 	}//rof
 
-	for (auto&[key, value] : this->meshVertices) {
-		for (auto& mesh : value) {
-			mesh.init();
-		}//rof
-	}//rof
+	this->mem.init();
 }
 
 void Object::draw() {
-	this->drawElements();
+	if (this->selectionInfo.canSelect) {
+		this->mem.setTransform(this->parentTransform + this->transform);
+		this->mem.draw();
+	}
+
 	this->drawMeshes();
 	this->drawChildrens();
 }
@@ -229,9 +108,5 @@ void Object::free() {
 		mesh.free();
 	}//rof
 
-	for (auto&[key, value] : this->meshVertices) {
-		for (auto& mesh : value) {
-			mesh.free();
-		}//rof
-	}//rof
+	this->mem.free();
 }

@@ -4,7 +4,9 @@
 #include "Application.h"
 #include "Shader.h"
 #include "SelectionInfo.h"
+#include "Object.h"
 
+class Object;
 
 class ISelection {
 protected:
