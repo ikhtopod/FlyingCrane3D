@@ -2,7 +2,6 @@
 
 
 const GLenum MeshElementVertex::DEFAULT_MESH_TYPE = GL_POINTS;
-const GLfloat MeshElementVertex::DEFAULT_POINT_SIZE = 6;
 
 MeshElementVertex::MeshElementVertex(Vertex _vertex) :
 	MeshElement(DEFAULT_MESH_TYPE) {

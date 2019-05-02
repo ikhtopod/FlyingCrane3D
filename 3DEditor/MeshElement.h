@@ -11,11 +11,17 @@ protected:
 	MeshElement(GLenum _type);
 	MeshElement(GLenum _type, Shader _shader);
 
+	bool m_isSelected = false;
+
 	std::vector<Vertex> vertices {};
 	std::vector<GLuint> indices {};
 
+protected:
+	void updateShaderLambdaDraw();
+
 public:
-	bool isSelected = false;
+	bool isSelected(); // getter m_isSelected
+	void isSelected(bool _isSelected); // setter m_isSelected
 
 public:
 	virtual ~MeshElement() = default;

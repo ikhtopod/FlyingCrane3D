@@ -127,6 +127,9 @@
     <ClCompile Include="MeshElementVertex.cpp">
       <Filter>Sources\Object</Filter>
     </ClCompile>
+    <ClCompile Include="MeshElementEdge.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -257,6 +260,9 @@
     </ClInclude>
     <ClInclude Include="MeshElementVertex.h">
       <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshElementEdge.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

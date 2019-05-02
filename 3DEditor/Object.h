@@ -9,11 +9,13 @@
 #include "Mesh.h"
 #include "MeshElement.h"
 #include "MeshElementVertex.h"
+#include "MeshElementEdge.h"
 #include "Shader.h"
 
 
 class Mesh;
 class MeshElementVertex;
+class MeshElementEdge;
 
 class Object : public ITriada {
 protected:
@@ -40,6 +42,7 @@ protected:
 	Transform globalTransform {};
 
 	UMapMeshElements<MeshElementVertex> meshVertices {};
+	UMapMeshElements<MeshElementEdge> meshEdges {};
 	UMapMesh meshes {};
 	UMapObject childrens {};
 
@@ -65,11 +68,15 @@ public:
 	void resetShadersAllMeshes();
 
 	void updateMeshVertices();
+	void updateMeshEdges();
+
+	void updateMeshElements();
 
 	UMapObject& getChildrens();
 	void addChildren(std::string _name, Object& _object);
 
 	void drawMeshVertices();
+	void drawMeshEdges();
 
 	void drawElements();
 	void drawMeshes();

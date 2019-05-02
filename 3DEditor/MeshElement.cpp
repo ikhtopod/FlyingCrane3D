@@ -19,6 +19,23 @@ MeshElement::MeshElement(GLenum _type) :
 MeshElement::MeshElement(GLenum _type, Shader _shader) :
 	MeshBase(_type, _shader) {}
 
+void MeshElement::updateShaderLambdaDraw() {
+	this->shader.resetLambdaDraw();
+
+	bool selected = this->isSelected();
+	this->shader.setLambdaDraw([selected](Shader* _this) {
+		_this->setBool("isSelected", selected);
+	});
+}
+
+bool MeshElement::isSelected() {
+	return this->m_isSelected;
+}
+
+void MeshElement::isSelected(bool _isSelected) {
+	this->m_isSelected = _isSelected;
+	this->updateShaderLambdaDraw();
+}
 
 void MeshElement::init() {
 	glGenVertexArrays(BUFFER_SIZE, &this->vao);
@@ -43,11 +60,7 @@ void MeshElement::init() {
 	glBindVertexArray(0); // unbind
 
 	this->shader.init();
-	this->shader.resetLambdaDraw();
-
-	this->shader.setLambdaDraw([this](Shader* _this) {
-		_this->setBool("isSelected", this->isSelected);
-	});
+	this->updateShaderLambdaDraw();
 }
 
 void MeshElement::draw() {

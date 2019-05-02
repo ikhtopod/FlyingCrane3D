@@ -52,12 +52,40 @@ void Object::updateMeshVertices() {
 		this->meshVertices.insert({ meshName, std::vector<MeshElementVertex> {} });
 
 		for (Vertex& vertex : mesh.getPolymesh().getVertices()) {
-			MeshElementVertex mev { vertex };
-			this->meshVertices[meshName].push_back(mev);
+			MeshElementVertex me { vertex };
+			this->meshVertices[meshName].push_back(me);
 			this->meshVertices[meshName].back().init();
 		}//rof
 	}//rof
 }
+
+void Object::updateMeshEdges() {
+	for (auto&[key, value] : this->meshEdges) {
+		for (auto& mesh : value) {
+			mesh.free();
+		}//rof
+
+		value.clear();
+	}//rof
+
+	this->meshEdges.clear();
+
+	for (auto&[meshName, mesh] : this->meshes) {
+		this->meshEdges.insert({ meshName, std::vector<MeshElementEdge> {} });
+
+		for (Edge& edge : mesh.getPolymesh().getEdges()) {
+			MeshElementEdge me { edge };
+			this->meshEdges[meshName].push_back(me);
+			this->meshEdges[meshName].back().init();
+		}//rof
+	}//rof
+}
+
+void Object::updateMeshElements() {
+	this->updateMeshVertices();
+	this->updateMeshEdges();
+}
+
 
 Object::UMapMesh& Object::getMeshes() {
 	return this->meshes;
@@ -66,7 +94,7 @@ Object::UMapMesh& Object::getMeshes() {
 void Object::addMesh(std::string _name, Mesh& _mesh) {
 	if (this->meshes.empty() || (this->meshes.find(_name) == this->meshes.end())) {
 		this->meshes.insert({ _name, _mesh });
-		this->updateMeshVertices();
+		this->updateMeshElements();
 	}//fi
 }
 
@@ -101,11 +129,22 @@ void Object::drawMeshes() {
 
 void Object::drawMeshVertices() {
 	for (auto&[key, value] : this->meshVertices) {
-		for (auto& mesh : value) {
+		for (MeshElementVertex& mesh : value) {
 			mesh.setParentTransform(this->parentTransform + this->transform);
 			mesh.draw();
 		}//rof
 	}//rof
+}
+
+void Object::drawMeshEdges() {
+	glLineWidth(2.0f);
+	for (auto&[key, value] : this->meshEdges) {
+		for (MeshElementEdge& mesh : value) {
+			mesh.setParentTransform(this->parentTransform + this->transform);
+			mesh.draw();
+		}//rof
+	}//rof
+	glLineWidth(1.0f);
 }
 
 void Object::drawElements() {
@@ -119,6 +158,7 @@ void Object::drawElements() {
 			this->drawMeshVertices();
 			break;
 		case SelectionMode::EDGE:
+			this->drawMeshEdges();
 			break;
 		case SelectionMode::FACE:
 			break;
