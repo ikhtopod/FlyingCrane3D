@@ -56,8 +56,7 @@ void MeshElementManager::updateVertices() {
 		this->vertices.insert({ meshName, std::vector<MeshElementVertex> {} });
 
 		for (Vertex& vertex : mesh.getPolymesh().getVertices()) {
-			MeshElementVertex me { vertex };
-			this->vertices[meshName].push_back(me);
+			this->vertices[meshName].push_back({ vertex });
 			this->vertices[meshName].back().init();
 		}//rof
 	}//rof
@@ -70,8 +69,7 @@ void MeshElementManager::updateEdges() {
 		this->edges.insert({ meshName, std::vector<MeshElementEdge> {} });
 
 		for (Edge& edge : mesh.getPolymesh().getEdges()) {
-			MeshElementEdge me { edge };
-			this->edges[meshName].push_back(me);
+			this->edges[meshName].push_back({ edge });
 			this->edges[meshName].back().init();
 		}//rof
 	}//rof
@@ -84,8 +82,7 @@ void MeshElementManager::updateFaces() {
 		this->faces.insert({ meshName, std::vector<MeshElementFace> {} });
 
 		for (Face& face : mesh.getPolymesh().getFaces()) {
-			MeshElementFace me { face };
-			this->faces[meshName].push_back(me);
+			this->faces[meshName].push_back({ face });
 			this->faces[meshName].back().init();
 		}//rof
 	}//rof
@@ -126,7 +123,7 @@ void MeshElementManager::draw() {
 			painter<decltype(this->vertices)>(&this->vertices, this->transform);
 			break;
 		case SelectionMode::EDGE:
-			glLineWidth(2.0f);
+			glLineWidth(2.5f);
 			painter<decltype(this->edges)>(&this->edges, this->transform);
 			glLineWidth(1.0f);
 			break;
