@@ -15,6 +15,14 @@ void Projection::setProjectionType(ProjectionType _projectionType) {
 	}
 }
 
+void Projection::switchToPerspective() {
+	this->setProjectionType(ProjectionType::PERSPECTIVE);
+}
+
+void Projection::switchToOrthographic() {
+	this->setProjectionType(ProjectionType::ORTHOGRAPHIC);
+}
+
 glm::vec3 Projection::getScale() {
 	return this->scale;
 }

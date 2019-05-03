@@ -19,6 +19,9 @@ public:
 	ProjectionType getProjectionType();
 	void setProjectionType(ProjectionType _projectionType);
 
+	void switchToPerspective();
+	void switchToOrthographic();
+
 	glm::vec3 getScale();
 	void setScale(glm::vec3 _scale);
 	void setScaleByDistance(float distance);

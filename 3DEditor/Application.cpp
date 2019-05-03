@@ -165,7 +165,7 @@ void Application::switchProjectionInput() {
 	int stateP = glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_P);
 
 	if (stateP == GLFW_PRESS && prevStateP == GLFW_RELEASE) {
-		this->scene.getModel().getOrthoProj().setProjectionType(ProjectionType::PERSPECTIVE);
+		this->scene.getModel().getOrthoProj().switchToPerspective();
 		prevStateP = GLFW_PRESS;
 		return;
 	} else if (stateP == GLFW_RELEASE && prevStateP == GLFW_PRESS) {
@@ -176,7 +176,7 @@ void Application::switchProjectionInput() {
 
 	if (stateO == GLFW_PRESS && prevStateO == GLFW_RELEASE) {
 		if (this->scene.getCameraSwitcher().getType() == CameraType::TARGET) {
-			this->scene.getModel().getOrthoProj().setProjectionType(ProjectionType::ORTHOGRAPHIC);
+			this->scene.getModel().getOrthoProj().switchToOrthographic();
 		}
 		prevStateO = GLFW_PRESS;
 		return;
