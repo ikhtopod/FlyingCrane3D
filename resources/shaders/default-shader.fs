@@ -14,16 +14,20 @@ uniform bool isSelected;
 uniform vec4 colorCode;
 
 
+const vec4 SELECT_COLOR = vec4(0.9f, 0.2f, 0.0f, 1.0f);
+
+
 void drawSelectionProcess() {
 	gl_FragColor = vec4(colorCode.r, colorCode.g, colorCode.b, colorCode.a) / 255.0;
 }
 
-void drawColorDefault() {
+
+void drawColor(vec3 selColor) {
 	vec3 norm = normalize(Normal);
 	
 	// ambient
     float ambientStrength = 1.0f;
-    vec3 ambient = ambientStrength * bgColor * lightColor;
+    vec3 ambient = ambientStrength * selColor * lightColor;
     
     // diffuse 
 	vec3 lightDir = normalize(cameraPos);
@@ -41,8 +45,13 @@ void drawColorDefault() {
 }
 
 void drawColorSelected() {
-	drawColorDefault();
+	drawColor(SELECT_COLOR.xyz);
 }
+
+void drawColorDefault() {
+	drawColor(bgColor);
+}
+
 
 void main() {
 	if (isSelectionProcess) {

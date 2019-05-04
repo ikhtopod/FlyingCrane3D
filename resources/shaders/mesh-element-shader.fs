@@ -1,11 +1,12 @@
 #version 330 core
 
-const vec4 MAIN_COLOR = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-const vec4 SELECT_COLOR = vec4(1.0f, 1.0f, 1.0f, 1.0f);
-
 uniform bool isSelectionProcess;
 uniform bool isSelected;
 uniform vec4 colorCode;
+
+const vec4 MAIN_COLOR = vec4(0.3f, 0.7f, 0.0f, 1.0f);
+const vec4 SELECT_COLOR = vec4(0.9f, 0.2f, 0.0f, 1.0f);
+
 
 void main() {
 	if (isSelectionProcess) {
