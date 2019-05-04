@@ -108,6 +108,21 @@ void MeshElementManager::setTransform(Transform _transform) {
 	this->transform = _transform;
 }
 
+MeshElementManager::UMapMeshElements<MeshElementVertex>&
+MeshElementManager::getVertices() {
+	return this->vertices;
+}
+
+MeshElementManager::UMapMeshElements<MeshElementEdge>&
+MeshElementManager::getEdges() {
+	return this->edges;
+}
+
+MeshElementManager::UMapMeshElements<MeshElementFace>&
+MeshElementManager::getFaces() {
+	return this->faces;
+}
+
 
 void MeshElementManager::init() {
 	initializer<decltype(this->vertices)>(&this->vertices);

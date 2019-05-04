@@ -69,6 +69,10 @@ public:
 	void update(UMapMesh* _meshes);
 
 	Transform& getTransform();
+	UMapMeshElements<MeshElementVertex>& getVertices();
+	UMapMeshElements<MeshElementEdge>& getEdges();
+	UMapMeshElements<MeshElementFace>& getFaces();
+
 	void setTransform(Transform _transform);
 
 	virtual void init() override;
