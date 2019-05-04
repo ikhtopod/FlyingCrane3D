@@ -41,7 +41,7 @@ void SelectionObject::select() {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
 		if (objValue.getSelectionInfo().colorSelectEquals(colorUnderCursor)) {
-			if (this->hasSelectedObjects(objKey)) {
+			if (this->hasSelectedObject(objKey)) {
 				if (this->selectedObjects[objKey] == nullptr) {
 					this->selectedObjects.erase(objKey);
 					this->selectedObjects.insert({ objKey, &objValue });
@@ -57,7 +57,7 @@ void SelectionObject::select() {
 
 glm::vec3 SelectionObject::getCentroid() {
 	glm::vec3 centroid { 0.0f };
-	if (this->selectedObjects.empty()) return centroid;
+	if (!this->hasSelectedObjects()) return centroid;
 
 	std::vector<glm::vec3> uniquePositions {};
 

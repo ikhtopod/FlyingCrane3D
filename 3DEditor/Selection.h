@@ -37,7 +37,8 @@ public:
 	~Selection() = default;
 
 	std::map<std::string, Object*>& getSelectedObjects();
-	bool hasSelectedObjects(std::string name);
+	bool hasSelectedObject(std::string name);
+	bool hasSelectedObjects();
 	void clearSelectedObjects();
 
 	void updateMousePosition();

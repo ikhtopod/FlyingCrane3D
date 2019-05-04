@@ -13,8 +13,12 @@ std::map<std::string, Object*>& Selection::getSelectedObjects() {
 	return this->selectedObjects;
 }
 
-bool Selection::hasSelectedObjects(std::string name) {
+bool Selection::hasSelectedObject(std::string name) {
 	return this->selectedObjects.find(name) != this->selectedObjects.end();
+}
+
+bool Selection::hasSelectedObjects() {
+	return !this->selectedObjects.empty();
 }
 
 void Selection::clearSelectedObjects() {

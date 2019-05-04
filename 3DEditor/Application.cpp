@@ -194,7 +194,7 @@ void Application::focusingOnSelectedObjects() {
 		if (this->scene.getCameraSwitcher().getType() == CameraType::TARGET &&
 			this->scene.getSelectionSwitcher().getActionMode() == SelectionActionMode::NONE) {
 
-			if (!this->scene.getSelection().getSelectedObjects().empty()) {
+			if (this->scene.getSelection().hasSelectedObjects()) {
 				std::shared_ptr<TargetCamera> tc =
 					std::dynamic_pointer_cast<TargetCamera>(this->scene.getCameraSwitcher().getCamera());
 				tc->setTargetPosition(this->scene.getSelection().getCentroid());

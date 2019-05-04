@@ -63,7 +63,7 @@ void SelectionSwitcher::switchSelectionInput() {
 void SelectionSwitcher::switchActionInput() {
 	GLFWwindow* window = Application::getInstancePtr()->getWindow().getWindowPtr();
 
-	if (!this->getSelection()->getSelectedObjects().empty()) {
+	if (this->getSelection()->hasSelectedObjects()) {
 		if (this->actionMode == SelectionActionMode::NONE) {
 			double posX = 0.0;
 			double posY = 0.0;
