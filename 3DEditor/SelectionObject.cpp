@@ -10,6 +10,7 @@ void SelectionObject::select() {
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glDisable(GL_MULTISAMPLE);
 
 	// Назначаем цвета объектам и отрисовываем
 	uint32_t colorId = 0;
@@ -30,6 +31,8 @@ void SelectionObject::select() {
 			meshValue.setShader(prevShader);
 		}//rof
 	}//rof
+
+	glEnable(GL_MULTISAMPLE);
 
 	// Смотрим, какой цвет под курсором мыши был у пикселя при нажатии
 	GLint screenHeight = appThis->getWindow().getScreen().getHeight();
