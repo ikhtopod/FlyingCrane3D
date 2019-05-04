@@ -281,8 +281,8 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\resources\shaders\DefaultShader.fs" />
-    <None Include="..\resources\shaders\DefaultShader.vs" />
+    <None Include="..\resources\shaders\default-shader.fs" />
+    <None Include="..\resources\shaders\default-shader.vs" />
     <None Include="..\resources\shaders\GridObjectMeshGrid.fs" />
     <None Include="..\resources\shaders\GridObjectMeshGrid.vs" />
     <None Include="..\resources\shaders\GridObjectMeshX.fs" />
@@ -291,8 +291,6 @@
     <None Include="..\resources\shaders\GridObjectMeshZ.vs" />
     <None Include="..\resources\shaders\mesh-element-shader.fs" />
     <None Include="..\resources\shaders\mesh-element-shader.vs" />
-    <None Include="..\resources\shaders\Selection.fs" />
-    <None Include="..\resources\shaders\Selection.vs" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\resources\fonts\Roboto-Regular.ttf" />

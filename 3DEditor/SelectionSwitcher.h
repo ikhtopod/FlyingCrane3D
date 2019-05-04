@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ITriada.h"
 #include "Selection.h"
 #include "SelectionObject.h"
 #include "SelectionElementPoint.h"
@@ -17,7 +16,7 @@ enum class SelectionActionMode {
 	MOVING, ROTATION, SCALING
 };
 
-class SelectionSwitcher : public ITriada {
+class SelectionSwitcher {
 public:
 	static const SelectionMode DEFAULT_SELECTION_MODE;
 
@@ -44,8 +43,6 @@ public:
 	void switchActionInput();
 	void mouseActionInput(int button, int action, int mods);
 
-	virtual void init() override;
-	virtual void draw() override;
-	virtual void free() override;
+	void clearSelections();
 };
 

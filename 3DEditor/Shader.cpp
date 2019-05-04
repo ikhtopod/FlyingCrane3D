@@ -2,8 +2,8 @@
 
 
 const std::string Shader::SHADER_DIRECTORY { R"(..\resources\shaders)" };
-const Shader::FsPath Shader::DEFAULT_VERTEX_PATH { Shader::SHADER_DIRECTORY + R"(\DefaultShader.vs)" };
-const Shader::FsPath Shader::DEFAULT_FRAGMENT_PATH { Shader::SHADER_DIRECTORY + R"(\DefaultShader.fs)" };
+const Shader::FsPath Shader::DEFAULT_VERTEX_PATH { Shader::SHADER_DIRECTORY + R"(\default-shader.vs)" };
+const Shader::FsPath Shader::DEFAULT_FRAGMENT_PATH { Shader::SHADER_DIRECTORY + R"(\default-shader.fs)" };
 
 
 Shader::Shader() : Shader(DEFAULT_VERTEX_PATH, DEFAULT_FRAGMENT_PATH) {}
@@ -19,6 +19,9 @@ Shader::Shader(FsPath _vertexPath, FsPath _fragmentPath)
 		_this->setVec3("lightColor", glm::vec3 { 1.0f });
 		_this->setVec3("objectColor", glm::vec3 { 0.78f, 0.78f, 0.78f });
 		_this->setVec3("cameraPos", appThis->getScene().getCamera().getTransform().getPosition());
+		_this->setBool("isSelectionProcess", false);
+		_this->setBool("isSelected", false);
+		_this->setVec4("colorCode", Selection::CLEAR_COLOR);
 	};
 }
 

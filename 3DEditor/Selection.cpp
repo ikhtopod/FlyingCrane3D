@@ -2,10 +2,6 @@
 
 const glm::vec4 Selection::CLEAR_COLOR = glm::vec4 { 0.0f, 0.0f, 0.0f, 0.0f };
 
-Selection::Selection() :
-	shader(R"(..\resources\shaders\Selection.vs)",
-		   R"(..\resources\shaders\Selection.fs)") {}
-
 
 bool Selection::diffIsZero() {
 	return this->diffMousePosition.x == 0.0f && this->diffMousePosition.y == 0.0f;
@@ -117,17 +113,4 @@ void Selection::mouseButtonInput(int button, int action, int mods) {
 	} else if (action == GLFW_RELEASE && prevState == GLFW_PRESS) {
 		prevState = GLFW_RELEASE;
 	}//esle fi
-}
-
-
-void Selection::init() {
-	this->shader.init();
-	this->shader.resetLambdaDraw();
-}
-
-void Selection::draw() { /* dummy */ }
-
-void Selection::free() {
-	this->shader.free();
-	this->clearSelectedObjects();
 }

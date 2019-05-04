@@ -92,6 +92,16 @@ void Object::drawChildrens() {
 void Object::init() {
 	for (auto&[meshName, mesh] : this->meshes) {
 		mesh.init();
+		mesh.getShader().setLambdaDraw([this](Shader* _this) {
+			Application* appThis = Application::getInstancePtr();
+			_this->setVec3("bgColor", glm::vec3 { appThis->getBgColor() });
+			_this->setVec3("lightColor", glm::vec3 { 1.0f });
+			_this->setVec3("objectColor", glm::vec3 { 0.78f, 0.78f, 0.78f });
+			_this->setVec3("cameraPos", appThis->getScene().getCamera().getTransform().getPosition());
+			_this->setBool("isSelectionProcess", this->getSelectionInfo().isSelectionProcess);
+			_this->setBool("isSelected", this->getSelectionInfo().isSelected);
+			_this->setVec4("colorCode", this->getSelectionInfo().colorSelect);
+		});
 	}//rof
 
 	this->mem.init();

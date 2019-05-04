@@ -43,8 +43,6 @@ void Scene::addObject(std::string _name, Object _object) {
 
 
 void Scene::init() {
-	this->selectionSwitcher.init();
-
 	/***********************************/
 
 	// grid
@@ -131,5 +129,5 @@ void Scene::free() {
 		o.second.free();
 	}
 
-	this->selectionSwitcher.free();
+	this->selectionSwitcher.clearSelections();
 }

@@ -4,17 +4,15 @@ void SelectionElement::drawObject(Object& object) {
 	this->drawObject(object, CLEAR_COLOR);
 }
 
+// Отрисовать объект, чтобы вершины, спрятанные за ним, не выделялись
 void SelectionElement::drawObject(Object& object, glm::vec4 color) {
-	// Отрисовать объект, чтобы вершины, спрятанные за ним, не выделялись
-	for (auto&[meshKey, meshValue] : object.getMeshes()) {
-		this->shader.setLambdaDraw([&object, color](Shader* _this) {
-			_this->setVec4("colorCode", color);
-		});
+	object.getSelectionInfo().colorSelect = color;
+	object.getSelectionInfo().isSelectionProcess = true;
 
-		Shader prevShader = meshValue.getShader();
-		meshValue.setShader(this->shader);
+	for (auto&[meshKey, meshValue] : object.getMeshes()) {
 		meshValue.setGlobalTransform(object.getParentTransform() + object.getTransform());
 		meshValue.draw();
-		meshValue.setShader(prevShader);
 	}//rof
+
+	object.getSelectionInfo().isSelectionProcess = false;
 }

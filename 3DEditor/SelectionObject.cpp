@@ -18,18 +18,14 @@ void SelectionObject::select() {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
 		objValue.getSelectionInfo().colorSelect = Util::generateRGBAColorById(++colorId);
+		objValue.getSelectionInfo().isSelectionProcess = true;
 
 		for (auto&[meshKey, meshValue] : objValue.getMeshes()) {
-			this->shader.setLambdaDraw([&objValue](Shader* _this) {
-				_this->setVec4("colorCode", objValue.getSelectionInfo().colorSelect);
-			});
-
-			Shader prevShader = meshValue.getShader();
-			meshValue.setShader(this->shader);
 			meshValue.setGlobalTransform(objValue.getParentTransform() + objValue.getTransform());
 			meshValue.draw();
-			meshValue.setShader(prevShader);
 		}//rof
+
+		objValue.getSelectionInfo().isSelectionProcess = false;
 	}//rof
 
 	glEnable(GL_MULTISAMPLE);

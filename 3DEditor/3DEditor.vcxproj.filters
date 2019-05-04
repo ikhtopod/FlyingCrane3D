@@ -365,22 +365,16 @@
     <None Include="..\resources\shaders\GridObjectMeshZ.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
-    <None Include="..\resources\shaders\DefaultShader.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\resources\shaders\DefaultShader.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\resources\shaders\Selection.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\resources\shaders\Selection.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
     <None Include="..\resources\shaders\mesh-element-shader.fs">
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="..\resources\shaders\mesh-element-shader.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\resources\shaders\default-shader.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\resources\shaders\default-shader.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
   </ItemGroup>

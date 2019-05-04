@@ -108,18 +108,8 @@ void SelectionSwitcher::mouseActionInput(int button, int action, int mods) {
 	}
 }
 
-void SelectionSwitcher::init() {
+void SelectionSwitcher::clearSelections() {
 	for (auto& selection : this->selections) {
-		selection.second->init();
-	}
-}
-
-void SelectionSwitcher::draw() {
-	this->getSelection()->draw();
-}
-
-void SelectionSwitcher::free() {
-	for (auto& selection : this->selections) {
-		selection.second->free();
+		selection.second->clearSelectedObjects();
 	}
 }

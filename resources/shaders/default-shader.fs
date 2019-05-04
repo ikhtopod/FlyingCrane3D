@@ -1,7 +1,5 @@
 #version 330 core
 
-layout (location = 0) out vec4 FragColor;
-
 in vec3 FragPos;
 in vec3 Normal;
 
@@ -11,7 +9,16 @@ uniform vec3 objectColor;
 
 uniform vec3 cameraPos;
 
-void main() {
+uniform bool isSelectionProcess;
+uniform bool isSelected;
+uniform vec4 colorCode;
+
+
+void drawSelectionProcess() {
+	gl_FragColor = vec4(colorCode.r, colorCode.g, colorCode.b, colorCode.a) / 255.0;
+}
+
+void drawColorDefault() {
 	vec3 norm = normalize(Normal);
 	
 	// ambient
@@ -30,5 +37,21 @@ void main() {
     vec3 specular = specularStrength * spec * lightColor;  
 	
 	vec3 result = (ambient + diffuse + specular) * objectColor;
-    FragColor = vec4(result, 1.0f);
+    gl_FragColor = vec4(result, 1.0f);
+}
+
+void drawColorSelected() {
+	drawColorDefault();
+}
+
+void main() {
+	if (isSelectionProcess) {
+		drawSelectionProcess();
+	} else {
+		if (isSelected) {
+			drawColorSelected();
+		} else {
+			drawColorDefault();
+		}//fi
+	}//fi
 }
