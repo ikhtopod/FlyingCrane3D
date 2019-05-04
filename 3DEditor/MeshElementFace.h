@@ -5,7 +5,7 @@
 #include "Face.h"
 
 class MeshElementFace final : public MeshElement {
-private:
+public:
 	static const GLenum DEFAULT_MESH_TYPE;
 
 public:

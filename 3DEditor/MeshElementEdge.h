@@ -5,7 +5,7 @@
 #include "Edge.h"
 
 class MeshElementEdge final : public MeshElement {
-private:
+public:
 	static const GLenum DEFAULT_MESH_TYPE;
 
 public:

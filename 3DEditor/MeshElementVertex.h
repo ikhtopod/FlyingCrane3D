@@ -4,7 +4,7 @@
 #include "Vertex.h"
 
 class MeshElementVertex final : public MeshElement {
-private:
+public:
 	static const GLenum DEFAULT_MESH_TYPE;
 
 public:
