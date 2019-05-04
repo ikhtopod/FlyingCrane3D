@@ -36,6 +36,10 @@ void Object::setSelectionInfo(SelectionInfo _selectionInfo) {
 	this->selectionInfo = _selectionInfo;
 }
 
+MeshElementManager& Object::getMeshElementManager() {
+	return this->mem;
+}
+
 
 Object::UMapMesh& Object::getMeshes() {
 	return this->meshes;

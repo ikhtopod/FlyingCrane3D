@@ -46,6 +46,8 @@ public:
 	void setGlobalTransform(Transform _gTransform);
 	void setSelectionInfo(SelectionInfo _selectionInfo);
 
+	MeshElementManager& getMeshElementManager();
+
 	UMapMesh& getMeshes();
 	void addMesh(std::string _name, Mesh& _mesh);
 	void setShadersAllMeshes(Shader& _shader);
