@@ -3,12 +3,8 @@
 
 void SelectionObject::select() {
 	Application* appThis = Application::getInstancePtr();
-	double xPos = 0.0;
-	double yPos = 0.0;
 
-	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &xPos, &yPos);
-
-	this->clearColor();
+	Selection::clearColor();
 
 	glDisable(GL_MULTISAMPLE);
 
@@ -30,11 +26,7 @@ void SelectionObject::select() {
 
 	glEnable(GL_MULTISAMPLE);
 
-	// Смотрим, какой цвет под курсором мыши был у пикселя при нажатии
-	GLint screenHeight = appThis->getWindow().getScreen().getHeight();
-	GLubyte colorUnderCursor[4];
-	glReadPixels(static_cast<int>(xPos), screenHeight - static_cast<int>(yPos),
-				 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, colorUnderCursor);
+	glm::vec4 colorUnderCursor = Selection::getColorUnderCursor();
 
 	// Сохранить текущие выбранные объекты
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {

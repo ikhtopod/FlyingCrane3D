@@ -30,9 +30,10 @@ protected:
 	std::map<std::string, Object*> selectedObjects {};
 
 protected:
-	bool diffIsZero();
+	static void clearColor();
+	static glm::vec4 getColorUnderCursor();
 
-	void clearColor();
+	bool diffIsZero();
 
 public:
 	Selection() = default;

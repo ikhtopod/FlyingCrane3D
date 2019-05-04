@@ -3,13 +3,29 @@
 const glm::vec4 Selection::CLEAR_COLOR = glm::vec4 { 0.0f, 0.0f, 0.0f, 0.0f };
 
 
-bool Selection::diffIsZero() {
-	return this->diffMousePosition.x == 0.0f && this->diffMousePosition.y == 0.0f;
-}
-
 void Selection::clearColor() {
 	glClearColor(CLEAR_COLOR.r, CLEAR_COLOR.g, CLEAR_COLOR.b, CLEAR_COLOR.a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+glm::vec4 Selection::getColorUnderCursor() {
+	Application* appThis = Application::getInstancePtr();
+	double xPos = 0.0;
+	double yPos = 0.0;
+
+	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &xPos, &yPos);
+
+	// Смотрим, какой цвет под курсором мыши был у пикселя при нажатии
+	GLint screenHeight = appThis->getWindow().getScreen().getHeight();
+	GLubyte color[4];
+	glReadPixels(static_cast<int>(xPos), screenHeight - static_cast<int>(yPos),
+				 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
+
+	return glm::vec4 { color[0], color[1], color[2], color[3] };
+}
+
+bool Selection::diffIsZero() {
+	return this->diffMousePosition.x == 0.0f && this->diffMousePosition.y == 0.0f;
 }
 
 std::map<std::string, Object*>& Selection::getSelectedObjects() {
