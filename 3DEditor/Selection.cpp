@@ -8,6 +8,7 @@ void Selection::clearColor() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+// Получить цвет пикселя под курсором, при клике мышью
 glm::vec4 Selection::getColorUnderCursor() {
 	Application* appThis = Application::getInstancePtr();
 	double xPos = 0.0;
@@ -15,7 +16,6 @@ glm::vec4 Selection::getColorUnderCursor() {
 
 	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &xPos, &yPos);
 
-	// Смотрим, какой цвет под курсором мыши был у пикселя при нажатии
 	GLint screenHeight = appThis->getWindow().getScreen().getHeight();
 	GLubyte color[4];
 	glReadPixels(static_cast<int>(xPos), screenHeight - static_cast<int>(yPos),
