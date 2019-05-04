@@ -30,15 +30,34 @@ void MeshElementManager::initializer(T* data) {
 }
 
 template<typename T>
-void MeshElementManager::painter(T* data, Transform _transform) {
+void MeshElementManager::_paint(T* data, Transform _transform, bool _painting) {
 	for (auto&[key, value] : *data) {
 		for (auto& mesh : value) {
 			if (!mesh.getSelectionInfo().canSelect) continue;
+			if (mesh.getSelectionInfo().isSelected != _painting) continue;
 
 			mesh.setParentTransform(_transform);
 			mesh.draw();
 		}//rof
 	}//rof
+}
+
+template<typename T>
+void MeshElementManager::_paintNotSelected(T* data, Transform _transform) {
+	_paint<T>(data, _transform, false);
+}
+
+template<typename T>
+void MeshElementManager::_paintSelected(T* data, Transform _transform) {
+	_paint<T>(data, _transform, true);
+}
+
+template<typename T>
+void MeshElementManager::painter(T* data, Transform _transform) {
+	// Сперва отрисовывать выделенные элементы, затем - не выделенные.
+	// Это нужно для корректной отрисовки выделения.
+	_paintSelected<T>(data, _transform);
+	_paintNotSelected<T>(data, _transform);
 }
 
 template<typename T>

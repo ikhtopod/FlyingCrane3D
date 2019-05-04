@@ -53,6 +53,12 @@ private:
 	static void initializer(T* data);
 
 	template<typename T>
+	static void _paint(T* data, Transform _transform, bool _painting);
+	template<typename T>
+	static void _paintNotSelected(T* data, Transform _transform);
+	template<typename T>
+	static void _paintSelected(T* data, Transform _transform);
+	template<typename T>
 	static void painter(T* data, Transform _transform);
 
 	template<typename T>
