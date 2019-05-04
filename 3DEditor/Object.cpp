@@ -58,12 +58,6 @@ void Object::setShadersAllMeshes(Shader& _shader) {
 	}//rof
 }
 
-void Object::resetShadersAllMeshes() {
-	for (auto&[meshName, mesh] : this->meshes) {
-		mesh.resetShaderToNative();
-	}//rof
-}
-
 Object::UMapObject& Object::getChildrens() {
 	return this->childrens;
 }

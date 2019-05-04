@@ -4,10 +4,10 @@ const GLsizei MeshBase::BUFFER_SIZE = 1;
 
 
 MeshBase::MeshBase() :
-	type(GL_TRIANGLES), nativeShader(), shader(nativeShader) {}
+	type(GL_TRIANGLES), shader() {}
 
 MeshBase::MeshBase(GLenum _type, Shader _shader) :
-	type(_type), nativeShader(_shader), shader(_shader) {}
+	type(_type), shader(_shader) {}
 
 
 Transform& MeshBase::getGlobalTransform() {
@@ -65,10 +65,6 @@ void MeshBase::setType(GLenum _type) {
 	this->type = _type;
 }
 
-
-void MeshBase::resetShaderToNative() {
-	this->setShader(this->nativeShader);
-}
 
 void MeshBase::free() {
 	glDeleteVertexArrays(BUFFER_SIZE, &this->vao);

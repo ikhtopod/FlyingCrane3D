@@ -51,7 +51,6 @@ public:
 	UMapMesh& getMeshes();
 	void addMesh(std::string _name, Mesh& _mesh);
 	void setShadersAllMeshes(Shader& _shader);
-	void resetShadersAllMeshes();
 
 	UMapObject& getChildrens();
 	void addChildren(std::string _name, Object& _object);
