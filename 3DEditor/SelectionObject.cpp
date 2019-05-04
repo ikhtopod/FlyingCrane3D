@@ -34,14 +34,16 @@ void SelectionObject::select() {
 	// Смотрим, какой цвет под курсором мыши был у пикселя при нажатии
 	GLint screenHeight = appThis->getWindow().getScreen().getHeight();
 	GLubyte colorUnderCursor[4];
-	glReadPixels(static_cast<int>(xPos), screenHeight - static_cast<int>(yPos), 1, 1, GL_RGBA,
-				 GL_UNSIGNED_BYTE, colorUnderCursor);
+	glReadPixels(static_cast<int>(xPos), screenHeight - static_cast<int>(yPos),
+				 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, colorUnderCursor);
 
 	// Сохранить текущие выбранные объекты
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
 		if (objValue.getSelectionInfo().colorSelectEquals(colorUnderCursor)) {
+			objValue.getSelectionInfo().isSelected = true;
+
 			if (this->hasSelectedObject(objKey)) {
 				if (this->selectedObjects[objKey] == nullptr) {
 					this->selectedObjects.erase(objKey);

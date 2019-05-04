@@ -5,6 +5,7 @@
 #include "Shader.h"
 #include "SelectionInfo.h"
 #include "Object.h"
+#include "MeshElementManager.h"
 
 class Object;
 

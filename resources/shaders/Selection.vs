@@ -11,7 +11,6 @@ struct MVP {
 /* end structs */
 
 layout (location = 0) in vec3 VertexPosition;
-//layout (location = 1) in vec3 VertexNormal;
 
 uniform MVP mvp;
 uniform mat4 transform;

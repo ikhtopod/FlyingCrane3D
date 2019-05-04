@@ -33,6 +33,8 @@ template<typename T>
 void MeshElementManager::painter(T* data, Transform _transform) {
 	for (auto&[key, value] : *data) {
 		for (auto& mesh : value) {
+			if (!mesh.getSelectionInfo().canSelect) continue;
+
 			mesh.setParentTransform(_transform);
 			mesh.draw();
 		}//rof

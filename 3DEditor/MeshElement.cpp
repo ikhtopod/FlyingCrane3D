@@ -20,6 +20,14 @@ MeshElement::MeshElement(GLenum _type, Shader _shader) :
 	MeshBase(_type, _shader) {}
 
 
+SelectionInfo& MeshElement::getSelectionInfo() {
+	return this->selectionInfo;
+}
+
+void MeshElement::setSelectionInfo(SelectionInfo _selectionInfo) {
+	this->selectionInfo = _selectionInfo;
+}
+
 void MeshElement::init() {
 	glGenVertexArrays(BUFFER_SIZE, &this->vao);
 	glGenBuffers(BUFFER_SIZE, &this->vbo);
@@ -43,10 +51,11 @@ void MeshElement::init() {
 	glBindVertexArray(0); // unbind
 
 	this->shader.init();
-	this->shader.resetLambdaDraw();
 
 	this->shader.setLambdaDraw([this](Shader* _this) {
-		_this->setBool("isSelected", this->isSelected);
+		_this->setBool("isSelectionProcess", this->getSelectionInfo().isSelectionProcess);
+		_this->setBool("isSelected", this->getSelectionInfo().isSelected);
+		_this->setVec4("colorCode", this->getSelectionInfo().colorSelect);
 	});
 }
 
