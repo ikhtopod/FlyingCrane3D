@@ -15,5 +15,7 @@ public:
 
 	static glm::vec4 generateRGBAColorById(uint32_t colorId);
 
+	static void makeListUniqueVec3(std::vector<glm::vec3>* vectors);
+
 	static std::string getTextFromFile(const std::filesystem::path& filePath);
 };

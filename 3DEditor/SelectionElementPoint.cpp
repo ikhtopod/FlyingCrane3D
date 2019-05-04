@@ -1,14 +1,14 @@
-#include "SelectionPoint.h"
+#include "SelectionElementPoint.h"
 
-void SelectionPoint::select() {
+void SelectionElementPoint::select() {
 	Application* appThis = Application::getInstancePtr();
 	double xPos = 0.0;
 	double yPos = 0.0;
 
 	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &xPos, &yPos);
 
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	this->clearColor();
+
 	glDisable(GL_MULTISAMPLE);
 
 	// Назначаем цвета объектам и отрисовываем
@@ -16,18 +16,7 @@ void SelectionPoint::select() {
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
-		// Отрисовать объект, чтобы вершины, спрятанные за ним, не выделялись
-		for (auto&[meshKey, meshValue] : objValue.getMeshes()) {
-			this->shader.setLambdaDraw([&objValue](Shader* _this) {
-				_this->setVec4("colorCode", glm::vec4 { 0.0f, 0.0f, 0.0f, 0.0f });
-			});
-
-			Shader prevShader = meshValue.getShader();
-			meshValue.setShader(this->shader);
-			meshValue.setGlobalTransform(objValue.getParentTransform() + objValue.getTransform());
-			meshValue.draw();
-			meshValue.setShader(prevShader);
-		}//rof
+		this->drawObject(objValue);
 
 		for (auto&[meshElemKey, meshElemVertises] : objValue.getMeshElementManager().getVertices()) {
 			for (auto& meshElem : meshElemVertises) {
@@ -77,12 +66,27 @@ void SelectionPoint::select() {
 	}//rof
 }
 
-glm::vec3 SelectionPoint::getCentroid() {
-	return glm::vec3 {};
+std::vector<glm::vec3> SelectionElementPoint::getVerticesForCentroid() {
+	std::vector<glm::vec3> centroidVertices {};
+
+	for (auto&[objName, objValue] : this->selectedObjects) {
+		for (auto&[meshName, meshElements] : objValue->getMeshElementManager().getVertices()) {
+			for (auto& me : meshElements) {
+				if (!me.getSelectionInfo().isSelected) continue;
+
+				for (Vertex& v : me.getVertices()) {
+					glm::vec3 pos = v.position + objValue->getGlobalTransform().getPosition();
+					centroidVertices.push_back(pos);
+				}//rof
+			}//rof
+		}//rof
+	}//rof
+
+	return centroidVertices;
 }
 
-void SelectionPoint::moving() { /* dummy */ }
+void SelectionElementPoint::moving() { /* dummy */ }
 
-void SelectionPoint::rotation() { /* dummy */ }
+void SelectionElementPoint::rotation() { /* dummy */ }
 
-void SelectionPoint::scaling() { /* dummy */ }
+void SelectionElementPoint::scaling() { /* dummy */ }

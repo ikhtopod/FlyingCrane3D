@@ -23,6 +23,8 @@ public:
 	SelectionInfo& getSelectionInfo();
 	void setSelectionInfo(SelectionInfo _selectionInfo);
 
+	std::vector<Vertex>& getVertices();
+
 	virtual void init() override;
 	virtual void draw() override;
 };

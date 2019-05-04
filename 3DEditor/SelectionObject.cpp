@@ -8,8 +8,8 @@ void SelectionObject::select() {
 
 	glfwGetCursorPos(appThis->getWindow().getWindowPtr(), &xPos, &yPos);
 
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	this->clearColor();
+
 	glDisable(GL_MULTISAMPLE);
 
 	// Назначаем цвета объектам и отрисовываем
@@ -61,37 +61,19 @@ void SelectionObject::select() {
 	}//rof
 }
 
-glm::vec3 SelectionObject::getCentroid() {
-	glm::vec3 centroid { 0.0f };
-	if (!this->hasSelectedObjects()) return centroid;
+std::vector<glm::vec3> SelectionObject::getVerticesForCentroid() {
+	std::vector<glm::vec3> centroidVertices {};
 
-	std::vector<glm::vec3> uniquePositions {};
-
-	for (auto&[objKey, objValue] : this->selectedObjects) {
-		for (auto&[meshKey, meshValue] : objValue->getMeshes()) {
+	for (auto&[objName, objValue] : this->selectedObjects) {
+		for (auto&[meshName, meshValue] : objValue->getMeshes()) {
 			for (Vertex& v : meshValue.getPolymesh().getVertices()) {
 				glm::vec3 pos = v.position + objValue->getGlobalTransform().getPosition();
-				uniquePositions.push_back(pos);
+				centroidVertices.push_back(pos);
 			}//rof
 		}//rof
 	}//rof
 
-	auto sortPred = [](const glm::vec3& lhs, const glm::vec3& rhs) -> bool {
-		return lhs.x < rhs.x && lhs.y < rhs.y && lhs.z < rhs.z;
-	};
-
-	std::sort(uniquePositions.begin(), uniquePositions.end(), sortPred);
-	uniquePositions.erase(std::unique(uniquePositions.begin(), uniquePositions.end()), uniquePositions.end());
-
-	if (uniquePositions.size() > 1) {
-		centroid = std::accumulate(std::next(uniquePositions.begin()), uniquePositions.end(),
-								   uniquePositions[0], std::plus<glm::vec3>());
-		centroid /= static_cast<float>(uniquePositions.size());
-	} else {
-		centroid = uniquePositions[0];
-	}
-
-	return centroid;
+	return centroidVertices;
 }
 
 void SelectionObject::moving() {

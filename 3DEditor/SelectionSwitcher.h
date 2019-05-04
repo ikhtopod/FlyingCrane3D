@@ -3,9 +3,9 @@
 #include "ITriada.h"
 #include "Selection.h"
 #include "SelectionObject.h"
-#include "SelectionPoint.h"
-#include "SelectionEdge.h"
-#include "SelectionFace.h"
+#include "SelectionElementPoint.h"
+#include "SelectionElementEdge.h"
+#include "SelectionElementFace.h"
 
 enum class SelectionMode {
 	VERTEX, EDGE, FACE,

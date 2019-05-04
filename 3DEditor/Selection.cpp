@@ -1,5 +1,7 @@
 #include "Selection.h"
 
+const glm::vec4 Selection::CLEAR_COLOR = glm::vec4 { 0.0f, 0.0f, 0.0f, 0.0f };
+
 Selection::Selection() :
 	shader(R"(..\resources\shaders\Selection.vs)",
 		   R"(..\resources\shaders\Selection.fs)") {}
@@ -7,6 +9,11 @@ Selection::Selection() :
 
 bool Selection::diffIsZero() {
 	return this->diffMousePosition.x == 0.0f && this->diffMousePosition.y == 0.0f;
+}
+
+void Selection::clearColor() {
+	glClearColor(CLEAR_COLOR.r, CLEAR_COLOR.g, CLEAR_COLOR.b, CLEAR_COLOR.a);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 std::map<std::string, Object*>& Selection::getSelectedObjects() {
@@ -72,6 +79,26 @@ void Selection::updateMousePosition(float currentMouseX, float currentMouseY) {
 		prevMousePosition = glm::vec2 { currentMouseX, currentMouseY };
 		diffMousePosition = glm::vec2 { diffMouseY, diffMouseX };
 	}
+}
+
+glm::vec3 Selection::getCentroid() {
+	glm::vec3 centroid { 0.0f };
+	if (!this->hasSelectedObjects()) return centroid;
+
+	std::vector<glm::vec3> centroidVertices = this->getVerticesForCentroid();
+	Util::makeListUniqueVec3(&centroidVertices);
+
+	if (centroidVertices.size() > 1) {
+		centroid = std::accumulate(std::next(centroidVertices.begin()), centroidVertices.end(),
+								   centroidVertices[0], std::plus<glm::vec3>());
+		centroid /= static_cast<float>(centroidVertices.size());
+	} else {
+		centroid = centroidVertices[0];
+	}
+
+	centroidVertices.clear();
+
+	return centroid;
 }
 
 void Selection::mouseButtonInput(int button, int action, int mods) {

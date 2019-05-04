@@ -1,14 +1,8 @@
 #pragma once
 
-#include "Util.h"
-#include "Selection.h"
-#include "Application.h"
-#include "Vertex.h"
-#include "Shader.h"
-#include "SelectionInfo.h"
-#include "Axis.h"
+#include "SelectionElement.h"
 
-class SelectionObject : public Selection {
+class SelectionElementEdge : public SelectionElement {
 public:
 	virtual void select() override;
 
@@ -18,3 +12,4 @@ public:
 	virtual void rotation() override;
 	virtual void scaling() override;
 };
+

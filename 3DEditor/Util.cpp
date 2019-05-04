@@ -42,6 +42,17 @@ glm::vec4 Util::generateRGBAColorById(uint32_t colorId) {
 	return glm::vec4 { rgba[0], rgba[1], rgba[2], rgba[3] };
 }
 
+void Util::makeListUniqueVec3(std::vector<glm::vec3>* vectors) {
+	if (vectors == nullptr || vectors->size() < 2) return;
+
+	auto sortPred = [](const glm::vec3& lhs, const glm::vec3& rhs) -> bool {
+		return lhs.x < rhs.x && lhs.y < rhs.y && lhs.z < rhs.z;
+	};
+
+	std::sort(vectors->begin(), vectors->end(), sortPred);
+	vectors->erase(std::unique(vectors->begin(), vectors->end()), vectors->end());
+}
+
 
 std::string Util::getTextFromFile(const std::filesystem::path& filePath) {
 	if (!std::filesystem::exists(filePath)) {

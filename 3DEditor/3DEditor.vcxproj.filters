@@ -85,16 +85,7 @@
     <ClCompile Include="SelectionSwitcher.cpp">
       <Filter>Sources\Selection</Filter>
     </ClCompile>
-    <ClCompile Include="SelectionEdge.cpp">
-      <Filter>Sources\Selection</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectionFace.cpp">
-      <Filter>Sources\Selection</Filter>
-    </ClCompile>
     <ClCompile Include="SelectionObject.cpp">
-      <Filter>Sources\Selection</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectionPoint.cpp">
       <Filter>Sources\Selection</Filter>
     </ClCompile>
     <ClCompile Include="SelectionInfo.cpp">
@@ -135,6 +126,18 @@
     </ClCompile>
     <ClCompile Include="MeshElementManager.cpp">
       <Filter>Sources\Object\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectionElementPoint.cpp">
+      <Filter>Sources\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectionElement.cpp">
+      <Filter>Sources\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectionElementFace.cpp">
+      <Filter>Sources\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectionElementEdge.cpp">
+      <Filter>Sources\Selection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -222,16 +225,7 @@
     <ClInclude Include="Selection.h">
       <Filter>Headers\Selection</Filter>
     </ClInclude>
-    <ClInclude Include="SelectionEdge.h">
-      <Filter>Headers\Selection</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectionFace.h">
-      <Filter>Headers\Selection</Filter>
-    </ClInclude>
     <ClInclude Include="SelectionObject.h">
-      <Filter>Headers\Selection</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectionPoint.h">
       <Filter>Headers\Selection</Filter>
     </ClInclude>
     <ClInclude Include="SelectionSwitcher.h">
@@ -275,6 +269,18 @@
     </ClInclude>
     <ClInclude Include="MeshElementManager.h">
       <Filter>Headers\Object\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionElementPoint.h">
+      <Filter>Headers\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionElement.h">
+      <Filter>Headers\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionElementFace.h">
+      <Filter>Headers\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionElementEdge.h">
+      <Filter>Headers\Selection</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
