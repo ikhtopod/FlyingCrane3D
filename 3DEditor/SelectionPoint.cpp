@@ -15,6 +15,19 @@ void SelectionPoint::select() {
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
+		// Отрисовать объект, чтобы вершины, спрятанные за ним, не выделялись
+		for (auto&[meshKey, meshValue] : objValue.getMeshes()) {
+			this->shader.setLambdaDraw([&objValue](Shader* _this) {
+				_this->setVec4("colorCode", glm::vec4 { 0.0f, 0.0f, 0.0f, 0.0f });
+			});
+
+			Shader prevShader = meshValue.getShader();
+			meshValue.setShader(this->shader);
+			meshValue.setGlobalTransform(objValue.getParentTransform() + objValue.getTransform());
+			meshValue.draw();
+			meshValue.setShader(prevShader);
+		}//rof
+
 		for (auto&[meshElemKey, meshElemVertises] : objValue.getMeshElementManager().getVertices()) {
 			for (auto& meshElem : meshElemVertises) {
 				if (!meshElem.getSelectionInfo().canSelect) continue;
