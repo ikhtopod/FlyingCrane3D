@@ -15,17 +15,17 @@ void SelectionElementEdge::select() {
 
 		this->drawObject(objValue);
 
-		for (auto&[meshElemKey, meshElemEdges] : objValue.getMeshElementManager().getEdges()) {
-			for (auto& meshElem : meshElemEdges) {
-				if (!meshElem.getSelectionInfo().canSelect) continue;
+		for (auto&[meshElemKey, meshElements] : objValue.getMeshElementManager().getEdges()) {
+			for (auto& meshElement : meshElements) {
+				if (!meshElement.getSelectionInfo().canSelect) continue;
 
-				meshElem.getSelectionInfo().colorSelect = Util::generateRGBAColorById(++colorId);
+				meshElement.getSelectionInfo().colorSelect = Util::generateRGBAColorById(++colorId);
 
-				meshElem.getSelectionInfo().isSelectionProcess = true;
+				meshElement.getSelectionInfo().isSelectionProcess = true;
 				glLineWidth(10.0f);
-				meshElem.draw();
+				meshElement.draw();
 				glLineWidth(1.0f);
-				meshElem.getSelectionInfo().isSelectionProcess = false;
+				meshElement.getSelectionInfo().isSelectionProcess = false;
 			}//rof
 		}//rof
 	}//rof
@@ -38,12 +38,12 @@ void SelectionElementEdge::select() {
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
-		for (auto&[meshElemKey, meshElemEdges] : objValue.getMeshElementManager().getEdges()) {
-			for (auto& meshElem : meshElemEdges) {
-				if (!meshElem.getSelectionInfo().canSelect) continue;
+		for (auto&[meshElemKey, meshElements] : objValue.getMeshElementManager().getEdges()) {
+			for (auto& meshElement : meshElements) {
+				if (!meshElement.getSelectionInfo().canSelect) continue;
 
-				if (meshElem.getSelectionInfo().colorSelectEquals(colorUnderCursor)) {
-					meshElem.getSelectionInfo().isSelected = true;
+				if (meshElement.getSelectionInfo().colorSelectEquals(colorUnderCursor)) {
+					meshElement.getSelectionInfo().isSelected = true;
 
 					if (this->hasSelectedObject(objKey)) {
 						if (this->selectedObjects[objKey] == nullptr) {

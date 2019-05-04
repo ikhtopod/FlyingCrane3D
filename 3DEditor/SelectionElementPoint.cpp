@@ -14,15 +14,15 @@ void SelectionElementPoint::select() {
 
 		this->drawObject(objValue);
 
-		for (auto&[meshElemKey, meshElemVertises] : objValue.getMeshElementManager().getVertices()) {
-			for (auto& meshElem : meshElemVertises) {
-				if (!meshElem.getSelectionInfo().canSelect) continue;
+		for (auto&[meshElemKey, meshElements] : objValue.getMeshElementManager().getVertices()) {
+			for (auto& meshElement : meshElements) {
+				if (!meshElement.getSelectionInfo().canSelect) continue;
 
-				meshElem.getSelectionInfo().colorSelect = Util::generateRGBAColorById(++colorId);
+				meshElement.getSelectionInfo().colorSelect = Util::generateRGBAColorById(++colorId);
 
-				meshElem.getSelectionInfo().isSelectionProcess = true;
-				meshElem.draw();
-				meshElem.getSelectionInfo().isSelectionProcess = false;
+				meshElement.getSelectionInfo().isSelectionProcess = true;
+				meshElement.draw();
+				meshElement.getSelectionInfo().isSelectionProcess = false;
 			}//rof
 		}//rof
 	}//rof
@@ -35,12 +35,12 @@ void SelectionElementPoint::select() {
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
-		for (auto&[meshElemKey, meshElemVertises] : objValue.getMeshElementManager().getVertices()) {
-			for (auto& meshElem : meshElemVertises) {
-				if (!meshElem.getSelectionInfo().canSelect) continue;
+		for (auto&[meshElemKey, meshElements] : objValue.getMeshElementManager().getVertices()) {
+			for (auto& meshElement : meshElements) {
+				if (!meshElement.getSelectionInfo().canSelect) continue;
 
-				if (meshElem.getSelectionInfo().colorSelectEquals(colorUnderCursor)) {
-					meshElem.getSelectionInfo().isSelected = true;
+				if (meshElement.getSelectionInfo().colorSelectEquals(colorUnderCursor)) {
+					meshElement.getSelectionInfo().isSelected = true;
 
 					if (this->hasSelectedObject(objKey)) {
 						if (this->selectedObjects[objKey] == nullptr) {
