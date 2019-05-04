@@ -283,12 +283,12 @@
   <ItemGroup>
     <None Include="..\resources\shaders\default-shader.fs" />
     <None Include="..\resources\shaders\default-shader.vs" />
-    <None Include="..\resources\shaders\GridObjectMeshGrid.fs" />
-    <None Include="..\resources\shaders\GridObjectMeshGrid.vs" />
-    <None Include="..\resources\shaders\GridObjectMeshX.fs" />
-    <None Include="..\resources\shaders\GridObjectMeshX.vs" />
-    <None Include="..\resources\shaders\GridObjectMeshZ.fs" />
-    <None Include="..\resources\shaders\GridObjectMeshZ.vs" />
+    <None Include="..\resources\shaders\grid-object-mesh-x.fs" />
+    <None Include="..\resources\shaders\grid-object-mesh-x.vs" />
+    <None Include="..\resources\shaders\grid-object-mesh-z.fs" />
+    <None Include="..\resources\shaders\grid-object-mesh-z.vs" />
+    <None Include="..\resources\shaders\grid-object-mesh.fs" />
+    <None Include="..\resources\shaders\grid-object-mesh.vs" />
     <None Include="..\resources\shaders\mesh-element-shader.fs" />
     <None Include="..\resources\shaders\mesh-element-shader.vs" />
   </ItemGroup>

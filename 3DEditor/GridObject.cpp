@@ -76,12 +76,12 @@ GridObject::GridObject(_uint _width, _uint _height)
 	}
 
 
-	FsPath meshXVertex { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshX.vs)" };
-	FsPath meshXFragment { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshX.fs)" };
-	FsPath meshZVertex { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshZ.vs)" };
-	FsPath meshZFragment { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshZ.fs)" };
-	FsPath meshGridVertex { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshGrid.vs)" };
-	FsPath meshGridFragment { Shader::SHADER_DIRECTORY + R"(\GridObjectMeshGrid.fs)" };
+	FsPath meshXVertex { Shader::SHADER_DIRECTORY + R"(\grid-object-mesh-x.vs)" };
+	FsPath meshXFragment { Shader::SHADER_DIRECTORY + R"(\grid-object-mesh-x.fs)" };
+	FsPath meshZVertex { Shader::SHADER_DIRECTORY + R"(\grid-object-mesh-z.vs)" };
+	FsPath meshZFragment { Shader::SHADER_DIRECTORY + R"(\grid-object-mesh-z.fs)" };
+	FsPath meshGridVertex { Shader::SHADER_DIRECTORY + R"(\grid-object-mesh.vs)" };
+	FsPath meshGridFragment { Shader::SHADER_DIRECTORY + R"(\grid-object-mesh.fs)" };
 
 
 	PolymeshRepresentation polymeshX { verticesX, indicesX };

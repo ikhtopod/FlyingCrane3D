@@ -345,26 +345,11 @@
     <Filter Include="Sources\Object\Representation">
       <UniqueIdentifier>{50dbb87f-53aa-4301-b7db-d88aaed45487}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Shaders\GridObject">
+      <UniqueIdentifier>{892f7eba-016f-4973-a839-3662eb849b39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\resources\shaders\GridObjectMeshX.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\resources\shaders\GridObjectMeshX.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\resources\shaders\GridObjectMeshGrid.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\resources\shaders\GridObjectMeshGrid.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\resources\shaders\GridObjectMeshZ.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\resources\shaders\GridObjectMeshZ.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
     <None Include="..\resources\shaders\mesh-element-shader.fs">
       <Filter>Resources\Shaders</Filter>
     </None>
@@ -376,6 +361,24 @@
     </None>
     <None Include="..\resources\shaders\default-shader.vs">
       <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\resources\shaders\grid-object-mesh.fs">
+      <Filter>Resources\Shaders\GridObject</Filter>
+    </None>
+    <None Include="..\resources\shaders\grid-object-mesh.vs">
+      <Filter>Resources\Shaders\GridObject</Filter>
+    </None>
+    <None Include="..\resources\shaders\grid-object-mesh-x.fs">
+      <Filter>Resources\Shaders\GridObject</Filter>
+    </None>
+    <None Include="..\resources\shaders\grid-object-mesh-x.vs">
+      <Filter>Resources\Shaders\GridObject</Filter>
+    </None>
+    <None Include="..\resources\shaders\grid-object-mesh-z.fs">
+      <Filter>Resources\Shaders\GridObject</Filter>
+    </None>
+    <None Include="..\resources\shaders\grid-object-mesh-z.vs">
+      <Filter>Resources\Shaders\GridObject</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
