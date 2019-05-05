@@ -46,20 +46,20 @@ void Selection::clearSelectedObjects() {
 
 		for (auto&[meshName, meshElements] : mem.getVertices()) {
 			for (auto& mesh : meshElements) {
-				mesh.getSelectionInfo().isSelected = false;
+				mesh->getSelectionInfo().isSelected = false;
 			}//rof
 		}//rof mesh element vertices
 
 
 		for (auto&[meshName, meshElements] : mem.getEdges()) {
 			for (auto& mesh : meshElements) {
-				mesh.getSelectionInfo().isSelected = false;
+				mesh->getSelectionInfo().isSelected = false;
 			}//rof
 		}//rof mesh element edges
 
 		for (auto&[meshName, meshElements] : mem.getFaces()) {
 			for (auto& mesh : meshElements) {
-				mesh.getSelectionInfo().isSelected = false;
+				mesh->getSelectionInfo().isSelected = false;
 			}//rof
 		}//rof mesh element faces
 

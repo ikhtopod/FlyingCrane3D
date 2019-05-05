@@ -23,9 +23,12 @@ private:
 	template<class D>
 	using IsBaseOfMeshElement = IsBaseOf<MeshElement, D>;
 
+	template<typename T>
+	using VectorPtr = std::vector<std::shared_ptr<T>>;
+
 	// ќтображение списка объектов, €вл€ющихс€ подклассами класса MeshElement
 	template<typename T, typename = IsBaseOfMeshElement<T>>
-	using UMapMeshElements = std::unordered_map<std::string, std::vector<T>>;
+	using UMapMeshElements = std::unordered_map<std::string, VectorPtr<T>>;
 
 	template<class T>
 	using UMap = std::unordered_map<std::string, T>;

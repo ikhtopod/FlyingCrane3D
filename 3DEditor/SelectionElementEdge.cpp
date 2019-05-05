@@ -13,21 +13,21 @@ void SelectionElementEdge::select() {
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
-		this->drawObject(objValue);
-
 		for (auto&[meshElemKey, meshElements] : objValue.getMeshElementManager().getEdges()) {
 			for (auto& meshElement : meshElements) {
-				if (!meshElement.getSelectionInfo().canSelect) continue;
+				if (!meshElement->getSelectionInfo().canSelect) continue;
 
-				meshElement.getSelectionInfo().colorSelect = Util::generateRGBAColorById(++colorId);
+				meshElement->getSelectionInfo().colorSelect = Util::generateRGBAColorById(++colorId);
 
-				meshElement.getSelectionInfo().isSelectionProcess = true;
+				meshElement->getSelectionInfo().isSelectionProcess = true;
 				glLineWidth(10.0f);
-				meshElement.draw();
+				meshElement->draw();
 				glLineWidth(1.0f);
-				meshElement.getSelectionInfo().isSelectionProcess = false;
+				meshElement->getSelectionInfo().isSelectionProcess = false;
 			}//rof
 		}//rof
+
+		this->drawObject(objValue);
 	}//rof
 
 	glEnable(GL_MULTISAMPLE);
@@ -40,10 +40,10 @@ void SelectionElementEdge::select() {
 
 		for (auto&[meshElemKey, meshElements] : objValue.getMeshElementManager().getEdges()) {
 			for (auto& meshElement : meshElements) {
-				if (!meshElement.getSelectionInfo().canSelect) continue;
-
-				if (meshElement.getSelectionInfo().colorSelectEquals(colorUnderCursor)) {
-					meshElement.getSelectionInfo().isSelected = true;
+				if (!meshElement->getSelectionInfo().canSelect) continue;
+				
+				if (meshElement->getSelectionInfo().colorSelectEquals(colorUnderCursor)) {
+					meshElement->getSelectionInfo().isSelected = true;
 
 					if (this->hasSelectedObject(objKey)) {
 						if (this->selectedObjects[objKey] == nullptr) {
@@ -67,9 +67,9 @@ std::vector<glm::vec3> SelectionElementEdge::getVerticesForCentroid() {
 	for (auto&[objName, objValue] : this->selectedObjects) {
 		for (auto&[meshName, meshElements] : objValue->getMeshElementManager().getEdges()) {
 			for (auto& me : meshElements) {
-				if (!me.getSelectionInfo().isSelected) continue;
+				if (!me->getSelectionInfo().isSelected) continue;
 
-				for (Vertex& v : me.getVertices()) {
+				for (Vertex& v : me->getVertices()) {
 					glm::vec3 pos = v.position + objValue->getGlobalTransform().getPosition();
 					centroidVertices.push_back(pos);
 				}//rof
