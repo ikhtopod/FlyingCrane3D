@@ -9,6 +9,6 @@ public:
 
 public:
 	MeshElementVertex() = delete;
-	MeshElementVertex(Vertex _vertex);
+	MeshElementVertex(Vertex& _vertex);
 	virtual ~MeshElementVertex() = default;
 };

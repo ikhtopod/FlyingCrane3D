@@ -10,8 +10,8 @@ public:
 
 public:
 	MeshElementEdge() = delete;
-	MeshElementEdge(Edge _edge);
-	MeshElementEdge(Vertex first, Vertex second);
+	MeshElementEdge(Edge& _edge);
+	MeshElementEdge(Vertex& first, Vertex& second);
 	virtual ~MeshElementEdge() = default;
 };
 

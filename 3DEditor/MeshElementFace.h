@@ -10,8 +10,8 @@ public:
 
 public:
 	MeshElementFace() = delete;
-	MeshElementFace(Face _face);
-	MeshElementFace(Vertex first, Vertex second, Vertex third);
+	MeshElementFace(Face& _face);
+	MeshElementFace(Vertex& first, Vertex& second, Vertex& third);
 	virtual ~MeshElementFace() = default;
 };
 
