@@ -218,13 +218,8 @@ void Application::input() {
 	this->focusingOnSelectedObjects();
 }
 
-void Application::clearColor() {
-	glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
 void Application::rendering() {
-	this->clearColor();
+	Util::clearColor(this->bgColor);
 	this->scene.draw();
 }
 

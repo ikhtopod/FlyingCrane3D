@@ -3,11 +3,6 @@
 const glm::vec4 Selection::CLEAR_COLOR = glm::vec4 { 0.0f, 0.0f, 0.0f, 0.0f };
 
 
-void Selection::clearColor() {
-	glClearColor(CLEAR_COLOR.r, CLEAR_COLOR.g, CLEAR_COLOR.b, CLEAR_COLOR.a);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
 // Получить цвет пикселя под курсором, при клике мышью
 glm::vec4 Selection::getColorUnderCursor() {
 	Application* appThis = Application::getInstancePtr();

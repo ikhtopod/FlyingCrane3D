@@ -30,7 +30,6 @@ protected:
 	std::map<std::string, Object*> selectedObjects {};
 
 protected:
-	static void clearColor();
 	static glm::vec4 getColorUnderCursor();
 
 	bool diffIsZero();

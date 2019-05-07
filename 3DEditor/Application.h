@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Util.h"
 #include "Window.h"
 #include "GUI.h"
 #include "DeltaTime.h"
@@ -58,7 +59,6 @@ private:
 	void focusingOnSelectedObjects();
 	void input();
 
-	void clearColor();
 	void rendering();
 
 private:

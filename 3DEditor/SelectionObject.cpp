@@ -4,7 +4,7 @@
 void SelectionObject::select() {
 	Application* appThis = Application::getInstancePtr();
 
-	Selection::clearColor();
+	Util::clearColor(Selection::CLEAR_COLOR);
 
 	glDisable(GL_MULTISAMPLE);
 

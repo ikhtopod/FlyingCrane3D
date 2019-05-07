@@ -6,6 +6,21 @@
 const glm::mat4 Util::IDENTITY_MATRIX = glm::mat4 { 1.0f };
 
 
+/* OpenGL Functions */
+
+void Util::clearColor() {
+	Util::clearColor(glm::vec4 {});
+}
+
+void Util::clearColor(const glm::vec4& color) {
+	Util::clearColor(glm::value_ptr(color));
+}
+
+void Util::clearColor(const GLfloat color[4]) {
+	glClearColor(color[0], color[1], color[2], color[3]);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 /* Functions */
 
 float Util::repeat(float val, float _min, float _max) {
@@ -36,7 +51,6 @@ glm::vec2 Util::repeat(glm::vec2 val, float _min, float _max) {
 }
 
 
-// maximum combinations = 4'294'967'296
 glm::vec4 Util::generateRGBAColorById(uint32_t colorId) {
 	char *rgba = reinterpret_cast<char*>(&colorId);
 	return glm::vec4 { rgba[0], rgba[1], rgba[2], rgba[3] };
