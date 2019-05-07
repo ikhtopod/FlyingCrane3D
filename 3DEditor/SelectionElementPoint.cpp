@@ -8,7 +8,7 @@ void SelectionElementPoint::drawForSelection() {
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
-		for (auto&[meshElemKey, meshElements] : objValue.getMeshElementManager().getVertices()) {
+		for (auto&[meshName, meshElements] : objValue.getMeshElementManager().getVertices()) {
 			for (auto& meshElement : meshElements) {
 				if (!meshElement->getSelectionInfo().canSelect) continue;
 
@@ -30,7 +30,7 @@ void SelectionElementPoint::saveSelectedObject(glm::vec4 colorUnderCursor) {
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
-		for (auto&[meshElemKey, meshElements] : objValue.getMeshElementManager().getVertices()) {
+		for (auto&[meshName, meshElements] : objValue.getMeshElementManager().getVertices()) {
 			for (auto& meshElement : meshElements) {
 				if (!meshElement->getSelectionInfo().canSelect) continue;
 

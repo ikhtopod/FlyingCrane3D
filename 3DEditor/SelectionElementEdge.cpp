@@ -8,7 +8,7 @@ void SelectionElementEdge::drawForSelection() {
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
-		for (auto&[meshElemKey, meshElements] : objValue.getMeshElementManager().getEdges()) {
+		for (auto&[meshName, meshElements] : objValue.getMeshElementManager().getEdges()) {
 			for (auto& meshElement : meshElements) {
 				if (!meshElement->getSelectionInfo().canSelect) continue;
 
@@ -32,7 +32,7 @@ void SelectionElementEdge::saveSelectedObject(glm::vec4 colorUnderCursor) {
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
-		for (auto&[meshElemKey, meshElements] : objValue.getMeshElementManager().getEdges()) {
+		for (auto&[meshName, meshElements] : objValue.getMeshElementManager().getEdges()) {
 			for (auto& meshElement : meshElements) {
 				if (!meshElement->getSelectionInfo().canSelect) continue;
 
