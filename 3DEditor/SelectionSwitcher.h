@@ -2,7 +2,7 @@
 
 #include "Selection.h"
 #include "SelectionObject.h"
-#include "SelectionElementPoint.h"
+#include "SelectionElementVertex.h"
 #include "SelectionElementEdge.h"
 #include "SelectionElementFace.h"
 

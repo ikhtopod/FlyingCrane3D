@@ -74,7 +74,7 @@
 #include "Selection.h"
 #include "SelectionObject.h"
 #include "SelectionElement.h"
-#include "SelectionElementPoint.h"
+#include "SelectionElementVertex.h"
 #include "SelectionElementEdge.h"
 #include "SelectionElementFace.h"
 #include "MeshBase.h"

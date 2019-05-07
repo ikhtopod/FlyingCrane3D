@@ -1,7 +1,7 @@
-#include "SelectionElementPoint.h"
+#include "SelectionElementVertex.h"
 
 
-void SelectionElementPoint::drawForSelection() {
+void SelectionElementVertex::drawForSelection() {
 	Application* appThis = Application::getInstancePtr();
 
 	uint32_t colorId = 0;
@@ -24,7 +24,7 @@ void SelectionElementPoint::drawForSelection() {
 	}//rof
 }
 
-void SelectionElementPoint::saveSelectedObject(glm::vec4 colorUnderCursor) {
+void SelectionElementVertex::saveSelectedObject(glm::vec4 colorUnderCursor) {
 	Application* appThis = Application::getInstancePtr();
 
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
@@ -53,7 +53,7 @@ void SelectionElementPoint::saveSelectedObject(glm::vec4 colorUnderCursor) {
 	}//rof
 }
 
-std::vector<glm::vec3> SelectionElementPoint::getVerticesForCentroid() {
+std::vector<glm::vec3> SelectionElementVertex::getVerticesForCentroid() {
 	std::vector<glm::vec3> centroidVertices {};
 
 	for (auto&[objName, objValue] : this->selectedObjects) {
@@ -72,8 +72,8 @@ std::vector<glm::vec3> SelectionElementPoint::getVerticesForCentroid() {
 	return centroidVertices;
 }
 
-void SelectionElementPoint::moving() { /* dummy */ }
+void SelectionElementVertex::moving() { /* dummy */ }
 
-void SelectionElementPoint::rotation() { /* dummy */ }
+void SelectionElementVertex::rotation() { /* dummy */ }
 
-void SelectionElementPoint::scaling() { /* dummy */ }
+void SelectionElementVertex::scaling() { /* dummy */ }
