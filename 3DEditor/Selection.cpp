@@ -1,5 +1,6 @@
 #include "Selection.h"
 
+
 const glm::vec4 Selection::CLEAR_COLOR = glm::vec4 { 0.0f, 0.0f, 0.0f, 0.0f };
 
 
@@ -124,4 +125,15 @@ void Selection::mouseButtonInput(int button, int action, int mods) {
 	} else if (action == GLFW_RELEASE && prevState == GLFW_PRESS) {
 		prevState = GLFW_RELEASE;
 	}//esle fi
+}
+
+void Selection::select() {
+	glDisable(GL_MULTISAMPLE);
+
+	Util::clearColor(Selection::CLEAR_COLOR);
+
+	this->drawForSelection();
+	this->saveSelectedObject(Selection::getColorUnderCursor());
+
+	glEnable(GL_MULTISAMPLE);
 }

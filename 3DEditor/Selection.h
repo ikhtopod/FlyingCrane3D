@@ -10,7 +10,9 @@ class Object;
 
 class ISelection {
 protected:
-	virtual void select() = 0;
+	virtual void drawForSelection() = 0;
+	virtual void saveSelectedObject(glm::vec4 colorUnderCursor) = 0;
+
 	virtual std::vector<glm::vec3> getVerticesForCentroid() = 0;
 
 public:
@@ -38,6 +40,9 @@ public:
 	Selection() = default;
 	virtual ~Selection() = default;
 
+	virtual void select();
+
+public:
 	std::map<std::string, Object*>& getSelectedObjects();
 	bool hasSelectedObject(std::string name);
 	bool hasSelectedObjects();
@@ -50,5 +55,4 @@ public:
 
 public:
 	void mouseButtonInput(int button, int action, int mods);
-
 };

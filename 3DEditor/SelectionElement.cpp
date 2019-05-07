@@ -1,5 +1,6 @@
 #include "SelectionElement.h"
 
+
 void SelectionElement::drawObject(Object& object) {
 	this->drawObject(object, CLEAR_COLOR);
 }

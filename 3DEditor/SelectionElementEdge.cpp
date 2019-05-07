@@ -1,14 +1,9 @@
 #include "SelectionElementEdge.h"
 
 
-void SelectionElementEdge::select() {
+void SelectionElementEdge::drawForSelection() {
 	Application* appThis = Application::getInstancePtr();
 
-	Util::clearColor(Selection::CLEAR_COLOR);
-
-	glDisable(GL_MULTISAMPLE);
-
-	// Назначаем цвета объектам и отрисовываем
 	uint32_t colorId = 0;
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
@@ -29,19 +24,18 @@ void SelectionElementEdge::select() {
 
 		this->drawObject(objValue);
 	}//rof
+}
 
-	glEnable(GL_MULTISAMPLE);
+void SelectionElementEdge::saveSelectedObject(glm::vec4 colorUnderCursor) {
+	Application* appThis = Application::getInstancePtr();
 
-	glm::vec4 colorUnderCursor = Selection::getColorUnderCursor();
-
-	// Сохранить текущие выбранные объекты
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
 		for (auto&[meshElemKey, meshElements] : objValue.getMeshElementManager().getEdges()) {
 			for (auto& meshElement : meshElements) {
 				if (!meshElement->getSelectionInfo().canSelect) continue;
-				
+
 				if (meshElement->getSelectionInfo().colorSelectEquals(colorUnderCursor)) {
 					meshElement->getSelectionInfo().isSelected = true;
 
