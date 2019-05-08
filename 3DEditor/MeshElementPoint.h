@@ -8,10 +8,9 @@ class MeshElementPoint final : public MeshElement {
 public:
 	static const GLenum DEFAULT_MESH_TYPE;
 
-	Point* point;
-
 public:
 	MeshElementPoint() = delete;
-	MeshElementPoint(Point* _point);
+	MeshElementPoint(Point& _point);
+	MeshElementPoint(Vertex& _vertex);
 	virtual ~MeshElementPoint() = default;
 };

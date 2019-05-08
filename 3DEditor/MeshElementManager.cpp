@@ -76,8 +76,8 @@ void MeshElementManager::updatePoints() {
 	for (auto&[meshName, mesh] : *this->meshes) {
 		this->points.insert({ meshName, VectorPtr<MeshElementPoint> {} });
 
-		for (Point& point : mesh.getPolymesh().getPoints()) {
-			this->points[meshName].push_back(std::make_shared<MeshElementPoint>(&point));
+		for (Vertex& vertex : mesh.getPolymesh().getVertices()) {
+			this->points[meshName].push_back(std::make_shared<MeshElementPoint>(vertex));
 			this->points[meshName].back()->init();
 		}//rof
 	}//rof
@@ -90,7 +90,7 @@ void MeshElementManager::updateEdges() {
 		this->edges.insert({ meshName, VectorPtr<MeshElementEdge> {} });
 
 		for (Edge& edge : mesh.getPolymesh().getEdges()) {
-			this->edges[meshName].push_back(std::make_shared<MeshElementEdge>(&edge));
+			this->edges[meshName].push_back(std::make_shared<MeshElementEdge>(edge));
 			this->edges[meshName].back()->init();
 		}//rof
 	}//rof
@@ -103,7 +103,7 @@ void MeshElementManager::updateFaces() {
 		this->faces.insert({ meshName, VectorPtr<MeshElementFace> {} });
 
 		for (Face& face : mesh.getPolymesh().getFaces()) {
-			this->faces[meshName].push_back(std::make_shared<MeshElementFace>(&face));
+			this->faces[meshName].push_back(std::make_shared<MeshElementFace>(face));
 			this->faces[meshName].back()->init();
 		}//rof
 	}//rof

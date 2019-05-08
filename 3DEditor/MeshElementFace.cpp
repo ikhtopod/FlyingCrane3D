@@ -3,32 +3,27 @@
 
 const GLenum MeshElementFace::DEFAULT_MESH_TYPE = GL_LINE_LOOP;
 
-MeshElementFace::MeshElementFace(Face* _face) :
-	MeshElement(DEFAULT_MESH_TYPE), face(_face) {
+MeshElementFace::MeshElementFace(Face& _face) :
+	MeshElementFace(*_face.first, *_face.second, *_face.third) {}
 
-	this->vertices.insert(this->vertices.end(),
-						  { *this->face->first, *this->face->second, *this->face->third });
+MeshElementFace::MeshElementFace(Vertex& first, Vertex& second, Vertex& third) :
+	MeshElement(DEFAULT_MESH_TYPE) {
+
+	this->vertices.insert(this->vertices.end(), { first, second, third });
 	this->indices.insert(this->indices.end(), { 0, 1, 2 });
 
-	this->updateMarkList();
-}
-
-void MeshElementFace::updateMarkList() {
-	glm::vec3 pos1 = this->face->first->position;
-	glm::vec3 pos2 = this->face->second->position;
-	glm::vec3 pos3 = this->face->third->position;
-
-	glm::vec3 markCenter = (pos1 + pos2 + pos3) / 3.0f;
+	glm::vec3 markCenter = (first.position + second.position + third.position) / 3.0f;
 	float scale = 0.05f;
 
 	this->markPoints.insert(
 		this->markPoints.end(), {
-			{ ((pos1 - markCenter) * scale) + markCenter, 0 },
-			{ ((pos2 - markCenter) * scale) + markCenter, 1 },
-			{ ((pos3 - markCenter) * scale) + markCenter, 2 },
+			{ ((first.position - markCenter) * scale) + markCenter, 0 },
+			{ ((second.position - markCenter) * scale) + markCenter, 1 },
+			{ ((third.position - markCenter) * scale) + markCenter, 2 },
 		}
 	);
 }
+
 
 void MeshElementFace::initMark() {
 	glGenVertexArrays(BUFFER_SIZE, &this->vaoMark);
@@ -51,7 +46,7 @@ void MeshElementFace::initMark() {
 void MeshElementFace::drawMark() {
 	glBindVertexArray(this->vaoMark);
 	glLineWidth(2.5f);
-	glDrawArrays(DEFAULT_MESH_TYPE, 0, 3);
+	glDrawArrays(GL_LINE_LOOP, 0, 3);
 	glLineWidth(1.0f);
 	glBindVertexArray(0); // unbind
 }

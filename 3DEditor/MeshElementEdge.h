@@ -8,11 +8,10 @@ class MeshElementEdge final : public MeshElement {
 public:
 	static const GLenum DEFAULT_MESH_TYPE;
 
-	Edge* edge;
-
 public:
 	MeshElementEdge() = delete;
-	MeshElementEdge(Edge* _edge);
+	MeshElementEdge(Edge& _edge);
+	MeshElementEdge(Vertex& first, Vertex& second);
 	virtual ~MeshElementEdge() = default;
 };
 
