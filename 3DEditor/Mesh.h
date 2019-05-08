@@ -17,7 +17,7 @@ public:
 	Mesh(PolymeshRepresentation _polymesh);
 	Mesh(PolymeshRepresentation _polymesh, GLenum _type);
 	Mesh(PolymeshRepresentation _polymesh, GLenum _type, Shader _shader);
-	~Mesh() = default;
+	virtual ~Mesh() = default;
 
 	PolymeshRepresentation& getPolymesh();
 
