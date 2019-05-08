@@ -12,6 +12,8 @@ private:
 	std::vector<Vertex> markPoints {};
 	GLuint vaoMark, vboMark;
 
+	void updateMarkList();
+
 	void initMark();
 	void drawMark();
 	void freeMark();
@@ -21,6 +23,8 @@ public:
 	MeshElementFace(Face& _face);
 	MeshElementFace(Vertex& first, Vertex& second, Vertex& third);
 	virtual ~MeshElementFace() = default;
+
+	virtual void updateBufferedVertices() override;
 
 	virtual void init() override;
 	virtual void draw() override;

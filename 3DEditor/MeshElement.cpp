@@ -32,6 +32,12 @@ std::vector<Vertex>& MeshElement::getVertices() {
 	return this->vertices;
 }
 
+void MeshElement::updateBufferedVertices() {
+	glBindVertexArray(this->vao);
+	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, this->vertices.size() * sizeof(Vertex), &(this->vertices)[0]);
+}
+
 void MeshElement::init() {
 	glGenVertexArrays(BUFFER_SIZE, &this->vao);
 	glGenBuffers(BUFFER_SIZE, &this->vbo);

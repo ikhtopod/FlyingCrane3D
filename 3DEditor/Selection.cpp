@@ -23,7 +23,7 @@ bool Selection::diffIsZero() {
 	return this->diffMousePosition.x == 0.0f && this->diffMousePosition.y == 0.0f;
 }
 
-std::map<std::string, Object*>& Selection::getSelectedObjects() {
+std::unordered_map<std::string, Object*>& Selection::getSelectedObjects() {
 	return this->selectedObjects;
 }
 

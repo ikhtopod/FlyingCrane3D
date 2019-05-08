@@ -12,18 +12,43 @@ MeshElementFace::MeshElementFace(Vertex& first, Vertex& second, Vertex& third) :
 	this->vertices.insert(this->vertices.end(), { first, second, third });
 	this->indices.insert(this->indices.end(), { 0, 1, 2 });
 
-	glm::vec3 markCenter = (first.position + second.position + third.position) / 3.0f;
+	this->updateMarkList();
+}
+
+
+void MeshElementFace::updateMarkList() {
+	if (this->vertices.empty() || this->vertices.size() < 3) return;
+
+	glm::vec3 first = this->vertices[0].position;
+	glm::vec3 second = this->vertices[1].position;
+	glm::vec3 third = this->vertices[2].position;
+
+	glm::vec3 markCenter = (first + second + third) / 3.0f;
 	float scale = 0.05f;
+
+	if (!this->markPoints.empty()) {
+		this->markPoints.clear();
+	}
 
 	this->markPoints.insert(
 		this->markPoints.end(), {
-			{ ((first.position - markCenter) * scale) + markCenter, 0 },
-			{ ((second.position - markCenter) * scale) + markCenter, 1 },
-			{ ((third.position - markCenter) * scale) + markCenter, 2 },
+			{ ((first - markCenter) * scale) + markCenter, 0 },
+			{ ((second - markCenter) * scale) + markCenter, 1 },
+			{ ((third - markCenter) * scale) + markCenter, 2 },
 		}
 	);
 }
 
+
+void MeshElementFace::updateBufferedVertices() {
+	MeshElement::updateBufferedVertices();
+
+	this->updateMarkList();
+
+	glBindVertexArray(this->vaoMark);
+	glBindBuffer(GL_ARRAY_BUFFER, this->vboMark);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, this->markPoints.size() * sizeof(Vertex), &(this->markPoints)[0]);
+}
 
 void MeshElementFace::initMark() {
 	glGenVertexArrays(BUFFER_SIZE, &this->vaoMark);

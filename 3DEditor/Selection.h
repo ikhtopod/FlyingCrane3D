@@ -29,7 +29,7 @@ protected:
 	glm::vec2 prevMousePosition {};
 	glm::vec2 diffMousePosition {};
 
-	std::map<std::string, Object*> selectedObjects {};
+	std::unordered_map<std::string, Object*> selectedObjects {};
 
 protected:
 	static glm::vec4 getColorUnderCursor();
@@ -43,7 +43,7 @@ public:
 	virtual void select();
 
 public:
-	std::map<std::string, Object*>& getSelectedObjects();
+	std::unordered_map<std::string, Object*>& getSelectedObjects();
 	bool hasSelectedObject(std::string name);
 	bool hasSelectedObjects();
 	void clearSelectedObjects();

@@ -21,6 +21,8 @@ void SelectionElementFace::drawForSelection() {
 				meshElement->getSelectionInfo().isSelectionProcess = false;
 			}//rof
 		}//rof
+
+		this->drawObject(objValue);
 	}//rof
 }
 
@@ -47,6 +49,8 @@ void SelectionElementFace::saveSelectedObject(glm::vec4 colorUnderCursor) {
 						break;
 					}//fi
 				}//fi
+
+				meshElement->getSelectionInfo().colorSelect = CLEAR_COLOR;
 			}//rof
 		}//rof
 	}//rof
@@ -71,7 +75,31 @@ std::vector<glm::vec3> SelectionElementFace::getVerticesForCentroid() {
 	return centroidVertices;
 }
 
-void SelectionElementFace::moving() { /* dummy */ }
+void SelectionElementFace::moving() {
+	this->updateMousePosition();
+
+	if (this->diffIsZero()) return;
+
+	Application* appThis = Application::getInstancePtr();
+
+	Axis& cameraAxis = appThis->getScene().getCamera().getAxis();
+	float deltaTime = appThis->getDeltaTime();
+
+	for (auto&[objName, objValue] : this->selectedObjects) {
+		for (auto&[meshName, meshElements] : objValue->getMeshElementManager().getFaces()) {
+			for (auto& me : meshElements) {
+				if (!me->getSelectionInfo().isSelected) continue;
+
+				for (Vertex& v : me->getVertices()) {
+					v.position += (cameraAxis.getRight() * diffMousePosition.x) * deltaTime;
+					v.position += (cameraAxis.getUp() * diffMousePosition.y) * deltaTime;
+				}//rof
+
+				me->updateBufferedVertices();
+			}//rof
+		}//rof
+	}//rof
+}
 
 void SelectionElementFace::rotation() { /* dummy */ }
 
