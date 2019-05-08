@@ -4,7 +4,7 @@
 const GLenum MeshElementPoint::DEFAULT_MESH_TYPE = GL_POINTS;
 
 MeshElementPoint::MeshElementPoint(Point& _point) :
-	MeshElementPoint(*_point.first) {}
+	MeshElementPoint(_point.first) {}
 
 MeshElementPoint::MeshElementPoint(Vertex& _vertex) :
 	MeshElement(DEFAULT_MESH_TYPE) {

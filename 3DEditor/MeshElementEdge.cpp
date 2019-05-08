@@ -4,7 +4,7 @@
 const GLenum MeshElementEdge::DEFAULT_MESH_TYPE = GL_LINES;
 
 MeshElementEdge::MeshElementEdge(Edge& _edge) :
-	MeshElementEdge(*_edge.first, *_edge.second) {}
+	MeshElementEdge(_edge.first, _edge.second) {}
 
 MeshElementEdge::MeshElementEdge(Vertex& first, Vertex& second) :
 	MeshElement(DEFAULT_MESH_TYPE) {

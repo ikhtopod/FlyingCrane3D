@@ -4,10 +4,10 @@
 
 class Point {
 public:
-	Vertex* first;
+	Vertex& first;
 
 	Point() = delete;
-	Point(Vertex* _first);
+	Point(Vertex& _first);
 	~Point() = default;
 
 	bool operator==(const Point& point) const;
