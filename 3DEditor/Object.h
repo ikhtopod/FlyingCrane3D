@@ -9,9 +9,6 @@
 
 
 class Mesh;
-//class MeshElementVertex;
-//class MeshElementEdge;
-//class MeshElementFace;
 
 class Object : public ITriada {
 protected:

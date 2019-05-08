@@ -70,15 +70,15 @@ void MeshElementManager::liberator(T* data) {
 }
 
 
-void MeshElementManager::updateVertices() {
-	cleaner<decltype(this->vertices)>(&this->vertices);
+void MeshElementManager::updatePoints() {
+	cleaner<decltype(this->points)>(&this->points);
 
 	for (auto&[meshName, mesh] : *this->meshes) {
-		this->vertices.insert({ meshName, VectorPtr<MeshElementVertex> {} });
+		this->points.insert({ meshName, VectorPtr<MeshElementPoint> {} });
 
 		for (Vertex& vertex : mesh.getPolymesh().getVertices()) {
-			this->vertices[meshName].push_back(std::make_shared<MeshElementVertex>(vertex));
-			this->vertices[meshName].back()->init();
+			this->points[meshName].push_back(std::make_shared<MeshElementPoint>(vertex));
+			this->points[meshName].back()->init();
 		}//rof
 	}//rof
 }
@@ -115,7 +115,7 @@ void MeshElementManager::update(UMapMesh* _meshes) {
 
 	this->meshes = _meshes;
 
-	this->updateVertices();
+	this->updatePoints();
 	this->updateEdges();
 	this->updateFaces();
 }
@@ -129,9 +129,9 @@ void MeshElementManager::setTransform(Transform _transform) {
 	this->transform = _transform;
 }
 
-MeshElementManager::UMapMeshElements<MeshElementVertex>&
-MeshElementManager::getVertices() {
-	return this->vertices;
+MeshElementManager::UMapMeshElements<MeshElementPoint>&
+MeshElementManager::getPoints() {
+	return this->points;
 }
 
 MeshElementManager::UMapMeshElements<MeshElementEdge>&
@@ -146,7 +146,7 @@ MeshElementManager::getFaces() {
 
 
 void MeshElementManager::init() {
-	initializer<decltype(this->vertices)>(&this->vertices);
+	initializer<decltype(this->points)>(&this->points);
 	initializer<decltype(this->edges)>(&this->edges);
 	initializer<decltype(this->faces)>(&this->faces);
 }
@@ -155,8 +155,8 @@ void MeshElementManager::draw() {
 	this->updateSelectionMode();
 
 	switch (this->currentSelectionMode) {
-		case SelectionMode::VERTEX:
-			painter<decltype(this->vertices)>(&this->vertices, this->transform);
+		case SelectionMode::POINT:
+			painter<decltype(this->points)>(&this->points, this->transform);
 			break;
 		case SelectionMode::EDGE:
 			glLineWidth(2.5f);
@@ -170,7 +170,7 @@ void MeshElementManager::draw() {
 }
 
 void MeshElementManager::free() {
-	liberator<decltype(this->vertices)>(&this->vertices);
+	liberator<decltype(this->points)>(&this->points);
 	liberator<decltype(this->edges)>(&this->edges);
 	liberator<decltype(this->faces)>(&this->faces);
 }

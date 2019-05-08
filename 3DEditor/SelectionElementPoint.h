@@ -2,7 +2,7 @@
 
 #include "SelectionElement.h"
 
-class SelectionElementVertex : public SelectionElement {
+class SelectionElementPoint : public SelectionElement {
 protected:
 	virtual void drawForSelection() override;
 	virtual void saveSelectedObject(glm::vec4 colorUnderCursor) override;

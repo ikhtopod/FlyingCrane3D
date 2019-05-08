@@ -2,12 +2,12 @@
 
 #include "Selection.h"
 #include "SelectionObject.h"
-#include "SelectionElementVertex.h"
+#include "SelectionElementPoint.h"
 #include "SelectionElementEdge.h"
 #include "SelectionElementFace.h"
 
 enum class SelectionMode {
-	VERTEX, EDGE, FACE,
+	POINT, EDGE, FACE,
 	OBJECT
 };
 

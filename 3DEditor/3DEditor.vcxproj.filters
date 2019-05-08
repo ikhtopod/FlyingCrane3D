@@ -109,9 +109,6 @@
     <ClCompile Include="MeshElementFace.cpp">
       <Filter>Sources\Object\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="MeshElementVertex.cpp">
-      <Filter>Sources\Object\Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="Edge.cpp">
       <Filter>Sources\Object\Representation</Filter>
     </ClCompile>
@@ -119,9 +116,6 @@
       <Filter>Sources\Object\Representation</Filter>
     </ClCompile>
     <ClCompile Include="PolymeshRepresentation.cpp">
-      <Filter>Sources\Object\Representation</Filter>
-    </ClCompile>
-    <ClCompile Include="Vertex.cpp">
       <Filter>Sources\Object\Representation</Filter>
     </ClCompile>
     <ClCompile Include="MeshElementManager.cpp">
@@ -136,8 +130,17 @@
     <ClCompile Include="SelectionElementEdge.cpp">
       <Filter>Sources\Selection</Filter>
     </ClCompile>
-    <ClCompile Include="SelectionElementVertex.cpp">
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Sources\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Sources\Object\Representation</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectionElementPoint.cpp">
       <Filter>Sources\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshElementPoint.cpp">
+      <Filter>Sources\Object\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -252,9 +255,6 @@
     <ClInclude Include="MeshElementFace.h">
       <Filter>Headers\Object\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="MeshElementVertex.h">
-      <Filter>Headers\Object\Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="Edge.h">
       <Filter>Headers\Object\Representation</Filter>
     </ClInclude>
@@ -262,9 +262,6 @@
       <Filter>Headers\Object\Representation</Filter>
     </ClInclude>
     <ClInclude Include="PolymeshRepresentation.h">
-      <Filter>Headers\Object\Representation</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
       <Filter>Headers\Object\Representation</Filter>
     </ClInclude>
     <ClInclude Include="MeshElementManager.h">
@@ -279,8 +276,17 @@
     <ClInclude Include="SelectionElementEdge.h">
       <Filter>Headers\Selection</Filter>
     </ClInclude>
-    <ClInclude Include="SelectionElementVertex.h">
+    <ClInclude Include="Point.h">
+      <Filter>Headers\Object\Representation</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Headers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionElementPoint.h">
       <Filter>Headers\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshElementPoint.h">
+      <Filter>Headers\Object\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

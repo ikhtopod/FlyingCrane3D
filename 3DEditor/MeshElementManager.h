@@ -7,7 +7,7 @@
 #include "Face.h"
 #include "Mesh.h"
 #include "MeshElement.h"
-#include "MeshElementVertex.h"
+#include "MeshElementPoint.h"
 #include "MeshElementEdge.h"
 #include "MeshElementFace.h"
 #include "SelectionSwitcher.h"
@@ -35,7 +35,7 @@ private:
 	using UMapMesh = UMap<Mesh>;
 
 private:
-	UMapMeshElements<MeshElementVertex> vertices {};
+	UMapMeshElements<MeshElementPoint> points {};
 	UMapMeshElements<MeshElementEdge> edges {};
 	UMapMeshElements<MeshElementFace> faces {};
 
@@ -70,7 +70,7 @@ private:
 private:
 	void updateSelectionMode();
 
-	void updateVertices();
+	void updatePoints();
 	void updateEdges();
 	void updateFaces();
 
@@ -78,7 +78,7 @@ public:
 	void update(UMapMesh* _meshes);
 
 	Transform& getTransform();
-	UMapMeshElements<MeshElementVertex>& getVertices();
+	UMapMeshElements<MeshElementPoint>& getPoints();
 	UMapMeshElements<MeshElementEdge>& getEdges();
 	UMapMeshElements<MeshElementFace>& getFaces();
 

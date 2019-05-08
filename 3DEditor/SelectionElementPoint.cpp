@@ -1,14 +1,14 @@
-#include "SelectionElementVertex.h"
+#include "SelectionElementPoint.h"
 
 
-void SelectionElementVertex::drawForSelection() {
+void SelectionElementPoint::drawForSelection() {
 	Application* appThis = Application::getInstancePtr();
 
 	uint32_t colorId = 0;
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
-		for (auto&[meshName, meshElements] : objValue.getMeshElementManager().getVertices()) {
+		for (auto&[meshName, meshElements] : objValue.getMeshElementManager().getPoints()) {
 			for (auto& meshElement : meshElements) {
 				if (!meshElement->getSelectionInfo().canSelect) continue;
 
@@ -24,13 +24,13 @@ void SelectionElementVertex::drawForSelection() {
 	}//rof
 }
 
-void SelectionElementVertex::saveSelectedObject(glm::vec4 colorUnderCursor) {
+void SelectionElementPoint::saveSelectedObject(glm::vec4 colorUnderCursor) {
 	Application* appThis = Application::getInstancePtr();
 
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
 		if (!objValue.getSelectionInfo().canSelect) continue;
 
-		for (auto&[meshName, meshElements] : objValue.getMeshElementManager().getVertices()) {
+		for (auto&[meshName, meshElements] : objValue.getMeshElementManager().getPoints()) {
 			for (auto& meshElement : meshElements) {
 				if (!meshElement->getSelectionInfo().canSelect) continue;
 
@@ -53,11 +53,11 @@ void SelectionElementVertex::saveSelectedObject(glm::vec4 colorUnderCursor) {
 	}//rof
 }
 
-std::vector<glm::vec3> SelectionElementVertex::getVerticesForCentroid() {
+std::vector<glm::vec3> SelectionElementPoint::getVerticesForCentroid() {
 	std::vector<glm::vec3> centroidVertices {};
 
 	for (auto&[objName, objValue] : this->selectedObjects) {
-		for (auto&[meshName, meshElements] : objValue->getMeshElementManager().getVertices()) {
+		for (auto&[meshName, meshElements] : objValue->getMeshElementManager().getPoints()) {
 			for (auto& me : meshElements) {
 				if (!me->getSelectionInfo().isSelected) continue;
 
@@ -72,8 +72,8 @@ std::vector<glm::vec3> SelectionElementVertex::getVerticesForCentroid() {
 	return centroidVertices;
 }
 
-void SelectionElementVertex::moving() { /* dummy */ }
+void SelectionElementPoint::moving() { /* dummy */ }
 
-void SelectionElementVertex::rotation() { /* dummy */ }
+void SelectionElementPoint::rotation() { /* dummy */ }
 
-void SelectionElementVertex::scaling() { /* dummy */ }
+void SelectionElementPoint::scaling() { /* dummy */ }

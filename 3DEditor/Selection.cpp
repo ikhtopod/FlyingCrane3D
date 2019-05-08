@@ -3,7 +3,6 @@
 
 const glm::vec4 Selection::CLEAR_COLOR = glm::vec4 { 0.0f, 0.0f, 0.0f, 0.0f };
 
-
 // Получить цвет пикселя под курсором, при клике мышью
 glm::vec4 Selection::getColorUnderCursor() {
 	Application* appThis = Application::getInstancePtr();
@@ -40,7 +39,7 @@ void Selection::clearSelectedObjects() {
 	for (auto&[objKey, objValue] : this->selectedObjects) {
 		MeshElementManager& mem = objValue->getMeshElementManager();
 
-		for (auto&[meshName, meshElements] : mem.getVertices()) {
+		for (auto&[meshName, meshElements] : mem.getPoints()) {
 			for (auto& mesh : meshElements) {
 				mesh->getSelectionInfo().isSelected = false;
 			}//rof

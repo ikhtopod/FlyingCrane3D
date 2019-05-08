@@ -14,6 +14,7 @@ private:
 
 	void initMark();
 	void drawMark();
+	void freeMark();
 
 public:
 	MeshElementFace() = delete;
@@ -23,5 +24,6 @@ public:
 
 	virtual void init() override;
 	virtual void draw() override;
+	virtual void free() override;
 };
 

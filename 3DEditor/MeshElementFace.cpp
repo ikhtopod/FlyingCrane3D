@@ -24,6 +24,7 @@ MeshElementFace::MeshElementFace(Vertex& first, Vertex& second, Vertex& third) :
 	);
 }
 
+
 void MeshElementFace::initMark() {
 	glGenVertexArrays(BUFFER_SIZE, &this->vaoMark);
 	glGenBuffers(BUFFER_SIZE, &this->vboMark);
@@ -50,6 +51,12 @@ void MeshElementFace::drawMark() {
 	glBindVertexArray(0); // unbind
 }
 
+void MeshElementFace::freeMark() {
+	glDeleteVertexArrays(BUFFER_SIZE, &this->vaoMark);
+	glDeleteBuffers(BUFFER_SIZE, &this->vboMark);
+}
+
+
 void MeshElementFace::init() {
 	MeshElement::init();
 	this->initMark();
@@ -58,4 +65,9 @@ void MeshElementFace::init() {
 void MeshElementFace::draw() {
 	MeshElement::draw();
 	this->drawMark();
+}
+
+void MeshElementFace::free() {
+	MeshElement::free();
+	this->freeMark();
 }
