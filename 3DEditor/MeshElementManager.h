@@ -3,6 +3,7 @@
 #include "ITriada.h"
 #include "Transform.h"
 #include "Vertex.h"
+#include "Point.h"
 #include "Edge.h"
 #include "Face.h"
 #include "Mesh.h"
