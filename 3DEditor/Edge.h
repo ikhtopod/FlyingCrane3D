@@ -4,11 +4,11 @@
 
 class Edge {
 public:
-	Vertex& first;
-	Vertex& second;
+	Vertex* first;
+	Vertex* second;
 
 	Edge() = delete;
-	Edge(Vertex& _first, Vertex& _second);
+	Edge(Vertex* _first, Vertex* _second);
 	~Edge() = default;
 
 	bool operator==(const Edge& edge) const;

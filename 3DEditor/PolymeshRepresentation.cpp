@@ -29,7 +29,7 @@ std::vector<Face>& PolymeshRepresentation::getFaces() {
 }
 
 
-void PolymeshRepresentation::updatePoints(Vertex& v1, Vertex& v2, Vertex& v3) {
+void PolymeshRepresentation::updatePoints(Vertex* v1, Vertex* v2, Vertex* v3) {
 	for (Point point : { Point { v1 }, Point { v2 }, Point { v3 } }) {
 		auto pred_p = [&point](const Point& p) {
 			return point == p;
@@ -41,7 +41,7 @@ void PolymeshRepresentation::updatePoints(Vertex& v1, Vertex& v2, Vertex& v3) {
 	}//rof
 }
 
-void PolymeshRepresentation::updateEdges(Vertex& v1, Vertex& v2, Vertex& v3) {
+void PolymeshRepresentation::updateEdges(Vertex* v1, Vertex* v2, Vertex* v3) {
 	for (Edge edge : { Edge { v1, v2 }, Edge { v2, v3 }, Edge { v3, v1 } }) {
 		auto pred_e = [&edge](const Edge& e) {
 			return edge == e;
@@ -53,7 +53,7 @@ void PolymeshRepresentation::updateEdges(Vertex& v1, Vertex& v2, Vertex& v3) {
 	}//rof
 }
 
-void PolymeshRepresentation::updateFaces(Vertex& v1, Vertex& v2, Vertex& v3) {
+void PolymeshRepresentation::updateFaces(Vertex* v1, Vertex* v2, Vertex* v3) {
 	Face face { v1, v2, v3 };
 
 	auto pred_f = [&face](const Face& f) {
@@ -67,11 +67,11 @@ void PolymeshRepresentation::updateFaces(Vertex& v1, Vertex& v2, Vertex& v3) {
 
 void PolymeshRepresentation::update() {
 	for (std::size_t i = 0; i < this->indicesMesh.size(); i += 3) {
-		Vertex& v1 = this->vertices[this->indicesMesh[i]];
-		Vertex& v2 = (i + 1) < this->indicesMesh.size() ?
-			this->vertices[this->indicesMesh[i + 1]] : this->vertices[this->indicesMesh[i]];
-		Vertex& v3 = (i + 2) < this->indicesMesh.size() ?
-			this->vertices[this->indicesMesh[i + 2]] : this->vertices[this->indicesMesh[i + 1]];
+		Vertex* v1 = &this->vertices[this->indicesMesh[i]];
+		Vertex* v2 = (i + 1) < this->indicesMesh.size() ?
+			&this->vertices[this->indicesMesh[i + 1]] : &this->vertices[this->indicesMesh[i]];
+		Vertex* v3 = (i + 2) < this->indicesMesh.size() ?
+			&this->vertices[this->indicesMesh[i + 2]] : &this->vertices[this->indicesMesh[i + 1]];
 
 		this->updatePoints(v1, v2, v3);
 		this->updateEdges(v1, v2, v3);
