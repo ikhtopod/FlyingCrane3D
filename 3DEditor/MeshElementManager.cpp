@@ -76,8 +76,8 @@ void MeshElementManager::updatePoints() {
 	for (auto&[meshName, mesh] : *this->meshes) {
 		this->points.insert({ meshName, VectorPtr<MeshElementPoint> {} });
 
-		for (Vertex& vertex : mesh.getPolymesh().getVertices()) {
-			this->points[meshName].push_back(std::make_shared<MeshElementPoint>(vertex));
+		for (Point& point : mesh.getPolymesh().getPoints()) {
+			this->points[meshName].push_back(std::make_shared<MeshElementPoint>(point));
 			this->points[meshName].back()->init();
 		}//rof
 	}//rof
