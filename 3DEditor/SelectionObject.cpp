@@ -68,12 +68,12 @@ void SelectionObject::moving() {
 	Application* appThis = Application::getInstancePtr();
 
 	Axis& cameraAxis = appThis->getScene().getCamera().getAxis();
-	float deltaTime = appThis->getDeltaTime();
+	glm::vec3 offset = cameraAxis.getRight() * diffMousePosition.x;
+	offset += cameraAxis.getUp() * diffMousePosition.y;
+	offset *= appThis->getDeltaTime();
 
 	for (auto&[objKey, objValue] : this->selectedObjects) {
-		glm::vec3 newPos = objValue->getTransform().getPosition();
-		newPos += (cameraAxis.getRight() * diffMousePosition.x) * deltaTime;
-		newPos += (cameraAxis.getUp() * diffMousePosition.y) * deltaTime;
+		glm::vec3 newPos = objValue->getTransform().getPosition() + offset;
 		objValue->getTransform().setPosition(newPos);
 	}//rof
 }

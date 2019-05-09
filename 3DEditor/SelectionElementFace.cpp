@@ -83,9 +83,11 @@ void SelectionElementFace::moving() {
 	if (this->diffIsZero()) return;
 
 	Application* appThis = Application::getInstancePtr();
-
 	Axis& cameraAxis = appThis->getScene().getCamera().getAxis();
-	float deltaTime = appThis->getDeltaTime();
+
+	glm::vec3 offset = cameraAxis.getRight() * diffMousePosition.x;
+	offset += cameraAxis.getUp() * diffMousePosition.y;
+	offset *= appThis->getDeltaTime();
 
 	for (auto&[objName, objValue] : this->selectedObjects) {
 		for (auto&[meshName, meshElements] : objValue->getMeshElementManager().getFaces()) {
@@ -94,10 +96,7 @@ void SelectionElementFace::moving() {
 
 				for (Vertex& v : me->getVertices()) {
 					glm::vec3 oldPos = v.position;
-
-					glm::vec3 newPos = oldPos;
-					newPos += (cameraAxis.getRight() * diffMousePosition.x) * deltaTime;
-					newPos += (cameraAxis.getUp() * diffMousePosition.y) * deltaTime;
+					glm::vec3 newPos = oldPos + offset;
 
 					this->updateMovingData(objValue, oldPos, newPos);
 				}//rof
