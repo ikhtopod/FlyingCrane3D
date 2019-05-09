@@ -32,15 +32,32 @@ std::map<std::string, Object>& Scene::getObjects() {
 void Scene::addStandardObject(std::string _name, Object _object) {
 	if (this->standardObjects.empty() || (this->standardObjects.find(_name) == this->standardObjects.end())) {
 		this->standardObjects.insert({ _name, _object });
-	}
+	}//fi
 }
 
 void Scene::addObject(std::string _name, Object _object) {
 	if (this->objects.empty() || (this->objects.find(_name) == this->objects.end())) {
 		this->objects.insert({ _name, _object });
-	}
+	}//fi
 }
 
+void Scene::deleteMarkedObjects() {
+	std::vector<std::string> namesForDelete {};
+
+	for (auto&[name, object] : this->objects) {
+		if (object.isDeleting) {
+			object.free();
+			namesForDelete.push_back(name);
+		}//fi
+	}//rof
+
+
+	if (namesForDelete.empty()) return;
+
+	for (std::string& name : namesForDelete) {
+		this->objects.erase(name);
+	}//rof
+}
 
 void Scene::init() {
 	/***********************************/
@@ -87,7 +104,7 @@ void Scene::init() {
 
 	Mesh pyramid_mesh_flat_000 { pyramid_polymesh_flat_000, GL_TRIANGLES };
 	Mesh pyramid_mesh_flat_001 { pyramid_polymesh_flat_000, GL_TRIANGLES };
-	
+
 	Object pyramid_000 {};
 	Object pyramid_001 {};
 
@@ -101,38 +118,39 @@ void Scene::init() {
 
 	/***********************************/
 
-	for (auto& o : this->standardObjects) {
-		o.second.init();
-	}
+	for (auto&[name, object] : this->standardObjects) {
+		object.init();
+	}//rof
 
-	for (auto& o : this->objects) {
-		o.second.init();
-	}
-
+	for (auto&[name, object] : this->objects) {
+		object.init();
+	}//rof
 }
 
 void Scene::draw() {
 	this->model.update();
 
-	for (auto& o : this->standardObjects) {
-		o.second.setParentTransform(this->transform);
-		o.second.draw();
-	}
+	for (auto&[name, object] : this->standardObjects) {
+		object.setParentTransform(this->transform);
+		object.draw();
+	}//rof
 
-	for (auto& o : this->objects) {
-		o.second.setParentTransform(this->transform);
-		o.second.draw();
-	}
+	this->deleteMarkedObjects();
+
+	for (auto&[name, object] : this->objects) {
+		object.setParentTransform(this->transform);
+		object.draw();
+	}//rof
 }
 
 void Scene::free() {
-	for (auto& o : this->standardObjects) {
-		o.second.free();
-	}
+	for (auto&[name, object] : this->standardObjects) {
+		object.free();
+	}//rof
 
-	for (auto& o : this->objects) {
-		o.second.free();
-	}
+	for (auto&[name, object] : this->objects) {
+		object.free();
+	}//rof
 
 	this->selectionSwitcher.clearSelections();
 }

@@ -33,6 +33,8 @@ public:
 	Object() = default;
 	virtual ~Object() = default;
 
+	bool isDeleting = false;
+
 	Transform& getTransform();
 	Transform& getParentTransform();
 	Transform& getGlobalTransform();

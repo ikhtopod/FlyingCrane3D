@@ -24,6 +24,8 @@ private:
 	std::map<std::string, Object> standardObjects {};
 	std::map<std::string, Object> objects {};
 
+	void deleteMarkedObjects();
+
 public:
 	Scene() = default;
 	~Scene() = default;

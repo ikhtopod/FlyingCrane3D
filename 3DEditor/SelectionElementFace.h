@@ -13,4 +13,6 @@ public:
 	virtual void moving() override;
 	virtual void rotation() override;
 	virtual void scaling() override;
+
+	virtual void deleting() override;
 };

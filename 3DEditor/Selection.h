@@ -19,6 +19,8 @@ public:
 	virtual void moving() = 0;
 	virtual void rotation() = 0;
 	virtual void scaling() = 0;
+
+	virtual void deleting() = 0;
 };
 
 class Selection : public ISelection {
@@ -33,8 +35,8 @@ protected:
 
 protected:
 	static glm::vec4 getColorUnderCursor();
-
 	bool diffIsZero();
+	void keyboardInputDeleting();
 
 public:
 	Selection() = default;
@@ -55,4 +57,5 @@ public:
 
 public:
 	void mouseButtonInput(int button, int action, int mods);
+	void keyboardInput();
 };

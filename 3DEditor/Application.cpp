@@ -138,6 +138,7 @@ void Application::free() {
 
 void Application::keyboardInput() {
 	this->scene.getCamera().keyboardInput();
+	this->scene.getSelection().keyboardInput();
 }
 
 void Application::switchCameraInput() {

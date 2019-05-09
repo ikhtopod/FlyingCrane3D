@@ -76,9 +76,9 @@ void Object::drawMeshes() {
 }
 
 void Object::drawChildrens() {
-	for (auto& children : this->childrens) {
-		children.second.setParentTransform(this->parentTransform + this->transform);
-		children.second.draw();
+	for (auto&[name, children] : this->childrens) {
+		children.setParentTransform(this->parentTransform + this->transform);
+		children.draw();
 	}//rof
 }
 
@@ -105,13 +105,17 @@ void Object::draw() {
 	if (this->selectionInfo.canSelect) {
 		this->mem.setTransform(this->parentTransform + this->transform);
 		this->mem.draw();
-	}
+	}//fi
 
 	this->drawMeshes();
 	this->drawChildrens();
 }
 
 void Object::free() {
+	for (auto&[name, children] : this->childrens) {
+		children.free();
+	}//rof
+
 	for (auto&[meshName, mesh] : this->meshes) {
 		mesh.free();
 	}//rof

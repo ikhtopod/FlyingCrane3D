@@ -136,3 +136,21 @@ void Selection::select() {
 
 	glEnable(GL_MULTISAMPLE);
 }
+
+void Selection::keyboardInputDeleting() {
+	static bool prevState = GLFW_RELEASE;
+
+	GLFWwindow* window = Application::getInstancePtr()->getWindow().getWindowPtr();
+	int state = glfwGetKey(window, GLFW_KEY_X);
+
+	if (state == GLFW_PRESS && prevState == GLFW_RELEASE) {
+		this->deleting();
+		prevState = GLFW_PRESS;
+	} else if (state == GLFW_RELEASE && prevState == GLFW_PRESS) {
+		prevState = GLFW_RELEASE;
+	}
+}
+
+void Selection::keyboardInput() {
+	this->keyboardInputDeleting();
+}

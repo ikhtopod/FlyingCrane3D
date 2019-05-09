@@ -149,7 +149,8 @@ void GUI::showMainMenuBar() {
 			ImGui::Text("Выделение:"); ImGui::NewLine();
 			ImGui::Text("ЛКМ: выделить объект");
 			ImGui::Text("Shift + ЛКМ: выделить несколько объектов");
-			ImGui::Text("F: центрировать камеру на выделенных объектах"); ImGui::NewLine();
+			ImGui::Text("F: центрировать камеру на выделенных объектах");
+			ImGui::Text("X: удалить выделенные объекты"); ImGui::NewLine();
 			ImGui::Text("Сменить режим выделения:"); ImGui::NewLine();
 			ImGui::Text("1: выделение вершин");
 			ImGui::Text("2: выделение ребер");

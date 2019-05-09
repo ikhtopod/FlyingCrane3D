@@ -75,6 +75,8 @@ std::vector<glm::vec3> SelectionElementPoint::getVerticesForCentroid() {
 }
 
 void SelectionElementPoint::moving() {
+	if (!this->hasSelectedObjects()) return;
+
 	this->updateMousePosition();
 
 	if (this->diffIsZero()) return;
@@ -106,3 +108,5 @@ void SelectionElementPoint::moving() {
 void SelectionElementPoint::rotation() { /* dummy */ }
 
 void SelectionElementPoint::scaling() { /* dummy */ }
+
+void SelectionElementPoint::deleting() { /* dummy */ }

@@ -59,6 +59,8 @@ std::vector<glm::vec3> SelectionObject::getVerticesForCentroid() {
 }
 
 void SelectionObject::moving() {
+	if (!this->hasSelectedObjects()) return;
+
 	this->updateMousePosition();
 
 	if (this->diffIsZero()) return;
@@ -73,11 +75,13 @@ void SelectionObject::moving() {
 		newPos += (cameraAxis.getRight() * diffMousePosition.x) * deltaTime;
 		newPos += (cameraAxis.getUp() * diffMousePosition.y) * deltaTime;
 		objValue->getTransform().setPosition(newPos);
-	}
+	}//rof
 }
 
 void SelectionObject::rotation() {
 	const static float STEP = 10.0f;
+
+	if (!this->hasSelectedObjects()) return;
 
 	this->updateMousePosition();
 
@@ -93,10 +97,12 @@ void SelectionObject::rotation() {
 		newRot -= (cameraAxis.getRight() * diffMousePosition.y) * STEP * deltaTime;
 		newRot += (cameraAxis.getUp() * diffMousePosition.x) * STEP * deltaTime;
 		objValue->getTransform().setRotation(newRot);
-	}
+	}//rof
 }
 
 void SelectionObject::scaling() {
+	if (!this->hasSelectedObjects()) return;
+
 	this->updateMousePosition();
 
 	if (this->diffIsZero()) return;
@@ -107,5 +113,15 @@ void SelectionObject::scaling() {
 		glm::vec3 newScale = objValue->getTransform().getScale();
 		newScale += ((diffMousePosition.x + diffMousePosition.y) / 2.0f) * deltaTime;
 		objValue->getTransform().setScale(newScale);
-	}
+	}//rof
+}
+
+void SelectionObject::deleting() {
+	if (!this->hasSelectedObjects()) return;
+
+	for (auto&[objKey, objValue] : this->selectedObjects) {
+		objValue->isDeleting = true;
+	}//rof
+
+	this->clearSelectedObjects();
 }
