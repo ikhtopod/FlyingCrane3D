@@ -1,6 +1,9 @@
 #include "MeshElementManager.h"
 
 
+MeshElementManager::MeshElementManager(Object* _parent) :
+	parent(_parent) {}
+
 void MeshElementManager::updateSelectionMode() {
 	this->currentSelectionMode = Application::getInstancePtr()->
 		getScene().getSelectionSwitcher().getSelectionMode();
@@ -73,7 +76,7 @@ void MeshElementManager::liberator(T* data) {
 void MeshElementManager::updatePoints() {
 	cleaner<decltype(this->points)>(&this->points);
 
-	for (auto&[meshName, mesh] : *this->meshes) {
+	for (auto&[meshName, mesh] : this->parent->getMeshes()) {
 		this->points.insert({ meshName, VectorPtr<MeshElementPoint> {} });
 
 		for (Point& point : mesh.getPolymesh().getPoints()) {
@@ -86,7 +89,7 @@ void MeshElementManager::updatePoints() {
 void MeshElementManager::updateEdges() {
 	cleaner<decltype(this->edges)>(&this->edges);
 
-	for (auto&[meshName, mesh] : *this->meshes) {
+	for (auto&[meshName, mesh] : this->parent->getMeshes()) {
 		this->edges.insert({ meshName, VectorPtr<MeshElementEdge> {} });
 
 		for (Edge& edge : mesh.getPolymesh().getEdges()) {
@@ -99,7 +102,7 @@ void MeshElementManager::updateEdges() {
 void MeshElementManager::updateFaces() {
 	cleaner<decltype(this->faces)>(&this->faces);
 
-	for (auto&[meshName, mesh] : *this->meshes) {
+	for (auto&[meshName, mesh] : this->parent->getMeshes()) {
 		this->faces.insert({ meshName, VectorPtr<MeshElementFace> {} });
 
 		for (Face& face : mesh.getPolymesh().getFaces()) {
@@ -110,10 +113,8 @@ void MeshElementManager::updateFaces() {
 }
 
 
-void MeshElementManager::update(UMapMesh* _meshes) {
-	if (_meshes == nullptr) return;
-
-	this->meshes = _meshes;
+void MeshElementManager::update() {
+	if (!this->hasParent()) return;
 
 	this->updatePoints();
 	this->updateEdges();
@@ -127,6 +128,18 @@ Transform& MeshElementManager::getTransform() {
 
 void MeshElementManager::setTransform(Transform _transform) {
 	this->transform = _transform;
+}
+
+Object* MeshElementManager::getParent() {
+	return this->parent;
+}
+
+void MeshElementManager::setParent(Object* _parent) {
+	this->parent = _parent;
+}
+
+bool MeshElementManager::hasParent() {
+	return this->parent != nullptr;
 }
 
 MeshElementManager::UMapMeshElements<MeshElementPoint>&

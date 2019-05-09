@@ -6,6 +6,7 @@
 #include "Point.h"
 #include "Edge.h"
 #include "Face.h"
+#include "Object.h"
 #include "Mesh.h"
 #include "MeshElement.h"
 #include "MeshElementPoint.h"
@@ -36,20 +37,6 @@ private:
 	using UMapMesh = UMap<Mesh>;
 
 private:
-	UMapMeshElements<MeshElementPoint> points {};
-	UMapMeshElements<MeshElementEdge> edges {};
-	UMapMeshElements<MeshElementFace> faces {};
-
-	SelectionMode currentSelectionMode = SelectionMode::OBJECT;
-
-	Transform transform {};
-	UMapMesh* meshes = nullptr;
-
-public:
-	MeshElementManager() = default;
-	~MeshElementManager() = default;
-
-private:
 	template<typename T>
 	static void cleaner(T* data);
 
@@ -69,6 +56,21 @@ private:
 	static void liberator(T* data);
 
 private:
+	UMapMeshElements<MeshElementPoint> points {};
+	UMapMeshElements<MeshElementEdge> edges {};
+	UMapMeshElements<MeshElementFace> faces {};
+
+	SelectionMode currentSelectionMode = SelectionMode::OBJECT;
+
+	Transform transform {};
+	Object* parent = nullptr;
+
+public:
+	MeshElementManager() = default;
+	MeshElementManager(Object* _parent);
+	~MeshElementManager() = default;
+
+private:
 	void updateSelectionMode();
 
 	void updatePoints();
@@ -76,14 +78,19 @@ private:
 	void updateFaces();
 
 public:
-	void update(UMapMesh* _meshes);
+	void update();
 
-	Transform& getTransform();
 	UMapMeshElements<MeshElementPoint>& getPoints();
 	UMapMeshElements<MeshElementEdge>& getEdges();
 	UMapMeshElements<MeshElementFace>& getFaces();
 
+	Transform& getTransform();
+	Object* getParent();
+
 	void setTransform(Transform _transform);
+	void setParent(Object* _parent);
+	
+	bool hasParent();
 
 	virtual void init() override;
 	virtual void draw() override;

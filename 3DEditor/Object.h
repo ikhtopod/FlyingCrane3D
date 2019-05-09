@@ -22,7 +22,7 @@ protected:
 	Transform parentTransform {};
 	Transform globalTransform {};
 
-	MeshElementManager mem {};
+	MeshElementManager mem { this };
 
 	UMapMesh meshes {};
 	UMapObject childrens {};
