@@ -23,13 +23,15 @@ protected:
 	Transform globalTransform {};
 
 	MeshElementManager mem { this };
-
 	UMapMesh meshes {};
+
+	Mesh pivotPoint;
+	bool canDrawPivotPoint = true;
 
 	SelectionInfo selectionInfo {};
 
 public:
-	Object() = default;
+	Object();
 	virtual ~Object() = default;
 
 	bool isDeleting = false;
@@ -55,5 +57,4 @@ public:
 	virtual void init() override;
 	virtual void draw() override;
 	virtual void free() override;
-
 };

@@ -12,6 +12,7 @@ GridObject::GridObject()
 GridObject::GridObject(_uint _width, _uint _height)
 	: Object(), width(_width), height(_height), step(DEFAULT_STEP) {
 
+	this->canDrawPivotPoint = false;
 	this->selectionInfo.canSelect = false;
 
 	if (this->width == 0) this->width = DEFAULT_WIDTH;
@@ -100,4 +101,3 @@ GridObject::GridObject(_uint _width, _uint _height)
 	this->addMesh("meshZ", meshZ);
 	this->addMesh("meshGrid", meshGrid);
 }
-
