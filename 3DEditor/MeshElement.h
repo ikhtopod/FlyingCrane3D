@@ -25,7 +25,7 @@ public:
 
 	std::vector<Vertex>& getVertices();
 
-	virtual void updateBufferedVertices();
+	virtual void updateBufferedVertices() override;
 
 	virtual void init() override;
 	virtual void draw() override;

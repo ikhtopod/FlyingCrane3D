@@ -21,6 +21,8 @@ public:
 
 	PolymeshRepresentation& getPolymesh();
 
+	virtual void updateBufferedVertices() override;
+
 	virtual void init() override;
 	virtual void draw() override;
 };

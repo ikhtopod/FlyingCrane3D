@@ -17,6 +17,14 @@ PolymeshRepresentation& Mesh::getPolymesh() {
 	return this->polymesh;
 }
 
+void Mesh::updateBufferedVertices() {
+	glBindVertexArray(this->vao);
+	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0,
+					this->polymesh.getVertices().size() * sizeof(Vertex),
+					&(this->polymesh.getVertices())[0]);
+}
+
 void Mesh::init() {
 	glGenVertexArrays(BUFFER_SIZE, &this->vao);
 	glGenBuffers(BUFFER_SIZE, &this->vbo);

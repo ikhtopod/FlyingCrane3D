@@ -4,7 +4,11 @@
 #include "Shader.h"
 #include "Transform.h"
 
-class MeshBase : public ITriada {
+class IMeshBase : public ITriada {
+	virtual void updateBufferedVertices() = 0;
+};
+
+class MeshBase : public IMeshBase {
 protected:
 	static const GLsizei BUFFER_SIZE;
 
