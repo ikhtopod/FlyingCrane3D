@@ -66,6 +66,12 @@ void PolymeshRepresentation::updateFaces(Vertex& v1, Vertex& v2, Vertex& v3) {
 }
 
 void PolymeshRepresentation::update() {
+	if (this->indicesMesh.empty()) return;
+
+	this->faces.clear();
+	this->edges.clear();
+	this->points.clear();
+
 	for (std::size_t i = 0; i < this->indicesMesh.size(); i += 3) {
 		Vertex& v1 = this->vertices[this->indicesMesh[i]];
 		Vertex& v2 = (i + 1) < this->indicesMesh.size() ?
@@ -73,8 +79,8 @@ void PolymeshRepresentation::update() {
 		Vertex& v3 = (i + 2) < this->indicesMesh.size() ?
 			this->vertices[this->indicesMesh[i + 2]] : this->vertices[this->indicesMesh[i + 1]];
 
-		this->updatePoints(v1, v2, v3);
-		this->updateEdges(v1, v2, v3);
 		this->updateFaces(v1, v2, v3);
+		this->updateEdges(v1, v2, v3);
+		this->updatePoints(v1, v2, v3);
 	}//rof
 }

@@ -90,11 +90,14 @@ void SelectionElementPoint::moving() {
 				if (!me->getSelectionInfo().isSelected) continue;
 
 				for (Vertex& v : me->getVertices()) {
-					v.position += (cameraAxis.getRight() * diffMousePosition.x) * deltaTime;
-					v.position += (cameraAxis.getUp() * diffMousePosition.y) * deltaTime;
-				}//rof
+					glm::vec3 oldPos = v.position;
 
-				me->updateBufferedVertices();
+					glm::vec3 newPos = oldPos;
+					newPos += (cameraAxis.getRight() * diffMousePosition.x) * deltaTime;
+					newPos += (cameraAxis.getUp() * diffMousePosition.y) * deltaTime;
+
+					this->updateMovingData(objValue, oldPos, newPos);
+				}//rof
 			}//rof
 		}//rof
 	}//rof
