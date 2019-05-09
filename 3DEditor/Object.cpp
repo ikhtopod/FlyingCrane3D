@@ -58,27 +58,10 @@ void Object::setShadersAllMeshes(Shader& _shader) {
 	}//rof
 }
 
-Object::UMapObject& Object::getChildrens() {
-	return this->childrens;
-}
-
-void Object::addChildren(std::string _name, Object& _object) {
-	if (this->childrens.empty() || (this->childrens.find(_name) == this->childrens.end())) {
-		this->childrens.insert({ _name, _object });
-	}//fi
-}
-
 void Object::drawMeshes() {
 	for (auto&[meshName, mesh] : this->meshes) {
 		mesh.setParentTransform(this->parentTransform + this->transform);
 		mesh.draw();
-	}//rof
-}
-
-void Object::drawChildrens() {
-	for (auto&[name, children] : this->childrens) {
-		children.setParentTransform(this->parentTransform + this->transform);
-		children.draw();
 	}//rof
 }
 
@@ -108,14 +91,9 @@ void Object::draw() {
 	}//fi
 
 	this->drawMeshes();
-	this->drawChildrens();
 }
 
 void Object::free() {
-	for (auto&[name, children] : this->childrens) {
-		children.free();
-	}//rof
-
 	for (auto&[meshName, mesh] : this->meshes) {
 		mesh.free();
 	}//rof

@@ -25,7 +25,6 @@ protected:
 	MeshElementManager mem { this };
 
 	UMapMesh meshes {};
-	UMapObject childrens {};
 
 	SelectionInfo selectionInfo {};
 
@@ -51,11 +50,7 @@ public:
 	void addMesh(std::string _name, Mesh& _mesh);
 	void setShadersAllMeshes(Shader& _shader);
 
-	UMapObject& getChildrens();
-	void addChildren(std::string _name, Object& _object);
-
 	void drawMeshes();
-	void drawChildrens();
 
 	virtual void init() override;
 	virtual void draw() override;
