@@ -14,6 +14,8 @@ private:
 	std::vector<Edge> edges {};
 	std::vector<Face> faces {};
 
+	void updateNormal(Vertex& v1, Vertex& v2, Vertex& v3);
+
 	void updatePoints(Vertex& v1, Vertex& v2, Vertex& v3);
 	void updateEdges(Vertex& v1, Vertex& v2, Vertex& v3);
 	void updateFaces(Vertex& v1, Vertex& v2, Vertex& v3);

@@ -29,6 +29,14 @@ std::vector<Face>& PolymeshRepresentation::getFaces() {
 }
 
 
+void PolymeshRepresentation::updateNormal(Vertex& v1, Vertex& v2, Vertex& v3) {
+	glm::vec3 newNormal = glm::triangleNormal(v1.position, v2.position, v3.position);
+
+	v1.normal = newNormal;
+	v2.normal = newNormal;
+	v3.normal = newNormal;
+}
+
 void PolymeshRepresentation::updatePoints(Vertex& v1, Vertex& v2, Vertex& v3) {
 	for (Point point : { Point { v1 }, Point { v2 }, Point { v3 } }) {
 		auto pred_p = [&point](const Point& p) {
@@ -78,6 +86,8 @@ void PolymeshRepresentation::update() {
 			this->vertices[this->indicesMesh[i + 1]] : this->vertices[this->indicesMesh[i]];
 		Vertex& v3 = (i + 2) < this->indicesMesh.size() ?
 			this->vertices[this->indicesMesh[i + 2]] : this->vertices[this->indicesMesh[i + 1]];
+
+		this->updateNormal(v1, v2, v3);
 
 		this->updateFaces(v1, v2, v3);
 		this->updateEdges(v1, v2, v3);
