@@ -52,7 +52,7 @@ glm::vec2 Util::repeat(glm::vec2 val, float _min, float _max) {
 
 
 glm::vec4 Util::generateRGBAColorById(uint32_t colorId) {
-	char *rgba = reinterpret_cast<char*>(&colorId);
+	unsigned char *rgba = reinterpret_cast<unsigned char*>(&colorId);
 	return glm::vec4 { rgba[0], rgba[1], rgba[2], rgba[3] };
 }
 
