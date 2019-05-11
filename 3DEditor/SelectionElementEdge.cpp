@@ -90,16 +90,26 @@ void SelectionElementEdge::moving() {
 	offset += cameraAxis.getUp() * diffMousePosition.y;
 	offset *= appThis->getDeltaTime();
 
+	std::vector<glm::vec3> checked {};
 	for (auto&[objName, objValue] : this->selectedObjects) {
 		for (auto&[meshName, meshElements] : objValue->getMeshElementManager().getEdges()) {
 			for (auto& me : meshElements) {
 				if (!me->getSelectionInfo().isSelected) continue;
 
 				for (Vertex& v : me->getVertices()) {
+					if (std::find_if(checked.begin(), checked.end(),
+									 [&v](const glm::vec3& pos) { return v.position == pos; })
+						!= checked.end()) {
+
+						continue;
+					}
+
 					glm::vec3 oldPos = v.position;
 					glm::vec3 newPos = oldPos + offset;
 
 					this->updateMovingData(objValue, oldPos, newPos);
+
+					checked.push_back(newPos);
 				}//rof
 			}//rof
 		}//rof
