@@ -5,18 +5,6 @@ const std::string GUI::FONT_PATH = FONT_DIRECTORY + "/Roboto-Regular.ttf";
 const float GUI::DEFAULT_FONT_SIZE = 16.0f;
 
 
-GUI::GUI() : fontSize(GUI::DEFAULT_FONT_SIZE) {}
-
-
-float GUI::getFontSize() {
-	return this->fontSize;
-}
-
-void GUI::setFontSize(float _fontSize) {
-	this->fontSize = _fontSize;
-}
-
-
 void GUI::initFont() {
 	ImGuiIO& io = ImGui::GetIO();
 
@@ -25,26 +13,43 @@ void GUI::initFont() {
 	ImFontConfig icons_config;
 	icons_config.MergeMode = false;
 
-	io.Fonts->AddFontFromFileTTF(FONT_PATH.c_str(), this->fontSize, &icons_config, ranges);
+	io.Fonts->AddFontFromFileTTF(
+		FONT_PATH.c_str(), this->fontSize, &icons_config, ranges);
 
 	io.Fonts->AddFontDefault();
 }
 
+void GUI::updateToolsPanelByScreenSize() {
+	ScreenResolution sr = Application::getInstancePtr()->getWindow().getScreen();
+	this->updateToolsPanelByScreenSize(sr.getWidth(), sr.getHeight());
+}
+
+void GUI::updateToolsPanelByScreenSize(int width, int height) {
+	this->updateToolsPanelByScreenSize(
+		static_cast<float>(width), static_cast<float>(height));
+}
+
+void GUI::updateToolsPanelByScreenSize(float width, float height) {
+	float wSize = 225.0f;
+	this->sizeToolsPanel = ImVec2 { width > wSize ? wSize : width, height - this->positionToolsPanel.y };
+	this->positionToolsPanel.x = width - this->sizeToolsPanel.x;
+}
 
 void GUI::init() {
-	this->bgColor = Application::getInstancePtr()->getBgColor();
-
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	// ImGuiIO& io = ImGui::GetIO(); //(void)io;
+
 	ImGui::GetIO().IniFilename = nullptr;
 
 	this->initFont();
 
 	ImGui::StyleColorsDark();
 
-	ImGui_ImplGlfw_InitForOpenGL(Application::getInstancePtr()->getWindow().getWindowPtr(), true);
+	ImGui_ImplGlfw_InitForOpenGL(
+		Application::getInstancePtr()->getWindow().getWindowPtr(), true);
 	ImGui_ImplOpenGL3_Init();
+
+	this->updateToolsPanelByScreenSize();
 }
 
 void GUI::draw() {
@@ -67,6 +72,7 @@ void GUI::draw_NewFrame() {
 
 void GUI::draw_GUI() {
 	this->showMainMenuBar();
+	this->showToolsPanel();
 }
 
 void GUI::draw_Render() {
@@ -80,6 +86,12 @@ void GUI::showMainMenuBar() {
 	static bool showHotKeys = false;
 
 	if (ImGui::BeginMainMenuBar()) {
+		// Установить панель Tools _под_ MenuBar
+		if (this->positionToolsPanel.y != ImGui::GetWindowSize().y) {
+			this->positionToolsPanel.y = ImGui::GetWindowSize().y;
+			this->updateToolsPanelByScreenSize();
+		}//fi
+
 		if (ImGui::BeginMenu("Файл")) {
 			if (ImGui::MenuItem("Новый", "Ctrl + N", false, false)) {}
 			if (ImGui::MenuItem("Открыть", "Ctrl + O", false, false)) {}
@@ -128,7 +140,8 @@ void GUI::showMainMenuBar() {
 		}
 
 		if (showHotKeys) {
-			ImGui::Begin("Горячие клавиши", &showHotKeys, ImVec2(400, 400), -1.0f, ImGuiWindowFlags_NoResize);
+			ImGui::Begin("Горячие клавиши", &showHotKeys,
+						 ImVec2(400, 400), -1.0f, ImGuiWindowFlags_NoResize);
 
 			ImGui::Text("Tab: переключить камеру"); ImGui::NewLine();
 			ImGui::Separator();
@@ -167,4 +180,19 @@ void GUI::showMainMenuBar() {
 		}
 
 	}
+}
+
+void GUI::showToolsPanel() {
+	ImGui::Begin("Tools", nullptr, this->sizeToolsPanel, -1.0f,
+				 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
+	ImGui::SetWindowSize(this->sizeToolsPanel, true);
+	ImGui::SetWindowPos(this->positionToolsPanel, true);
+
+	ImGui::Text("Header 1:"); ImGui::NewLine();
+	ImGui::Text("Content 1");
+	ImGui::Text("Content 2");
+	ImGui::Text("Content 3"); ImGui::NewLine();
+	ImGui::Separator();
+
+	ImGui::End();
 }

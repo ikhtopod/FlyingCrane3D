@@ -36,6 +36,10 @@ Window& Application::getWindow() {
 	return this->window;
 }
 
+GUI& Application::getGui() {
+	return this->gui;
+}
+
 DeltaTime& Application::getDeltaTime() {
 	return this->deltaTime;
 }
@@ -246,6 +250,8 @@ void Application::Callback::resizeWindow(GLFWwindow* win, int width, int height)
 	appThis->getWindow().getScreen().setWidthHeight(width, height);
 
 	glViewport(0, 0, width, height);
+
+	appThis->getGui().updateToolsPanelByScreenSize();
 }
 
 void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, double yPos) {

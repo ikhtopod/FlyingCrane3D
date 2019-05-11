@@ -3,23 +3,27 @@
 #include "Util.h"
 #include "ITriada.h"
 #include "Application.h"
+#include "ScreenResolution.h"
 
-class GUI : public ITriada {
+class GUI final : public ITriada {
 public:
 	static const std::string FONT_DIRECTORY;
 	static const std::string FONT_PATH;
 	static const float DEFAULT_FONT_SIZE;
 
 private:
-	glm::vec4 bgColor { .2f, .2f, .3f, 1.0f };
-	float fontSize;
+	float fontSize = DEFAULT_FONT_SIZE;
+
+	ImVec2 sizeToolsPanel {};
+	ImVec2 positionToolsPanel {};
 
 public:
-	GUI();
+	GUI() = default;
 	~GUI() = default;
 
-	float getFontSize();
-	void setFontSize(float _fontSize);
+	void updateToolsPanelByScreenSize();
+	void updateToolsPanelByScreenSize(int width, int height);
+	void updateToolsPanelByScreenSize(float width, float height);
 
 	virtual void init() override;
 	virtual void draw() override;
@@ -34,4 +38,5 @@ private:
 
 private:
 	void showMainMenuBar();
+	void showToolsPanel();
 };

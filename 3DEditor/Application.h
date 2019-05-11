@@ -34,6 +34,7 @@ public:
 	static Application* getInstancePtr();
 
 	Window& getWindow();
+	GUI& getGui();
 	DeltaTime& getDeltaTime();
 	Scene& getScene();
 	TriadaMode getCurrentMode();
