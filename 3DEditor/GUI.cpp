@@ -35,6 +35,13 @@ void GUI::updateToolsPanelByScreenSize(float width, float height) {
 	this->positionToolsPanel.x = width - this->sizeToolsPanel.x;
 }
 
+void GUI::updateToolsPanelUnderMenuBar(float yPosition) {
+	if (this->positionToolsPanel.y == yPosition) return;
+
+	this->positionToolsPanel.y = yPosition;
+	this->updateToolsPanelByScreenSize();
+}
+
 void GUI::init() {
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -88,11 +95,7 @@ void GUI::showMainMenuBar() {
 	static bool showHotKeys = false;
 
 	if (ImGui::BeginMainMenuBar()) {
-		// Настроить панель Tools _под_ MenuBar
-		if (this->positionToolsPanel.y != ImGui::GetWindowSize().y) {
-			this->positionToolsPanel.y = ImGui::GetWindowSize().y;
-			this->updateToolsPanelByScreenSize();
-		}//fi
+		this->updateToolsPanelUnderMenuBar(ImGui::GetWindowSize().y);
 
 		if (ImGui::BeginMenu("Файл")) {
 			if (ImGui::MenuItem("Новый", "Ctrl + N", false, false)) {}
@@ -106,12 +109,12 @@ void GUI::showMainMenuBar() {
 				Application::getInstancePtr()->quit();
 			}
 			ImGui::EndMenu();
-		}
+		}//fi BeginMenu
 
 		if (ImGui::BeginMenu("Редактировать")) {
 			if (ImGui::MenuItem("Настройки", "Ctrl + P", false, false)) {}
 			ImGui::EndMenu();
-		}
+		}//fi BeginMenu
 
 		if (ImGui::BeginMenu("Справка")) {
 			if (ImGui::MenuItem("Горячие клавиши", "", &showHotKeys)) {}
@@ -120,12 +123,12 @@ void GUI::showMainMenuBar() {
 				ImGui::Text(("FPS: " + std::to_string(ImGui::GetIO().Framerate)).c_str(), "");
 				ImGui::Separator();
 				ImGui::EndMenu();
-			}
+			}//fi BeginMenu
 
 			ImGui::Separator();
 			if (ImGui::MenuItem("О проекте", "F1", &showAboutWindow)) {}
 			ImGui::EndMenu();
-		}
+		}//fi BeginMenu
 
 		ImGui::EndMainMenuBar();
 
@@ -139,7 +142,7 @@ void GUI::showMainMenuBar() {
 			ImGui::Text("Виталий Лифанов. Группа ЗП3-2д");
 
 			ImGui::End();
-		}
+		}//fi showAboutWindow
 
 		if (showHotKeys) {
 			ImGui::Begin("Горячие клавиши", &showHotKeys,
@@ -179,37 +182,38 @@ void GUI::showMainMenuBar() {
 			ImGui::Separator();
 
 			ImGui::End();
-		}
+		}//fi showHotKeys
 
-	}
+	}//fi BeginMainMenuBar
 }
 
 void GUI::showToolsPanel() {
 	if (ImGui::Begin("Tools", nullptr, this->sizeToolsPanel, -1.0f,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
+
 		ImGui::SetWindowSize(this->sizeToolsPanel, true);
 		ImGui::SetWindowPos(this->positionToolsPanel, true);
 		ImGui::BeginDockspace();
 
-		if (ImGui::BeginDock("Dock 1")) {
-			ImGui::Text("Header 1:"); ImGui::NewLine();
+		if (ImGui::BeginDock("Dock 1", nullptr)) {
+			ImGui::Text("Header Dock 1:"); ImGui::NewLine();
 			ImGui::Text("Content 1");
 			ImGui::Text("Content 2");
 			ImGui::Text("Content 3"); ImGui::NewLine();
 			ImGui::Separator();
-		}
+		}//fi BeginDock
 		ImGui::EndDock();
 
 		if (ImGui::BeginDock("Dock 2")) {
-			ImGui::Text("Header 1:"); ImGui::NewLine();
+			ImGui::Text("Header Dock 2:"); ImGui::NewLine();
 			ImGui::Text("Content 1");
 			ImGui::Text("Content 2");
 			ImGui::Text("Content 3"); ImGui::NewLine();
 			ImGui::Separator();
-		}
+		}//fi BeginDock
 		ImGui::EndDock();
 
 		ImGui::EndDockspace();
-	}//fi Tools
+	}//fi Begin
 	ImGui::End();
 }

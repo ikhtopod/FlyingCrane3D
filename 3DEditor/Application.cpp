@@ -251,7 +251,7 @@ void Application::Callback::resizeWindow(GLFWwindow* win, int width, int height)
 
 	glViewport(0, 0, width, height);
 
-	appThis->getGui().updateToolsPanelByScreenSize();
+	appThis->getGui().updateToolsPanelByScreenSize(width, height);
 }
 
 void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, double yPos) {

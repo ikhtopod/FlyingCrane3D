@@ -24,6 +24,7 @@ public:
 	void updateToolsPanelByScreenSize();
 	void updateToolsPanelByScreenSize(int width, int height);
 	void updateToolsPanelByScreenSize(float width, float height);
+	void updateToolsPanelUnderMenuBar(float yPosition);
 
 	virtual void init() override;
 	virtual void draw() override;
