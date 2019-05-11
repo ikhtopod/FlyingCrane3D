@@ -71,11 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\include;E:\Program Files\imgui\imgui-1.68\imgui_glfw;$(IncludePath)</IncludePath>
+    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\include;E:\Program Files\imgui\imgui-1.68\imgui_glfw;E:\Program Files\imgui\imguiDock;$(IncludePath)</IncludePath>
     <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\include;E:\Program Files\imgui\imgui-1.68\imgui_glfw;$(IncludePath)</IncludePath>
+    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\include;E:\Program Files\imgui\imgui-1.68\imgui_glfw;E:\Program Files\imgui\imguiDock;$(IncludePath)</IncludePath>
     <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -88,6 +88,8 @@
       <PrecompiledHeaderFile>stdhdr.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdhdr.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PrecompiledHeader>Create</PrecompiledHeader>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -113,6 +115,8 @@
       <PrecompiledHeaderFile>stdhdr.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdhdr.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PrecompiledHeader>Create</PrecompiledHeader>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -196,6 +200,16 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imguiDock\imgui_dock.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ForcedIncludeFiles>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4996</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4996</DisableSpecificWarnings>
+    </ClCompile>
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Face.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
@@ -246,6 +260,7 @@
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_rectpack.h" />
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_textedit.h" />
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_truetype.h" />
+    <ClInclude Include="E:\Program Files\imgui\imguiDock\imgui_dock.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Face.h" />
     <ClInclude Include="FreeCamera.h" />

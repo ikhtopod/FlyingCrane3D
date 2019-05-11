@@ -49,6 +49,8 @@ void GUI::init() {
 		Application::getInstancePtr()->getWindow().getWindowPtr(), true);
 	ImGui_ImplOpenGL3_Init();
 
+	ImGui::InitDock();
+
 	this->updateToolsPanelByScreenSize();
 }
 
@@ -86,7 +88,7 @@ void GUI::showMainMenuBar() {
 	static bool showHotKeys = false;
 
 	if (ImGui::BeginMainMenuBar()) {
-		// Установить панель Tools _под_ MenuBar
+		// Настроить панель Tools _под_ MenuBar
 		if (this->positionToolsPanel.y != ImGui::GetWindowSize().y) {
 			this->positionToolsPanel.y = ImGui::GetWindowSize().y;
 			this->updateToolsPanelByScreenSize();
@@ -183,16 +185,31 @@ void GUI::showMainMenuBar() {
 }
 
 void GUI::showToolsPanel() {
-	ImGui::Begin("Tools", nullptr, this->sizeToolsPanel, -1.0f,
-				 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
-	ImGui::SetWindowSize(this->sizeToolsPanel, true);
-	ImGui::SetWindowPos(this->positionToolsPanel, true);
+	if (ImGui::Begin("Tools", nullptr, this->sizeToolsPanel, -1.0f,
+					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
+		ImGui::SetWindowSize(this->sizeToolsPanel, true);
+		ImGui::SetWindowPos(this->positionToolsPanel, true);
+		ImGui::BeginDockspace();
 
-	ImGui::Text("Header 1:"); ImGui::NewLine();
-	ImGui::Text("Content 1");
-	ImGui::Text("Content 2");
-	ImGui::Text("Content 3"); ImGui::NewLine();
-	ImGui::Separator();
+		if (ImGui::BeginDock("Dock 1")) {
+			ImGui::Text("Header 1:"); ImGui::NewLine();
+			ImGui::Text("Content 1");
+			ImGui::Text("Content 2");
+			ImGui::Text("Content 3"); ImGui::NewLine();
+			ImGui::Separator();
+		}
+		ImGui::EndDock();
 
+		if (ImGui::BeginDock("Dock 2")) {
+			ImGui::Text("Header 1:"); ImGui::NewLine();
+			ImGui::Text("Content 1");
+			ImGui::Text("Content 2");
+			ImGui::Text("Content 3"); ImGui::NewLine();
+			ImGui::Separator();
+		}
+		ImGui::EndDock();
+
+		ImGui::EndDockspace();
+	}//fi Tools
 	ImGui::End();
 }

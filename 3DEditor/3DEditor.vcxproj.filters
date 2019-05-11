@@ -142,6 +142,9 @@
     <ClCompile Include="MeshElementPoint.cpp">
       <Filter>Sources\Object\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imguiDock\imgui_dock.cpp">
+      <Filter>Sources\lib\ImGuiDock</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -202,28 +205,28 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imconfig.h">
-      <Filter>Headers\lib\imGui</Filter>
+      <Filter>Headers\lib\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui.h">
-      <Filter>Headers\lib\imGui</Filter>
+      <Filter>Headers\lib\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_impl_glfw.h">
-      <Filter>Headers\lib\imGui</Filter>
+      <Filter>Headers\lib\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_internal.h">
-      <Filter>Headers\lib\imGui</Filter>
+      <Filter>Headers\lib\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_rectpack.h">
-      <Filter>Headers\lib\imGui</Filter>
+      <Filter>Headers\lib\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_textedit.h">
-      <Filter>Headers\lib\imGui</Filter>
+      <Filter>Headers\lib\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_truetype.h">
-      <Filter>Headers\lib\imGui</Filter>
+      <Filter>Headers\lib\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_impl_opengl3.h">
-      <Filter>Headers\lib\imGui</Filter>
+      <Filter>Headers\lib\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Selection.h">
       <Filter>Headers\Selection</Filter>
@@ -288,6 +291,9 @@
     <ClInclude Include="MeshElementPoint.h">
       <Filter>Headers\Object\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imguiDock\imgui_dock.h">
+      <Filter>Headers\lib\ImGuiDock</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
@@ -326,9 +332,6 @@
     <Filter Include="Headers\lib">
       <UniqueIdentifier>{3269860b-6927-453f-b52a-2b92ff7cb72a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\lib\imGui">
-      <UniqueIdentifier>{a0e27067-1181-43d1-b3df-9f0da3ce5ade}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\fonts">
       <UniqueIdentifier>{db9b6593-aa72-48fd-bb34-d8565d271df0}</UniqueIdentifier>
       <Extensions>ttf</Extensions>
@@ -353,6 +356,15 @@
     </Filter>
     <Filter Include="Resources\Shaders\GridObject">
       <UniqueIdentifier>{892f7eba-016f-4973-a839-3662eb849b39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\lib\ImGuiDock">
+      <UniqueIdentifier>{f0a0e36f-249e-48a1-a220-018a60eab151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\lib\ImGui">
+      <UniqueIdentifier>{a0e27067-1181-43d1-b3df-9f0da3ce5ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lib\ImGuiDock">
+      <UniqueIdentifier>{19b20504-46e3-48c6-975d-1f331bde2276}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

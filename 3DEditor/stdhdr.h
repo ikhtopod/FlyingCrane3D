@@ -21,6 +21,7 @@
 #include <glm/gtx/matrix_decompose.hpp>
 
 #include <imgui.h>
+#include <imgui_dock.h>
 #include <imgui_impl_glfw.h>
 
 #undef IMGUI_IMPL_OPENGL_LOADER_GL3W
