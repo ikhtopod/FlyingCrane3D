@@ -188,14 +188,19 @@ void GUI::showMainMenuBar() {
 }
 
 void GUI::showToolsPanel() {
-	if (ImGui::Begin("Tools", nullptr, this->sizeToolsPanel, -1.0f,
+	std::string mainTools { "Tools" };
+
+	if (ImGui::Begin(mainTools.c_str(), nullptr, this->sizeToolsPanel, -1.0f,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
 
 		ImGui::SetWindowSize(this->sizeToolsPanel, true);
 		ImGui::SetWindowPos(this->positionToolsPanel, true);
+
 		ImGui::BeginDockspace();
 
-		if (ImGui::BeginDock("Dock 1", nullptr)) {
+
+		ImGui::SetNextDock(mainTools.c_str(), ImGuiDockSlot_Top);
+		if (ImGui::BeginDock("Dock 1")) {
 			ImGui::Text("Header Dock 1:"); ImGui::NewLine();
 			ImGui::Text("Content 1");
 			ImGui::Text("Content 2");
@@ -204,6 +209,8 @@ void GUI::showToolsPanel() {
 		}//fi BeginDock
 		ImGui::EndDock();
 
+
+		ImGui::SetNextDock(mainTools.c_str(), ImGuiDockSlot_Bottom);
 		if (ImGui::BeginDock("Dock 2")) {
 			ImGui::Text("Header Dock 2:"); ImGui::NewLine();
 			ImGui::Text("Content 1");
@@ -212,6 +219,18 @@ void GUI::showToolsPanel() {
 			ImGui::Separator();
 		}//fi BeginDock
 		ImGui::EndDock();
+
+
+		ImGui::SetNextDock(mainTools.c_str(), ImGuiDockSlot_Bottom);
+		if (ImGui::BeginDock("Dock 3")) {
+			ImGui::Text("Header Dock 3:"); ImGui::NewLine();
+			ImGui::Text("Content 1");
+			ImGui::Text("Content 2");
+			ImGui::Text("Content 3"); ImGui::NewLine();
+			ImGui::Separator();
+		}//fi BeginDock
+		ImGui::EndDock();
+
 
 		ImGui::EndDockspace();
 	}//fi Begin
