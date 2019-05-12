@@ -112,80 +112,77 @@ void GUI::showMainMenuBar() {
 			if (ImGui::MenuItem("Выход", "Ctrl + Q")) {
 				Application::getInstancePtr()->quit();
 			}
+
 			ImGui::EndMenu();
 		}//fi BeginMenu
 
 		if (ImGui::BeginMenu("Редактировать")) {
 			if (ImGui::MenuItem("Настройки", "Ctrl + P", false, false)) {}
+
 			ImGui::EndMenu();
 		}//fi BeginMenu
 
 		if (ImGui::BeginMenu("Справка")) {
 			if (ImGui::MenuItem("Горячие клавиши", "", &showHotKeys)) {}
-
-			if (ImGui::BeginMenu("Статистика")) {
-				ImGui::Text(("FPS: " + std::to_string(ImGui::GetIO().Framerate)).c_str(), "");
-				ImGui::Separator();
-				ImGui::EndMenu();
-			}//fi BeginMenu
-
 			ImGui::Separator();
 			if (ImGui::MenuItem("О проекте", "F1", &showAboutWindow)) {}
+
 			ImGui::EndMenu();
 		}//fi BeginMenu
 
 		ImGui::EndMainMenuBar();
 
 		if (showAboutWindow) {
-			ImGui::Begin("О проекте", &showAboutWindow);
+			if (ImGui::Begin("О проекте", &showAboutWindow)) {
+				ImGui::Text("Дипломный проект на тему:"); ImGui::NewLine();
+				ImGui::Text("\"Разработка программной платформы интерактивной 3D-визуализации\"");
+				ImGui::NewLine();
+				ImGui::Separator();
+				ImGui::Text("Виталий Лифанов. Группа ЗП3-2д");
 
-			ImGui::Text("Дипломный проект на тему:"); ImGui::NewLine();
-			ImGui::Text("\"Разработка программной платформы интерактивной 3D-визуализации\"");
-			ImGui::NewLine();
-			ImGui::Separator();
-			ImGui::Text("Виталий Лифанов. Группа ЗП3-2д");
-
-			ImGui::End();
+				ImGui::End();
+			}//fi Begin
 		}//fi showAboutWindow
 
 		if (showHotKeys) {
-			ImGui::Begin("Горячие клавиши", &showHotKeys,
-						 ImVec2(400, 400), -1.0f, ImGuiWindowFlags_NoResize);
+			if (ImGui::Begin("Горячие клавиши", &showHotKeys,
+							 ImVec2(400, 400), -1.0f, ImGuiWindowFlags_NoResize)) {
 
-			ImGui::Text("Tab: переключить камеру"); ImGui::NewLine();
-			ImGui::Separator();
-			ImGui::Text("Free Camera:"); ImGui::NewLine();
-			ImGui::Text("W, A, S, D, Q, E: передвижение по сцене");
-			ImGui::Text("Mouse: направление движения");
-			ImGui::Text("Крутить СКМ: скорость"); ImGui::NewLine();
-			ImGui::Separator();
-			ImGui::Text("Target Camera:"); ImGui::NewLine();
-			ImGui::Text("Зажать СКМ: вращение вокруг целевой точки");
-			ImGui::Text("Shift + СКМ: смещение камеры и целевой точки в стороны");
-			ImGui::Text("Крутить СКМ: изменение расстояния от целевой точки"); ImGui::NewLine();
-			ImGui::Separator();
-			ImGui::Text("Проекция:"); ImGui::NewLine();
-			ImGui::Text("O: ортографическая");
-			ImGui::Text("P: перспективная"); ImGui::NewLine();
-			ImGui::Separator();
-			ImGui::Text("Выделение:"); ImGui::NewLine();
-			ImGui::Text("ЛКМ: выделить объект");
-			ImGui::Text("Shift + ЛКМ: выделить несколько объектов");
-			ImGui::Text("F: центрировать камеру на выделенных объектах");
-			ImGui::Text("X: удалить выделенные объекты"); ImGui::NewLine();
-			ImGui::Text("Сменить режим выделения:"); ImGui::NewLine();
-			ImGui::Text("1: выделение вершин");
-			ImGui::Text("2: выделение ребер");
-			ImGui::Text("3: выделение граней");
-			ImGui::Text("4: выделение объектов"); ImGui::NewLine();
-			ImGui::Separator();
-			ImGui::Text("Действия с выделенными объектами:"); ImGui::NewLine();
-			ImGui::Text("G: перемещение");
-			ImGui::Text("R: вращение");
-			ImGui::Text("S: масштабирование"); ImGui::NewLine();
-			ImGui::Separator();
+				ImGui::Text("Tab: переключить камеру"); ImGui::NewLine();
+				ImGui::Separator();
+				ImGui::Text("Free Camera:"); ImGui::NewLine();
+				ImGui::Text("W, A, S, D, Q, E: передвижение по сцене");
+				ImGui::Text("Mouse: направление движения");
+				ImGui::Text("Крутить СКМ: скорость"); ImGui::NewLine();
+				ImGui::Separator();
+				ImGui::Text("Target Camera:"); ImGui::NewLine();
+				ImGui::Text("Зажать СКМ: вращение вокруг целевой точки");
+				ImGui::Text("Shift + СКМ: смещение камеры и целевой точки в стороны");
+				ImGui::Text("Крутить СКМ: изменение расстояния от целевой точки"); ImGui::NewLine();
+				ImGui::Separator();
+				ImGui::Text("Проекция:"); ImGui::NewLine();
+				ImGui::Text("O: ортографическая");
+				ImGui::Text("P: перспективная"); ImGui::NewLine();
+				ImGui::Separator();
+				ImGui::Text("Выделение:"); ImGui::NewLine();
+				ImGui::Text("ЛКМ: выделить объект");
+				ImGui::Text("Shift + ЛКМ: выделить несколько объектов");
+				ImGui::Text("F: центрировать камеру на выделенных объектах");
+				ImGui::Text("X: удалить выделенные объекты"); ImGui::NewLine();
+				ImGui::Text("Сменить режим выделения:"); ImGui::NewLine();
+				ImGui::Text("1: выделение вершин");
+				ImGui::Text("2: выделение ребер");
+				ImGui::Text("3: выделение граней");
+				ImGui::Text("4: выделение объектов"); ImGui::NewLine();
+				ImGui::Separator();
+				ImGui::Text("Действия с выделенными объектами:"); ImGui::NewLine();
+				ImGui::Text("G: перемещение");
+				ImGui::Text("R: вращение");
+				ImGui::Text("S: масштабирование"); ImGui::NewLine();
+				ImGui::Separator();
 
-			ImGui::End();
+				ImGui::End();
+			}//fi Begin
 		}//fi showHotKeys
 
 	}//fi BeginMainMenuBar
@@ -265,8 +262,8 @@ void GUI::showToolBar() {
 
 		ImGui::SameLine(0.0f, spacing_w);
 
-	}//fi begin
-	ImGui::End();
+		ImGui::End();
+	}//fi Begin
 }
 
 void GUI::showToolsPanel() {
@@ -279,23 +276,18 @@ void GUI::showToolsPanel() {
 
 		ImGui::BeginDockspace();
 
-
 		ImGui::SetNextDock(nameMainTools.c_str(), ImGuiDockSlot_Tab);
 		if (ImGui::BeginDock("Свойства")) {
 			ImGui::TextColored(ImVec4 { 0.6f, 0.7f, 0.9f, 1.0f }, "Свойства:");
 			ImGui::Separator();
 
-			if (ImGui::CollapsingHeader("Transform", nullptr, ImGuiTreeNodeFlags_DefaultOpen)) {
-				Selection& selection = Application::getInstancePtr()->getScene().getSelection();
-				ImGui::Text("Position");
-				ImGui::Text("Rotation");
-				ImGui::Text("Scale");
+			if (ImGui::CollapsingHeader("ImGui FPS", nullptr, ImGuiTreeNodeFlags_DefaultOpen)) {
+				ImGui::Text((std::to_string(ImGui::GetIO().Framerate)).c_str(), "");
 			}//CollapsingHeader Transform
 
 			ImGui::Separator();
 		}//fi BeginDock
 		ImGui::EndDock();
-
 
 		ImGui::SetNextDock(nameMainTools.c_str(), ImGuiDockSlot_Tab);
 		if (ImGui::BeginDock("Добавить объект")) {
@@ -318,8 +310,8 @@ void GUI::showToolsPanel() {
 		}//fi BeginDock
 		ImGui::EndDock();
 
-
 		ImGui::EndDockspace();
+
+		ImGui::End();
 	}//fi Begin
-	ImGui::End();
 }
