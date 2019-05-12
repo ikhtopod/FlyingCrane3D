@@ -61,24 +61,6 @@
     <ClCompile Include="GUI.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_widgets.cpp">
-      <Filter>Sources\lib\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui.cpp">
-      <Filter>Sources\lib\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_demo.cpp">
-      <Filter>Sources\lib\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_draw.cpp">
-      <Filter>Sources\lib\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_impl_glfw.cpp">
-      <Filter>Sources\lib\imGui</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_impl_opengl3.cpp">
-      <Filter>Sources\lib\imGui</Filter>
-    </ClCompile>
     <ClCompile Include="Selection.cpp">
       <Filter>Sources\Selection</Filter>
     </ClCompile>
@@ -145,6 +127,24 @@
     <ClCompile Include="E:\Program Files\imgui\imguiDock\imgui_dock.cpp">
       <Filter>Sources\lib\ImGuiDock</Filter>
     </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui_draw.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui_impl_glfw.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui_impl_opengl3.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui_widgets.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui_demo.cpp">
+      <Filter>Sources\lib\imGui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -203,30 +203,6 @@
     </ClInclude>
     <ClInclude Include="GUI.h">
       <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imconfig.h">
-      <Filter>Headers\lib\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui.h">
-      <Filter>Headers\lib\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_impl_glfw.h">
-      <Filter>Headers\lib\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_internal.h">
-      <Filter>Headers\lib\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_rectpack.h">
-      <Filter>Headers\lib\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_textedit.h">
-      <Filter>Headers\lib\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imstb_truetype.h">
-      <Filter>Headers\lib\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Program Files\imgui\imgui-1.68\imgui_glfw\imgui_impl_opengl3.h">
-      <Filter>Headers\lib\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Selection.h">
       <Filter>Headers\Selection</Filter>
@@ -293,6 +269,30 @@
     </ClInclude>
     <ClInclude Include="E:\Program Files\imgui\imguiDock\imgui_dock.h">
       <Filter>Headers\lib\ImGuiDock</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui_impl_opengl3.h">
+      <Filter>Headers\lib\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui_internal.h">
+      <Filter>Headers\lib\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imstb_rectpack.h">
+      <Filter>Headers\lib\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imstb_textedit.h">
+      <Filter>Headers\lib\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imstb_truetype.h">
+      <Filter>Headers\lib\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imconfig.h">
+      <Filter>Headers\lib\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui.h">
+      <Filter>Headers\lib\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui_impl_glfw.h">
+      <Filter>Headers\lib\ImGui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
