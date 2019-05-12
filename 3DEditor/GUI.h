@@ -7,7 +7,9 @@
 #include "Texture.h"
 
 enum class GUIIcons : uint32_t {
-	MOVING
+	MOVE, ROTATE, SCALE,
+	PERSP, ORTHO,
+	CAMERA
 };
 
 class GUI final : public ITriada {

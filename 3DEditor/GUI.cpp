@@ -6,7 +6,14 @@ const float GUI::DEFAULT_FONT_SIZE = 16.0f;
 
 
 void GUI::initIcons() {
-	this->icons.insert({ GUIIcons::MOVING, Texture { R"(..\resources\icons\multimedia-icons\png\move.png)" } });
+	this->icons.insert({ GUIIcons::MOVE, Texture { R"(..\resources\icons\multimedia-icons\png\move.png)" } });
+	this->icons.insert({ GUIIcons::ROTATE, Texture { R"(..\resources\icons\multimedia-icons\png\refresh.png)" } });
+	this->icons.insert({ GUIIcons::SCALE, Texture { R"(..\resources\icons\multimedia-icons\png\full.png)" } });
+
+	this->icons.insert({ GUIIcons::PERSP, Texture { R"(..\resources\icons\multimedia-icons\png\photo-camera.png)" } });
+	this->icons.insert({ GUIIcons::ORTHO, Texture { R"(..\resources\icons\multimedia-icons\png\photo-camera-1.png)" } });
+
+	this->icons.insert({ GUIIcons::CAMERA, Texture { R"(..\resources\icons\multimedia-icons\png\video-camera.png)" } });
 }
 
 void GUI::initFont() {
@@ -205,65 +212,67 @@ void GUI::showToolBar() {
 		ImGui::SetWindowSize(this->sizeToolBarPanel, true);
 		ImGui::SetWindowPos(this->positionToolBarPanel, true);
 
-		float sizeMoveButton = 29.0f;
+		ImVec2 sizeMoveButton { 29.0f, 29.0f };
 		float spacing_w = this->sizeToolBarPanel.y / 2.0f;
 
-		Texture& iconMoveButton = this->icons[GUIIcons::MOVING];
-		ImGui::ImageButton((ImTextureID)iconMoveButton.getId(), ImVec2 { sizeMoveButton, sizeMoveButton });
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::MOVE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
-			std::cout << "w: " << iconMoveButton.getWidth() << ", h: " << iconMoveButton.getHeight() << std::endl;
-		}
-
+		}//fi IsItemClicked Button
 		if (ImGui::IsItemHovered()) {
 			ImGui::SetTooltip("Перемещение\nвыделенных\nобъектов (G)");
 		}//fi IsItemHovered Button
 
 		ImGui::SameLine();
 
-		if (ImGui::Button("R", ImVec2 { sizeMoveButton, sizeMoveButton })) {
-		}//fi Button
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::ROTATE].getId(), sizeMoveButton);
+		if (ImGui::IsItemClicked()) {
+		}//fi IsItemClicked Button
 		if (ImGui::IsItemHovered()) {
 			ImGui::SetTooltip("Вращение\nвыделенных\nобъектов (R)");
 		}//fi IsItemHovered Button
 
 		ImGui::SameLine();
 
-		if (ImGui::Button("S", ImVec2 { sizeMoveButton, sizeMoveButton })) {
-		}//fi Button
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::SCALE].getId(), sizeMoveButton);
+		if (ImGui::IsItemClicked()) {
+		}//fi IsItemClicked Button
 		if (ImGui::IsItemHovered()) {
 			ImGui::SetTooltip("Масштабирование\nвыделенных\nобъектов (S)");
 		}//fi IsItemHovered Button
 
 		ImGui::SameLine(0.0f, spacing_w);
 
-		if (ImGui::Button("O", ImVec2 { sizeMoveButton, sizeMoveButton })) {
-			if (scene.getCameraSwitcher().getType() == CameraType::TARGET) {
-				scene.getModel().getOrthoProj().switchToOrthographic();
-			}
-		}//fi Button
-		if (ImGui::IsItemHovered()) {
-			ImGui::SetTooltip("Ортографический\nвид (O)");
-		}//fi IsItemHovered Button
-
-		ImGui::SameLine();
-
-		if (ImGui::Button("P", ImVec2 { sizeMoveButton, sizeMoveButton })) {
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::PERSP].getId(), sizeMoveButton);
+		if (ImGui::IsItemClicked()) {
 			scene.getModel().getOrthoProj().switchToPerspective();
-		}//fi Button
+		}//fi IsItemClicked Button
 		if (ImGui::IsItemHovered()) {
 			ImGui::SetTooltip("Перспективный\nвид (P)");
 		}//fi IsItemHovered Button
 
+		ImGui::SameLine();
+
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::ORTHO].getId(), sizeMoveButton);
+		if (ImGui::IsItemClicked()) {
+			if (scene.getCameraSwitcher().getType() == CameraType::TARGET) {
+				scene.getModel().getOrthoProj().switchToOrthographic();
+			}
+		}//fi IsItemClicked Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Ортографический\nвид (O)");
+		}//fi IsItemHovered Button
+
 		ImGui::SameLine(0.0f, spacing_w);
 
-		if (ImGui::Button("C", ImVec2 { sizeMoveButton, sizeMoveButton })) {
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::CAMERA].getId(), sizeMoveButton);
+		if (ImGui::IsItemClicked()) {
 			if ((scene.getCameraSwitcher().getType() == CameraType::TARGET &&
 				 scene.getSelectionSwitcher().getActionMode() == SelectionActionMode::NONE) ||
 				scene.getCameraSwitcher().getType() == CameraType::FREE) {
 
 				scene.getCameraSwitcher().switchCamera();
 			}//fi
-		}//fi Button
+		}//fi IsItemClicked Button
 		if (ImGui::IsItemHovered()) {
 			ImGui::SetTooltip("Переключить\nтип камеры (Tab)");
 		}//fi IsItemHovered Button
