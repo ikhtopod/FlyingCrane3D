@@ -26,7 +26,7 @@ void drawColor(vec3 selColor) {
 	vec3 norm = normalize(Normal);
 	
 	// ambient
-    float ambientStrength = 1.0f;
+    float ambientStrength = 0.8f;
     vec3 ambient = ambientStrength * selColor * lightColor;
     
     // diffuse 
