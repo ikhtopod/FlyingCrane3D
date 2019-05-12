@@ -24,7 +24,7 @@ private:
 	int height = 0;
 	int nrChannels = 0; // кол-во цветовых каналов
 
-	bool flipVertical = true; // отобразить изображение по вертикали
+	bool flipVertical = false; // отобразить изображение по вертикали
 
 	TextureComponent componentsPerPixel = TextureComponent::RGBA;
 

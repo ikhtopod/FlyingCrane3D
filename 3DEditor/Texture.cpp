@@ -14,7 +14,7 @@ R"(..\resources\icons\multimedia-icons\png\cancel-1.png)";
 Texture::Texture() : Texture(Texture::DEFAULT_IMAGE_PATH) {}
 
 Texture::Texture(std::string _pathToImage) :
-	Texture(_pathToImage, true) {}
+	Texture(_pathToImage, false) {}
 
 Texture::Texture(std::string _pathToImage, bool _flipVertical) :
 	Texture(_pathToImage, _flipVertical, TextureComponent::RGBA) {}
