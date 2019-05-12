@@ -145,9 +145,8 @@ void GUI::showMainMenuBar() {
 				ImGui::NewLine();
 				ImGui::Separator();
 				ImGui::Text("Виталий Лифанов. Группа ЗП3-2д");
-
-				ImGui::End();
 			}//fi Begin
+			ImGui::End();
 		}//fi showAboutWindow
 
 		if (showHotKeys) {
@@ -186,9 +185,8 @@ void GUI::showMainMenuBar() {
 				ImGui::Text("R: вращение");
 				ImGui::Text("S: масштабирование"); ImGui::NewLine();
 				ImGui::Separator();
-
-				ImGui::End();
 			}//fi Begin
+			ImGui::End();
 		}//fi showHotKeys
 
 	}//fi BeginMainMenuBar
