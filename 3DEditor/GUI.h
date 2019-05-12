@@ -17,14 +17,17 @@ private:
 	ImVec2 sizeToolsPanel {};
 	ImVec2 positionToolsPanel {};
 
+	ImVec2 sizeToolBarPanel {};
+	ImVec2 positionToolBarPanel {};
+
 public:
 	GUI() = default;
 	~GUI() = default;
 
-	void updateToolsPanelByScreenSize();
-	void updateToolsPanelByScreenSize(int width, int height);
-	void updateToolsPanelByScreenSize(float width, float height);
-	void updateToolsPanelUnderMenuBar(float yPosition);
+	void updatePanelsByScreenSize();
+	void updatePanelsByScreenSize(int width, int height);
+	void updatePanelsByScreenSize(float width, float height);
+	void updatePanelsUnderMenuBar(float yPosition);
 
 	virtual void init() override;
 	virtual void draw() override;
@@ -39,5 +42,6 @@ private:
 
 private:
 	void showMainMenuBar();
+	void showToolBar();
 	void showToolsPanel();
 };

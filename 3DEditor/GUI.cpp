@@ -19,34 +19,37 @@ void GUI::initFont() {
 	io.Fonts->AddFontDefault();
 }
 
-void GUI::updateToolsPanelByScreenSize() {
+void GUI::updatePanelsByScreenSize() {
 	ScreenResolution sr = Application::getInstancePtr()->getWindow().getScreen();
-	this->updateToolsPanelByScreenSize(sr.getWidth(), sr.getHeight());
+	this->updatePanelsByScreenSize(sr.getWidth(), sr.getHeight());
 }
 
-void GUI::updateToolsPanelByScreenSize(int width, int height) {
-	this->updateToolsPanelByScreenSize(
+void GUI::updatePanelsByScreenSize(int width, int height) {
+	this->updatePanelsByScreenSize(
 		static_cast<float>(width), static_cast<float>(height));
 }
 
-void GUI::updateToolsPanelByScreenSize(float width, float height) {
-	float wSize = 225.0f;
-	this->sizeToolsPanel = ImVec2 { width > wSize ? wSize : width, height - this->positionToolsPanel.y };
+void GUI::updatePanelsByScreenSize(float width, float height) {
+	this->sizeToolBarPanel = ImVec2 { width, 50.0f };
+
+	this->sizeToolsPanel = ImVec2 { 300.0f, height - this->sizeToolBarPanel.y };
+	this->positionToolsPanel.y = this->sizeToolBarPanel.y + this->positionToolBarPanel.y;
 	this->positionToolsPanel.x = width - this->sizeToolsPanel.x;
 }
 
-void GUI::updateToolsPanelUnderMenuBar(float yPosition) {
-	if (this->positionToolsPanel.y == yPosition) return;
+void GUI::updatePanelsUnderMenuBar(float yPosition) {
+	if (this->positionToolBarPanel.y == yPosition) return;
 
-	this->positionToolsPanel.y = yPosition;
-	this->updateToolsPanelByScreenSize();
+	this->positionToolBarPanel.y = yPosition;
+	this->updatePanelsByScreenSize();
 }
 
 void GUI::init() {
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 
-	ImGui::GetIO().IniFilename = nullptr;
+	ImGuiIO& io = ImGui::GetIO();
+	io.IniFilename = nullptr;
 
 	this->initFont();
 
@@ -58,7 +61,7 @@ void GUI::init() {
 
 	ImGui::InitDock();
 
-	this->updateToolsPanelByScreenSize();
+	this->updatePanelsByScreenSize();
 }
 
 void GUI::draw() {
@@ -81,6 +84,7 @@ void GUI::draw_NewFrame() {
 
 void GUI::draw_GUI() {
 	this->showMainMenuBar();
+	this->showToolBar();
 	this->showToolsPanel();
 }
 
@@ -95,7 +99,7 @@ void GUI::showMainMenuBar() {
 	static bool showHotKeys = false;
 
 	if (ImGui::BeginMainMenuBar()) {
-		this->updateToolsPanelUnderMenuBar(ImGui::GetWindowSize().y);
+		this->updatePanelsUnderMenuBar(ImGui::GetWindowSize().y);
 
 		if (ImGui::BeginMenu("Файл")) {
 			if (ImGui::MenuItem("Новый", "Ctrl + N", false, false)) {}
@@ -173,7 +177,7 @@ void GUI::showMainMenuBar() {
 			ImGui::Text("1: выделение вершин");
 			ImGui::Text("2: выделение ребер");
 			ImGui::Text("3: выделение граней");
-			ImGui::Text("4: выделение объектов");
+			ImGui::Text("4: выделение объектов"); ImGui::NewLine();
 			ImGui::Separator();
 			ImGui::Text("Действия с выделенными объектами:"); ImGui::NewLine();
 			ImGui::Text("G: перемещение");
@@ -187,46 +191,129 @@ void GUI::showMainMenuBar() {
 	}//fi BeginMainMenuBar
 }
 
+void GUI::showToolBar() {
+	std::string nameToolBar { "ToolBar" };
+
+	Application* appThis = Application::getInstancePtr();
+	Scene& scene = appThis->getScene();
+
+	if (ImGui::Begin(nameToolBar.c_str(), nullptr, this->sizeToolsPanel, -1.0f,
+					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
+					 ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar)) {
+
+		ImGui::SetWindowSize(this->sizeToolBarPanel, true);
+		ImGui::SetWindowPos(this->positionToolBarPanel, true);
+
+		float sizeMoveButton = this->sizeToolBarPanel.y - 16.0f;
+		float spacing_w = this->sizeToolBarPanel.y / 2.0f;
+
+		if (ImGui::Button("M", ImVec2 { sizeMoveButton, sizeMoveButton })) {
+		}//fi Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Перемещение\nвыделенных\nобъектов (G)");
+		}//fi IsItemHovered Button
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("R", ImVec2 { sizeMoveButton, sizeMoveButton })) {
+		}//fi Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Вращение\nвыделенных\nобъектов (R)");
+		}//fi IsItemHovered Button
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("S", ImVec2 { sizeMoveButton, sizeMoveButton })) {
+		}//fi Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Масштабирование\nвыделенных\nобъектов (S)");
+		}//fi IsItemHovered Button
+
+		ImGui::SameLine(0.0f, spacing_w);
+
+		if (ImGui::Button("O", ImVec2 { sizeMoveButton, sizeMoveButton })) {
+			if (scene.getCameraSwitcher().getType() == CameraType::TARGET) {
+				scene.getModel().getOrthoProj().switchToOrthographic();
+			}
+		}//fi Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Ортографический\nвид (O)");
+		}//fi IsItemHovered Button
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("P", ImVec2 { sizeMoveButton, sizeMoveButton })) {
+			scene.getModel().getOrthoProj().switchToPerspective();
+		}//fi Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Перспективный\nвид (P)");
+		}//fi IsItemHovered Button
+
+		ImGui::SameLine(0.0f, spacing_w);
+
+		if (ImGui::Button("C", ImVec2 { sizeMoveButton, sizeMoveButton })) {
+			if ((scene.getCameraSwitcher().getType() == CameraType::TARGET &&
+				 scene.getSelectionSwitcher().getActionMode() == SelectionActionMode::NONE) ||
+				scene.getCameraSwitcher().getType() == CameraType::FREE) {
+
+				scene.getCameraSwitcher().switchCamera();
+			}//fi
+		}//fi Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Переключить\nтип камеры (Tab)");
+		}//fi IsItemHovered Button
+
+		ImGui::SameLine(0.0f, spacing_w);
+
+	}//fi begin
+	ImGui::End();
+}
+
 void GUI::showToolsPanel() {
-	std::string mainTools { "Tools" };
+	std::string nameMainTools { "Панель инструментов" };
 
-	if (ImGui::Begin(mainTools.c_str(), nullptr, this->sizeToolsPanel, -1.0f,
+	if (ImGui::Begin(nameMainTools.c_str(), nullptr, this->sizeToolsPanel, -1.0f,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
-
 		ImGui::SetWindowSize(this->sizeToolsPanel, true);
 		ImGui::SetWindowPos(this->positionToolsPanel, true);
 
 		ImGui::BeginDockspace();
 
 
-		ImGui::SetNextDock(mainTools.c_str(), ImGuiDockSlot_Top);
-		if (ImGui::BeginDock("Dock 1")) {
-			ImGui::Text("Header Dock 1:"); ImGui::NewLine();
-			ImGui::Text("Content 1");
-			ImGui::Text("Content 2");
-			ImGui::Text("Content 3"); ImGui::NewLine();
+		ImGui::SetNextDock(nameMainTools.c_str(), ImGuiDockSlot_Tab);
+		if (ImGui::BeginDock("Свойства")) {
+			ImGui::TextColored(ImVec4 { 0.6f, 0.7f, 0.9f, 1.0f }, "Свойства:");
+			ImGui::Separator();
+
+			if (ImGui::CollapsingHeader("Transform", nullptr, ImGuiTreeNodeFlags_DefaultOpen)) {
+				Selection& selection = Application::getInstancePtr()->getScene().getSelection();
+				ImGui::Text("Position");
+				ImGui::Text("Rotation");
+				ImGui::Text("Scale");
+			}//CollapsingHeader Transform
+
 			ImGui::Separator();
 		}//fi BeginDock
 		ImGui::EndDock();
 
 
-		ImGui::SetNextDock(mainTools.c_str(), ImGuiDockSlot_Bottom);
-		if (ImGui::BeginDock("Dock 2")) {
-			ImGui::Text("Header Dock 2:"); ImGui::NewLine();
-			ImGui::Text("Content 1");
-			ImGui::Text("Content 2");
-			ImGui::Text("Content 3"); ImGui::NewLine();
-			ImGui::Separator();
-		}//fi BeginDock
-		ImGui::EndDock();
+		ImGui::SetNextDock(nameMainTools.c_str(), ImGuiDockSlot_Tab);
+		if (ImGui::BeginDock("Добавить объект")) {
+			std::vector<const char *> listboxItems {
+				"Плоскость", "Сетка",
+				"Куб",
+				"Конус", "Пирамида",
+				"Цилиндр",
+				"Сфера",
+				"Пустышка"
+			};
+			static int currentListboxItem = 0;
 
+			ImGui::ListBox("Список\nобъектов", &currentListboxItem, &(listboxItems)[0],
+						   listboxItems.size(), listboxItems.size());
 
-		ImGui::SetNextDock(mainTools.c_str(), ImGuiDockSlot_Bottom);
-		if (ImGui::BeginDock("Dock 3")) {
-			ImGui::Text("Header Dock 3:"); ImGui::NewLine();
-			ImGui::Text("Content 1");
-			ImGui::Text("Content 2");
-			ImGui::Text("Content 3"); ImGui::NewLine();
+			ImGui::NewLine();
+			ImGui::Button("Добавить");
 			ImGui::Separator();
 		}//fi BeginDock
 		ImGui::EndDock();
