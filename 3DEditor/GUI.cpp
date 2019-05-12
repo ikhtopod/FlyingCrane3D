@@ -271,9 +271,8 @@ void GUI::showToolBar() {
 		}//fi IsItemHovered Button
 
 		ImGui::SameLine(0.0f, spacing_w);
-
-		ImGui::End();
 	}//fi Begin
+	ImGui::End();
 }
 
 void GUI::showToolsPanel() {
@@ -321,7 +320,6 @@ void GUI::showToolsPanel() {
 		ImGui::EndDock();
 
 		ImGui::EndDockspace();
-
-		ImGui::End();
 	}//fi Begin
+	ImGui::End();
 }
