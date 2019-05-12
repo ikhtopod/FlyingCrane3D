@@ -17,7 +17,8 @@ Application::Application(std::string appTitle)
 				  ScreenResolution::DEFAULT_SCREEN_HEIGHT) {}
 
 Application::Application(std::string appTitle, int sWidth, int sHeight)
-	: window(appTitle, sWidth, sHeight), deltaTime(120) {
+	: window(appTitle, sWidth, sHeight), deltaTime(120),
+	bgColor({ .3f, .3f, .3f, 1.0f }) {
 
 	Application::initInstance(this);
 }

@@ -5,6 +5,10 @@ const std::string GUI::FONT_PATH = FONT_DIRECTORY + "/Roboto-Regular.ttf";
 const float GUI::DEFAULT_FONT_SIZE = 16.0f;
 
 
+void GUI::initIcons() {
+	this->icons.insert({ GUIIcons::MOVING, Texture { R"(..\resources\icons\multimedia-icons\png\move.png)" } });
+}
+
 void GUI::initFont() {
 	ImGuiIO& io = ImGui::GetIO();
 
@@ -45,6 +49,8 @@ void GUI::updatePanelsUnderMenuBar(float yPosition) {
 }
 
 void GUI::init() {
+	this->initIcons();
+
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 
@@ -53,7 +59,7 @@ void GUI::init() {
 
 	this->initFont();
 
-	ImGui::StyleColorsDark();
+	ImGui::StyleColorsLight();
 
 	ImGui_ImplGlfw_InitForOpenGL(
 		Application::getInstancePtr()->getWindow().getWindowPtr(), true);
@@ -201,11 +207,15 @@ void GUI::showToolBar() {
 		ImGui::SetWindowSize(this->sizeToolBarPanel, true);
 		ImGui::SetWindowPos(this->positionToolBarPanel, true);
 
-		float sizeMoveButton = this->sizeToolBarPanel.y - 16.0f;
+		float sizeMoveButton = 29.0f;
 		float spacing_w = this->sizeToolBarPanel.y / 2.0f;
 
-		if (ImGui::Button("M", ImVec2 { sizeMoveButton, sizeMoveButton })) {
-		}//fi Button
+		Texture& iconMoveButton = this->icons[GUIIcons::MOVING];
+		ImGui::ImageButton((ImTextureID)iconMoveButton.getId(), ImVec2 { sizeMoveButton, sizeMoveButton });
+		if (ImGui::IsItemClicked()) {
+			std::cout << "w: " << iconMoveButton.getWidth() << ", h: " << iconMoveButton.getHeight() << std::endl;
+		}
+
 		if (ImGui::IsItemHovered()) {
 			ImGui::SetTooltip("Перемещение\nвыделенных\nобъектов (G)");
 		}//fi IsItemHovered Button

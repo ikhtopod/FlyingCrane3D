@@ -4,6 +4,11 @@
 #include "ITriada.h"
 #include "Application.h"
 #include "ScreenResolution.h"
+#include "Texture.h"
+
+enum class GUIIcons : uint32_t {
+	MOVING
+};
 
 class GUI final : public ITriada {
 public:
@@ -19,6 +24,8 @@ private:
 
 	ImVec2 sizeToolBarPanel {};
 	ImVec2 positionToolBarPanel {};
+
+	std::unordered_map<GUIIcons, Texture> icons {};
 
 public:
 	GUI() = default;
@@ -38,6 +45,7 @@ private:
 	void draw_GUI();
 	void draw_Render();
 
+	void initIcons();
 	void initFont();
 
 private:

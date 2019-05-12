@@ -22,7 +22,7 @@ private:
 
 	TriadaMode currentMode = TriadaMode::NONE;
 
-	glm::vec4 bgColor { .2f, .2f, .3f, 1.0f };
+	glm::vec4 bgColor {};
 
 public:
 	Application();
