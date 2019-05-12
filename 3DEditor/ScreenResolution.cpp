@@ -8,9 +8,9 @@ const int ScreenResolution::DEFAULT_SCREEN_HEIGHT = 600;
 ScreenResolution::ScreenResolution()
 	: ScreenResolution(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT) {}
 
-ScreenResolution::ScreenResolution(int sWidth, int sHeight)
-	: width(sWidth), height(sHeight),
-	halfWidth(sWidth / 2.0), halfHeight(sHeight / 2.0) {}
+ScreenResolution::ScreenResolution(int sWidth, int sHeight) {
+	this->setWidthHeight(sWidth, sHeight);
+}
 
 
 int ScreenResolution::getWidth() {
@@ -31,13 +31,17 @@ double ScreenResolution::getHalfHeight() {
 
 
 void ScreenResolution::setWidth(int _width) {
+	if (_width < 0) _width = 0;
+
 	this->width = _width;
-	this->halfWidth = _width / 2.0;
+	this->halfWidth = static_cast<double>(_width) / 2.0;
 }
 
 void ScreenResolution::setHeight(int _height) {
+	if (_height < 0) _height = 0;
+
 	this->height = _height;
-	this->halfHeight = _height / 2.0;
+	this->halfHeight = static_cast<double>(_height) / 2.0;
 }
 
 

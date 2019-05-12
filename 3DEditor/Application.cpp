@@ -247,11 +247,10 @@ void Application::Callback::resizeWindow(GLFWwindow* win, int width, int height)
 
 	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
 
+	if (width < 1 && height < 1) return;
 	appThis->getWindow().getScreen().setWidthHeight(width, height);
-
+	appThis->getGui().updatePanelsByScreenSize(width, height);
 	glViewport(0, 0, width, height);
-
-	appThis->getGui().updateToolsPanelByScreenSize(width, height);
 }
 
 void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, double yPos) {
