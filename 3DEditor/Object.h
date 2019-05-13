@@ -13,9 +13,9 @@ class Mesh;
 class Object : public ITriada {
 protected:
 	template<class T>
-	using UMap = std::unordered_map<std::string, T>;
-	using UMapMesh = UMap<Mesh>;
-	using UMapObject = UMap<Object>;
+	using Map = std::map<std::string, T>;
+	using MapMesh = Map<Mesh>;
+	using MapObject = Map<Object>;
 
 protected:
 	Transform transform {};
@@ -23,7 +23,7 @@ protected:
 	Transform globalTransform {};
 
 	MeshElementManager mem { this };
-	UMapMesh meshes {};
+	MapMesh meshes {};
 
 	Mesh pivotPoint;
 	bool canDrawPivotPoint = true;
@@ -48,7 +48,7 @@ public:
 
 	MeshElementManager& getMeshElementManager();
 
-	UMapMesh& getMeshes();
+	MapMesh& getMeshes();
 	void addMesh(std::string _name, Mesh& _mesh);
 	void setShadersAllMeshes(Shader& _shader);
 

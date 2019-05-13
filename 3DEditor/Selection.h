@@ -24,6 +24,9 @@ public:
 };
 
 class Selection : public ISelection {
+protected:
+	using MapObjectPtr = std::map<std::string, Object*>;
+
 public:
 	static const glm::vec4 CLEAR_COLOR;
 
@@ -31,7 +34,7 @@ protected:
 	glm::vec2 prevMousePosition {};
 	glm::vec2 diffMousePosition {};
 
-	std::unordered_map<std::string, Object*> selectedObjects {};
+	MapObjectPtr selectedObjects {};
 
 protected:
 	static glm::vec4 getColorUnderCursor();
@@ -45,7 +48,7 @@ public:
 	virtual void select();
 
 public:
-	std::unordered_map<std::string, Object*>& getSelectedObjects();
+	MapObjectPtr& getSelectedObjects();
 	bool hasSelectedObject(std::string name);
 	bool hasSelectedObjects();
 	void clearSelectedObjects();

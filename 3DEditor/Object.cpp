@@ -54,7 +54,7 @@ MeshElementManager& Object::getMeshElementManager() {
 }
 
 
-Object::UMapMesh& Object::getMeshes() {
+Object::MapMesh& Object::getMeshes() {
 	return this->meshes;
 }
 
