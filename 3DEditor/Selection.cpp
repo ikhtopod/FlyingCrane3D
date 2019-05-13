@@ -114,7 +114,7 @@ void Selection::mouseButtonInput(int button, int action, int mods) {
 	static bool prevState = GLFW_RELEASE;
 
 	if (action == GLFW_PRESS && prevState == GLFW_RELEASE) {
-		if (mods != GLFW_MOD_SHIFT) {
+		if (mods != GLFW_MOD_SHIFT && !ImGui::IsAnyWindowHovered()) {
 			this->clearSelectedObjects();
 		}//fi
 
