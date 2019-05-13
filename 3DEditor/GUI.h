@@ -10,7 +10,7 @@ enum class GUIIcons : UINT8 {
 	MOVE, ROTATE, SCALE,
 	REMOVE,
 	PERSP, ORTHO,
-	CAMERA
+	CAMERA, FOCUS
 };
 
 class GUI final : public ITriada {

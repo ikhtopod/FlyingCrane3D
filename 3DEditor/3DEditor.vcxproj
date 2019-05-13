@@ -322,6 +322,7 @@
     <Image Include="..\resources\icons\multimedia-icons\png\photo-camera-1.png" />
     <Image Include="..\resources\icons\multimedia-icons\png\photo-camera.png" />
     <Image Include="..\resources\icons\multimedia-icons\png\refresh.png" />
+    <Image Include="..\resources\icons\multimedia-icons\png\target.png" />
     <Image Include="..\resources\icons\multimedia-icons\png\trash.png" />
     <Image Include="..\resources\icons\multimedia-icons\png\video-camera.png" />
   </ItemGroup>

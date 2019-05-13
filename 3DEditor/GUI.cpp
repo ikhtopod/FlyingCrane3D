@@ -16,6 +16,7 @@ void GUI::initIcons() {
 	this->icons.insert({ GUIIcons::ORTHO, Texture { R"(..\resources\icons\multimedia-icons\png\photo-camera-1.png)" } });
 
 	this->icons.insert({ GUIIcons::CAMERA, Texture { R"(..\resources\icons\multimedia-icons\png\video-camera.png)" } });
+	this->icons.insert({ GUIIcons::FOCUS, Texture { R"(..\resources\icons\multimedia-icons\png\target.png)" } });
 }
 
 void GUI::initFont() {
@@ -229,7 +230,7 @@ void GUI::showToolBar() {
 		ImGui::Columns(3, nameToolBarColumn.c_str(), true);
 		ImGui::SetColumnWidth(0, 195.0f);
 		ImGui::SetColumnWidth(1, 97.0f);
-		ImGui::SetColumnWidth(2, 49.0f);
+		ImGui::SetColumnWidth(2, 97.0f);
 
 		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::MOVE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
@@ -312,6 +313,25 @@ void GUI::showToolBar() {
 		}//fi IsItemClicked Button
 		if (ImGui::IsItemHovered()) {
 			ImGui::SetTooltip("Переключить\nтип камеры (Tab)");
+		}//fi IsItemHovered Button
+
+		ImGui::SameLine();
+
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::FOCUS].getId(), sizeMoveButton);
+		if (ImGui::IsItemClicked()) {
+			if (scene.getCameraSwitcher().getType() == CameraType::TARGET &&
+				scene.getSelectionSwitcher().getActionMode() == SelectionActionMode::NONE) {
+
+				if (scene.getSelection().hasSelectedObjects()) {
+					std::shared_ptr<TargetCamera> tc =
+						std::dynamic_pointer_cast<TargetCamera>(scene.getCameraSwitcher().getCamera());
+					tc->setTargetPosition(scene.getSelection().getCentroid());
+				}//fi
+
+			}//fi
+		}//fi IsItemClicked Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Сфокусировать\nкамеру\nна выделенном\nобъекте (F)");
 		}//fi IsItemHovered Button
 
 		ImGui::SameLine(0.0f, spacing_w);
