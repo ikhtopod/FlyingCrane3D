@@ -42,6 +42,9 @@ public:
 	void updatePanelsByScreenSize(float width, float height);
 	void updatePanelsUnderMenuBar(float yPosition);
 
+	void updateSelectedObjectsTree();
+	void updateSceneObjectsTree();
+
 	virtual void init() override;
 	virtual void draw() override;
 	virtual void free() override;

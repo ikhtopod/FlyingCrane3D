@@ -372,10 +372,34 @@ void GUI::showToolsPanel() {
 	ImGui::End();
 }
 
+void GUI::updateSelectedObjectsTree() {
+	Selection& selection = Application::getInstancePtr()->getScene().getSelection();
+
+	for (auto&[nameObject, object] : selection.getSelectedObjects()) {
+		if (ImGui::TreeNodeEx(nameObject.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
+			for (auto&[nameMesh, mesh] : object->getMeshes()) {
+				ImGui::BulletText(nameMesh.c_str());
+			}//rof meshes
+			ImGui::TreePop();
+		}//fi TreeNodeEx
+	}//rof objects
+}
+
+void GUI::updateSceneObjectsTree() {
+	Scene& scene = Application::getInstancePtr()->getScene();
+
+	for (auto&[nameObject, object] : scene.getObjects()) {
+		if (ImGui::TreeNodeEx(nameObject.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
+			for (auto&[nameMesh, mesh] : object.getMeshes()) {
+				ImGui::BulletText(nameMesh.c_str());
+			}//rof meshes
+			ImGui::TreePop();
+		}//fi TreeNodeEx
+	}//rof objects
+}
+
 void GUI::showObjectsListPanel() {
 	std::string nameObjectsList { "Объекты" };
-
-	Application* appThis = Application::getInstancePtr();
 
 	if (ImGui::Begin(nameObjectsList.c_str(), nullptr, this->sizeObjectsListPanel, -1.0f,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
@@ -387,6 +411,7 @@ void GUI::showObjectsListPanel() {
 		ImGui::SetNextDock(nameObjectsList.c_str(), ImGuiDockSlot_Tab);
 		if (ImGui::BeginDock("Выделены")) {
 			ImGui::Separator();
+			this->updateSelectedObjectsTree();
 			ImGui::Separator();
 		}//fi BeginDock
 		ImGui::EndDock();
@@ -394,25 +419,7 @@ void GUI::showObjectsListPanel() {
 		ImGui::SetNextDock(nameObjectsList.c_str(), ImGuiDockSlot_Tab);
 		if (ImGui::BeginDock("Сцена")) {
 			ImGui::Separator();
-
-			if (ImGui::TreeNodeEx("Scene", ImGuiTreeNodeFlags_DefaultOpen)) {
-				if (ImGui::TreeNode("Object.000")) {
-					if (ImGui::TreeNode("Mesh.000")) {
-						ImGui::BulletText("no objects");
-						ImGui::TreePop();
-					}//fi TreeNode
-					if (ImGui::TreeNode("Mesh.001")) {
-						ImGui::BulletText("no objects");
-						ImGui::TreePop();
-					}//fi TreeNode
-
-					ImGui::TreePop();
-				}//fi TreeNode
-
-				ImGui::TreePop();
-			}//fi TreeNode
-
-
+			this->updateSceneObjectsTree();
 			ImGui::Separator();
 		}//fi BeginDock
 		ImGui::EndDock();
