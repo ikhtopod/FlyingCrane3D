@@ -31,9 +31,9 @@ Texture::Texture(std::string _pathToImage, bool _flipVertical,
 void Texture::loadImage() {
 	stbi_set_flip_vertically_on_load(this->flipVertical);
 
-	unsigned char* data = stbi_load(this->pathToImage.c_str(),
-									&this->width, &this->height, &this->nrChannels,
-									static_cast<int>(this->componentsPerPixel));
+	UINT8* data = stbi_load(this->pathToImage.c_str(),
+							&this->width, &this->height, &this->nrChannels,
+							static_cast<int>(this->componentsPerPixel));
 
 	glGenTextures(Texture::BUFFER_SIZE, &this->id);
 	glBindTexture(GL_TEXTURE_2D, this->id);
