@@ -43,9 +43,13 @@ void GUI::updatePanelsByScreenSize(int width, int height) {
 void GUI::updatePanelsByScreenSize(float width, float height) {
 	this->sizeToolBarPanel = ImVec2 { width, 50.0f };
 
-	this->sizeToolsPanel = ImVec2 { 300.0f, height - this->sizeToolBarPanel.y };
+	float sizeTools = 300.0f;
+	this->sizeToolsPanel = ImVec2 { sizeTools, height - this->sizeToolBarPanel.y };
 	this->positionToolsPanel.y = this->sizeToolBarPanel.y + this->positionToolBarPanel.y;
 	this->positionToolsPanel.x = width - this->sizeToolsPanel.x;
+
+	this->sizeObjectsListPanel = this->sizeToolsPanel;
+	this->positionObjectsListPanel.y = this->positionToolsPanel.y;
 }
 
 void GUI::updatePanelsUnderMenuBar(float yPosition) {
@@ -99,6 +103,7 @@ void GUI::draw_GUI() {
 	this->showMainMenuBar();
 	this->showToolBar();
 	this->showToolsPanel();
+	this->showObjectsListPanel();
 }
 
 void GUI::draw_Render() {
@@ -290,18 +295,18 @@ void GUI::showToolBar() {
 }
 
 void GUI::showToolsPanel() {
-	std::string nameMainTools { "Панель инструментов" };
+	std::string nameTools { "Панель инструментов" };
 
 	Application* appThis = Application::getInstancePtr();
 
-	if (ImGui::Begin(nameMainTools.c_str(), nullptr, this->sizeToolsPanel, -1.0f,
+	if (ImGui::Begin(nameTools.c_str(), nullptr, this->sizeToolsPanel, -1.0f,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
 		ImGui::SetWindowSize(this->sizeToolsPanel, true);
 		ImGui::SetWindowPos(this->positionToolsPanel, true);
 
 		ImGui::BeginDockspace();
 
-		ImGui::SetNextDock(nameMainTools.c_str(), ImGuiDockSlot_Tab);
+		ImGui::SetNextDock(nameTools.c_str(), ImGuiDockSlot_Tab);
 		if (ImGui::BeginDock("Свойства")) {
 			ImGui::TextColored(ImVec4 { 0.5f, 0.7f, 0.9f, 1.0f }, "Свойства:");
 			ImGui::Separator();
@@ -315,7 +320,7 @@ void GUI::showToolsPanel() {
 		}//fi BeginDock
 		ImGui::EndDock();
 
-		ImGui::SetNextDock(nameMainTools.c_str(), ImGuiDockSlot_Tab);
+		ImGui::SetNextDock(nameTools.c_str(), ImGuiDockSlot_Tab);
 		if (ImGui::BeginDock("Добавить объект")) {
 			std::vector<const char *> listboxItems {
 				"Плоскость", "Сетка",
@@ -327,11 +332,62 @@ void GUI::showToolsPanel() {
 			};
 			static int currentListboxItem = 0;
 
+			ImGui::Separator();
 			ImGui::ListBox("Список\nобъектов", &currentListboxItem, &(listboxItems)[0],
 						   listboxItems.size(), listboxItems.size());
 
 			ImGui::NewLine();
 			ImGui::Button("Добавить");
+			ImGui::Separator();
+		}//fi BeginDock
+		ImGui::EndDock();
+
+		ImGui::EndDockspace();
+	}//fi Begin
+	ImGui::End();
+}
+
+void GUI::showObjectsListPanel() {
+	std::string nameObjectsList { "Объекты" };
+
+	Application* appThis = Application::getInstancePtr();
+
+	if (ImGui::Begin(nameObjectsList.c_str(), nullptr, this->sizeObjectsListPanel, -1.0f,
+					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
+		ImGui::SetWindowSize(this->sizeObjectsListPanel, true);
+		ImGui::SetWindowPos(this->positionObjectsListPanel, true);
+
+		ImGui::BeginDockspace();
+
+		ImGui::SetNextDock(nameObjectsList.c_str(), ImGuiDockSlot_Tab);
+		if (ImGui::BeginDock("Выделены")) {
+			ImGui::Separator();
+			ImGui::Separator();
+		}//fi BeginDock
+		ImGui::EndDock();
+
+		ImGui::SetNextDock(nameObjectsList.c_str(), ImGuiDockSlot_Tab);
+		if (ImGui::BeginDock("Сцена")) {
+			ImGui::Separator();
+
+			if (ImGui::TreeNodeEx("Scene", ImGuiTreeNodeFlags_DefaultOpen)) {
+				if (ImGui::TreeNode("Object.000")) {
+					if (ImGui::TreeNode("Mesh.000")) {
+						ImGui::BulletText("no objects");
+						ImGui::TreePop();
+					}//fi TreeNode
+					if (ImGui::TreeNode("Mesh.001")) {
+						ImGui::BulletText("no objects");
+						ImGui::TreePop();
+					}//fi TreeNode
+
+					ImGui::TreePop();
+				}//fi TreeNode
+
+				ImGui::TreePop();
+			}//fi TreeNode
+
+
 			ImGui::Separator();
 		}//fi BeginDock
 		ImGui::EndDock();

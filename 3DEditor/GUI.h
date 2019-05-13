@@ -27,6 +27,9 @@ private:
 	ImVec2 sizeToolBarPanel {};
 	ImVec2 positionToolBarPanel {};
 
+	ImVec2 sizeObjectsListPanel {};
+	ImVec2 positionObjectsListPanel {};
+
 	std::unordered_map<GUIIcons, Texture> icons {};
 
 public:
@@ -54,4 +57,5 @@ private:
 	void showMainMenuBar();
 	void showToolBar();
 	void showToolsPanel();
+	void showObjectsListPanel();
 };
