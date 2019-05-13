@@ -54,6 +54,7 @@ private:
 	virtual void free() override;
 
 	void keyboardInput();
+	void keyboardQuit();
 	void switchCameraInput();
 	void switchProjectionInput();
 	void focusingOnSelectedObjects();

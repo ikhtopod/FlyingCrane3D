@@ -138,8 +138,19 @@ void Application::free() {
 }
 
 void Application::keyboardInput() {
+	this->keyboardQuit();
 	this->scene.getCamera().keyboardInput();
 	this->scene.getSelection().keyboardInput();
+}
+
+void Application::keyboardQuit() {
+	int keyQ = glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_Q);
+	int lCtrl = glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_LEFT_CONTROL);
+	int rCtrl = glfwGetKey(this->window.getWindowPtr(), GLFW_KEY_RIGHT_CONTROL);
+
+	if (keyQ == GLFW_PRESS && (lCtrl == GLFW_PRESS || rCtrl == GLFW_PRESS)) {
+		this->quit();
+	}
 }
 
 void Application::switchCameraInput() {
