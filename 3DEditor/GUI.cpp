@@ -224,15 +224,18 @@ void GUI::showToolBar() {
 		ImGui::SetWindowPos(this->positionToolBarPanel, true);
 
 		ImVec2 sizeMoveButton { 29.0f, 29.0f };
-		float spacing_w = 14.5f;
+		float spacing_w = 16.0f;
 
 		ImGui::Columns(3, nameToolBarColumn.c_str(), true);
-		ImGui::SetColumnWidth(0, 142.0f);
+		ImGui::SetColumnWidth(0, 195.0f);
 		ImGui::SetColumnWidth(1, 97.0f);
 		ImGui::SetColumnWidth(2, 49.0f);
 
 		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::MOVE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
+			if (selection.hasSelectedObjects()) {
+				selectionSwitcher.setActionMode(SelectionActionMode::MOVING);
+			}//fi
 		}//fi IsItemClicked Button
 		if (ImGui::IsItemHovered()) {
 			ImGui::SetTooltip("Перемещение\nвыделенных\nобъектов (G)");
@@ -242,6 +245,9 @@ void GUI::showToolBar() {
 
 		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::ROTATE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
+			if (selection.hasSelectedObjects()) {
+				selectionSwitcher.setActionMode(SelectionActionMode::ROTATION);
+			}//fi
 		}//fi IsItemClicked Button
 		if (ImGui::IsItemHovered()) {
 			ImGui::SetTooltip("Вращение\nвыделенных\nобъектов (R)");
@@ -251,9 +257,24 @@ void GUI::showToolBar() {
 
 		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::SCALE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
+			if (selection.hasSelectedObjects()) {
+				selectionSwitcher.setActionMode(SelectionActionMode::SCALING);
+			}//fi
 		}//fi IsItemClicked Button
 		if (ImGui::IsItemHovered()) {
 			ImGui::SetTooltip("Масштабирование\nвыделенных\nобъектов (S)");
+		}//fi IsItemHovered Button
+
+		ImGui::SameLine(0.0f, spacing_w);
+
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::REMOVE].getId(), sizeMoveButton);
+		if (ImGui::IsItemClicked()) {
+			if (selection.hasSelectedObjects()) {
+				selection.deleting();
+			}//fi
+		}//fi IsItemClicked Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Удалить\nвыделенные\nобъекты (X)");
 		}//fi IsItemHovered Button
 
 		ImGui::NextColumn();
