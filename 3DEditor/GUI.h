@@ -7,6 +7,7 @@
 #include "Texture.h"
 
 enum class GUIIcons : UINT8 {
+	POINT, EDGE, FACE, OBJECT,
 	MOVE, ROTATE, SCALE,
 	REMOVE,
 	PERSP, ORTHO,

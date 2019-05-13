@@ -6,6 +6,11 @@ const float GUI::DEFAULT_FONT_SIZE = 16.0f;
 
 
 void GUI::initIcons() {
+	this->icons.insert({ GUIIcons::POINT, Texture { R"(..\resources\icons\multimedia-icons\png\more.png)" } });
+	this->icons.insert({ GUIIcons::EDGE, Texture { R"(..\resources\icons\multimedia-icons\png\menu.png)" } });
+	this->icons.insert({ GUIIcons::FACE, Texture { R"(..\resources\icons\multimedia-icons\png\up-arrow-3.png)" } });
+	this->icons.insert({ GUIIcons::OBJECT, Texture { R"(..\resources\icons\multimedia-icons\png\wine-glass-1.png)" } });
+
 	this->icons.insert({ GUIIcons::MOVE, Texture { R"(..\resources\icons\multimedia-icons\png\move.png)" } });
 	this->icons.insert({ GUIIcons::ROTATE, Texture { R"(..\resources\icons\multimedia-icons\png\refresh.png)" } });
 	this->icons.insert({ GUIIcons::SCALE, Texture { R"(..\resources\icons\multimedia-icons\png\full.png)" } });
@@ -46,8 +51,8 @@ void GUI::updatePanelsByScreenSize(int width, int height) {
 void GUI::updatePanelsByScreenSize(float width, float height) {
 	this->sizeToolBarPanel = ImVec2 { width, 50.0f };
 
-	float sizeTools = 300.0f;
-	this->sizeToolsPanel = ImVec2 { sizeTools, height - this->sizeToolBarPanel.y };
+	this->sizeToolsPanel =
+		ImVec2 { 300.0f, height - this->sizeToolBarPanel.y - this->positionToolBarPanel.y };
 	this->positionToolsPanel.y = this->sizeToolBarPanel.y + this->positionToolBarPanel.y;
 	this->positionToolsPanel.x = width - this->sizeToolsPanel.x;
 
@@ -170,7 +175,9 @@ void GUI::showMainMenuBar() {
 
 		if (showHotKeys) {
 			if (ImGui::Begin("Горячие клавиши", &showHotKeys,
-							 ImVec2(400, 400), -1.0f, ImGuiWindowFlags_NoResize)) {
+							 ImGuiWindowFlags_NoResize)) {
+
+				ImGui::SetWindowSize(ImVec2 { 400.0f, 400.0f }, true);
 
 				ImGui::Text("Tab: переключить камеру"); ImGui::NewLine();
 				ImGui::Separator();
@@ -220,7 +227,7 @@ void GUI::showToolBar() {
 	Selection& selection = scene.getSelection();
 	SelectionSwitcher& selectionSwitcher = scene.getSelectionSwitcher();
 
-	if (ImGui::Begin(nameToolBar.c_str(), nullptr, this->sizeToolsPanel, -1.0f,
+	if (ImGui::Begin(nameToolBar.c_str(), nullptr,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
 					 ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar |
 					 ImGuiWindowFlags_NoScrollWithMouse)) {
@@ -231,10 +238,51 @@ void GUI::showToolBar() {
 		ImVec2 sizeMoveButton { 29.0f, 29.0f };
 		float spacing_w = 16.0f;
 
-		ImGui::Columns(3, nameToolBarColumn.c_str(), true);
-		ImGui::SetColumnWidth(0, 195.0f);
-		ImGui::SetColumnWidth(1, 97.0f);
+		ImGui::Columns(4, nameToolBarColumn.c_str(), true);
+		ImGui::SetColumnWidth(0, 187.0f);
+		ImGui::SetColumnWidth(1, 195.0f);
 		ImGui::SetColumnWidth(2, 97.0f);
+		ImGui::SetColumnWidth(3, 97.0f);
+
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::POINT].getId(), sizeMoveButton);
+		if (ImGui::IsItemClicked()) {
+			selectionSwitcher.setSelectionMode(SelectionMode::POINT);
+		}//fi IsItemClicked Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Режим\nвыделения\nточек (1)");
+		}//fi IsItemHovered Button
+
+		ImGui::SameLine();
+
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::EDGE].getId(), sizeMoveButton);
+		if (ImGui::IsItemClicked()) {
+			selectionSwitcher.setSelectionMode(SelectionMode::EDGE);
+		}//fi IsItemClicked Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Режим\nвыделения\nребер (2)");
+		}//fi IsItemHovered Button
+
+		ImGui::SameLine();
+
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::FACE].getId(), sizeMoveButton);
+		if (ImGui::IsItemClicked()) {
+			selectionSwitcher.setSelectionMode(SelectionMode::FACE);
+		}//fi IsItemClicked Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Режим\nвыделения\nграней (3)");
+		}//fi IsItemHovered Button
+
+		ImGui::SameLine();
+
+		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::OBJECT].getId(), sizeMoveButton);
+		if (ImGui::IsItemClicked()) {
+			selectionSwitcher.setSelectionMode(SelectionMode::OBJECT);
+		}//fi IsItemClicked Button
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("Режим\nвыделения\nобъектов (4)");
+		}//fi IsItemHovered Button
+
+		ImGui::NextColumn();
 
 		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::MOVE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
@@ -339,6 +387,9 @@ void GUI::showToolBar() {
 		}//fi IsItemHovered Button
 
 		ImGui::SameLine(0.0f, spacing_w);
+	} else {
+		ImGui::SetWindowSize(this->sizeToolBarPanel, true);
+		ImGui::SetWindowPos(this->positionToolBarPanel, true);
 	}//fi Begin
 	ImGui::End();
 }
@@ -348,8 +399,9 @@ void GUI::showToolsPanel() {
 
 	Application* appThis = Application::getInstancePtr();
 
-	if (ImGui::Begin(nameTools.c_str(), nullptr, this->sizeToolsPanel, -1.0f,
+	if (ImGui::Begin(nameTools.c_str(), nullptr,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
+
 		ImGui::SetWindowSize(this->sizeToolsPanel, true);
 		ImGui::SetWindowPos(this->positionToolsPanel, true);
 
@@ -392,6 +444,9 @@ void GUI::showToolsPanel() {
 		ImGui::EndDock();
 
 		ImGui::EndDockspace();
+	} else {
+		ImGui::SetWindowSize(this->sizeToolsPanel, true);
+		ImGui::SetWindowPos(this->positionToolsPanel, true);
 	}//fi Begin
 	ImGui::End();
 }
@@ -425,8 +480,9 @@ void GUI::updateSceneObjectsTree() {
 void GUI::showObjectsListPanel() {
 	std::string nameObjectsList { "Объекты" };
 
-	if (ImGui::Begin(nameObjectsList.c_str(), nullptr, this->sizeObjectsListPanel, -1.0f,
+	if (ImGui::Begin(nameObjectsList.c_str(), nullptr,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
+
 		ImGui::SetWindowSize(this->sizeObjectsListPanel, true);
 		ImGui::SetWindowPos(this->positionObjectsListPanel, true);
 
@@ -449,6 +505,9 @@ void GUI::showObjectsListPanel() {
 		ImGui::EndDock();
 
 		ImGui::EndDockspace();
+	} else {
+		ImGui::SetWindowSize(this->sizeObjectsListPanel, true);
+		ImGui::SetWindowPos(this->positionObjectsListPanel, true);
 	}//fi Begin
 	ImGui::End();
 }

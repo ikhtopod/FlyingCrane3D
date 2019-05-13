@@ -448,5 +448,17 @@
     <Image Include="..\resources\icons\multimedia-icons\png\target.png">
       <Filter>Resources\icons</Filter>
     </Image>
+    <Image Include="..\resources\icons\multimedia-icons\png\more.png">
+      <Filter>Resources\icons</Filter>
+    </Image>
+    <Image Include="..\resources\icons\multimedia-icons\png\up-arrow-3.png">
+      <Filter>Resources\icons</Filter>
+    </Image>
+    <Image Include="..\resources\icons\multimedia-icons\png\wine-glass-1.png">
+      <Filter>Resources\icons</Filter>
+    </Image>
+    <Image Include="..\resources\icons\multimedia-icons\png\menu.png">
+      <Filter>Resources\icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>

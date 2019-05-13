@@ -318,13 +318,17 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\resources\icons\multimedia-icons\png\full.png" />
+    <Image Include="..\resources\icons\multimedia-icons\png\menu.png" />
+    <Image Include="..\resources\icons\multimedia-icons\png\more.png" />
     <Image Include="..\resources\icons\multimedia-icons\png\move.png" />
     <Image Include="..\resources\icons\multimedia-icons\png\photo-camera-1.png" />
     <Image Include="..\resources\icons\multimedia-icons\png\photo-camera.png" />
     <Image Include="..\resources\icons\multimedia-icons\png\refresh.png" />
     <Image Include="..\resources\icons\multimedia-icons\png\target.png" />
     <Image Include="..\resources\icons\multimedia-icons\png\trash.png" />
+    <Image Include="..\resources\icons\multimedia-icons\png\up-arrow-3.png" />
     <Image Include="..\resources\icons\multimedia-icons\png\video-camera.png" />
+    <Image Include="..\resources\icons\multimedia-icons\png\wine-glass-1.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
