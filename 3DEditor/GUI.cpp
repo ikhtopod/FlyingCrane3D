@@ -201,19 +201,26 @@ void GUI::showMainMenuBar() {
 
 void GUI::showToolBar() {
 	std::string nameToolBar { "ToolBar" };
+	std::string nameToolBarColumn { "ToolBarColumn" };
 
 	Application* appThis = Application::getInstancePtr();
 	Scene& scene = appThis->getScene();
 
 	if (ImGui::Begin(nameToolBar.c_str(), nullptr, this->sizeToolsPanel, -1.0f,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
-					 ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar)) {
+					 ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar |
+					 ImGuiWindowFlags_NoScrollWithMouse)) {
 
 		ImGui::SetWindowSize(this->sizeToolBarPanel, true);
 		ImGui::SetWindowPos(this->positionToolBarPanel, true);
 
 		ImVec2 sizeMoveButton { 29.0f, 29.0f };
-		float spacing_w = this->sizeToolBarPanel.y / 2.0f;
+		float spacing_w = 14.5f;
+
+		ImGui::Columns(3, nameToolBarColumn.c_str(), true);
+		ImGui::SetColumnWidth(0, 142.0f);
+		ImGui::SetColumnWidth(1, 97.0f);
+		ImGui::SetColumnWidth(2, 49.0f);
 
 		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::MOVE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
@@ -240,7 +247,7 @@ void GUI::showToolBar() {
 			ImGui::SetTooltip("Масштабирование\nвыделенных\nобъектов (S)");
 		}//fi IsItemHovered Button
 
-		ImGui::SameLine(0.0f, spacing_w);
+		ImGui::NextColumn();
 
 		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::PERSP].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
@@ -262,7 +269,7 @@ void GUI::showToolBar() {
 			ImGui::SetTooltip("Ортографический\nвид (O)");
 		}//fi IsItemHovered Button
 
-		ImGui::SameLine(0.0f, spacing_w);
+		ImGui::NextColumn();
 
 		ImGui::ImageButton((ImTextureID)this->icons[GUIIcons::CAMERA].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
@@ -285,6 +292,8 @@ void GUI::showToolBar() {
 void GUI::showToolsPanel() {
 	std::string nameMainTools { "Панель инструментов" };
 
+	Application* appThis = Application::getInstancePtr();
+
 	if (ImGui::Begin(nameMainTools.c_str(), nullptr, this->sizeToolsPanel, -1.0f,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
 		ImGui::SetWindowSize(this->sizeToolsPanel, true);
@@ -294,12 +303,13 @@ void GUI::showToolsPanel() {
 
 		ImGui::SetNextDock(nameMainTools.c_str(), ImGuiDockSlot_Tab);
 		if (ImGui::BeginDock("Свойства")) {
-			ImGui::TextColored(ImVec4 { 0.6f, 0.7f, 0.9f, 1.0f }, "Свойства:");
+			ImGui::TextColored(ImVec4 { 0.5f, 0.7f, 0.9f, 1.0f }, "Свойства:");
 			ImGui::Separator();
 
-			if (ImGui::CollapsingHeader("ImGui FPS", nullptr, ImGuiTreeNodeFlags_DefaultOpen)) {
-				ImGui::Text((std::to_string(ImGui::GetIO().Framerate)).c_str(), "");
-			}//CollapsingHeader Transform
+			if (ImGui::CollapsingHeader("FPS", nullptr, ImGuiTreeNodeFlags_DefaultOpen)) {
+				ImGui::Text("ImGui: %s", (std::to_string(ImGui::GetIO().Framerate)).c_str());
+				ImGui::Text("Editor: %s", (std::to_string(1.0f / appThis->getDeltaTime())).c_str());
+			}//fi CollapsingHeader FPS
 
 			ImGui::Separator();
 		}//fi BeginDock
