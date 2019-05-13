@@ -1,7 +1,7 @@
 #include "Application.h"
 
 int main() {
-	std::string applicationName = "Lowpoly Style 3D Editor";
+	std::string applicationName = "Lowpoly Style 3D Editor | Vitaly Lifanov";
 
 	try {
 		Application(applicationName, 1280, 720).run();
