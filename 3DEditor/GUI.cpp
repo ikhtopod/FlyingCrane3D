@@ -153,6 +153,10 @@ void GUI::showMainMenuBar() {
 
 		ImGui::EndMainMenuBar();
 
+		if (ImGui::IsKeyPressed(GLFW_KEY_F1, false)) {
+			showAboutWindow = !showAboutWindow;
+		}
+
 		if (showAboutWindow) {
 			if (ImGui::Begin("О проекте", &showAboutWindow)) {
 				ImGui::Text("Дипломный проект на тему:"); ImGui::NewLine();
