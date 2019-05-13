@@ -35,10 +35,6 @@ void Window::setVSync(bool _vSync) {
 }
 
 
-GLFWwindow& Window::getWindow() {
-	return *(this->window);
-}
-
 GLFWwindow* Window::getWindowPtr() {
 	return this->window;
 }
@@ -56,19 +52,21 @@ void Window::init() {
 									this->screenTitle.c_str(),
 									nullptr, nullptr);
 
-	if (!window) {
+	if (!this->window) {
 		throw WindowException("Error in Window::init(): GLFWwindow is 0");
 	}
 
-	glfwMakeContextCurrent(window);
+	glfwMakeContextCurrent(this->window);
+}
 
-	// On/off v-sync. Если v-sync включен, то fps ограничевается до 60 кадров
+void Window::extra() {
+	glfwMaximizeWindow(this->window);
 	glfwSwapInterval(this->vSync);
 }
 
 void Window::close() {
 	if (this->window) {
-		glfwDestroyWindow(window);
+		glfwDestroyWindow(this->window);
 	}
 
 	glfwTerminate();

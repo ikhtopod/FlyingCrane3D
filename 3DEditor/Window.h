@@ -24,10 +24,11 @@ public:
 
 	void setVSync(bool _vSync);
 
-	GLFWwindow& getWindow();
 	GLFWwindow* getWindowPtr();
 
 	void init();
+	void extra();
+
 	void close();
 };
 

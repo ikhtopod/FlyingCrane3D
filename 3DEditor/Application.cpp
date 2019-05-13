@@ -24,10 +24,6 @@ Application::Application(std::string appTitle, int sWidth, int sHeight)
 }
 
 
-Application& Application::getInstance() {
-	return *Application::instance;
-}
-
 Application* Application::getInstancePtr() {
 	return Application::instance;
 }
@@ -85,7 +81,7 @@ void Application::loadGLLoader() const {
 
 
 void Application::mainLoop() {
-	// WARNING: Последовательность вызовов функций важна!!!
+	// WARNING: Последовательность вызовов функций важна
 	while (!glfwWindowShouldClose(this->window.getWindowPtr())) {
 		glfwPollEvents();
 
@@ -95,7 +91,6 @@ void Application::mainLoop() {
 
 		glfwSwapBuffers(this->window.getWindowPtr());
 
-		//this->deltaTime.update();
 		this->deltaTime.update(this->window.isVSync());
 	}
 }
@@ -110,6 +105,7 @@ void Application::init() {
 		Application::Callback::assignAll();
 		this->gui.init();
 		this->scene.init();
+		this->window.extra();
 	} catch (std::exception e) {
 		this->currentMode = TriadaMode::NONE;
 		throw e;
@@ -233,20 +229,18 @@ void Application::rendering() {
 /* Callback */
 
 void Application::Callback::assignAll() {
-	Application* _this = Application::getInstancePtr();
-	glfwSetWindowUserPointer(_this->getWindow().getWindowPtr(), _this);
+	Application* appThis = Application::getInstancePtr();
+	glfwSetWindowUserPointer(appThis->getWindow().getWindowPtr(), appThis);
 
-	glfwSetFramebufferSizeCallback(_this->getWindow().getWindowPtr(), AppCall::resizeWindow);
-	glfwSetCursorPosCallback(_this->getWindow().getWindowPtr(), AppCall::mouseMovementCallback);
-	glfwSetMouseButtonCallback(_this->getWindow().getWindowPtr(), AppCall::mouseButtonCallback);
-	glfwSetScrollCallback(_this->getWindow().getWindowPtr(), AppCall::scrollCallback);
+	glfwSetFramebufferSizeCallback(appThis->getWindow().getWindowPtr(), AppCall::resizeWindow);
+	glfwSetCursorPosCallback(appThis->getWindow().getWindowPtr(), AppCall::mouseMovementCallback);
+	glfwSetMouseButtonCallback(appThis->getWindow().getWindowPtr(), AppCall::mouseButtonCallback);
+	glfwSetScrollCallback(appThis->getWindow().getWindowPtr(), AppCall::scrollCallback);
 }
 
 
 void Application::Callback::resizeWindow(GLFWwindow* win, int width, int height) {
 	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
-
-	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
 
 	if (width < 1 && height < 1) return;
 	appThis->getWindow().getScreen().setWidthHeight(width, height);

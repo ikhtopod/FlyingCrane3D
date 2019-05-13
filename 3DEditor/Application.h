@@ -30,7 +30,6 @@ public:
 	Application(std::string appTitle, int sWidth, int sHeight);
 	~Application() = default;
 
-	static Application& getInstance();
 	static Application* getInstancePtr();
 
 	Window& getWindow();
