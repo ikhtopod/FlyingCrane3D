@@ -10,6 +10,8 @@ void GUI::initIcons() {
 	this->icons.insert({ GUIIcons::ROTATE, Texture { R"(..\resources\icons\multimedia-icons\png\refresh.png)" } });
 	this->icons.insert({ GUIIcons::SCALE, Texture { R"(..\resources\icons\multimedia-icons\png\full.png)" } });
 
+	this->icons.insert({ GUIIcons::REMOVE, Texture { R"(..\resources\icons\multimedia-icons\png\trash.png)" } });
+
 	this->icons.insert({ GUIIcons::PERSP, Texture { R"(..\resources\icons\multimedia-icons\png\photo-camera.png)" } });
 	this->icons.insert({ GUIIcons::ORTHO, Texture { R"(..\resources\icons\multimedia-icons\png\photo-camera-1.png)" } });
 
@@ -210,6 +212,8 @@ void GUI::showToolBar() {
 
 	Application* appThis = Application::getInstancePtr();
 	Scene& scene = appThis->getScene();
+	Selection& selection = scene.getSelection();
+	SelectionSwitcher& selectionSwitcher = scene.getSelectionSwitcher();
 
 	if (ImGui::Begin(nameToolBar.c_str(), nullptr, this->sizeToolsPanel, -1.0f,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |

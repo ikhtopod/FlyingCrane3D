@@ -6,8 +6,9 @@
 #include "ScreenResolution.h"
 #include "Texture.h"
 
-enum class GUIIcons : uint32_t {
+enum class GUIIcons : UINT8 {
 	MOVE, ROTATE, SCALE,
+	REMOVE,
 	PERSP, ORTHO,
 	CAMERA
 };

@@ -442,5 +442,8 @@
     <Image Include="..\resources\icons\multimedia-icons\png\move.png">
       <Filter>Resources\icons</Filter>
     </Image>
+    <Image Include="..\resources\icons\multimedia-icons\png\trash.png">
+      <Filter>Resources\icons</Filter>
+    </Image>
   </ItemGroup>
 </Project>
