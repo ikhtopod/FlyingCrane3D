@@ -34,9 +34,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Sources\Object</Filter>
     </ClCompile>
-    <ClCompile Include="GridObject.cpp">
-      <Filter>Sources\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Axis.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -148,6 +145,12 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectSceneGrid.cpp">
+      <Filter>Sources\Object\ObjectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectScene.cpp">
+      <Filter>Sources\Object\ObjectScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -175,9 +178,6 @@
       <Filter>Headers\Object</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Headers\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="GridObject.h">
       <Filter>Headers\Object</Filter>
     </ClInclude>
     <ClInclude Include="ITriada.h">
@@ -306,6 +306,12 @@
     <ClInclude Include="E:\Program Files\stb\stb_image_resize.h">
       <Filter>Headers\lib\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectSceneGrid.h">
+      <Filter>Headers\Object\ObjectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectScene.h">
+      <Filter>Headers\Object\ObjectScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
@@ -384,6 +390,22 @@
     </Filter>
     <Filter Include="Headers\lib\stb_image">
       <UniqueIdentifier>{7147e6d2-faaf-4b78-a112-020f7d4962ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Object\ObjectScene">
+      <UniqueIdentifier>{0813f1c7-3c42-41ee-8182-f4fc801133e8}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="Sources\Object\ObjectShape">
+      <UniqueIdentifier>{ac3e9396-888a-49bb-a627-fd1b4b0beac2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Object\ObjectScene">
+      <UniqueIdentifier>{96eedf2a-3f45-4c45-9772-78ea4ccd465c}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="Headers\Object\ObjectShape">
+      <UniqueIdentifier>{4126d46c-3202-408e-8ce6-d266307b5db3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

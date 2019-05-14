@@ -25,19 +25,19 @@ Selection& Scene::getSelection() {
 	return *(this->selectionSwitcher.getSelection());
 }
 
-std::map<std::string, Object>& Scene::getObjects() {
+Scene::MapObject& Scene::getObjects() {
 	return this->objects;
 }
 
-void Scene::addStandardObject(std::string _name, Object _object) {
-	if (this->standardObjects.empty() || (this->standardObjects.find(_name) == this->standardObjects.end())) {
-		this->standardObjects.insert({ _name, _object });
+void Scene::addSceneObject(std::string _name, Object _object) {
+	if (this->sceneObjects.empty() || (this->sceneObjects.find(_name) == this->sceneObjects.end())) {
+		this->sceneObjects.insert({ _name, std::make_shared<Object>(_object) });
 	}//fi
 }
 
 void Scene::addObject(std::string _name, Object _object) {
 	if (this->objects.empty() || (this->objects.find(_name) == this->objects.end())) {
-		this->objects.insert({ _name, _object });
+		this->objects.insert({ _name, std::make_shared<Object>(_object) });
 	}//fi
 }
 
@@ -45,8 +45,8 @@ void Scene::deleteMarkedObjects() {
 	std::vector<std::string> namesForDelete {};
 
 	for (auto&[name, object] : this->objects) {
-		if (object.isDeleting) {
-			object.free();
+		if (object->isDeleting) {
+			object->free();
 			namesForDelete.push_back(name);
 		}//fi
 	}//rof
@@ -63,7 +63,7 @@ void Scene::init() {
 	/***********************************/
 
 	// grid
-	this->addStandardObject("grid_8x8.000", GridObject { 8, 8 });
+	this->addSceneObject("grid_8x8.000", ObjectSceneGrid { 8, 8 });
 
 	// insert objects
 	PolymeshRepresentation pyramid_polymesh_flat_000 {
@@ -118,38 +118,38 @@ void Scene::init() {
 
 	/***********************************/
 
-	for (auto&[name, object] : this->standardObjects) {
-		object.init();
+	for (auto&[name, object] : this->sceneObjects) {
+		object->init();
 	}//rof
 
 	for (auto&[name, object] : this->objects) {
-		object.init();
+		object->init();
 	}//rof
 }
 
 void Scene::draw() {
 	this->model.update();
 
-	for (auto&[name, object] : this->standardObjects) {
-		object.setParentTransform(this->transform);
-		object.draw();
+	for (auto&[name, object] : this->sceneObjects) {
+		object->setParentTransform(this->transform);
+		object->draw();
 	}//rof
 
 	this->deleteMarkedObjects();
 
 	for (auto&[name, object] : this->objects) {
-		object.setParentTransform(this->transform);
-		object.draw();
+		object->setParentTransform(this->transform);
+		object->draw();
 	}//rof
 }
 
 void Scene::free() {
-	for (auto&[name, object] : this->standardObjects) {
-		object.free();
+	for (auto&[name, object] : this->sceneObjects) {
+		object->free();
 	}//rof
 
 	for (auto&[name, object] : this->objects) {
-		object.free();
+		object->free();
 	}//rof
 
 	this->selectionSwitcher.clearSelections();

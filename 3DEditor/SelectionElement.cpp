@@ -1,26 +1,26 @@
 #include "SelectionElement.h"
 
 
-void SelectionElement::drawObject(Object& object) {
+void SelectionElement::drawObject(const SharedObject& object) {
 	this->drawObject(object, CLEAR_COLOR);
 }
 
 // Отрисовать объект, чтобы вершины, спрятанные за ним, не выделялись
-void SelectionElement::drawObject(Object& object, glm::vec4 color) {
-	object.getSelectionInfo().colorSelect = color;
-	object.getSelectionInfo().isSelectionProcess = true;
+void SelectionElement::drawObject(const SharedObject& object, glm::vec4 color) {
+	object->getSelectionInfo().colorSelect = color;
+	object->getSelectionInfo().isSelectionProcess = true;
 
-	for (auto&[meshKey, meshValue] : object.getMeshes()) {
-		meshValue.setGlobalTransform(object.getParentTransform() + object.getTransform());
+	for (auto&[meshKey, meshValue] : object->getMeshes()) {
+		meshValue.setGlobalTransform(object->getParentTransform() + object->getTransform());
 		meshValue.draw();
 	}//rof
 
-	object.getSelectionInfo().isSelectionProcess = false;
+	object->getSelectionInfo().isSelectionProcess = false;
 }
 
 
 void SelectionElement::
-updateMovingPoints(Object* object, glm::vec3& oldPosition, glm::vec3& newPosition) {
+updateMovingPoints(const SharedObject& object, glm::vec3& oldPosition, glm::vec3& newPosition) {
 	for (auto&[meshName, meshElements] : object->getMeshElementManager().getPoints()) {
 		for (auto& meshElement : meshElements) {
 			for (Vertex& v : meshElement->getVertices()) {
@@ -35,7 +35,7 @@ updateMovingPoints(Object* object, glm::vec3& oldPosition, glm::vec3& newPositio
 }
 
 void SelectionElement::
-updateMovingEdges(Object* object, glm::vec3& oldPosition, glm::vec3& newPosition) {
+updateMovingEdges(const SharedObject& object, glm::vec3& oldPosition, glm::vec3& newPosition) {
 	for (auto&[meshName, meshElements] : object->getMeshElementManager().getEdges()) {
 		for (auto& meshElement : meshElements) {
 			for (Vertex& v : meshElement->getVertices()) {
@@ -50,7 +50,7 @@ updateMovingEdges(Object* object, glm::vec3& oldPosition, glm::vec3& newPosition
 }
 
 void SelectionElement::
-updateMovingFaces(Object* object, glm::vec3& oldPosition, glm::vec3& newPosition) {
+updateMovingFaces(const SharedObject& object, glm::vec3& oldPosition, glm::vec3& newPosition) {
 	for (auto&[meshName, meshElements] : object->getMeshElementManager().getFaces()) {
 		for (auto& meshElement : meshElements) {
 			for (Vertex& v : meshElement->getVertices()) {
@@ -65,14 +65,14 @@ updateMovingFaces(Object* object, glm::vec3& oldPosition, glm::vec3& newPosition
 }
 
 void SelectionElement::
-updateMovingElements(Object* object, glm::vec3& oldPosition, glm::vec3& newPosition) {
+updateMovingElements(const SharedObject& object, glm::vec3& oldPosition, glm::vec3& newPosition) {
 	this->updateMovingPoints(object, oldPosition, newPosition);
 	this->updateMovingEdges(object, oldPosition, newPosition);
 	this->updateMovingFaces(object, oldPosition, newPosition);
 }
 
 void SelectionElement::
-updateMovingMeshes(Object* object, glm::vec3& oldPosition, glm::vec3& newPosition) {
+updateMovingMeshes(const SharedObject& object, glm::vec3& oldPosition, glm::vec3& newPosition) {
 	for (auto&[meshName, mesh] : object->getMeshes()) {
 		for (auto& v : mesh.getPolymesh().getVertices()) {
 			if (v.position == oldPosition) {
@@ -86,7 +86,7 @@ updateMovingMeshes(Object* object, glm::vec3& oldPosition, glm::vec3& newPositio
 }
 
 void SelectionElement::
-updateMovingData(Object* object, glm::vec3& oldPosition, glm::vec3& newPosition) {
+updateMovingData(const SharedObject& object, glm::vec3& oldPosition, glm::vec3& newPosition) {
 	this->updateMovingElements(object, oldPosition, newPosition);
 	this->updateMovingMeshes(object, oldPosition, newPosition);
 }

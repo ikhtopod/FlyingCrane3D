@@ -1,16 +1,16 @@
-#include "GridObject.h"
+#include "ObjectSceneGrid.h"
 
 
-GridObject::_Cuint GridObject::DEFAULT_WIDTH = 10;
-GridObject::_Cuint GridObject::DEFAULT_HEIGHT = GridObject::DEFAULT_WIDTH;
-GridObject::_Cuint GridObject::DEFAULT_STEP = 1;
+ObjectSceneGrid::_Cuint ObjectSceneGrid::DEFAULT_WIDTH = 10;
+ObjectSceneGrid::_Cuint ObjectSceneGrid::DEFAULT_HEIGHT = ObjectSceneGrid::DEFAULT_WIDTH;
+ObjectSceneGrid::_Cuint ObjectSceneGrid::DEFAULT_STEP = 1;
 
 
-GridObject::GridObject()
-	: GridObject(DEFAULT_WIDTH, DEFAULT_HEIGHT) {}
+ObjectSceneGrid::ObjectSceneGrid()
+	: ObjectSceneGrid(DEFAULT_WIDTH, DEFAULT_HEIGHT) {}
 
-GridObject::GridObject(_uint _width, _uint _height)
-	: Object(), width(_width), height(_height), step(DEFAULT_STEP) {
+ObjectSceneGrid::ObjectSceneGrid(_uint _width, _uint _height)
+	: ObjectScene(), width(_width), height(_height), step(DEFAULT_STEP) {
 
 	this->canDrawPivotPoint = false;
 	this->selectionInfo.canSelect = false;

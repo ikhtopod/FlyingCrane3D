@@ -6,9 +6,9 @@ void SelectionElementEdge::drawForSelection() {
 
 	uint32_t colorId = 0;
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
-		if (!objValue.getSelectionInfo().canSelect) continue;
+		if (!objValue->getSelectionInfo().canSelect) continue;
 
-		for (auto&[meshName, meshElements] : objValue.getMeshElementManager().getEdges()) {
+		for (auto&[meshName, meshElements] : objValue->getMeshElementManager().getEdges()) {
 			for (auto& meshElement : meshElements) {
 				if (!meshElement->getSelectionInfo().canSelect) continue;
 
@@ -30,9 +30,9 @@ void SelectionElementEdge::saveSelectedObject(glm::vec4 colorUnderCursor) {
 	Application* appThis = Application::getInstancePtr();
 
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
-		if (!objValue.getSelectionInfo().canSelect) continue;
+		if (!objValue->getSelectionInfo().canSelect) continue;
 
-		for (auto&[meshName, meshElements] : objValue.getMeshElementManager().getEdges()) {
+		for (auto&[meshName, meshElements] : objValue->getMeshElementManager().getEdges()) {
 			for (auto& meshElement : meshElements) {
 				if (!meshElement->getSelectionInfo().canSelect) continue;
 
@@ -42,11 +42,11 @@ void SelectionElementEdge::saveSelectedObject(glm::vec4 colorUnderCursor) {
 					if (this->hasSelectedObject(objKey)) {
 						if (this->selectedObjects[objKey] == nullptr) {
 							this->selectedObjects.erase(objKey);
-							this->selectedObjects.insert({ objKey, &objValue });
+							this->selectedObjects.insert({ objKey, objValue });
 							break;
 						}//fi
 					} else {
-						this->selectedObjects.insert({ objKey, &objValue });
+						this->selectedObjects.insert({ objKey, objValue });
 						break;
 					}//fi
 				}//fi

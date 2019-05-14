@@ -469,7 +469,7 @@ void GUI::updateSceneObjectsTree() {
 
 	for (auto&[nameObject, object] : scene.getObjects()) {
 		if (ImGui::TreeNodeEx(nameObject.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
-			for (auto&[nameMesh, mesh] : object.getMeshes()) {
+			for (auto&[nameMesh, mesh] : object->getMeshes()) {
 				ImGui::BulletText(nameMesh.c_str());
 			}//rof meshes
 			ImGui::TreePop();

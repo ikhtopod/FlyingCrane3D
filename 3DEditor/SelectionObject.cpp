@@ -6,17 +6,17 @@ void SelectionObject::drawForSelection() {
 
 	uint32_t colorId = 0;
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
-		if (!objValue.getSelectionInfo().canSelect) continue;
+		if (!objValue->getSelectionInfo().canSelect) continue;
 
-		objValue.getSelectionInfo().colorSelect = Util::generateRGBAColorById(++colorId);
-		objValue.getSelectionInfo().isSelectionProcess = true;
+		objValue->getSelectionInfo().colorSelect = Util::generateRGBAColorById(++colorId);
+		objValue->getSelectionInfo().isSelectionProcess = true;
 
-		for (auto&[meshKey, meshValue] : objValue.getMeshes()) {
-			meshValue.setGlobalTransform(objValue.getParentTransform() + objValue.getTransform());
+		for (auto&[meshKey, meshValue] : objValue->getMeshes()) {
+			meshValue.setGlobalTransform(objValue->getParentTransform() + objValue->getTransform());
 			meshValue.draw();
 		}//rof
 
-		objValue.getSelectionInfo().isSelectionProcess = false;
+		objValue->getSelectionInfo().isSelectionProcess = false;
 	}//rof
 }
 
@@ -24,19 +24,19 @@ void SelectionObject::saveSelectedObject(glm::vec4 colorUnderCursor) {
 	Application* appThis = Application::getInstancePtr();
 
 	for (auto&[objKey, objValue] : appThis->getScene().getObjects()) {
-		if (!objValue.getSelectionInfo().canSelect) continue;
+		if (!objValue->getSelectionInfo().canSelect) continue;
 
-		if (objValue.getSelectionInfo().colorSelectEquals(colorUnderCursor)) {
-			objValue.getSelectionInfo().isSelected = true;
+		if (objValue->getSelectionInfo().colorSelectEquals(colorUnderCursor)) {
+			objValue->getSelectionInfo().isSelected = true;
 
 			if (this->hasSelectedObject(objKey)) {
 				if (this->selectedObjects[objKey] == nullptr) {
 					this->selectedObjects.erase(objKey);
-					this->selectedObjects.insert({ objKey, &objValue });
+					this->selectedObjects.insert({ objKey, objValue });
 					break;
 				}//fi
 			} else {
-				this->selectedObjects.insert({ objKey, &objValue });
+				this->selectedObjects.insert({ objKey, objValue });
 				break;
 			}//fi
 		}//fi

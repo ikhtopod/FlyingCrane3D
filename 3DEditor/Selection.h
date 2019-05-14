@@ -25,7 +25,7 @@ public:
 
 class Selection : public ISelection {
 protected:
-	using MapObjectPtr = std::map<std::string, Object*>;
+	using MapObjectPtr = std::map<std::string, std::shared_ptr<Object>>;
 
 public:
 	static const glm::vec4 CLEAR_COLOR;
