@@ -4,6 +4,8 @@
 #include "Vertex.h"
 #include "PolymeshRepresentation.h"
 #include "Object.h"
+#include "ObjectScene.h"
+#include "ObjectShape.h"
 #include "ObjectSceneGrid.h"
 #include "Camera.h"
 #include "CameraSwitcher.h"
@@ -15,7 +17,11 @@
 
 class Scene final : public ITriada {
 private:
-	using MapObject = std::map<std::string, std::shared_ptr<Object>>;
+	template<class T>
+	using MapObject = std::map<std::string, std::shared_ptr<T>>;
+
+	using MapObjectScene = MapObject<ObjectScene>;
+	using MapObjectShape = MapObject<ObjectShape>;
 
 private:
 	CameraSwitcher cameraSwitcher {};
@@ -24,8 +30,8 @@ private:
 	Transform transform {};
 
 private:
-	MapObject sceneObjects {};
-	MapObject objects {};
+	MapObjectScene sceneObjects {};
+	MapObjectShape objects {};
 
 	void deleteMarkedObjects();
 
@@ -40,10 +46,10 @@ public:
 	Model& getModel();
 	Transform& getTransform();
 
-	MapObject& getObjects();
+	MapObjectShape& getObjects();
 
-	void addSceneObject(std::string _name, Object _object);
-	void addObject(std::string _name, Object _object);
+	void addSceneObject(std::string _name, ObjectScene _object);
+	void addObject(std::string _name, ObjectShape _object);
 
 	virtual void init() override;
 	virtual void draw() override;

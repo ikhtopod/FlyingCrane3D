@@ -1,19 +1,6 @@
 #include "Object.h"
 
 
-Object::Object() :
-	pivotPoint(
-		Mesh {
-			PolymeshRepresentation {
-				{
-					Vertex{ glm::vec3 {}, 0 },
-				},
-				{ 0, 0, 0 }
-			},
-			GL_POINTS
-		}
-	) {}
-
 Transform& Object::getTransform() {
 	return this->transform;
 }
@@ -95,7 +82,6 @@ void Object::init() {
 	}//rof
 
 	this->mem.init();
-	this->pivotPoint.init();
 }
 
 void Object::draw() {
@@ -105,11 +91,6 @@ void Object::draw() {
 	}//fi
 
 	this->drawMeshes();
-
-	if (canDrawPivotPoint) {
-		this->pivotPoint.setParentTransform(this->parentTransform + this->transform);
-		this->pivotPoint.draw();
-	}//fi
 }
 
 void Object::free() {
@@ -118,5 +99,4 @@ void Object::free() {
 	}//rof
 
 	this->mem.free();
-	this->pivotPoint.free();
 }

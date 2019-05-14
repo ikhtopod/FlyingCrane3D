@@ -1,4 +1,6 @@
 #include "ObjectScene.h"
 
 
-ObjectScene::ObjectScene() : Object() {}
+ObjectScene::ObjectScene() : Object() {
+	this->selectionInfo.canSelect = false;
+}

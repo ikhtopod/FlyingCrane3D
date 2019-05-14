@@ -12,9 +12,6 @@ ObjectSceneGrid::ObjectSceneGrid()
 ObjectSceneGrid::ObjectSceneGrid(_uint _width, _uint _height)
 	: ObjectScene(), width(_width), height(_height), step(DEFAULT_STEP) {
 
-	this->canDrawPivotPoint = false;
-	this->selectionInfo.canSelect = false;
-
 	if (this->width == 0) this->width = DEFAULT_WIDTH;
 	if (this->height == 0) this->height = DEFAULT_HEIGHT;
 

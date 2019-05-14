@@ -226,6 +226,7 @@
     <ClCompile Include="MeshElementPoint.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectShape.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="PolymeshRepresentation.cpp" />
     <ClCompile Include="Projection.cpp" />
@@ -281,6 +282,7 @@
     <ClInclude Include="MeshElementPoint.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectShape.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="PolymeshRepresentation.h" />
     <ClInclude Include="Projection.h" />

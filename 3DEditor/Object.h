@@ -23,13 +23,10 @@ protected:
 	MeshElementManager mem { this };
 	MapMesh meshes {};
 
-	Mesh pivotPoint;
-	bool canDrawPivotPoint = true;
-
 	SelectionInfo selectionInfo {};
 
 public:
-	Object();
+	Object() = default;
 	virtual ~Object() = default;
 
 	bool isDeleting = false;

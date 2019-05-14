@@ -25,19 +25,19 @@ Selection& Scene::getSelection() {
 	return *(this->selectionSwitcher.getSelection());
 }
 
-Scene::MapObject& Scene::getObjects() {
+Scene::MapObjectShape& Scene::getObjects() {
 	return this->objects;
 }
 
-void Scene::addSceneObject(std::string _name, Object _object) {
+void Scene::addSceneObject(std::string _name, ObjectScene _object) {
 	if (this->sceneObjects.empty() || (this->sceneObjects.find(_name) == this->sceneObjects.end())) {
-		this->sceneObjects.insert({ _name, std::make_shared<Object>(_object) });
+		this->sceneObjects.insert({ _name, std::make_shared<ObjectScene>(_object) });
 	}//fi
 }
 
-void Scene::addObject(std::string _name, Object _object) {
+void Scene::addObject(std::string _name, ObjectShape _object) {
 	if (this->objects.empty() || (this->objects.find(_name) == this->objects.end())) {
-		this->objects.insert({ _name, std::make_shared<Object>(_object) });
+		this->objects.insert({ _name, std::make_shared<ObjectShape>(_object) });
 	}//fi
 }
 
@@ -105,8 +105,8 @@ void Scene::init() {
 	Mesh pyramid_mesh_flat_000 { pyramid_polymesh_flat_000, GL_TRIANGLES };
 	Mesh pyramid_mesh_flat_001 { pyramid_polymesh_flat_000, GL_TRIANGLES };
 
-	Object pyramid_000 {};
-	Object pyramid_001 {};
+	ObjectShape pyramid_000 {};
+	ObjectShape pyramid_001 {};
 
 	pyramid_000.addMesh("pyramid_mesh_flat.000", pyramid_mesh_flat_000);
 	pyramid_001.addMesh("pyramid_mesh_flat.000", pyramid_mesh_flat_001);
