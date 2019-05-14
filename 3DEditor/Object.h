@@ -4,11 +4,9 @@
 #include "Transform.h"
 #include "SelectionInfo.h"
 #include "Mesh.h"
-#include "MeshElementManager.h"
 #include "Shader.h"
+#include "MeshElementManager.h"
 
-
-class Mesh;
 
 class Object : public ITriada {
 protected:
