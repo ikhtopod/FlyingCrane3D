@@ -14,6 +14,10 @@ private:
 	std::vector<Edge> edges {};
 	std::vector<Face> faces {};
 
+
+private:
+	void init(std::vector<Vertex>& _vertices, std::vector<GLuint>& _indices);
+
 	void updateNormal(Vertex& v1, Vertex& v2, Vertex& v3);
 
 	void updatePoints(Vertex& v1, Vertex& v2, Vertex& v3);

@@ -68,37 +68,19 @@ void Scene::init() {
 	// insert objects
 	PolymeshRepresentation pyramid_polymesh_flat_000 {
 		{
-			Vertex{ { 1.0f, 0.0f, 1.0f }, 0 },
-			Vertex{ { -1.0f, 0.0f, -1.0f }, 1 },
-			Vertex{ { 1.0f, 0.0f, -1.0f }, 2 },
-
-			Vertex{ { 1.0f, 0.0f, -1.0f }, 3 },
+			Vertex{ { 1.0f, 0.0f, -1.0f }, 0 },
+			Vertex{ { 1.0f, 0.0f, 1.0f }, 1 },
+			Vertex{ { -1.0f, 0.0f, 1.0f }, 2 },
+			Vertex{ { -1.0f, 0.0f, -1.0f }, 3 },
 			Vertex{ { 0.0f, 2.0f, 0.0f }, 4 },
-			Vertex{ { 1.0f, 0.0f, 1.0f }, 5 },
-
-			Vertex{ { 1.0f, 0.0f, 1.0f }, 6 },
-			Vertex{ { 0.0f, 2.0f, 0.0f }, 7 },
-			Vertex{ { -1.0f, 0.0f, 1.0f }, 8 },
-
-			Vertex{ { -1.0f, 0.0f, 1.0f }, 9 },
-			Vertex{ { 0.0f, 2.0f, 0.0f }, 10 },
-			Vertex{ { -1.0f, 0.0f, -1.0f }, 11 },
-
-			Vertex{ { 0.0f, 2.0f, 0.0f }, 12 },
-			Vertex{ { 1.0f, 0.0f, -1.0f }, 13 },
-			Vertex{ { -1.0f, 0.0f, -1.0f }, 14 },
-
-			Vertex{ { 1.0f, 0.0f, 1.0f }, 15 },
-			Vertex{ { -1.0f, 0.0f, 1.0f }, 16 },
-			Vertex{ { -1.0f, 0.0f, -1.0f }, 17 },
 		},
 		{
-			0, 1, 2,
-			3, 4, 5,
-			6, 7, 8,
-			9, 10, 11,
-			12, 13, 14,
-			15, 16, 17,
+			1, 3, 0,
+			0, 4, 1,
+			1, 4, 2,
+			2, 4, 3,
+			4, 0, 3,
+			1, 2, 3,
 		}
 	};
 

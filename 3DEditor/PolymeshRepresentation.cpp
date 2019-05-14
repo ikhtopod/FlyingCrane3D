@@ -2,10 +2,9 @@
 
 
 PolymeshRepresentation::PolymeshRepresentation(
-	std::vector<Vertex> _vertices, std::vector<GLuint> _indices)
-	: vertices(_vertices), indicesMesh(_indices) {
+	std::vector<Vertex> _vertices, std::vector<GLuint> _indices) {
 
-	this->update();
+	this->init(_vertices, _indices);
 }
 
 std::vector<GLuint>& PolymeshRepresentation::getIndicesMesh() {
@@ -28,6 +27,26 @@ std::vector<Face>& PolymeshRepresentation::getFaces() {
 	return this->faces;
 }
 
+
+void PolymeshRepresentation::init(
+	std::vector<Vertex>& _vertices, std::vector<GLuint>& _indices) {
+
+	if (_vertices.size() != _indices.size()) {
+		GLuint counter = 0;
+
+		for (GLuint& i : _indices) {
+			Vertex newVertex = _vertices[i];
+			newVertex.index = counter;
+			this->vertices.push_back(newVertex);
+			this->indicesMesh.push_back(counter++);
+		}//rof
+	} else {
+		this->vertices = _vertices;
+		this->indicesMesh = _indices;
+	}//fi
+
+	this->update();
+}
 
 void PolymeshRepresentation::updateNormal(Vertex& v1, Vertex& v2, Vertex& v3) {
 	glm::vec3 newNormal = glm::triangleNormal(v1.position, v2.position, v3.position);
