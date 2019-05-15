@@ -88,6 +88,7 @@
 #include "ObjectScene.h"
 #include "ObjectSceneGrid.h"
 #include "ObjectShape.h"
+#include "ObjectShapePlane.h"
 #include "MeshElementManager.h"
 #include "Axis.h"
 #include "Shader.h"

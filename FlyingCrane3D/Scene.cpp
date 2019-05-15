@@ -85,18 +85,14 @@ void Scene::init() {
 	};
 
 	Mesh pyramid_mesh_flat_000 { pyramid_polymesh_flat_000, GL_TRIANGLES };
-	Mesh pyramid_mesh_flat_001 { pyramid_polymesh_flat_000, GL_TRIANGLES };
 
 	ObjectShape pyramid_000 {};
-	ObjectShape pyramid_001 {};
 
 	pyramid_000.addMesh("pyramid_mesh_flat.000", pyramid_mesh_flat_000);
-	pyramid_001.addMesh("pyramid_mesh_flat.000", pyramid_mesh_flat_001);
-
-	pyramid_001.getTransform().setPosition(glm::vec3 { -3.0f, 0.0f, -1.0f });
+	pyramid_000.getTransform().setPosition(glm::vec3 { -3.0f, 0.0f, -1.0f });
 
 	this->addObject("pyramid.000", pyramid_000);
-	this->addObject("pyramid.001", pyramid_001);
+	this->addObject("plane.001", ObjectShapePlane {});
 
 	/***********************************/
 
