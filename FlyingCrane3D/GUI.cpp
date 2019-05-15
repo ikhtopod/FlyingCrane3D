@@ -6,22 +6,26 @@ const float GUI::DEFAULT_FONT_SIZE = 16.0f;
 
 
 void GUI::initIcons() {
-	this->icons.insert({ GUIIcons::POINT, Texture { R"(..\resources\icons\multimedia-icons\png\more.png)" } });
-	this->icons.insert({ GUIIcons::EDGE, Texture { R"(..\resources\icons\multimedia-icons\png\menu.png)" } });
-	this->icons.insert({ GUIIcons::FACE, Texture { R"(..\resources\icons\multimedia-icons\png\up-arrow-3.png)" } });
-	this->icons.insert({ GUIIcons::OBJECT, Texture { R"(..\resources\icons\multimedia-icons\png\wine-glass-1.png)" } });
+	this->icons.insert(
+		{
+			{ GUIIcons::POINT, Texture { R"(..\resources\icons\multimedia-icons\png\more.png)" } },
+			{ GUIIcons::EDGE, Texture { R"(..\resources\icons\multimedia-icons\png\menu.png)" } },
+			{ GUIIcons::FACE, Texture { R"(..\resources\icons\multimedia-icons\png\up-arrow-3.png)" } },
+			{ GUIIcons::OBJECT, Texture { R"(..\resources\icons\multimedia-icons\png\wine-glass-1.png)" } },
 
-	this->icons.insert({ GUIIcons::MOVE, Texture { R"(..\resources\icons\multimedia-icons\png\move.png)" } });
-	this->icons.insert({ GUIIcons::ROTATE, Texture { R"(..\resources\icons\multimedia-icons\png\refresh.png)" } });
-	this->icons.insert({ GUIIcons::SCALE, Texture { R"(..\resources\icons\multimedia-icons\png\full.png)" } });
+			{ GUIIcons::MOVE, Texture { R"(..\resources\icons\multimedia-icons\png\move.png)" } },
+			{ GUIIcons::ROTATE, Texture { R"(..\resources\icons\multimedia-icons\png\refresh.png)" } },
+			{ GUIIcons::SCALE, Texture { R"(..\resources\icons\multimedia-icons\png\full.png)" } },
 
-	this->icons.insert({ GUIIcons::REMOVE, Texture { R"(..\resources\icons\multimedia-icons\png\trash.png)" } });
+			{ GUIIcons::REMOVE, Texture { R"(..\resources\icons\multimedia-icons\png\trash.png)" } },
 
-	this->icons.insert({ GUIIcons::PERSP, Texture { R"(..\resources\icons\multimedia-icons\png\photo-camera.png)" } });
-	this->icons.insert({ GUIIcons::ORTHO, Texture { R"(..\resources\icons\multimedia-icons\png\photo-camera-1.png)" } });
+			{ GUIIcons::PERSP, Texture { R"(..\resources\icons\multimedia-icons\png\photo-camera.png)" } },
+			{ GUIIcons::ORTHO, Texture { R"(..\resources\icons\multimedia-icons\png\photo-camera-1.png)" } },
 
-	this->icons.insert({ GUIIcons::CAMERA, Texture { R"(..\resources\icons\multimedia-icons\png\video-camera.png)" } });
-	this->icons.insert({ GUIIcons::FOCUS, Texture { R"(..\resources\icons\multimedia-icons\png\target.png)" } });
+			{ GUIIcons::CAMERA, Texture { R"(..\resources\icons\multimedia-icons\png\video-camera.png)" } },
+			{ GUIIcons::FOCUS, Texture { R"(..\resources\icons\multimedia-icons\png\target.png)" } },
+		}
+	);
 }
 
 void GUI::initFont() {
@@ -424,7 +428,6 @@ void GUI::showToolsPanel() {
 		ImGui::SetNextDock(nameTools.c_str(), ImGuiDockSlot_Tab);
 		if (ImGui::BeginDock("Добавить объект")) {
 			std::vector<const char *> listboxItems {
-				"Пустышка",
 				"Плоскость", "Сетка",
 				"Куб",
 				"Конус", "Пирамида",
