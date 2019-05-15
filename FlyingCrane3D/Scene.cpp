@@ -83,7 +83,7 @@ void Scene::initFill() {
 	this->addSceneObject("grid_8x8.000", ObjectSceneGrid { 8, 8 });
 
 	// insert objects
-	this->addObject("cube.000", ObjectShapeCube {});
+	this->addObject("cube", ObjectShapeCube {});
 }
 
 void Scene::init() {
