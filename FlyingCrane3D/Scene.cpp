@@ -35,21 +35,30 @@ void Scene::addSceneObject(std::string _name, ObjectScene _object) {
 	}//fi
 }
 
+
 void Scene::addObject(ObjectShape& _object) {
-	std::string name { "object" };
-	this->addObject(name, _object);
+	this->addObject("object", _object);
+}
+
+void Scene::addObject(ObjectShape&& _object) {
+	this->addObject(_object);
 }
 
 void Scene::addObject(const std::string& _name, ObjectShape& _object) {
 	std::size_t counter = 0;
 	std::string objectName = _name;
 
-	while (this->objects.find(objectName) != this->objects.end()) {
+	while (this->objects.find(objectName) != this->objects.cend()) {
 		objectName = _name + "." + std::to_string(counter++);
 	}//fi
 
 	this->objects.insert({ objectName, std::make_shared<ObjectShape>(_object) });
 }
+
+void Scene::addObject(const std::string& _name, ObjectShape&& _object) {
+	this->addObject(_name, _object);
+}
+
 
 void Scene::deleteMarkedObjects() {
 	std::vector<std::string> namesForDelete {};
@@ -74,8 +83,7 @@ void Scene::initFill() {
 	this->addSceneObject("grid_8x8.000", ObjectSceneGrid { 8, 8 });
 
 	// insert objects
-	ObjectShapeCube cube {};
-	this->addObject("cube.000", cube);
+	this->addObject("cube.000", ObjectShapeCube {});
 }
 
 void Scene::init() {
@@ -101,6 +109,10 @@ void Scene::draw() {
 	this->deleteMarkedObjects();
 
 	for (auto&[name, object] : this->objects) {
+		if (object->getMode() == TriadaMode::NONE) {
+			object->init();
+		};
+
 		object->setParentTransform(this->transform);
 		object->draw();
 	}//rof

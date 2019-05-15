@@ -51,8 +51,11 @@ public:
 	MapObjectShape& getObjects();
 
 	void addSceneObject(std::string _name, ObjectScene _object);
+
 	void addObject(ObjectShape& _object);
+	void addObject(ObjectShape&& _object);
 	void addObject(const std::string& _name, ObjectShape& _object);
+	void addObject(const std::string& _name, ObjectShape&& _object);
 
 	virtual void init() override;
 	virtual void draw() override;

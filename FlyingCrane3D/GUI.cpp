@@ -402,6 +402,7 @@ void GUI::showToolsPanel() {
 	std::string nameTools { "Панель инструментов" };
 
 	Application* appThis = Application::getInstancePtr();
+	Scene& scene = appThis->getScene();
 
 	if (ImGui::Begin(nameTools.c_str(), nullptr,
 					 ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)) {
@@ -439,7 +440,23 @@ void GUI::showToolsPanel() {
 						   listboxItems.size(), listboxItems.size());
 
 			ImGui::NewLine();
-			ImGui::Button("Добавить");
+			
+			if (ImGui::Button("Добавить")) {
+				switch (currentListboxItem) {
+					case 0:
+						scene.addObject("plane", ObjectShapePlane {});
+						break;
+					case 1:
+						scene.addObject("cube", ObjectShapeCube {});
+						break;
+					case 2:
+						scene.addObject("pyramid", ObjectShapePyramid {});
+						break;
+					default:
+						break;
+				}//hctiws
+			}//fi Button
+
 			ImGui::Separator();
 		}//fi BeginDock
 		ImGui::EndDock();
@@ -456,7 +473,7 @@ void GUI::updateSelectedObjectsTree() {
 	Selection& selection = Application::getInstancePtr()->getScene().getSelection();
 
 	for (auto&[nameObject, object] : selection.getSelectedObjects()) {
-		if (ImGui::TreeNodeEx(nameObject.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
+		if (ImGui::TreeNode(nameObject.c_str())) {
 			for (auto&[nameMesh, mesh] : object->getMeshes()) {
 				ImGui::BulletText(nameMesh.c_str());
 			}//rof meshes
@@ -469,7 +486,7 @@ void GUI::updateSceneObjectsTree() {
 	Scene& scene = Application::getInstancePtr()->getScene();
 
 	for (auto&[nameObject, object] : scene.getObjects()) {
-		if (ImGui::TreeNodeEx(nameObject.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
+		if (ImGui::TreeNode(nameObject.c_str())) {
 			for (auto&[nameMesh, mesh] : object->getMeshes()) {
 				ImGui::BulletText(nameMesh.c_str());
 			}//rof meshes
