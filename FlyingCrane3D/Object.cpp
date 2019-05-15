@@ -17,6 +17,10 @@ SelectionInfo& Object::getSelectionInfo() {
 	return this->selectionInfo;
 }
 
+TriadaMode Object::getMode() {
+	return this->mode;
+}
+
 
 void Object::setTransform(Transform _transform) {
 	this->transform = _transform;
@@ -67,6 +71,8 @@ void Object::drawMeshes() {
 
 
 void Object::init() {
+	this->mode = TriadaMode::INIT;
+
 	for (auto&[meshName, mesh] : this->meshes) {
 		mesh.init();
 		mesh.getShader().setLambdaDraw([this](Shader* _this) {
@@ -85,6 +91,8 @@ void Object::init() {
 }
 
 void Object::draw() {
+	this->mode = TriadaMode::DRAW;
+
 	if (this->selectionInfo.canSelect) {
 		this->mem.setTransform(this->parentTransform + this->transform);
 		this->mem.draw();
@@ -94,9 +102,13 @@ void Object::draw() {
 }
 
 void Object::free() {
+	this->mode = TriadaMode::FREE;
+
 	for (auto&[meshName, mesh] : this->meshes) {
 		mesh.free();
 	}//rof
 
 	this->mem.free();
+
+	this->mode = TriadaMode::NONE;
 }

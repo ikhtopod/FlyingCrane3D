@@ -24,6 +24,7 @@ protected:
 	MapMesh meshes {};
 
 	SelectionInfo selectionInfo {};
+	TriadaMode mode = TriadaMode::NONE;
 
 public:
 	Object() = default;
@@ -35,6 +36,7 @@ public:
 	Transform& getParentTransform();
 	Transform& getGlobalTransform();
 	SelectionInfo& getSelectionInfo();
+	TriadaMode getMode();
 
 	void setTransform(Transform _transform);
 	void setParentTransform(Transform _pTransform);
