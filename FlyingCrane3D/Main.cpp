@@ -1,7 +1,7 @@
 #include "Application.h"
 
 int main() {
-	std::string applicationName = "Flying Crane 3D | Vitaly Lifanov";
+	std::string applicationName = "Flying Crane 3D";
 
 	try {
 		Application(applicationName, 1280, 720).run();
