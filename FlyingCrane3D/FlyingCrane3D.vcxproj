@@ -21,9 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{B0187AEF-73B8-49B0-8F77-E14C33BF8F83}</ProjectGuid>
-    <RootNamespace>3DEditor</RootNamespace>
+    <RootNamespace>FlyingCrane3D</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
-    <ProjectName>3DEditor</ProjectName>
+    <ProjectName>FlyingCrane3D</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
