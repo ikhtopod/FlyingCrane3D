@@ -35,10 +35,20 @@ void Scene::addSceneObject(std::string _name, ObjectScene _object) {
 	}//fi
 }
 
-void Scene::addObject(std::string _name, ObjectShape _object) {
-	if (this->objects.empty() || (this->objects.find(_name) == this->objects.end())) {
-		this->objects.insert({ _name, std::make_shared<ObjectShape>(_object) });
+void Scene::addObject(ObjectShape& _object) {
+	std::string name { "object" };
+	this->addObject(name, _object);
+}
+
+void Scene::addObject(const std::string& _name, ObjectShape& _object) {
+	std::size_t counter = 0;
+	std::string objectName = _name;
+
+	while (this->objects.find(objectName) != this->objects.end()) {
+		objectName = _name + "." + std::to_string(counter++);
 	}//fi
+
+	this->objects.insert({ objectName, std::make_shared<ObjectShape>(_object) });
 }
 
 void Scene::deleteMarkedObjects() {
@@ -64,7 +74,8 @@ void Scene::initFill() {
 	this->addSceneObject("grid_8x8.000", ObjectSceneGrid { 8, 8 });
 
 	// insert objects
-	this->addObject("cube.000", ObjectShapeCube {});
+	ObjectShapeCube cube {};
+	this->addObject("cube.000", cube);
 }
 
 void Scene::init() {
