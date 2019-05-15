@@ -428,7 +428,7 @@ void GUI::showToolsPanel() {
 		ImGui::SetNextDock(nameTools.c_str(), ImGuiDockSlot_Tab);
 		if (ImGui::BeginDock("Добавить объект")) {
 			std::vector<const char *> listboxItems {
-				"Плоскость", "Сетка",
+				"Плоскость",
 				"Куб",
 				"Конус", "Пирамида",
 				"Цилиндр",

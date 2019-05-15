@@ -7,7 +7,7 @@
 #include "ObjectScene.h"
 #include "ObjectSceneGrid.h"
 #include "ObjectShape.h"
-#include "ObjectShapePlane.h"
+#include "ObjectShapeCube.h"
 #include "Camera.h"
 #include "CameraSwitcher.h"
 #include "Selection.h"

@@ -157,6 +157,9 @@
     <ClCompile Include="ObjectShapePlane.cpp">
       <Filter>Sources\Object\ObjectShape</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectShapeCube.cpp">
+      <Filter>Sources\Object\ObjectShape</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -322,6 +325,9 @@
       <Filter>Headers\Object\ObjectShape</Filter>
     </ClInclude>
     <ClInclude Include="ObjectShapePlane.h">
+      <Filter>Headers\Object\ObjectShape</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectShapeCube.h">
       <Filter>Headers\Object\ObjectShape</Filter>
     </ClInclude>
   </ItemGroup>

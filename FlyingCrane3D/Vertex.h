@@ -6,6 +6,7 @@ struct Vertex {
 
 	GLuint index;
 
+	Vertex(glm::vec3 _position);
 	Vertex(glm::vec3 _position, GLuint _index);
 	Vertex(glm::vec3 _position, glm::vec3 _normal, GLuint _index);
 

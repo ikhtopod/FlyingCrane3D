@@ -92,7 +92,7 @@ void Scene::init() {
 	pyramid_000.getTransform().setPosition(glm::vec3 { -3.0f, 0.0f, -1.0f });
 
 	this->addObject("pyramid.000", pyramid_000);
-	this->addObject("plane.001", ObjectShapePlane {});
+	this->addObject("cube.000", ObjectShapeCube {});
 
 	/***********************************/
 

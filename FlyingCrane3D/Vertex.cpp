@@ -1,5 +1,9 @@
 #include "Vertex.h"
 
+
+Vertex::Vertex(glm::vec3 _position) :
+	Vertex(_position, 0) {}
+
 Vertex::Vertex(glm::vec3 _position, GLuint _index)
 	: Vertex(_position, glm::vec3 {}, _index) {}
 
