@@ -160,6 +160,9 @@
     <ClCompile Include="ObjectShapeCube.cpp">
       <Filter>Sources\Object\ObjectShape</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectShapePyramid.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -329,6 +332,9 @@
     </ClInclude>
     <ClInclude Include="ObjectShapeCube.h">
       <Filter>Headers\Object\ObjectShape</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectShapePyramid.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

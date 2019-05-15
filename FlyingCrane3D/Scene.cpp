@@ -59,42 +59,16 @@ void Scene::deleteMarkedObjects() {
 	}//rof
 }
 
-void Scene::init() {
-	/***********************************/
-
+void Scene::initFill() {
 	// grid
 	this->addSceneObject("grid_8x8.000", ObjectSceneGrid { 8, 8 });
 
 	// insert objects
-	PolymeshRepresentation pyramid_polymesh_flat_000 {
-		{
-			Vertex{ { 1.0f, 0.0f, -1.0f }, 0 },
-			Vertex{ { 1.0f, 0.0f, 1.0f }, 1 },
-			Vertex{ { -1.0f, 0.0f, 1.0f }, 2 },
-			Vertex{ { -1.0f, 0.0f, -1.0f }, 3 },
-			Vertex{ { 0.0f, 2.0f, 0.0f }, 4 },
-		},
-		{
-			1, 3, 0,
-			0, 4, 1,
-			1, 4, 2,
-			2, 4, 3,
-			4, 0, 3,
-			1, 2, 3,
-		}
-	};
-
-	Mesh pyramid_mesh_flat_000 { pyramid_polymesh_flat_000, GL_TRIANGLES };
-
-	ObjectShape pyramid_000 {};
-
-	pyramid_000.addMesh("pyramid_mesh_flat.000", pyramid_mesh_flat_000);
-	pyramid_000.getTransform().setPosition(glm::vec3 { -3.0f, 0.0f, -1.0f });
-
-	this->addObject("pyramid.000", pyramid_000);
 	this->addObject("cube.000", ObjectShapeCube {});
+}
 
-	/***********************************/
+void Scene::init() {
+	this->initFill();
 
 	for (auto&[name, object] : this->sceneObjects) {
 		object->init();

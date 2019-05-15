@@ -430,10 +430,7 @@ void GUI::showToolsPanel() {
 			std::vector<const char *> listboxItems {
 				"Плоскость",
 				"Куб",
-				"Конус", "Пирамида",
-				"Цилиндр",
-				"Сфера",
-				"Журавль",
+				"Пирамида",
 			};
 			static int currentListboxItem = 0;
 

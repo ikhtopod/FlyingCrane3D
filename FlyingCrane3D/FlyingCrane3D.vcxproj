@@ -229,6 +229,7 @@
     <ClCompile Include="ObjectShape.cpp" />
     <ClCompile Include="ObjectShapeCube.cpp" />
     <ClCompile Include="ObjectShapePlane.cpp" />
+    <ClCompile Include="ObjectShapePyramid.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="PolymeshRepresentation.cpp" />
     <ClCompile Include="Projection.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="ObjectShape.h" />
     <ClInclude Include="ObjectShapeCube.h" />
     <ClInclude Include="ObjectShapePlane.h" />
+    <ClInclude Include="ObjectShapePyramid.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="PolymeshRepresentation.h" />
     <ClInclude Include="Projection.h" />

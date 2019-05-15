@@ -35,6 +35,7 @@ private:
 	MapObjectShape objects {};
 
 	void deleteMarkedObjects();
+	void initFill();
 
 public:
 	Scene() = default;
