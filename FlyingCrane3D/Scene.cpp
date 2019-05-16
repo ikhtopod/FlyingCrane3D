@@ -109,10 +109,6 @@ void Scene::draw() {
 	this->deleteMarkedObjects();
 
 	for (auto&[name, object] : this->objects) {
-		if (object->getMode() == TriadaMode::NONE) {
-			object->init();
-		};
-
 		object->setParentTransform(this->transform);
 		object->draw();
 	}//rof

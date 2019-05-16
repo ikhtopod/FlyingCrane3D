@@ -91,7 +91,11 @@ void Object::init() {
 }
 
 void Object::draw() {
-	this->mode = TriadaMode::DRAW;
+	if (this->mode == TriadaMode::NONE) {
+		this->init();
+	} else if (this->mode != TriadaMode::DRAW) {
+		this->mode = TriadaMode::DRAW;
+	};
 
 	if (this->selectionInfo.canSelect) {
 		this->mem.setTransform(this->parentTransform + this->transform);
