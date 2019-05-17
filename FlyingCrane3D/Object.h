@@ -28,7 +28,7 @@ protected:
 
 public:
 	Object() = default;
-	virtual ~Object() = default;
+	virtual ~Object();
 
 	bool isDeleting = false;
 

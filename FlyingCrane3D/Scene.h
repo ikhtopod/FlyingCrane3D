@@ -39,7 +39,7 @@ private:
 
 public:
 	Scene() = default;
-	~Scene() = default;
+	~Scene();
 
 	CameraSwitcher& getCameraSwitcher();
 	Camera& getCamera();

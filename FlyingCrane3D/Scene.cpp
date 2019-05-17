@@ -1,6 +1,25 @@
 #include "Scene.h"
 
 
+Scene::~Scene() {
+	for (auto&[name, object] : this->sceneObjects) {
+		if (object->getMode() == TriadaMode::INIT ||
+			object->getMode() == TriadaMode::DRAW) {
+			object->free();
+		}
+	}
+
+	for (auto&[name, object] : this->objects) {
+		if (object->getMode() == TriadaMode::INIT ||
+			object->getMode() == TriadaMode::DRAW) {
+			object->free();
+		}
+	}
+
+	this->sceneObjects.clear();
+	this->objects.clear();
+}
+
 CameraSwitcher& Scene::getCameraSwitcher() {
 	return this->cameraSwitcher;
 }

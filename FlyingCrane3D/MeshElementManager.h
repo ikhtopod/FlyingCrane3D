@@ -32,10 +32,6 @@ private:
 	template<typename T, typename = IsBaseOfMeshElement<T>>
 	using UMapMeshElements = std::unordered_map<std::string, VectorPtr<T>>;
 
-	template<class T>
-	using UMap = std::unordered_map<std::string, T>;
-	using UMapMesh = UMap<Mesh>;
-
 private:
 	template<typename T>
 	static void cleaner(T* data);
@@ -68,7 +64,7 @@ private:
 public:
 	MeshElementManager() = default;
 	MeshElementManager(Object* _parent);
-	~MeshElementManager() = default;
+	~MeshElementManager();
 
 private:
 	void updateSelectionMode();

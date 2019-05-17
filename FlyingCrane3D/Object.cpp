@@ -1,6 +1,20 @@
 #include "Object.h"
 
 
+Object::~Object() {
+	if (this->mode == TriadaMode::INIT ||
+		this->mode == TriadaMode::DRAW) {
+
+		for (auto&[name, mesh] : this->meshes) {
+			mesh.free();
+		}
+
+		this->mem.free();
+	}
+
+	this->meshes.clear();
+}
+
 Transform& Object::getTransform() {
 	return this->transform;
 }

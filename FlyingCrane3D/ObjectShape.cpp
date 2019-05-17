@@ -15,6 +15,10 @@ ObjectShape::ObjectShape() :
 		}
 	) {}
 
+ObjectShape::~ObjectShape() {
+	pivotPoint.free();
+}
+
 
 void ObjectShape::init() {
 	Object::init();

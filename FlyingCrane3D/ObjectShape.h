@@ -11,7 +11,7 @@ public:
 
 public:
 	ObjectShape();
-	virtual ~ObjectShape() = default;
+	virtual ~ObjectShape();
 
 	virtual void init() override;
 	virtual void draw() override;

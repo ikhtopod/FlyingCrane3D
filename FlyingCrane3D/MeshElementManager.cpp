@@ -4,6 +4,12 @@
 MeshElementManager::MeshElementManager(Object* _parent) :
 	parent(_parent) {}
 
+MeshElementManager::~MeshElementManager() {
+	cleaner<decltype(this->points)>(&this->points);
+	cleaner<decltype(this->edges)>(&this->edges);
+	cleaner<decltype(this->faces)>(&this->faces);
+}
+
 void MeshElementManager::updateSelectionMode() {
 	this->currentSelectionMode = Application::getInstancePtr()->
 		getScene().getSelectionSwitcher().getSelectionMode();
@@ -187,5 +193,3 @@ void MeshElementManager::free() {
 	liberator<decltype(this->edges)>(&this->edges);
 	liberator<decltype(this->faces)>(&this->faces);
 }
-
-
