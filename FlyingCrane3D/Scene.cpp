@@ -64,11 +64,19 @@ void Scene::addObject(ObjectShape&& _object) {
 }
 
 void Scene::addObject(const std::string& _name, ObjectShape& _object) {
-	std::size_t counter = 0;
 	std::string objectName = _name;
 
+	std::size_t counter = 0;
 	while (this->objects.find(objectName) != this->objects.cend()) {
-		objectName = _name + "." + std::to_string(counter++);
+		std::string postfix = std::to_string(counter++);
+
+		objectName = _name + '.';
+
+		if (postfix.size() < 3) {
+			objectName += std::string(3 - postfix.size(), '0');
+		}
+
+		objectName += postfix;
 	}//fi
 
 	this->objects.insert({ objectName, std::make_shared<ObjectShape>(_object) });

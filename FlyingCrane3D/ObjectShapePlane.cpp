@@ -17,5 +17,5 @@ ObjectShapePlane::ObjectShapePlane() : ObjectShape() {
 
 	Mesh mesh { polymesh, GL_TRIANGLES };
 
-	this->addMesh("mesh_plane.000", mesh);
+	this->addMesh("mesh_plane", mesh);
 }

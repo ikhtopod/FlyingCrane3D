@@ -94,7 +94,7 @@ ObjectSceneGrid::ObjectSceneGrid(_uint _width, _uint _height)
 	meshZ.getShader().resetLambdaDraw();
 	meshGrid.getShader().resetLambdaDraw();
 
-	this->addMesh("meshX", meshX);
-	this->addMesh("meshZ", meshZ);
-	this->addMesh("meshGrid", meshGrid);
+	this->addMesh("mesh_x", meshX);
+	this->addMesh("mesh_z", meshZ);
+	this->addMesh("mesh_grid", meshGrid);
 }

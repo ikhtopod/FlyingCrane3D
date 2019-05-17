@@ -63,17 +63,24 @@ Object::MapMesh& Object::getMeshes() {
 	return this->meshes;
 }
 
-void Object::addMesh(std::string _name, Mesh& _mesh) {
-	if (this->meshes.empty() || (this->meshes.find(_name) == this->meshes.end())) {
-		this->meshes.insert({ _name, _mesh });
-		this->mem.update();
-	}//fi
-}
+void Object::addMesh(const std::string& _name, Mesh& _mesh) {
+	std::string meshName = _name;
 
-void Object::setShadersAllMeshes(Shader& _shader) {
-	for (auto&[meshName, mesh] : this->meshes) {
-		mesh.setShader(_shader);
-	}//rof
+	std::size_t counter = 0;
+	while (this->meshes.find(meshName) != this->meshes.cend()) {
+		std::string postfix = std::to_string(counter++);
+
+		meshName = _name + '.';
+
+		if (postfix.size() < 3) {
+			meshName += std::string(3 - postfix.size(), '0');
+		}
+
+		meshName += postfix;
+	}//fi
+
+	this->meshes.insert({ _name, _mesh });
+	this->mem.update();
 }
 
 void Object::drawMeshes() {

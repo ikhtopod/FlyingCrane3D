@@ -34,5 +34,5 @@ ObjectShapeCube::ObjectShapeCube() : ObjectShape() {
 
 	PolymeshRepresentation polymesh { gridVertices, gridIndices };
 	Mesh mesh { polymesh, GL_TRIANGLES };
-	this->addMesh("mesh_cube.000", mesh);
+	this->addMesh("mesh_cube", mesh);
 }

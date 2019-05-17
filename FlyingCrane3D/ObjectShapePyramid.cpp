@@ -21,5 +21,5 @@ ObjectShapePyramid::ObjectShapePyramid() : ObjectShape() {
 	};
 
 	Mesh mesh { polymesh, GL_TRIANGLES };
-	this->addMesh("mesh_pyramid.000", mesh);
+	this->addMesh("mesh_pyramid", mesh);
 }

@@ -46,8 +46,7 @@ public:
 	MeshElementManager& getMeshElementManager();
 
 	MapMesh& getMeshes();
-	void addMesh(std::string _name, Mesh& _mesh);
-	void setShadersAllMeshes(Shader& _shader);
+	void addMesh(const std::string& _name, Mesh& _mesh);
 
 	void drawMeshes();
 
