@@ -221,6 +221,8 @@ void Application::focusingOnSelectedObjects() {
 }
 
 void Application::input() {
+	if (ImGui::IsMouseHoveringAnyWindow()) return;
+
 	this->keyboardInput();
 	this->switchCameraInput();
 	this->scene.getSelectionSwitcher().switchSelectionInput();
@@ -263,6 +265,7 @@ void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, 
 	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
 
 	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
+	if (ImGui::IsMouseHoveringAnyWindow()) return;
 
 	float xPos_f = static_cast<float>(xPos);
 	float yPos_f = static_cast<float>(yPos);
@@ -273,6 +276,7 @@ void Application::Callback::mouseButtonCallback(GLFWwindow* win, int button, int
 	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
 
 	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
+	if (ImGui::IsMouseHoveringAnyWindow()) return;
 
 	appThis->getScene().getCamera().mouseButtonInput(button, action, mods);
 
