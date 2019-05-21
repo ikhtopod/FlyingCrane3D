@@ -265,7 +265,10 @@ void Application::Callback::mouseMovementCallback(GLFWwindow* win, double xPos, 
 	Application* appThis = static_cast<Application*>(glfwGetWindowUserPointer(win));
 
 	if (appThis->getCurrentMode() != TriadaMode::DRAW) return;
-	if (ImGui::IsMouseHoveringAnyWindow()) return;
+
+	if (appThis->scene.getCameraSwitcher().getType() == CameraType::TARGET) {
+		if (ImGui::IsMouseHoveringAnyWindow()) return;
+	}
 
 	float xPos_f = static_cast<float>(xPos);
 	float yPos_f = static_cast<float>(yPos);
