@@ -68,7 +68,7 @@ void Util::makeListUniqueVec3(std::vector<glm::vec3>* vectors) {
 }
 
 
-std::string Util::getTextFromFile(const std::filesystem::path& filePath) {
+std::string Util::getTextFromFile(const FSPath& filePath) {
 	if (!std::filesystem::exists(filePath)) {
 		throw std::exception { (filePath.string() + " isn't exists").c_str() };
 	}
@@ -78,7 +78,7 @@ std::string Util::getTextFromFile(const std::filesystem::path& filePath) {
 	}
 
 	std::ifstream fh;
-
+	int oldExceptions = fh.exceptions();
 	fh.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
 	std::stringstream res {};
@@ -86,10 +86,62 @@ std::string Util::getTextFromFile(const std::filesystem::path& filePath) {
 	try {
 		fh.open(filePath);
 		res << fh.rdbuf();
+		fh.exceptions(oldExceptions);
 		fh.close();
 	} catch (...) {
+		fh.exceptions(oldExceptions);
 		throw;
 	}
 
 	return res.str();
+}
+
+bool Util::createDirectories(const FSPath& dirPath) {
+	if (Util::existsDirectory(dirPath)) {
+		return false;
+	}
+
+	return std::filesystem::create_directories(dirPath);
+}
+
+bool Util::existsFile(const FSPath& filePath) {
+	if (std::filesystem::exists(filePath) &&
+		!std::filesystem::is_directory(filePath)) {
+		return true;
+	}
+
+	return false;
+}
+
+bool Util::existsDirectory(const FSPath& dirPath) {
+	if (std::filesystem::exists(dirPath) &&
+		std::filesystem::is_directory(dirPath)) {
+		return true;
+	}
+
+	return false;
+}
+
+void Util::saveSettings(const FSPath& path, const std::string& content) {
+	std::ofstream fh;
+
+	int oldExceptions = fh.exceptions();
+	fh.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+	std::size_t size = content.size();
+
+	try {
+		fh.open(path, std::ios::out);
+		fh << content;
+		fh.exceptions(oldExceptions);
+		fh.flush();
+		fh.close();
+	} catch (...) {
+		fh.exceptions(oldExceptions);
+		throw;
+	}
+}
+
+std::string Util::loadSettings(const FSPath& path) {
+	return getTextFromFile(path);
 }

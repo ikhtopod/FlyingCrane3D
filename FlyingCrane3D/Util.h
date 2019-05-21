@@ -1,6 +1,9 @@
 #pragma once
 
 class Util final {
+private:
+	using FSPath = std::filesystem::path;
+
 public:
 	Util() = delete;
 	~Util() = default;
@@ -31,5 +34,12 @@ public:
 
 	static void makeListUniqueVec3(std::vector<glm::vec3>* vectors);
 
-	static std::string getTextFromFile(const std::filesystem::path& filePath);
+public:
+	static std::string getTextFromFile(const FSPath& filePath);
+	static bool createDirectories(const FSPath& dirPath);
+	static bool existsFile(const FSPath& filePath);
+	static bool existsDirectory(const FSPath& dirPath);
+
+	static void saveSettings(const FSPath& path, const std::string& content);
+	static std::string loadSettings(const FSPath& path);
 };
