@@ -4,6 +4,10 @@ const std::string GUI::FONT_DIRECTORY = "../resources/fonts";
 const std::string GUI::FONT_PATH = FONT_DIRECTORY + "/Roboto-Regular.ttf";
 const float GUI::DEFAULT_FONT_SIZE = 16.0f;
 
+const GUI::FSPath GUI::SAVE_DIRECTORY = "../resources/save";
+const GUI::FSPath GUI::SAVE_FILENAME = "settings.bin";
+const GUI::FSPath GUI::SAVE_PATH = GUI::SAVE_DIRECTORY / GUI::SAVE_FILENAME;
+
 
 void GUI::initIcons() {
 	this->icons.insert(
@@ -124,9 +128,164 @@ void GUI::draw_Render() {
 }
 
 
+void GUI::showSettingsPanel(bool* showSettingsPanel) {
+	static bool prevShowSettingsPanel = *showSettingsPanel;
+	static std::string settingsTitle { "Настройки" };
+
+	if (!*showSettingsPanel) return;
+
+	static char ip[16] = "";
+	static char port[6] = "";
+	static char login[50] = "";
+	static char password[50] = "";
+
+	if (ImGui::Begin(settingsTitle.c_str(), showSettingsPanel,
+					 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
+
+		if (!prevShowSettingsPanel) {
+			if (Util::existsDirectory(GUI::SAVE_DIRECTORY)) {
+				if (Util::existsFile(GUI::SAVE_PATH)) {
+					std::stringstream ss { Util::loadSettings(GUI::SAVE_PATH) };
+					std::string res {};
+
+					std::size_t counter = 0;
+					while (std::getline(ss, res, '\n')) {
+						char* tmp = nullptr;
+
+						if (counter == 0) {
+							tmp = ip;
+						} else if (counter == 1) {
+							tmp = port;
+						} else if (counter == 2) {
+							tmp = login;
+						} else if (counter == 3) {
+							tmp = password;
+						} else {
+							break;
+						}
+
+						for (std::size_t i = 0; i < res.size(); i++) {
+							tmp[i] = res[i];
+						}
+
+						counter++;
+					}
+				}//fi
+			}//fi
+
+			Application* appThis = Application::getInstancePtr();
+			ScreenResolution& sr = appThis->getWindow().getScreen();
+
+			ImVec2 winSize = ImVec2 { 400.0f, 400.0f };
+			ImVec2 winPos = ImVec2 {
+				static_cast<float>(sr.getHalfWidth()) - (winSize.x / 2.0f),
+				static_cast<float>(sr.getHalfHeight()) - (winSize.y / 2.0f)
+			};
+
+			ImGui::SetWindowSize(winSize, true);
+			ImGui::SetWindowPos(winPos, true);
+		}//fi
+
+		ImGui::Separator();
+		ImGui::TextColored(ImVec4 { 0.5f, 0.7f, 0.9f, 1.0f }, "Сервер:");
+
+		ImGui::InputText("ip", ip, sizeof(ip),
+						 ImGuiInputTextFlags_CharsDecimal |
+						 ImGuiInputTextFlags_CharsNoBlank);
+		ImGui::InputText("порт", port, sizeof(port),
+						 ImGuiInputTextFlags_CharsDecimal |
+						 ImGuiInputTextFlags_CharsNoBlank);
+		ImGui::InputText("логин", login, sizeof(login),
+						 ImGuiInputTextFlags_CharsNoBlank);
+		ImGui::InputText("пароль", password, sizeof(password),
+						 ImGuiInputTextFlags_Password |
+						 ImGuiInputTextFlags_CharsNoBlank);
+
+		ImGui::NewLine();
+
+		if (ImGui::Button("Сохранить")) {
+			if (!Util::existsDirectory(GUI::SAVE_DIRECTORY)) {
+				Util::createDirectories(GUI::SAVE_DIRECTORY);
+			}//fi
+
+			std::stringstream ss {};
+			ss << ip << std::endl <<
+				port << std::endl <<
+				login << std::endl <<
+				password;
+
+			Util::saveSettings(GUI::SAVE_PATH, ss.str());
+		}//fi
+
+		ImGui::Separator();
+	}
+	ImGui::End();
+
+	prevShowSettingsPanel = *showSettingsPanel;
+}
+
+void GUI::showHotKeysPanel(bool* showHotKeys) {
+	if (!*showHotKeys) return;
+
+	if (ImGui::Begin("Горячие клавиши", showHotKeys, ImGuiWindowFlags_NoResize)) {
+		ImGui::SetWindowSize(ImVec2 { 400.0f, 400.0f }, true);
+
+		ImGui::Text("Tab: переключить камеру"); ImGui::NewLine();
+		ImGui::Separator();
+		ImGui::Text("Free Camera:"); ImGui::NewLine();
+		ImGui::Text("W, A, S, D, Q, E: передвижение по сцене");
+		ImGui::Text("Mouse: направление движения");
+		ImGui::Text("Крутить СКМ: скорость"); ImGui::NewLine();
+		ImGui::Separator();
+		ImGui::Text("Target Camera:"); ImGui::NewLine();
+		ImGui::Text("Зажать СКМ: вращение вокруг целевой точки");
+		ImGui::Text("Shift + СКМ: смещение камеры и целевой точки в стороны");
+		ImGui::Text("Крутить СКМ: изменение расстояния от целевой точки"); ImGui::NewLine();
+		ImGui::Separator();
+		ImGui::Text("Проекция:"); ImGui::NewLine();
+		ImGui::Text("O: ортографическая");
+		ImGui::Text("P: перспективная"); ImGui::NewLine();
+		ImGui::Separator();
+		ImGui::Text("Выделение:"); ImGui::NewLine();
+		ImGui::Text("ЛКМ: выделить объект");
+		ImGui::Text("Shift + ЛКМ: выделить несколько объектов");
+		ImGui::Text("F: центрировать камеру на выделенных объектах");
+		ImGui::Text("X: удалить выделенные объекты"); ImGui::NewLine();
+		ImGui::Text("Сменить режим выделения:"); ImGui::NewLine();
+		ImGui::Text("1: выделение вершин");
+		ImGui::Text("2: выделение ребер");
+		ImGui::Text("3: выделение граней");
+		ImGui::Text("4: выделение объектов"); ImGui::NewLine();
+		ImGui::Separator();
+		ImGui::Text("Действия с выделенными объектами:"); ImGui::NewLine();
+		ImGui::Text("G: перемещение");
+		ImGui::Text("R: вращение");
+		ImGui::Text("S: масштабирование"); ImGui::NewLine();
+		ImGui::Separator();
+	}//fi Begin
+	ImGui::End();
+}
+
+void GUI::showAboutWindowPanel(bool* showAboutWindow) {
+	if (!*showAboutWindow) return;
+
+	Application* appThis = Application::getInstancePtr();
+	ScreenResolution& sr = appThis->getWindow().getScreen();
+
+	if (ImGui::Begin("О проекте", showAboutWindow)) {
+		ImGui::Text("Дипломный проект на тему:"); ImGui::NewLine();
+		ImGui::Text("\"Разработка программной платформы интерактивной 3D-визуализации\"");
+		ImGui::NewLine();
+		ImGui::Separator();
+		ImGui::Text("Виталий Лифанов. Группа ЗП3-2д");
+	}//fi Begin
+	ImGui::End();
+}
+
 void GUI::showMainMenuBar() {
 	static bool showAboutWindow = false;
 	static bool showHotKeys = false;
+	static bool showSettings = false;
 
 	if (ImGui::BeginMainMenuBar()) {
 		this->updatePanelsUnderMenuBar(ImGui::GetWindowSize().y);
@@ -136,9 +295,6 @@ void GUI::showMainMenuBar() {
 			if (ImGui::MenuItem("Открыть", "Ctrl + O", false, false)) {}
 			if (ImGui::MenuItem("Сохранить", "Ctrl + S", false, false)) {}
 			ImGui::Separator();
-			if (ImGui::MenuItem("Импортировать", "", false, false)) {}
-			if (ImGui::MenuItem("Экспортировать", "", false, false)) {}
-			ImGui::Separator();
 			if (ImGui::MenuItem("Выход", "Ctrl + Q")) {
 				Application::getInstancePtr()->quit();
 			}
@@ -147,16 +303,14 @@ void GUI::showMainMenuBar() {
 		}//fi BeginMenu
 
 		if (ImGui::BeginMenu("Редактировать")) {
-			if (ImGui::MenuItem("Настройки", "Ctrl + P", false, false)) {}
-
+			ImGui::MenuItem("Настройки", "", &showSettings);
 			ImGui::EndMenu();
 		}//fi BeginMenu
 
 		if (ImGui::BeginMenu("Справка")) {
-			if (ImGui::MenuItem("Горячие клавиши", "", &showHotKeys)) {}
+			ImGui::MenuItem("Горячие клавиши", "", &showHotKeys);
 			ImGui::Separator();
-			if (ImGui::MenuItem("О проекте", "F1", &showAboutWindow)) {}
-
+			ImGui::MenuItem("О проекте", "F1", &showAboutWindow);
 			ImGui::EndMenu();
 		}//fi BeginMenu
 
@@ -166,59 +320,9 @@ void GUI::showMainMenuBar() {
 			showAboutWindow = !showAboutWindow;
 		}
 
-		if (showAboutWindow) {
-			if (ImGui::Begin("О проекте", &showAboutWindow)) {
-				ImGui::Text("Дипломный проект на тему:"); ImGui::NewLine();
-				ImGui::Text("\"Разработка программной платформы интерактивной 3D-визуализации\"");
-				ImGui::NewLine();
-				ImGui::Separator();
-				ImGui::Text("Виталий Лифанов. Группа ЗП3-2д");
-			}//fi Begin
-			ImGui::End();
-		}//fi showAboutWindow
-
-		if (showHotKeys) {
-			if (ImGui::Begin("Горячие клавиши", &showHotKeys,
-							 ImGuiWindowFlags_NoResize)) {
-
-				ImGui::SetWindowSize(ImVec2 { 400.0f, 400.0f }, true);
-
-				ImGui::Text("Tab: переключить камеру"); ImGui::NewLine();
-				ImGui::Separator();
-				ImGui::Text("Free Camera:"); ImGui::NewLine();
-				ImGui::Text("W, A, S, D, Q, E: передвижение по сцене");
-				ImGui::Text("Mouse: направление движения");
-				ImGui::Text("Крутить СКМ: скорость"); ImGui::NewLine();
-				ImGui::Separator();
-				ImGui::Text("Target Camera:"); ImGui::NewLine();
-				ImGui::Text("Зажать СКМ: вращение вокруг целевой точки");
-				ImGui::Text("Shift + СКМ: смещение камеры и целевой точки в стороны");
-				ImGui::Text("Крутить СКМ: изменение расстояния от целевой точки"); ImGui::NewLine();
-				ImGui::Separator();
-				ImGui::Text("Проекция:"); ImGui::NewLine();
-				ImGui::Text("O: ортографическая");
-				ImGui::Text("P: перспективная"); ImGui::NewLine();
-				ImGui::Separator();
-				ImGui::Text("Выделение:"); ImGui::NewLine();
-				ImGui::Text("ЛКМ: выделить объект");
-				ImGui::Text("Shift + ЛКМ: выделить несколько объектов");
-				ImGui::Text("F: центрировать камеру на выделенных объектах");
-				ImGui::Text("X: удалить выделенные объекты"); ImGui::NewLine();
-				ImGui::Text("Сменить режим выделения:"); ImGui::NewLine();
-				ImGui::Text("1: выделение вершин");
-				ImGui::Text("2: выделение ребер");
-				ImGui::Text("3: выделение граней");
-				ImGui::Text("4: выделение объектов"); ImGui::NewLine();
-				ImGui::Separator();
-				ImGui::Text("Действия с выделенными объектами:"); ImGui::NewLine();
-				ImGui::Text("G: перемещение");
-				ImGui::Text("R: вращение");
-				ImGui::Text("S: масштабирование"); ImGui::NewLine();
-				ImGui::Separator();
-			}//fi Begin
-			ImGui::End();
-		}//fi showHotKeys
-
+		this->showSettingsPanel(&showSettings);
+		this->showHotKeysPanel(&showHotKeys);
+		this->showAboutWindowPanel(&showAboutWindow);
 	}//fi BeginMainMenuBar
 }
 
@@ -440,7 +544,7 @@ void GUI::showToolsPanel() {
 						   listboxItems.size(), listboxItems.size());
 
 			ImGui::NewLine();
-			
+
 			if (ImGui::Button("Добавить")) {
 				switch (currentListboxItem) {
 					case 0:

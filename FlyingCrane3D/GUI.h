@@ -15,10 +15,17 @@ enum class GUIIcons : UINT8 {
 };
 
 class GUI final : public ITriada {
+private:
+	using FSPath = std::filesystem::path;
+
 public:
 	static const std::string FONT_DIRECTORY;
 	static const std::string FONT_PATH;
 	static const float DEFAULT_FONT_SIZE;
+
+	static const FSPath SAVE_DIRECTORY;
+	static const FSPath SAVE_FILENAME;
+	static const FSPath SAVE_PATH;
 
 private:
 	float fontSize = DEFAULT_FONT_SIZE;
@@ -57,6 +64,11 @@ private:
 
 	void initIcons();
 	void initFont();
+
+private:
+	void showSettingsPanel(bool* showSettingsPanel);
+	void showHotKeysPanel(bool* showHotKeys);
+	void showAboutWindowPanel(bool* showAboutWindow);
 
 private:
 	void showMainMenuBar();
