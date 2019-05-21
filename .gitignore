@@ -402,3 +402,6 @@ dkms.conf
 
 ### imgui ###
 imgui.ini
+
+
+resources/save/*
