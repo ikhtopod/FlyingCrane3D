@@ -53,6 +53,8 @@ void GUI::updateServerSettings() {
 	std::stringstream ss { Util::loadSettings(GUI::SAVE_PATH) };
 	std::string res {};
 
+	if (ss.str().empty()) return;
+
 	for (std::size_t counter = 0; std::getline(ss, res, '\n'); counter++) {
 		char* tmp = nullptr;
 
