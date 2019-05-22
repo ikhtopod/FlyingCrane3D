@@ -404,4 +404,5 @@ dkms.conf
 imgui.ini
 
 
+save/*
 resources/save/*
