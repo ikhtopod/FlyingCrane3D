@@ -30,6 +30,11 @@ public:
 private:
 	float fontSize = DEFAULT_FONT_SIZE;
 
+	char serverName[50] = "";
+	char port[6] = "";
+	char login[50] = "";
+	char password[50] = "";
+
 	ImVec2 sizeToolsPanel {};
 	ImVec2 positionToolsPanel {};
 
@@ -64,6 +69,7 @@ private:
 
 	void initIcons();
 	void initFont();
+	void updateServerSettings();
 
 private:
 	void showSettingsPanel(bool* showSettingsPanel);

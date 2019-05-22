@@ -4,7 +4,7 @@ const std::string GUI::FONT_DIRECTORY = "../resources/fonts";
 const std::string GUI::FONT_PATH = FONT_DIRECTORY + "/Roboto-Regular.ttf";
 const float GUI::DEFAULT_FONT_SIZE = 16.0f;
 
-const GUI::FSPath GUI::SAVE_DIRECTORY = "../resources/save";
+const GUI::FSPath GUI::SAVE_DIRECTORY = "../save";
 const GUI::FSPath GUI::SAVE_FILENAME = "settings.bin";
 const GUI::FSPath GUI::SAVE_PATH = GUI::SAVE_DIRECTORY / GUI::SAVE_FILENAME;
 
@@ -46,6 +46,34 @@ void GUI::initFont() {
 	io.Fonts->AddFontDefault();
 }
 
+void GUI::updateServerSettings() {
+	if (!Util::existsDirectory(GUI::SAVE_DIRECTORY)) return;
+	if (!Util::existsFile(GUI::SAVE_PATH)) return;
+
+	std::stringstream ss { Util::loadSettings(GUI::SAVE_PATH) };
+	std::string res {};
+
+	for (std::size_t counter = 0; std::getline(ss, res, '\n'); counter++) {
+		char* tmp = nullptr;
+
+		if (counter == 0) {
+			tmp = serverName;
+		} else if (counter == 1) {
+			tmp = port;
+		} else if (counter == 2) {
+			tmp = login;
+		} else if (counter == 3) {
+			tmp = password;
+		} else {
+			break;
+		}
+
+		for (std::size_t i = 0; i < res.size(); i++) {
+			tmp[i] = res[i];
+		}
+	}
+}
+
 void GUI::updatePanelsByScreenSize() {
 	ScreenResolution sr = Application::getInstancePtr()->getWindow().getScreen();
 	this->updatePanelsByScreenSize(sr.getWidth(), sr.getHeight());
@@ -76,6 +104,7 @@ void GUI::updatePanelsUnderMenuBar(float yPosition) {
 }
 
 void GUI::init() {
+	this->updateServerSettings();
 	this->initIcons();
 
 	IMGUI_CHECKVERSION();
@@ -134,44 +163,11 @@ void GUI::showSettingsPanel(bool* showSettingsPanel) {
 
 	if (!*showSettingsPanel) return;
 
-	static char ip[16] = "";
-	static char port[6] = "";
-	static char login[50] = "";
-	static char password[50] = "";
-
 	if (ImGui::Begin(settingsTitle.c_str(), showSettingsPanel,
 					 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
 
 		if (!prevShowSettingsPanel) {
-			if (Util::existsDirectory(GUI::SAVE_DIRECTORY)) {
-				if (Util::existsFile(GUI::SAVE_PATH)) {
-					std::stringstream ss { Util::loadSettings(GUI::SAVE_PATH) };
-					std::string res {};
-
-					std::size_t counter = 0;
-					while (std::getline(ss, res, '\n')) {
-						char* tmp = nullptr;
-
-						if (counter == 0) {
-							tmp = ip;
-						} else if (counter == 1) {
-							tmp = port;
-						} else if (counter == 2) {
-							tmp = login;
-						} else if (counter == 3) {
-							tmp = password;
-						} else {
-							break;
-						}
-
-						for (std::size_t i = 0; i < res.size(); i++) {
-							tmp[i] = res[i];
-						}
-
-						counter++;
-					}
-				}//fi
-			}//fi
+			this->updateServerSettings();
 
 			Application* appThis = Application::getInstancePtr();
 			ScreenResolution& sr = appThis->getWindow().getScreen();
@@ -189,8 +185,7 @@ void GUI::showSettingsPanel(bool* showSettingsPanel) {
 		ImGui::Separator();
 		ImGui::TextColored(ImVec4 { 0.5f, 0.7f, 0.9f, 1.0f }, "Сервер:");
 
-		ImGui::InputText("ip", ip, sizeof(ip),
-						 ImGuiInputTextFlags_CharsDecimal |
+		ImGui::InputText("имя сервера", serverName, sizeof(serverName),
 						 ImGuiInputTextFlags_CharsNoBlank);
 		ImGui::InputText("порт", port, sizeof(port),
 						 ImGuiInputTextFlags_CharsDecimal |
@@ -209,7 +204,7 @@ void GUI::showSettingsPanel(bool* showSettingsPanel) {
 			}//fi
 
 			std::stringstream ss {};
-			ss << ip << std::endl <<
+			ss << serverName << std::endl <<
 				port << std::endl <<
 				login << std::endl <<
 				password;
