@@ -131,7 +131,7 @@ void Util::saveSettings(const FSPath& path, const std::string& content) {
 	std::size_t size = content.size();
 
 	try {
-		fh.open(path, std::ios::out);
+		fh.open(path, std::ios::out | std::ios::binary);
 		fh << content;
 		fh.exceptions(oldExceptions);
 		fh.flush();
