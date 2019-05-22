@@ -5,7 +5,7 @@ const std::string GUI::FONT_PATH = FONT_DIRECTORY + "/Roboto-Regular.ttf";
 const float GUI::DEFAULT_FONT_SIZE = 16.0f;
 
 const GUI::FSPath GUI::SAVE_DIRECTORY = "../save";
-const GUI::FSPath GUI::SAVE_FILENAME = "settings.bin";
+const GUI::FSPath GUI::SAVE_FILENAME = "settings";
 const GUI::FSPath GUI::SAVE_PATH = GUI::SAVE_DIRECTORY / GUI::SAVE_FILENAME;
 
 
