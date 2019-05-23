@@ -363,16 +363,20 @@ void GUI::showMainMenuBar() {
 	static bool showSettings = false;
 	static bool showSave = false;
 
+	Application* appThis = Application::getInstancePtr();
+
 	if (ImGui::BeginMainMenuBar()) {
 		this->updatePanelsUnderMenuBar(ImGui::GetWindowSize().y);
 
 		if (ImGui::BeginMenu("Файл")) {
-			if (ImGui::MenuItem("Новый", "", false, false)) {}
+			if (ImGui::MenuItem("Новый")) {
+				appThis->newScene();
+			}
 			if (ImGui::MenuItem("Открыть", "", false, false)) {}
 			if (ImGui::MenuItem("Сохранить", "", &showSave)) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Выход", "Ctrl + Q")) {
-				Application::getInstancePtr()->quit();
+				appThis->quit();
 			}
 
 			ImGui::EndMenu();

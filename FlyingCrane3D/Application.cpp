@@ -53,6 +53,12 @@ glm::vec4 Application::getBgColor() {
 	return this->bgColor;
 }
 
+void Application::newScene() {
+	this->scene.free();
+	this->scene = Scene {};
+	this->scene.init();
+}
+
 void Application::run() {
 	try {
 		this->init();
