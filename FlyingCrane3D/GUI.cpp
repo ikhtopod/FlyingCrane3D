@@ -61,11 +61,11 @@ void GUI::updateServerSettings() {
 		if (counter == 0) {
 			tmp = serverName;
 		} else if (counter == 1) {
-			tmp = port;
-		} else if (counter == 2) {
 			tmp = login;
-		} else if (counter == 3) {
+		} else if (counter == 2) {
 			tmp = password;
+		} else if (counter == 3) {
+			tmp = dbName;
 		} else {
 			break;
 		}
@@ -189,13 +189,12 @@ void GUI::showSettingsPanel(bool* showSettingsPanel) {
 
 		ImGui::InputText("имя сервера", serverName, sizeof(serverName),
 						 ImGuiInputTextFlags_CharsNoBlank);
-		ImGui::InputText("порт", port, sizeof(port),
-						 ImGuiInputTextFlags_CharsDecimal |
-						 ImGuiInputTextFlags_CharsNoBlank);
 		ImGui::InputText("логин", login, sizeof(login),
 						 ImGuiInputTextFlags_CharsNoBlank);
 		ImGui::InputText("пароль", password, sizeof(password),
 						 ImGuiInputTextFlags_Password |
+						 ImGuiInputTextFlags_CharsNoBlank);
+		ImGui::InputText("имя базы", dbName, sizeof(dbName),
 						 ImGuiInputTextFlags_CharsNoBlank);
 
 		ImGui::NewLine();
@@ -207,9 +206,9 @@ void GUI::showSettingsPanel(bool* showSettingsPanel) {
 
 			std::stringstream ss {};
 			ss << serverName << std::endl <<
-				port << std::endl <<
 				login << std::endl <<
-				password;
+				password << std::endl <<
+				dbName;
 
 			Util::saveSettings(GUI::SAVE_PATH, ss.str());
 		}//fi
