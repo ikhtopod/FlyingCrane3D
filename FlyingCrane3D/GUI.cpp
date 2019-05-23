@@ -161,16 +161,51 @@ void GUI::draw_Render() {
 }
 
 
-void GUI::showSettingsPanel(bool* showSettingsPanel) {
+void GUI::showSavePanel(bool* showSave) {
+	static bool prevShowSave = false;
+	static std::string saveTitle { "Сохранить" };
+
+	if (!*showSave) {
+		if (prevShowSave) prevShowSave = false;
+		return;
+	}
+
+	if (ImGui::Begin(saveTitle.c_str(), showSave,
+					 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
+
+		if (!prevShowSave) {
+			prevShowSave = true;
+
+			Application* appThis = Application::getInstancePtr();
+			ScreenResolution& sr = appThis->getWindow().getScreen();
+
+			ImVec2 winSize = ImVec2 { 800.0f, 400.0f };
+			ImVec2 winPos = ImVec2 {
+				static_cast<float>(sr.getHalfWidth()) - (winSize.x / 2.0f),
+				static_cast<float>(sr.getHalfHeight()) - (winSize.y / 2.0f)
+			};
+
+			ImGui::SetWindowSize(winSize, true);
+			ImGui::SetWindowPos(winPos, true);
+		}
+
+		ImGui::Separator();
+		ImGui::Separator();
+
+	}
+	ImGui::End();
+}
+
+void GUI::showSettingsPanel(bool* showSettings) {
 	static bool prevShowSettingsPanel = false;
 	static std::string settingsTitle { "Настройки" };
 
-	if (!*showSettingsPanel) {
+	if (!*showSettings) {
 		if (prevShowSettingsPanel) prevShowSettingsPanel = false;
 		return;
 	}
 
-	if (ImGui::Begin(settingsTitle.c_str(), showSettingsPanel,
+	if (ImGui::Begin(settingsTitle.c_str(), showSettings,
 					 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
 
 		if (!prevShowSettingsPanel) {
@@ -287,14 +322,15 @@ void GUI::showMainMenuBar() {
 	static bool showAboutWindow = false;
 	static bool showHotKeys = false;
 	static bool showSettings = false;
+	static bool showSave = false;
 
 	if (ImGui::BeginMainMenuBar()) {
 		this->updatePanelsUnderMenuBar(ImGui::GetWindowSize().y);
 
 		if (ImGui::BeginMenu("Файл")) {
-			if (ImGui::MenuItem("Новый", "Ctrl + N", false, false)) {}
-			if (ImGui::MenuItem("Открыть", "Ctrl + O", false, false)) {}
-			if (ImGui::MenuItem("Сохранить", "Ctrl + S", false, false)) {}
+			if (ImGui::MenuItem("Новый", "", false, false)) {}
+			if (ImGui::MenuItem("Открыть", "", false, false)) {}
+			if (ImGui::MenuItem("Сохранить", "", &showSave)) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Выход", "Ctrl + Q")) {
 				Application::getInstancePtr()->quit();
@@ -321,6 +357,7 @@ void GUI::showMainMenuBar() {
 			showAboutWindow = !showAboutWindow;
 		}
 
+		this->showSavePanel(&showSave);
 		this->showSettingsPanel(&showSettings);
 		this->showHotKeysPanel(&showHotKeys);
 		this->showAboutWindowPanel(&showAboutWindow);
