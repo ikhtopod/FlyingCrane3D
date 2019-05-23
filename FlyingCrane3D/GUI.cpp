@@ -164,6 +164,7 @@ void GUI::draw_Render() {
 void GUI::showSavePanel(bool* showSave) {
 	static bool prevShowSave = false;
 	static std::string saveTitle { "Сохранить" };
+	static std::string savePanelColumn { "savePanelColumn" };
 
 	if (!*showSave) {
 		if (prevShowSave) prevShowSave = false;
@@ -179,7 +180,7 @@ void GUI::showSavePanel(bool* showSave) {
 			Application* appThis = Application::getInstancePtr();
 			ScreenResolution& sr = appThis->getWindow().getScreen();
 
-			ImVec2 winSize = ImVec2 { 800.0f, 400.0f };
+			ImVec2 winSize = ImVec2 { 600.0f, 310.0f };
 			ImVec2 winPos = ImVec2 {
 				static_cast<float>(sr.getHalfWidth()) - (winSize.x / 2.0f),
 				static_cast<float>(sr.getHalfHeight()) - (winSize.y / 2.0f)
@@ -190,9 +191,47 @@ void GUI::showSavePanel(bool* showSave) {
 		}
 
 		ImGui::Separator();
-		ImGui::Separator();
 
-	}
+		ImGui::Columns(2, savePanelColumn.c_str(), true);
+		ImGui::SetColumnWidth(0, 350.0f);
+		ImGui::SetColumnWidth(1, 250.0f);
+
+		std::vector<const char *> sceneItems {
+				"Scene",
+				"Scene.000",
+				"Scene.001",
+		};
+		static int currentSceneItem = 0;
+
+		ImGui::ListBox("Сохраненные\nсцены", &currentSceneItem,
+					   &(sceneItems)[0], sceneItems.size(), 10);
+
+		ImGui::NextColumn();
+
+		std::vector<const char *> categoryItems {
+				"Planes",
+				"Boxes",
+				"Pyramids",
+		};
+		static int currentCategoryItem = 0;
+
+		ImGui::ListBox("Категория", &currentCategoryItem,
+					   &(categoryItems)[0], categoryItems.size(), 8);
+
+		ImGui::NewLine();
+
+		static char sceneName[255] = "Scene";
+
+		ImGui::InputText("Имя", sceneName, sizeof(sceneName),
+						 ImGuiInputTextFlags_CharsNoBlank);
+
+		ImGui::NewLine();
+
+		if (ImGui::Button("Сохранить")) {
+
+		}//fi Button
+
+	}//fi Begin
 	ImGui::End();
 }
 
