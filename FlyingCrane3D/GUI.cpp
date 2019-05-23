@@ -73,6 +73,8 @@ void GUI::updateServerSettings() {
 		for (std::size_t i = 0; i < res.size(); i++) {
 			tmp[i] = res[i];
 		}
+
+		tmp[res.size()] = '\0';
 	}
 }
 
@@ -160,15 +162,20 @@ void GUI::draw_Render() {
 
 
 void GUI::showSettingsPanel(bool* showSettingsPanel) {
-	static bool prevShowSettingsPanel = *showSettingsPanel;
+	static bool prevShowSettingsPanel = false;
 	static std::string settingsTitle { "Настройки" };
 
-	if (!*showSettingsPanel) return;
+	if (!*showSettingsPanel) {
+		if (prevShowSettingsPanel) prevShowSettingsPanel = false;
+		return;
+	}
 
 	if (ImGui::Begin(settingsTitle.c_str(), showSettingsPanel,
 					 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
 
 		if (!prevShowSettingsPanel) {
+			prevShowSettingsPanel = true;
+
 			this->updateServerSettings();
 
 			Application* appThis = Application::getInstancePtr();
@@ -187,14 +194,14 @@ void GUI::showSettingsPanel(bool* showSettingsPanel) {
 		ImGui::Separator();
 		ImGui::TextColored(ImVec4 { 0.5f, 0.7f, 0.9f, 1.0f }, "Сервер:");
 
-		ImGui::InputText("имя сервера", serverName, sizeof(serverName),
+		ImGui::InputText("сервер", serverName, sizeof(serverName),
 						 ImGuiInputTextFlags_CharsNoBlank);
 		ImGui::InputText("логин", login, sizeof(login),
 						 ImGuiInputTextFlags_CharsNoBlank);
 		ImGui::InputText("пароль", password, sizeof(password),
 						 ImGuiInputTextFlags_Password |
 						 ImGuiInputTextFlags_CharsNoBlank);
-		ImGui::InputText("имя базы", dbName, sizeof(dbName),
+		ImGui::InputText("база", dbName, sizeof(dbName),
 						 ImGuiInputTextFlags_CharsNoBlank);
 
 		ImGui::NewLine();
@@ -216,8 +223,6 @@ void GUI::showSettingsPanel(bool* showSettingsPanel) {
 		ImGui::Separator();
 	}
 	ImGui::End();
-
-	prevShowSettingsPanel = *showSettingsPanel;
 }
 
 void GUI::showHotKeysPanel(bool* showHotKeys) {
