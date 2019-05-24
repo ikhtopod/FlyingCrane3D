@@ -255,7 +255,7 @@ void GUI::showSettingsPanel(bool* showSettings) {
 			Application* appThis = Application::getInstancePtr();
 			ScreenResolution& sr = appThis->getWindow().getScreen();
 
-			ImVec2 winSize = ImVec2 { 400.0f, 400.0f };
+			ImVec2 winSize = ImVec2 { 400.0f, 215.0f };
 			ImVec2 winPos = ImVec2 {
 				static_cast<float>(sr.getHalfWidth()) - (winSize.x / 2.0f),
 				static_cast<float>(sr.getHalfHeight()) - (winSize.y / 2.0f)
