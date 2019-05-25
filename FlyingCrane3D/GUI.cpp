@@ -235,6 +235,75 @@ void GUI::showSavePanel(bool* showSave) {
 	ImGui::End();
 }
 
+void GUI::showLoadPanel(bool* showLoad) {
+	static bool prevShowLoad = false;
+	static std::string loadTitle { "Открыть" };
+	static std::string loadPanelColumn { "loadPanelColumn" };
+
+	if (!*showLoad) {
+		if (prevShowLoad) prevShowLoad = false;
+		return;
+	}
+
+	if (ImGui::Begin(loadTitle.c_str(), showLoad,
+					 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
+
+		if (!prevShowLoad) {
+			prevShowLoad = true;
+
+			Application* appThis = Application::getInstancePtr();
+			ScreenResolution& sr = appThis->getWindow().getScreen();
+
+			ImVec2 winSize = ImVec2 { 600.0f, 310.0f };
+			ImVec2 winPos = ImVec2 {
+				static_cast<float>(sr.getHalfWidth()) - (winSize.x / 2.0f),
+				static_cast<float>(sr.getHalfHeight()) - (winSize.y / 2.0f)
+			};
+
+			ImGui::SetWindowSize(winSize, true);
+			ImGui::SetWindowPos(winPos, true);
+		}
+
+		ImGui::Separator();
+
+		ImGui::Columns(2, loadPanelColumn.c_str(), true);
+		ImGui::SetColumnWidth(0, 350.0f);
+		ImGui::SetColumnWidth(1, 250.0f);
+
+		std::vector<const char *> sceneItems {
+				"Scene",
+				"Scene.000",
+				"Scene.001",
+		};
+		static int currentSceneItem = 0;
+
+		ImGui::ListBox("Сохраненные\nсцены", &currentSceneItem,
+					   &(sceneItems)[0], sceneItems.size(), 10);
+
+		ImGui::NextColumn();
+
+		std::vector<const char *> categoryItems {
+				"Planes",
+				"Boxes",
+				"Pyramids",
+		};
+		static int currentCategoryItem = 0;
+
+		ImGui::ListBox("Категория", &currentCategoryItem,
+					   &(categoryItems)[0], categoryItems.size(), 8);
+
+		ImGui::NewLine();
+		ImGui::NewLine();
+
+		if (ImGui::Button("Загрузить")) {
+
+		}//fi Button
+
+		ImGui::NewLine();
+	}//fi Begin
+	ImGui::End();
+}
+
 void GUI::showSettingsPanel(bool* showSettings) {
 	static bool prevShowSettingsPanel = false;
 	static std::string settingsTitle { "Настройки" };
@@ -362,6 +431,7 @@ void GUI::showMainMenuBar() {
 	static bool showHotKeys = false;
 	static bool showSettings = false;
 	static bool showSave = false;
+	static bool showLoad = false;
 
 	Application* appThis = Application::getInstancePtr();
 
@@ -372,7 +442,7 @@ void GUI::showMainMenuBar() {
 			if (ImGui::MenuItem("Новый")) {
 				appThis->newScene();
 			}
-			if (ImGui::MenuItem("Открыть", "", false, false)) {}
+			if (ImGui::MenuItem("Открыть", "", &showLoad)) {}
 			if (ImGui::MenuItem("Сохранить", "", &showSave)) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Выход", "Ctrl + Q")) {
@@ -401,6 +471,7 @@ void GUI::showMainMenuBar() {
 		}
 
 		this->showSavePanel(&showSave);
+		this->showLoadPanel(&showLoad);
 		this->showSettingsPanel(&showSettings);
 		this->showHotKeysPanel(&showHotKeys);
 		this->showAboutWindowPanel(&showAboutWindow);

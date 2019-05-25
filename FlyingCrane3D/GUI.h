@@ -73,6 +73,7 @@ private:
 
 private:
 	void showSavePanel(bool* showSave);
+	void showLoadPanel(bool* showLoad);
 	void showSettingsPanel(bool* showSettings);
 	void showHotKeysPanel(bool* showHotKeys);
 	void showAboutWindowPanel(bool* showAboutWindow);
