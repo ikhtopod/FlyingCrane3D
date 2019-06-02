@@ -5,3 +5,7 @@ LoadSystem::LoadSystem() {}
 
 
 LoadSystem::~LoadSystem() {}
+
+void LoadSystem::load() {
+
+}
