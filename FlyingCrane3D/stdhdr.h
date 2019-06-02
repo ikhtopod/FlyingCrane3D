@@ -26,6 +26,8 @@
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 #include <imgui_impl_opengl3.h>
 
+#include <mysql.h>
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -57,6 +59,9 @@
 #include "DeltaTime.h"
 #include "ScreenResolution.h"
 #include "Application.h"
+#include "DBConnect.h"
+#include "SaveSystem.h"
+#include "LoadSystem.h"
 #include "Window.h"
 #include "Texture.h"
 #include "GUI.h"

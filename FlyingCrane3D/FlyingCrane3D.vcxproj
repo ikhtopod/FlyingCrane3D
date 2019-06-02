@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\include;E:\Program Files\imgui\imgui-1.70\imgui_glfw;E:\Program Files\imgui\imguiDock;E:\Program Files\stb;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\include;E:\Program Files\imgui\imgui-1.70\imgui_glfw;E:\Program Files\imgui\imguiDock;E:\Program Files\stb;C:\Program Files\MySQL\MySQL Server 8.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files %28x86%29\MySQL\Connector C++ 8.0\lib\vs14;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\include;E:\Program Files\imgui\imgui-1.70\imgui_glfw;E:\Program Files\imgui\imguiDock;E:\Program Files\stb;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\include;E:\Program Files\imgui\imgui-1.70\imgui_glfw;E:\Program Files\imgui\imguiDock;E:\Program Files\stb;C:\Program Files\MySQL\MySQL Server 8.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files %28x86%29\MySQL\Connector C++ 8.0\lib\vs14;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -90,9 +90,10 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <PreprocessorDefinitions>CPPCONN_PUBLIC_FUNC=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glfw3dll.lib;mysqlcppconn-static.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,11 +118,12 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <PreprocessorDefinitions>CPPCONN_PUBLIC_FUNC=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glfw3dll.lib;mysqlcppconn-static.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,6 +145,7 @@
     <ClCompile Include="Axis.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraSwitcher.cpp" />
+    <ClCompile Include="DBConnect.cpp" />
     <ClCompile Include="DeltaTime.cpp" />
     <ClCompile Include="E:\Program Files\glad\gl_3_3_core\src\glad.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -213,6 +216,7 @@
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Face.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
+    <ClCompile Include="LoadSystem.cpp" />
     <ClCompile Include="ObjectScene.cpp" />
     <ClCompile Include="ObjectSceneGrid.cpp" />
     <ClCompile Include="GUI.cpp" />
@@ -233,6 +237,7 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="PolymeshRepresentation.cpp" />
     <ClCompile Include="Projection.cpp" />
+    <ClCompile Include="SaveSystem.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ScreenResolution.cpp" />
     <ClCompile Include="Selection.cpp" />
@@ -257,6 +262,7 @@
     <ClInclude Include="Axis.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraSwitcher.h" />
+    <ClInclude Include="DBConnect.h" />
     <ClInclude Include="DeltaTime.h" />
     <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imconfig.h" />
     <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui.h" />
@@ -272,6 +278,7 @@
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Face.h" />
     <ClInclude Include="FreeCamera.h" />
+    <ClInclude Include="LoadSystem.h" />
     <ClInclude Include="ObjectScene.h" />
     <ClInclude Include="ObjectSceneGrid.h" />
     <ClInclude Include="GUI.h" />
@@ -292,6 +299,7 @@
     <ClInclude Include="Point.h" />
     <ClInclude Include="PolymeshRepresentation.h" />
     <ClInclude Include="Projection.h" />
+    <ClInclude Include="SaveSystem.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ScreenResolution.h" />
     <ClInclude Include="Selection.h" />
