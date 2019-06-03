@@ -79,12 +79,12 @@
     <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN64\include;E:\Program Files\imgui\imgui-1.70\imgui_glfw;E:\Program Files\imgui\imguiDock;E:\Program Files\stb;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN64\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN64\include;E:\Program Files\imgui\imgui-1.70\imgui_glfw;E:\Program Files\imgui\imguiDock;E:\Program Files\stb;C:\Program Files\MySQL\MySQL Server 8.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN64\include;E:\Program Files\imgui\imgui-1.70\imgui_glfw;E:\Program Files\imgui\imguiDock;E:\Program Files\stb;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN64\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN64\include;E:\Program Files\imgui\imgui-1.70\imgui_glfw;E:\Program Files\imgui\imguiDock;E:\Program Files\stb;C:\Program Files\MySQL\MySQL Server 8.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -119,7 +119,7 @@
       </OmitFramePointers>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glfw3dll.lib;mysqlcppconn-static.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -163,7 +163,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glfw3dll.lib;mysqlcppconn-static.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -4,16 +4,19 @@
 const uint32_t DBConnect::DEFAULT_PORT = 3306;
 
 
-DBConnect::DBConnect(CCHARP _server, CCHARP _login,
-					 CCHARP _password, CCHARP _database) :
+DBConnect::DBConnect(std::string _server, std::string _login,
+					 std::string _password, std::string _database) :
 	server(_server), login(_login),
 	password(_password), database(_database), port(DEFAULT_PORT) {
 
 	mysql_init(&this->mysql);
 	this->connection = mysql_real_connect(&this->mysql,
-										  this->server, this->login,
-										  this->password, this->database,
+										  this->server.c_str(), this->login.c_str(),
+										  this->password.c_str(), this->database.c_str(),
 										  this->port, 0, 0);
+
+
+
 	this->createTablesIfNotExists();
 }
 
@@ -24,7 +27,7 @@ DBConnect::~DBConnect() {
 }
 
 int DBConnect::query(const char* q) {
-	if (this->connection == nullptr) return 1;
+	if (this->isConnectionError()) return 1;
 
 	return mysql_query(this->connection, q);
 }
@@ -33,8 +36,17 @@ int DBConnect::query(std::string q) {
 	return this->query(q.c_str());
 }
 
+bool DBConnect::isConnectionError() {
+	if (this->connection == nullptr) {
+		std::cout << mysql_error(&this->mysql) << std::endl;
+		return true;
+	}
+
+	return false;
+}
+
 void DBConnect::createTablesIfNotExists() {
-	if (this->connection == nullptr) return;
+	if (this->isConnectionError()) return;
 
 	std::string req = R"sql(
 create table if not exists category (

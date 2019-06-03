@@ -1,5 +1,6 @@
 #include "GUI.h"
 
+
 const std::string GUI::FONT_DIRECTORY = "../resources/fonts";
 const std::string GUI::FONT_PATH = FONT_DIRECTORY + "/Roboto-Regular.ttf";
 const float GUI::DEFAULT_FONT_SIZE = 16.0f;
@@ -230,9 +231,13 @@ void GUI::showSavePanel(bool* showSave) {
 		ImGui::NewLine();
 
 		if (ImGui::Button("Сохранить")) {
-
+			SaveSystem {
+				std::string { this->serverName },
+				std::string { this->login },
+				std::string { this->password },
+				std::string { this->dbName }
+			};
 		}//fi Button
-
 	}//fi Begin
 	ImGui::End();
 }
@@ -300,7 +305,12 @@ void GUI::showLoadPanel(bool* showLoad) {
 		ImGui::NewLine();
 
 		if (ImGui::Button("Загрузить")) {
-
+			LoadSystem {
+				std::string { this->serverName },
+				std::string { this->login },
+				std::string { this->password },
+				std::string { this->dbName }
+			};
 		}//fi Button
 
 		ImGui::NewLine();
@@ -632,7 +642,7 @@ void GUI::showToolBar() {
 		}//fi IsItemHovered Button
 
 		ImGui::SameLine();
-		
+
 		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::FOCUS].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			if (scene.getCameraSwitcher().getType() == CameraType::TARGET &&

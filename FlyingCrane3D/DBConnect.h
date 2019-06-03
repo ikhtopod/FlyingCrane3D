@@ -1,9 +1,6 @@
 #pragma once
 
 class DBConnect {
-protected:
-	using CCHARP = const char*;
-
 public:
 	static const uint32_t DEFAULT_PORT;
 
@@ -12,21 +9,22 @@ protected:
 	MYSQL mysql;
 
 protected:
-	CCHARP server;
-	CCHARP login;
-	CCHARP password;
-	CCHARP database;
+	std::string server;
+	std::string login;
+	std::string password;
+	std::string database;
 	uint32_t port;
 
 protected:
+	bool isConnectionError();
 	void createTablesIfNotExists();
 
 public:
 	DBConnect() = delete;
-	DBConnect(CCHARP _server,
-			  CCHARP _login,
-			  CCHARP _password,
-			  CCHARP _database);
+	DBConnect(std::string _server,
+			  std::string _login,
+			  std::string _password,
+			  std::string _database);
 	virtual ~DBConnect();
 
 	int query(const char* q);
