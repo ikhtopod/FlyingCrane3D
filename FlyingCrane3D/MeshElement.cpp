@@ -74,6 +74,7 @@ void MeshElement::draw() {
 	this->shader.draw();
 
 	glBindVertexArray(this->vao);
-	glDrawElements(this->type, this->indices.size(), GL_UNSIGNED_INT, (void*)0);
+	glDrawElements(this->type, static_cast<GLsizei>(this->indices.size()),
+				   GL_UNSIGNED_INT, (void*)0);
 	glBindVertexArray(0); // unbind
 }

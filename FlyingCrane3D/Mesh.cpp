@@ -60,7 +60,8 @@ void Mesh::draw() {
 	this->shader.draw();
 
 	glBindVertexArray(this->vao);
-	glDrawElements(this->type, this->polymesh.getIndicesMesh().size(),
+	glDrawElements(this->type,
+				   static_cast<GLsizei>(this->polymesh.getIndicesMesh().size()),
 				   GL_UNSIGNED_INT, (void*)0);
 	glBindVertexArray(0); // unbind
 }
