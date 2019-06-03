@@ -508,7 +508,7 @@ void GUI::showToolBar() {
 		ImGui::SetColumnWidth(2, 97.0f);
 		ImGui::SetColumnWidth(3, 97.0f);
 
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::POINT].getId(), sizeMoveButton);
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::POINT].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			selectionSwitcher.setSelectionMode(SelectionMode::POINT);
 		}//fi IsItemClicked Button
@@ -518,7 +518,7 @@ void GUI::showToolBar() {
 
 		ImGui::SameLine();
 
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::EDGE].getId(), sizeMoveButton);
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::EDGE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			selectionSwitcher.setSelectionMode(SelectionMode::EDGE);
 		}//fi IsItemClicked Button
@@ -528,7 +528,7 @@ void GUI::showToolBar() {
 
 		ImGui::SameLine();
 
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::FACE].getId(), sizeMoveButton);
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::FACE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			selectionSwitcher.setSelectionMode(SelectionMode::FACE);
 		}//fi IsItemClicked Button
@@ -538,7 +538,7 @@ void GUI::showToolBar() {
 
 		ImGui::SameLine();
 
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::OBJECT].getId(), sizeMoveButton);
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::OBJECT].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			selectionSwitcher.setSelectionMode(SelectionMode::OBJECT);
 		}//fi IsItemClicked Button
@@ -548,7 +548,7 @@ void GUI::showToolBar() {
 
 		ImGui::NextColumn();
 
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::MOVE].getId(), sizeMoveButton);
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::MOVE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			if (selection.hasSelectedObjects()) {
 				selectionSwitcher.setActionMode(SelectionActionMode::MOVING);
@@ -560,7 +560,7 @@ void GUI::showToolBar() {
 
 		ImGui::SameLine();
 
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::ROTATE].getId(), sizeMoveButton);
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::ROTATE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			if (selection.hasSelectedObjects()) {
 				selectionSwitcher.setActionMode(SelectionActionMode::ROTATION);
@@ -572,7 +572,7 @@ void GUI::showToolBar() {
 
 		ImGui::SameLine();
 
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::SCALE].getId(), sizeMoveButton);
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::SCALE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			if (selection.hasSelectedObjects()) {
 				selectionSwitcher.setActionMode(SelectionActionMode::SCALING);
@@ -584,7 +584,7 @@ void GUI::showToolBar() {
 
 		ImGui::SameLine(0.0f, spacing_w);
 
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::REMOVE].getId(), sizeMoveButton);
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::REMOVE].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			if (selection.hasSelectedObjects()) {
 				selection.deleting();
@@ -596,7 +596,7 @@ void GUI::showToolBar() {
 
 		ImGui::NextColumn();
 
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::PERSP].getId(), sizeMoveButton);
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::PERSP].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			scene.getModel().getOrthoProj().switchToPerspective();
 		}//fi IsItemClicked Button
@@ -606,7 +606,7 @@ void GUI::showToolBar() {
 
 		ImGui::SameLine();
 
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::ORTHO].getId(), sizeMoveButton);
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::ORTHO].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			if (scene.getCameraSwitcher().getType() == CameraType::TARGET) {
 				scene.getModel().getOrthoProj().switchToOrthographic();
@@ -618,7 +618,7 @@ void GUI::showToolBar() {
 
 		ImGui::NextColumn();
 
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::CAMERA].getId(), sizeMoveButton);
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::CAMERA].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			if ((scene.getCameraSwitcher().getType() == CameraType::TARGET &&
 				 scene.getSelectionSwitcher().getActionMode() == SelectionActionMode::NONE) ||
@@ -632,8 +632,8 @@ void GUI::showToolBar() {
 		}//fi IsItemHovered Button
 
 		ImGui::SameLine();
-
-		ImGui::ImageButton((ImTextureID)(__int64)this->icons[GUIIcons::FOCUS].getId(), sizeMoveButton);
+		
+		ImGui::ImageButton((ImTextureID)(int64_t)this->icons[GUIIcons::FOCUS].getId(), sizeMoveButton);
 		if (ImGui::IsItemClicked()) {
 			if (scene.getCameraSwitcher().getType() == CameraType::TARGET &&
 				scene.getSelectionSwitcher().getActionMode() == SelectionActionMode::NONE) {
