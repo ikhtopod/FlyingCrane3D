@@ -1,7 +1,7 @@
 #include "DBConnect.h"
 
 
-const uint32_t DEFAULT_PORT = 3306;
+const uint32_t DBConnect::DEFAULT_PORT = 3306;
 
 
 DBConnect::DBConnect(CCHARP _server, CCHARP _login,
