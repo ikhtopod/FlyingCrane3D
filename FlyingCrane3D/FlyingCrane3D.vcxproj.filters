@@ -163,6 +163,15 @@
     <ClCompile Include="ObjectShapePyramid.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="DBConnect.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadSystem.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveSystem.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -336,6 +345,15 @@
     <ClInclude Include="ObjectShapePyramid.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="DBConnect.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadSystem.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveSystem.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
@@ -430,6 +448,12 @@
     </Filter>
     <Filter Include="Headers\Object\ObjectShape">
       <UniqueIdentifier>{4126d46c-3202-408e-8ce6-d266307b5db3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Save">
+      <UniqueIdentifier>{6d0a03dd-ff09-4c3f-bee8-5e1e14fee402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Save">
+      <UniqueIdentifier>{b8f1632d-bd0e-42c1-af97-62d9e84e3354}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

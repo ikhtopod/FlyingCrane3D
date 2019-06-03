@@ -171,6 +171,7 @@
     <ClCompile Include="Axis.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraSwitcher.cpp" />
+    <ClCompile Include="DBConnect.cpp" />
     <ClCompile Include="DeltaTime.cpp" />
     <ClCompile Include="E:\Program Files\glad\gl_3_3_core\src\glad.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -291,6 +292,7 @@
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Face.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
+    <ClCompile Include="LoadSystem.cpp" />
     <ClCompile Include="ObjectScene.cpp" />
     <ClCompile Include="ObjectSceneGrid.cpp" />
     <ClCompile Include="GUI.cpp" />
@@ -311,6 +313,7 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="PolymeshRepresentation.cpp" />
     <ClCompile Include="Projection.cpp" />
+    <ClCompile Include="SaveSystem.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ScreenResolution.cpp" />
     <ClCompile Include="Selection.cpp" />
@@ -335,6 +338,7 @@
     <ClInclude Include="Axis.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraSwitcher.h" />
+    <ClInclude Include="DBConnect.h" />
     <ClInclude Include="DeltaTime.h" />
     <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imconfig.h" />
     <ClInclude Include="E:\Program Files\imgui\imgui-1.70\imgui_glfw\imgui.h" />
@@ -350,6 +354,7 @@
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Face.h" />
     <ClInclude Include="FreeCamera.h" />
+    <ClInclude Include="LoadSystem.h" />
     <ClInclude Include="ObjectScene.h" />
     <ClInclude Include="ObjectSceneGrid.h" />
     <ClInclude Include="GUI.h" />
@@ -370,6 +375,7 @@
     <ClInclude Include="Point.h" />
     <ClInclude Include="PolymeshRepresentation.h" />
     <ClInclude Include="Projection.h" />
+    <ClInclude Include="SaveSystem.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ScreenResolution.h" />
     <ClInclude Include="Selection.h" />
