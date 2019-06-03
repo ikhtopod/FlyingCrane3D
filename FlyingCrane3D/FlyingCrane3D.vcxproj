@@ -72,11 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\include;E:\Program Files\imgui\imgui-1.70\imgui_glfw;E:\Program Files\imgui\imguiDock;E:\Program Files\stb;C:\Program Files\MySQL\MySQL Server 8.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files %28x86%29\MySQL\Connector C++ 8.0\lib\vs14;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>E:\Program Files\glad\gl_3_3_core\include;E:\Program Files\glm\glm-0.9.9.3;E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\include;E:\Program Files\imgui\imgui-1.70\imgui_glfw;E:\Program Files\imgui\imguiDock;E:\Program Files\stb;C:\Program Files\MySQL\MySQL Server 8.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files %28x86%29\MySQL\Connector C++ 8.0\lib\vs14;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\Program Files\glfw\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

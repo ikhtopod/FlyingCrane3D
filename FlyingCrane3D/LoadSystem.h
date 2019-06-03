@@ -4,8 +4,7 @@
 
 class LoadSystem : public DBConnect {
 public:
-	LoadSystem();
-	virtual ~LoadSystem();
+	virtual ~LoadSystem() = default;
 
 	void load();
 };
