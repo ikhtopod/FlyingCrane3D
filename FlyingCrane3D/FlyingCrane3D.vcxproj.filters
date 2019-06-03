@@ -164,13 +164,13 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="DBConnect.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Sources\Save</Filter>
     </ClCompile>
     <ClCompile Include="LoadSystem.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Sources\Save</Filter>
     </ClCompile>
     <ClCompile Include="SaveSystem.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Sources\Save</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -346,13 +346,13 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="DBConnect.h">
-      <Filter>Headers</Filter>
+      <Filter>Headers\Save</Filter>
     </ClInclude>
     <ClInclude Include="LoadSystem.h">
-      <Filter>Headers</Filter>
+      <Filter>Headers\Save</Filter>
     </ClInclude>
     <ClInclude Include="SaveSystem.h">
-      <Filter>Headers</Filter>
+      <Filter>Headers\Save</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
