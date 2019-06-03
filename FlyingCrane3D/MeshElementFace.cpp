@@ -64,8 +64,6 @@ void MeshElementFace::initMark() {
 	glEnableVertexAttribArray(MeshBase::AttribIndex::POSITION);
 	glVertexAttribPointer(MeshBase::AttribIndex::POSITION, 3,
 						  GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
-
-	glBindVertexArray(0); // unbind
 }
 
 void MeshElementFace::drawMark() {
@@ -73,7 +71,6 @@ void MeshElementFace::drawMark() {
 	glLineWidth(2.5f);
 	glDrawArrays(GL_LINE_LOOP, 0, 3);
 	glLineWidth(1.0f);
-	glBindVertexArray(0); // unbind
 }
 
 void MeshElementFace::freeMark() {

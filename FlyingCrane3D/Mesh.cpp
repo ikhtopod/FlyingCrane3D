@@ -50,8 +50,6 @@ void Mesh::init() {
 	glVertexAttribPointer(MeshBase::AttribIndex::NORMAL, 3, GL_FLOAT, GL_FALSE,
 						  sizeof(Vertex), (void*)offsetof(Vertex, normal));
 
-	glBindVertexArray(0); // unbind
-
 	this->shader.init();
 }
 

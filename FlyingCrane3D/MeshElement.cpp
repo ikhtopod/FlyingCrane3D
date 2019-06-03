@@ -58,8 +58,6 @@ void MeshElement::init() {
 	glVertexAttribPointer(MeshBase::AttribIndex::POSITION, 3,
 						  GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 
-	glBindVertexArray(0); // unbind
-
 	this->shader.init();
 
 	this->shader.setLambdaDraw([this](Shader* _this) {
@@ -76,5 +74,4 @@ void MeshElement::draw() {
 	glBindVertexArray(this->vao);
 	glDrawElements(this->type, static_cast<GLsizei>(this->indices.size()),
 				   GL_UNSIGNED_INT, (void*)0);
-	glBindVertexArray(0); // unbind
 }
