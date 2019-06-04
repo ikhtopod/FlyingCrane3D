@@ -715,14 +715,23 @@ void GUI::showToolsPanel() {
 			if (ImGui::Button("Добавить")) {
 				switch (currentListboxItem) {
 					case 0:
-						scene.addObject("plane", ObjectShapePlane {});
+					{
+						ObjectShapePlane obj {};
+						scene.addObject("plane", obj);
 						break;
+					}
 					case 1:
-						scene.addObject("cube", ObjectShapeCube {});
+					{
+						ObjectShapeCube obj {};
+						scene.addObject("cube", obj);
 						break;
+					}
 					case 2:
-						scene.addObject("pyramid", ObjectShapePyramid {});
+					{
+						ObjectShapePyramid obj {};
+						scene.addObject("pyramid", obj);
 						break;
+					}
 					default:
 						break;
 				}//hctiws

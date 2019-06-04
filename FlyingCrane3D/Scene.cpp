@@ -59,10 +59,6 @@ void Scene::addObject(ObjectShape& _object) {
 	this->addObject("object", _object);
 }
 
-void Scene::addObject(ObjectShape&& _object) {
-	this->addObject(_object);
-}
-
 void Scene::addObject(const std::string& _name, ObjectShape& _object) {
 	std::string objectName = _name;
 
@@ -80,10 +76,6 @@ void Scene::addObject(const std::string& _name, ObjectShape& _object) {
 	}//fi
 
 	this->objects.insert({ objectName, std::make_shared<ObjectShape>(_object) });
-}
-
-void Scene::addObject(const std::string& _name, ObjectShape&& _object) {
-	this->addObject(_name, _object);
 }
 
 
@@ -105,16 +97,17 @@ void Scene::deleteMarkedObjects() {
 	}//rof
 }
 
-void Scene::initFill() {
+void Scene::initSceneObjects() {
 	// grid
 	this->addSceneObject("grid_8x8.000", ObjectSceneGrid { 8, 8 });
 
 	// insert objects
-	this->addObject("cube", ObjectShapeCube {});
+	ObjectShapeCube obj {};
+	this->addObject("cube", obj);
 }
 
 void Scene::init() {
-	this->initFill();
+	this->initSceneObjects();
 
 	for (auto&[name, object] : this->sceneObjects) {
 		object->init();

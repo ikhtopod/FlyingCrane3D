@@ -50,6 +50,8 @@ void Mesh::init() {
 	glVertexAttribPointer(MeshBase::AttribIndex::NORMAL, 3, GL_FLOAT, GL_FALSE,
 						  sizeof(Vertex), (void*)offsetof(Vertex, normal));
 
+	glBindVertexArray(0); // unbind
+
 	this->shader.init();
 }
 
@@ -61,4 +63,5 @@ void Mesh::draw() {
 	glDrawElements(this->type,
 				   static_cast<GLsizei>(this->polymesh.getIndicesMesh().size()),
 				   GL_UNSIGNED_INT, (void*)0);
+	glBindVertexArray(0); // unbind
 }
