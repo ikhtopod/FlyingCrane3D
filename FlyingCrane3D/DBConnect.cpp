@@ -48,13 +48,75 @@ bool DBConnect::isConnectionError() {
 void DBConnect::createTablesIfNotExists() {
 	if (this->isConnectionError()) return;
 
-	std::string req = R"sql(
-create table if not exists category (
+	std::string createTableCategories = R"sql(
+create table if not exists categories (
     id int(11) not null auto_increment,
-    name varchar(250) not null default '',
+    name varchar(250) not null unique,
     primary key (id)
 );
 )sql";
 
-	this->query(req);
+	std::string createTableScenes = R"sql(
+create table if not exists scenes (
+    id int(11) not null,
+    name varchar(250) not null unique,
+	category_id int(11) not null,
+    primary key (id)
+);
+)sql";
+
+	std::string createTableObjects = R"sql(
+create table if not exists objects (
+    id int(11) not null,
+    name varchar(250) not null,
+	scene_id int(11) not null,
+    primary key (id),
+	foreign key (scene_id) references scenes (id)
+		on delete cascade
+		on update cascade
+);
+)sql";
+
+	std::string createTableTransforms = R"sql(
+create table if not exists transforms (
+    id int(11) not null,
+	position varchar(80) not null default '0.0;0.0;0.0',
+	rotation varchar(80) not null default '0.0;0.0;0.0',
+	scale varchar(80) not null default '1.0;1.0;1.0',
+    primary key (id),
+	foreign key (id) references objects (id)
+		on delete cascade
+		on update cascade
+);
+)sql";
+
+	std::string createTableMeshes = R"sql(
+create table if not exists meshes (
+    id int(11) not null,
+    name varchar(250) not null,
+	`object_id` int(11) not null,
+    primary key (id),
+	foreign key (`object_id`) references objects (id)
+		on delete cascade
+		on update cascade
+);
+)sql";
+
+	std::string createTablePolymeshes = R"sql(
+create table if not exists polymeshes (
+    id int(11) not null,
+    `index` int(11) not null,
+	vertex varchar(80) not null default '0.0;0.0;0.0',
+	foreign key (id) references meshes (id)
+		on delete cascade
+		on update cascade
+);
+)sql";
+
+	this->query(createTableCategories);
+	this->query(createTableScenes);
+	this->query(createTableObjects);
+	this->query(createTableTransforms);
+	this->query(createTableMeshes);
+	this->query(createTablePolymeshes);
 }
