@@ -98,12 +98,7 @@ void Scene::deleteMarkedObjects() {
 }
 
 void Scene::initSceneObjects() {
-	// grid
 	this->addSceneObject("grid_8x8.000", ObjectSceneGrid { 8, 8 });
-
-	// insert objects
-	ObjectShapeCube obj {};
-	this->addObject("cube", obj);
 }
 
 void Scene::init() {

@@ -39,7 +39,7 @@ public:
 	TriadaMode getCurrentMode();
 	glm::vec4 getBgColor();
 
-	void newScene();
+	void setScene(Scene& _scene);
 
 	void run();
 

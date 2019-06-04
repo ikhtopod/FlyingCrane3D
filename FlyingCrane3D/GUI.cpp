@@ -454,7 +454,10 @@ void GUI::showMainMenuBar() {
 
 		if (ImGui::BeginMenu("Файл")) {
 			if (ImGui::MenuItem("Новый")) {
-				appThis->newScene();
+				Scene newScene {};
+				appThis->setScene(newScene);
+				ObjectShapeCube obj {};
+				appThis->getScene().addObject("cube", obj);
 			}
 			if (ImGui::MenuItem("Открыть", "", &showLoad)) {}
 			if (ImGui::MenuItem("Сохранить", "", &showSave)) {}

@@ -53,9 +53,9 @@ glm::vec4 Application::getBgColor() {
 	return this->bgColor;
 }
 
-void Application::newScene() {
+void Application::setScene(Scene& _scene) {
 	this->scene.free();
-	this->scene = Scene {};
+	this->scene = _scene;
 	this->scene.init();
 }
 
@@ -110,7 +110,11 @@ void Application::init() {
 		this->loadGLLoader();
 		Application::Callback::assignAll();
 		this->gui.init();
+
 		this->scene.init();
+		ObjectShapeCube obj {};
+		this->scene.addObject("cube", obj);
+
 		this->window.extra();
 	} catch (std::exception e) {
 		this->currentMode = TriadaMode::NONE;
