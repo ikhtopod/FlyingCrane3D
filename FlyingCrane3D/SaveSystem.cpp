@@ -12,7 +12,7 @@ void SaveSystem::save(std::string sceneName, std::string categoryName) {
 	Application* appThis = Application::getInstancePtr();
 
 	// заполнить таблицу scenes
-	int32_t sceneId = this->getColumnMax("scenes", "id") + 1;
+	int32_t sceneId = this->getFreeRow("scenes", "id");
 	int32_t categoryId = this->getCategoryIdByName(categoryName);
 
 	std::stringstream addSceneReq {};
@@ -26,7 +26,7 @@ void SaveSystem::save(std::string sceneName, std::string categoryName) {
 
 	for (auto&[objectName, objectShape] : appThis->getScene().getObjects()) {
 		// заполнить таблицу objects
-		int32_t objectId = this->getColumnMax("objects", "id") + 1;
+		int32_t objectId = this->getFreeRow("objects", "id");
 
 		std::stringstream addObjectReq {};
 		addObjectReq << "insert into objects (id, name, scene_id) values " <<
@@ -52,7 +52,7 @@ void SaveSystem::save(std::string sceneName, std::string categoryName) {
 
 		for (auto&[meshName, mesh] : objectShape->getMeshes()) {
 			// заполнить таблицу meshes
-			int32_t meshId = this->getColumnMax("meshes", "id") + 1;
+			int32_t meshId = this->getFreeRow("meshes", "id");
 
 			std::stringstream addMeshReq {};
 			addMeshReq << "insert into meshes (id, name, `object_id`) values " <<

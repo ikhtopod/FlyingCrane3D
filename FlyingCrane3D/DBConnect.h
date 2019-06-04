@@ -35,6 +35,6 @@ public:
 	int query(const std::string& q);
 
 	std::vector<const char *> getColumnContent(std::string tableName, std::string colName);
-	uint32_t getColumnMax(std::string tableName, std::string colName);
+	uint32_t getFreeRow(std::string tableName, std::string colIdName);
 	uint32_t getCategoryIdByName(std::string categoryName);
 };

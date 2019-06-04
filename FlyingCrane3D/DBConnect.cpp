@@ -165,30 +165,34 @@ std::vector<const char*> DBConnect::getColumnContent(std::string tableName, std:
 	return names;
 }
 
-uint32_t DBConnect::getColumnMax(std::string tableName, std::string colName) {
+uint32_t DBConnect::getFreeRow(std::string tableName, std::string colIdName) {
 	if (this->isConnectionError()) return {};
 
-	uint32_t max = 0;
+	uint32_t freeRow = 1;
 
 	MYSQL_RES *res;
 	MYSQL_ROW row;
 
 	std::stringstream req {};
-	req << "select max(" << colName << ") from " << tableName;
+	req << "select " << colIdName << " from " << tableName << " order by " << colIdName;
 
 	this->query(req.str());
 
 	if (res = mysql_store_result(this->connection)) {
-		if (row = mysql_fetch_row(res)) {
+		while (row = mysql_fetch_row(res)) {
 			if (row[0] != nullptr) {
-				max = std::stoul(std::string { row[0] });
+				if (std::stoul(std::string { row[0] }) > freeRow) {
+					break;
+				}//fi
 			}//fi
-		}//fi
+
+			freeRow++;
+		}//elihw
 	} else {
 		std::cout << mysql_error(this->connection) << std::endl;
 	}//fi
 
-	return max;
+	return freeRow;
 }
 
 uint32_t DBConnect::getCategoryIdByName(std::string categoryName) {
