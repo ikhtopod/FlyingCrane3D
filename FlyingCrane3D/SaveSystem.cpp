@@ -66,9 +66,10 @@ void SaveSystem::save(std::string sceneName, std::string categoryName) {
 			// заполнить таблицу polymeshes
 			for (Vertex& vertex : mesh.getPolymesh().getVertices()) {
 				std::stringstream addPolymeshReq {};
-				addPolymeshReq << "insert into polymeshes (id, `index`, vertex) values " <<
+				addPolymeshReq << "insert into polymeshes (id, `index`, vertex, normal) values " <<
 					"(" << meshId << ", " << vertex.index << ", '" <<
-					vectorToString(vertex.position) << "')";
+					vectorToString(vertex.position) << "', '" <<
+					vectorToString(vertex.normal) << "')";
 
 				if (this->query(addPolymeshReq.str()) != 0) {
 					std::cout << mysql_error(this->connection) << std::endl;

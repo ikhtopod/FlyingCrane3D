@@ -126,6 +126,7 @@ create table if not exists polymeshes (
     id int(11) not null,
     `index` int(11) not null,
 	vertex varchar(80) not null default '0.0;0.0;0.0',
+	normal varchar(80) not null default '0.0;0.0;0.0',
 	foreign key (id) references meshes (id)
 		on delete cascade
 		on update cascade
