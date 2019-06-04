@@ -167,6 +167,12 @@ void GUI::showSavePanel(bool* showSave) {
 	static std::string saveTitle { "Сохранить" };
 	static std::string savePanelColumn { "savePanelColumn" };
 
+	static std::vector<const char *> sceneItems {};
+	static int currentSceneItem = 0;
+
+	static std::vector<const char *> categoryItems {};
+	static int currentCategoryItem = 0;
+
 	if (!*showSave) {
 		if (prevShowSave) prevShowSave = false;
 		return;
@@ -189,7 +195,23 @@ void GUI::showSavePanel(bool* showSave) {
 
 			ImGui::SetWindowSize(winSize, true);
 			ImGui::SetWindowPos(winPos, true);
-		}
+
+
+			sceneItems.clear();
+			categoryItems.clear();
+			currentSceneItem = 0;
+			currentCategoryItem = 0;
+
+			LoadSystem ls {
+				std::string { this->serverName },
+				std::string { this->login },
+				std::string { this->password },
+				std::string { this->dbName }
+			};
+
+			sceneItems = ls.getColumnContent("scenes", "name");
+			categoryItems = ls.getColumnContent("categories", "name");
+		}//fi
 
 		ImGui::Separator();
 
@@ -197,25 +219,12 @@ void GUI::showSavePanel(bool* showSave) {
 		ImGui::SetColumnWidth(0, 350.0f);
 		ImGui::SetColumnWidth(1, 250.0f);
 
-		std::vector<const char *> sceneItems {
-				"Scene",
-				"Scene.000",
-				"Scene.001",
-		};
-		static int currentSceneItem = 0;
-
 		ImGui::ListBox("Сохраненные\nсцены", &currentSceneItem,
 					   &(sceneItems)[0],
 					   static_cast<int>(sceneItems.size()), 10);
 
 		ImGui::NextColumn();
 
-		std::vector<const char *> categoryItems {
-				"Planes",
-				"Boxes",
-				"Pyramids",
-		};
-		static int currentCategoryItem = 0;
 
 		ImGui::ListBox("Категория", &currentCategoryItem,
 					   &(categoryItems)[0],
@@ -236,7 +245,9 @@ void GUI::showSavePanel(bool* showSave) {
 				std::string { this->login },
 				std::string { this->password },
 				std::string { this->dbName }
-			};
+			}.save(sceneName, categoryItems[currentCategoryItem]);
+
+			prevShowSave = false;
 		}//fi Button
 	}//fi Begin
 	ImGui::End();

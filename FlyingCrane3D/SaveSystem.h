@@ -11,5 +11,5 @@ public:
 			   std::string _database);
 	virtual ~SaveSystem() = default;
 
-	void save(std::string sceneName);
+	void save(std::string sceneName, std::string categoryName);
 };

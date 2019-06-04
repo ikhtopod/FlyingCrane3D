@@ -26,13 +26,32 @@ DBConnect::~DBConnect() {
 	}
 }
 
+
+std::string DBConnect::vectorToString(const glm::vec3& vctr) {
+	std::stringstream res {};
+	res << vctr.x << ';' << vctr.y << ';' << vctr.z;
+	return res.str();
+}
+
+glm::vec3 DBConnect::stringToVector(const std::string& str) {
+	std::vector<float> coord {};
+
+	std::string tmp {};
+	while (std::getline(std::stringstream { str }, tmp, ';')) {
+		coord.push_back(std::stof(tmp));
+	}//elihw
+
+	return glm::vec3 { coord[0], coord[1], coord[2] };
+}
+
+
 int DBConnect::query(const char* q) {
 	if (this->isConnectionError()) return 1;
 
 	return mysql_query(this->connection, q);
 }
 
-int DBConnect::query(std::string q) {
+int DBConnect::query(const std::string& q) {
 	return this->query(q.c_str());
 }
 
@@ -119,4 +138,80 @@ create table if not exists polymeshes (
 	this->query(createTableTransforms);
 	this->query(createTableMeshes);
 	this->query(createTablePolymeshes);
+}
+
+std::vector<const char*> DBConnect::getColumnContent(std::string tableName, std::string colName) {
+	if (this->isConnectionError()) return {};
+
+	std::vector<const char*> names {};
+
+	MYSQL_RES *res;
+	MYSQL_ROW row;
+
+	std::stringstream req {};
+	req << "select " << colName << " from " << tableName;
+
+	this->query(req.str());
+
+	if (res = mysql_store_result(this->connection)) {
+		while (row = mysql_fetch_row(res)) {
+			names.push_back(row[0]);
+		}//elihw
+	} else {
+		std::cout << mysql_error(this->connection) << std::endl;
+	}//fi
+
+	return names;
+}
+
+uint32_t DBConnect::getColumnMax(std::string tableName, std::string colName) {
+	if (this->isConnectionError()) return {};
+
+	uint32_t max = 0;
+
+	MYSQL_RES *res;
+	MYSQL_ROW row;
+
+	std::stringstream req {};
+	req << "select max(" << colName << ") from " << tableName;
+
+	this->query(req.str());
+
+	if (res = mysql_store_result(this->connection)) {
+		if (row = mysql_fetch_row(res)) {
+			if (row[0] != nullptr) {
+				max = std::stoul(std::string { row[0] });
+			}//fi
+		}//fi
+	} else {
+		std::cout << mysql_error(this->connection) << std::endl;
+	}//fi
+
+	return max;
+}
+
+uint32_t DBConnect::getCategoryIdByName(std::string categoryName) {
+	if (this->isConnectionError()) return {};
+
+	uint32_t categoryId = 0;
+
+	MYSQL_RES *res;
+	MYSQL_ROW row;
+
+	std::stringstream req {};
+	req << "select id from categories where name = '" << categoryName << "'";
+
+	this->query(req.str());
+
+	if (res = mysql_store_result(this->connection)) {
+		if (row = mysql_fetch_row(res)) {
+			if (row[0] != nullptr) {
+				categoryId = std::stoul(std::string { row[0] });
+			}//fi
+		}//fi
+	} else {
+		std::cout << mysql_error(this->connection) << std::endl;
+	}//fi
+
+	return categoryId;
 }

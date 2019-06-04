@@ -5,6 +5,10 @@ public:
 	static const uint32_t DEFAULT_PORT;
 
 protected:
+	static std::string vectorToString(const glm::vec3& vctr);
+	static glm::vec3 stringToVector(const std::string& vctr);
+
+protected:
 	MYSQL* connection;
 	MYSQL mysql;
 
@@ -28,5 +32,9 @@ public:
 	virtual ~DBConnect();
 
 	int query(const char* q);
-	int query(std::string q);
+	int query(const std::string& q);
+
+	std::vector<const char *> getColumnContent(std::string tableName, std::string colName);
+	uint32_t getColumnMax(std::string tableName, std::string colName);
+	uint32_t getCategoryIdByName(std::string categoryName);
 };
