@@ -266,6 +266,12 @@ void GUI::showLoadPanel(bool* showLoad) {
 	static std::string loadTitle { "Открыть" };
 	static std::string loadPanelColumn { "loadPanelColumn" };
 
+	static std::vector<const char *> sceneItems {};
+	static int currentSceneItem = 0;
+
+	static std::vector<const char *> categoryItems {};
+	static int currentCategoryItem = 0;
+
 	if (!*showLoad) {
 		if (prevShowLoad) prevShowLoad = false;
 		return;
@@ -288,7 +294,33 @@ void GUI::showLoadPanel(bool* showLoad) {
 
 			ImGui::SetWindowSize(winSize, true);
 			ImGui::SetWindowPos(winPos, true);
-		}
+
+			sceneItems.clear();
+			categoryItems.clear();
+			currentSceneItem = 0;
+
+			try {
+				LoadSystem ls {
+					std::string { this->serverName },
+					std::string { this->login },
+					std::string { this->password },
+					std::string { this->dbName }
+				};
+
+				categoryItems.push_back("-- all --");
+				std::vector<const char*> tmpVec = ls.getColumnContent("categories", "name");
+				categoryItems.insert(categoryItems.end(), tmpVec.begin(), tmpVec.end());
+
+				if (currentCategoryItem == 0) {
+					sceneItems = ls.getColumnContent("scenes", "name");
+				} else {
+					sceneItems = ls.getColumnContentByCategory("scenes", "name",
+															   categoryItems[currentCategoryItem]);
+				}//fi
+			} catch (std::exception e) {
+				std::cout << e.what() << std::endl;
+			}
+		}//fi
 
 		ImGui::Separator();
 
@@ -296,40 +328,35 @@ void GUI::showLoadPanel(bool* showLoad) {
 		ImGui::SetColumnWidth(0, 350.0f);
 		ImGui::SetColumnWidth(1, 250.0f);
 
-		std::vector<const char *> sceneItems {
-				"Scene",
-				"Scene.000",
-				"Scene.001",
-		};
-		static int currentSceneItem = 0;
-
 		ImGui::ListBox("Сохраненные\nсцены", &currentSceneItem,
 					   &(sceneItems)[0],
 					   static_cast<int>(sceneItems.size()), 10);
 
 		ImGui::NextColumn();
 
-		std::vector<const char *> categoryItems {
-				"Planes",
-				"Boxes",
-				"Pyramids",
-		};
-		static int currentCategoryItem = 0;
+		if (ImGui::ListBox("Категория", &currentCategoryItem,
+						   &(categoryItems)[0],
+						   static_cast<int>(categoryItems.size()), 8)) {
 
-		ImGui::ListBox("Категория", &currentCategoryItem,
-					   &(categoryItems)[0],
-					   static_cast<int>(categoryItems.size()), 8);
+			prevShowLoad = false;
+		}//fi ListBox
 
 		ImGui::NewLine();
 		ImGui::NewLine();
 
 		if (ImGui::Button("Загрузить")) {
-			LoadSystem {
-				std::string { this->serverName },
-				std::string { this->login },
-				std::string { this->password },
-				std::string { this->dbName }
-			};
+			try {
+				LoadSystem {
+					std::string { this->serverName },
+					std::string { this->login },
+					std::string { this->password },
+					std::string { this->dbName }
+				}.load(categoryItems[currentCategoryItem]);
+
+				prevShowLoad = false;
+			} catch (std::exception e) {
+				std::cout << e.what() << std::endl;
+			}
 		}//fi Button
 
 		ImGui::NewLine();

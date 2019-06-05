@@ -10,11 +10,11 @@ DBConnect::DBConnect(std::string _server, std::string _login,
 	password(_password), database(_database), port(DEFAULT_PORT) {
 
 	mysql_init(&this->mysql);
-	this->connection = mysql_real_connect(&this->mysql,
-										  this->server.c_str(), this->login.c_str(),
-										  this->password.c_str(), this->database.c_str(),
-										  this->port, 0, 0);
-
+	this->connection =
+		mysql_real_connect(&this->mysql,
+						   this->server.c_str(), this->login.c_str(),
+						   this->password.c_str(), this->database.c_str(),
+						   this->port, 0, 0);
 
 
 	this->createTablesIfNotExists();
@@ -141,60 +141,6 @@ create table if not exists polymeshes (
 	this->query(createTablePolymeshes);
 }
 
-std::vector<const char*> DBConnect::getColumnContent(std::string tableName, std::string colName) {
-	if (this->isConnectionError()) return {};
-
-	std::vector<const char*> names {};
-
-	MYSQL_RES *res;
-	MYSQL_ROW row;
-
-	std::stringstream req {};
-	req << "select " << colName << " from " << tableName;
-
-	this->query(req.str());
-
-	if (res = mysql_store_result(this->connection)) {
-		while (row = mysql_fetch_row(res)) {
-			names.push_back(row[0]);
-		}//elihw
-	} else {
-		std::cout << mysql_error(this->connection) << std::endl;
-	}//fi
-
-	return names;
-}
-
-uint32_t DBConnect::getFreeRow(std::string tableName, std::string colIdName) {
-	if (this->isConnectionError()) return {};
-
-	uint32_t freeRow = 1;
-
-	MYSQL_RES *res;
-	MYSQL_ROW row;
-
-	std::stringstream req {};
-	req << "select " << colIdName << " from " << tableName << " order by " << colIdName;
-
-	this->query(req.str());
-
-	if (res = mysql_store_result(this->connection)) {
-		while (row = mysql_fetch_row(res)) {
-			if (row[0] != nullptr) {
-				if (std::stoul(std::string { row[0] }) > freeRow) {
-					break;
-				}//fi
-			}//fi
-
-			freeRow++;
-		}//elihw
-	} else {
-		std::cout << mysql_error(this->connection) << std::endl;
-	}//fi
-
-	return freeRow;
-}
-
 uint32_t DBConnect::getCategoryIdByName(std::string categoryName) {
 	if (this->isConnectionError()) return {};
 
@@ -219,4 +165,90 @@ uint32_t DBConnect::getCategoryIdByName(std::string categoryName) {
 	}//fi
 
 	return categoryId;
+}
+
+std::vector<const char*> DBConnect::getColumnContent(
+	std::string tableName, std::string colName) {
+
+	if (this->isConnectionError()) return {};
+
+	std::vector<const char*> names {};
+
+	MYSQL_RES *res;
+	MYSQL_ROW row;
+
+	std::stringstream req {};
+	req << "select " << colName << " from " << tableName;
+
+	this->query(req.str());
+
+	if (res = mysql_store_result(this->connection)) {
+		while (row = mysql_fetch_row(res)) {
+			names.push_back(row[0]);
+		}//elihw
+	} else {
+		std::cout << mysql_error(this->connection) << std::endl;
+	}//fi
+
+	return names;
+}
+
+std::vector<const char*> DBConnect::getColumnContentByCategory(
+	std::string tableName, std::string colName, std::string category) {
+
+	if (this->isConnectionError()) return {};
+
+	uint32_t category_id = getCategoryIdByName(category);
+
+	std::vector<const char*> names {};
+
+	MYSQL_RES *res;
+	MYSQL_ROW row;
+
+	std::stringstream req {};
+	req << "select " << colName << " from " << tableName <<
+		" where category_id = " << category_id;
+
+	this->query(req.str());
+
+	if (res = mysql_store_result(this->connection)) {
+		while (row = mysql_fetch_row(res)) {
+			names.push_back(row[0]);
+		}//elihw
+	} else {
+		std::cout << mysql_error(this->connection) << std::endl;
+	}//fi
+
+	return names;
+}
+
+uint32_t DBConnect::getFreeRow(std::string tableName, std::string colIdName) {
+	if (this->isConnectionError()) return 1;
+
+	uint32_t freeRow = 1;
+
+	MYSQL_RES *res;
+	MYSQL_ROW row;
+
+	std::stringstream req {};
+	req << "select " << colIdName << " from " << tableName <<
+		" order by " << colIdName;
+
+	this->query(req.str());
+
+	if (res = mysql_store_result(this->connection)) {
+		while (row = mysql_fetch_row(res)) {
+			if (row[0] != nullptr) {
+				if (std::stoul(std::string { row[0] }) > freeRow) {
+					break;
+				}//fi
+			}//fi
+
+			freeRow++;
+		}//elihw
+	} else {
+		std::cout << mysql_error(this->connection) << std::endl;
+	}//fi
+
+	return freeRow;
 }

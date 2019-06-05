@@ -11,5 +11,5 @@ public:
 			   std::string _database);
 	virtual ~LoadSystem() = default;
 
-	void load(uint32_t sceneId);
+	void load(std::string sceneName);
 };
