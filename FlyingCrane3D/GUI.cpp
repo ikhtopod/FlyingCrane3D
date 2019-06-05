@@ -202,15 +202,19 @@ void GUI::showSavePanel(bool* showSave) {
 			currentSceneItem = 0;
 			currentCategoryItem = 0;
 
-			LoadSystem ls {
-				std::string { this->serverName },
-				std::string { this->login },
-				std::string { this->password },
-				std::string { this->dbName }
-			};
+			try {
+				LoadSystem ls {
+					std::string { this->serverName },
+					std::string { this->login },
+					std::string { this->password },
+					std::string { this->dbName }
+				};
 
-			sceneItems = ls.getColumnContent("scenes", "name");
-			categoryItems = ls.getColumnContent("categories", "name");
+				sceneItems = ls.getColumnContent("scenes", "name");
+				categoryItems = ls.getColumnContent("categories", "name");
+			} catch (std::exception e) {
+				std::cout << e.what() << std::endl;
+			}
 		}//fi
 
 		ImGui::Separator();
@@ -240,14 +244,18 @@ void GUI::showSavePanel(bool* showSave) {
 		ImGui::NewLine();
 
 		if (ImGui::Button("Сохранить")) {
-			SaveSystem {
-				std::string { this->serverName },
-				std::string { this->login },
-				std::string { this->password },
-				std::string { this->dbName }
-			}.save(sceneName, categoryItems[currentCategoryItem]);
+			try {
+				SaveSystem {
+					std::string { this->serverName },
+					std::string { this->login },
+					std::string { this->password },
+					std::string { this->dbName }
+				}.save(sceneName, categoryItems[currentCategoryItem]);
 
-			prevShowSave = false;
+				prevShowSave = false;
+			} catch (std::exception e) {
+				std::cout << e.what() << std::endl;
+			}
 		}//fi Button
 	}//fi Begin
 	ImGui::End();
