@@ -66,6 +66,7 @@
 #include "Texture.h"
 #include "GUI.h"
 #include "CameraSwitcher.h"
+#include "Transform.h"
 #include "Camera.h"
 #include "TargetCamera.h"
 #include "FreeCamera.h"
