@@ -6,6 +6,38 @@ SaveSystem::SaveSystem(std::string _server, std::string _login,
 	DBConnect(_server, _login, _password, _database) {}
 
 
+uint32_t SaveSystem::getFreeRow(std::string tableName, std::string colIdName) {
+	if (this->isConnectionError()) return 1;
+
+	uint32_t freeRow = 1;
+
+	MYSQL_RES *res;
+	MYSQL_ROW row;
+
+	std::stringstream req {};
+	req << "select " << colIdName << " from " << tableName <<
+		" order by " << colIdName;
+
+	this->query(req.str());
+
+	if (res = mysql_store_result(this->connection)) {
+		while (row = mysql_fetch_row(res)) {
+			if (row[0] != nullptr) {
+				if (std::stoul(std::string { row[0] }) > freeRow) {
+					break;
+				}//fi
+			}//fi
+
+			freeRow++;
+		}//elihw
+	} else {
+		std::cout << mysql_error(this->connection) << std::endl;
+	}//fi
+
+	return freeRow;
+}
+
+
 void SaveSystem::save(std::string sceneName, std::string categoryName) {
 	if (this->isConnectionError()) return;
 
@@ -13,7 +45,7 @@ void SaveSystem::save(std::string sceneName, std::string categoryName) {
 
 	// заполнить таблицу scenes
 	int32_t sceneId = this->getFreeRow("scenes", "id");
-	int32_t categoryId = this->getCategoryIdByName(categoryName);
+	int32_t categoryId = this->getIdByName("categories", "id", categoryName);
 
 	std::stringstream addSceneReq {};
 	addSceneReq << "insert into scenes (id, name, category_id) values " <<

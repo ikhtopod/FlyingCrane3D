@@ -3,6 +3,9 @@
 #include "DBConnect.h"
 
 class SaveSystem : public DBConnect {
+protected:
+	uint32_t getFreeRow(std::string tableName, std::string colIdName);
+
 public:
 	SaveSystem() = delete;
 	SaveSystem(std::string _server,

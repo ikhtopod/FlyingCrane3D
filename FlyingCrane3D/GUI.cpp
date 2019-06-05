@@ -351,7 +351,7 @@ void GUI::showLoadPanel(bool* showLoad) {
 					std::string { this->login },
 					std::string { this->password },
 					std::string { this->dbName }
-				}.load(categoryItems[currentCategoryItem]);
+				}.load(sceneItems[currentSceneItem]);
 
 				prevShowLoad = false;
 			} catch (std::exception e) {

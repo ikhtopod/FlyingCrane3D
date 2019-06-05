@@ -36,8 +36,9 @@ std::string DBConnect::vectorToString(const glm::vec3& vctr) {
 glm::vec3 DBConnect::stringToVector(const std::string& str) {
 	std::vector<float> coord {};
 
+	std::stringstream ss { str };
 	std::string tmp {};
-	while (std::getline(std::stringstream { str }, tmp, ';')) {
+	while (std::getline(ss, tmp, ';')) {
 		coord.push_back(std::stof(tmp));
 	}//elihw
 
@@ -141,30 +142,30 @@ create table if not exists polymeshes (
 	this->query(createTablePolymeshes);
 }
 
-uint32_t DBConnect::getCategoryIdByName(std::string categoryName) {
+uint32_t DBConnect::getIdByName(std::string table, std::string col, std::string name) {
 	if (this->isConnectionError()) return {};
 
-	uint32_t categoryId = 0;
+	uint32_t id = 0;
 
 	MYSQL_RES *res;
 	MYSQL_ROW row;
 
 	std::stringstream req {};
-	req << "select id from categories where name = '" << categoryName << "'";
+	req << "select " << col << " from " << table << " where name = '" << name << "'";
 
 	this->query(req.str());
 
 	if (res = mysql_store_result(this->connection)) {
 		if (row = mysql_fetch_row(res)) {
 			if (row[0] != nullptr) {
-				categoryId = std::stoul(std::string { row[0] });
+				id = std::stoul(std::string { row[0] });
 			}//fi
 		}//fi
 	} else {
 		std::cout << mysql_error(this->connection) << std::endl;
 	}//fi
 
-	return categoryId;
+	return id;
 }
 
 std::vector<const char*> DBConnect::getColumnContent(
@@ -198,7 +199,7 @@ std::vector<const char*> DBConnect::getColumnContentByCategory(
 
 	if (this->isConnectionError()) return {};
 
-	uint32_t category_id = getCategoryIdByName(category);
+	uint32_t categoryId = this->getIdByName("categories", "id", category);
 
 	std::vector<const char*> names {};
 
@@ -207,7 +208,7 @@ std::vector<const char*> DBConnect::getColumnContentByCategory(
 
 	std::stringstream req {};
 	req << "select " << colName << " from " << tableName <<
-		" where category_id = " << category_id;
+		" where category_id = " << categoryId;
 
 	this->query(req.str());
 
@@ -220,35 +221,4 @@ std::vector<const char*> DBConnect::getColumnContentByCategory(
 	}//fi
 
 	return names;
-}
-
-uint32_t DBConnect::getFreeRow(std::string tableName, std::string colIdName) {
-	if (this->isConnectionError()) return 1;
-
-	uint32_t freeRow = 1;
-
-	MYSQL_RES *res;
-	MYSQL_ROW row;
-
-	std::stringstream req {};
-	req << "select " << colIdName << " from " << tableName <<
-		" order by " << colIdName;
-
-	this->query(req.str());
-
-	if (res = mysql_store_result(this->connection)) {
-		while (row = mysql_fetch_row(res)) {
-			if (row[0] != nullptr) {
-				if (std::stoul(std::string { row[0] }) > freeRow) {
-					break;
-				}//fi
-			}//fi
-
-			freeRow++;
-		}//elihw
-	} else {
-		std::cout << mysql_error(this->connection) << std::endl;
-	}//fi
-
-	return freeRow;
 }

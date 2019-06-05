@@ -22,6 +22,10 @@ protected:
 protected:
 	bool isConnectionError();
 	void createTablesIfNotExists();
+	uint32_t getIdByName(std::string table, std::string col, std::string name);
+
+	int query(const char* q);
+	int query(const std::string& q);
 
 public:
 	DBConnect() = delete;
@@ -31,13 +35,8 @@ public:
 			  std::string _database);
 	virtual ~DBConnect();
 
-	int query(const char* q);
-	int query(const std::string& q);
-
-	uint32_t getCategoryIdByName(std::string categoryName);
 	std::vector<const char *> getColumnContent(std::string tableName, std::string colName);
 	std::vector<const char *> getColumnContentByCategory(std::string tableName,
 														 std::string colName,
 														 std::string category);
-	uint32_t getFreeRow(std::string tableName, std::string colIdName);
 };
