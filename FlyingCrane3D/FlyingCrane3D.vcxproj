@@ -112,7 +112,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>CPPCONN_PUBLIC_FUNC=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdhdr.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdhdr.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <OmitFramePointers>
@@ -155,7 +155,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>CPPCONN_PUBLIC_FUNC=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdhdr.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdhdr.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <OmitFramePointers>
@@ -326,7 +326,10 @@
     <ClCompile Include="SelectionElementPoint.cpp" />
     <ClCompile Include="SelectionSwitcher.cpp" />
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="stdhdr.cpp" />
+    <ClCompile Include="stdhdr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="TargetCamera.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
