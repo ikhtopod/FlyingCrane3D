@@ -87,7 +87,6 @@ void Application::loadGLLoader() const {
 
 
 void Application::mainLoop() {
-	// WARNING: Последовательность вызовов функций важна
 	while (!glfwWindowShouldClose(this->window.getWindowPtr())) {
 		glfwPollEvents();
 
