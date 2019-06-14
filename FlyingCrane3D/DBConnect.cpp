@@ -16,7 +16,6 @@ DBConnect::DBConnect(std::string _server, std::string _login,
 						   this->password.c_str(), this->database.c_str(),
 						   this->port, 0, 0);
 
-
 	this->createTablesIfNotExists();
 }
 
@@ -147,7 +146,7 @@ uint32_t DBConnect::getIdByName(std::string table, std::string col, std::string 
 
 	uint32_t id = 0;
 
-	MYSQL_RES *res;
+	MYSQL_RES* res;
 	MYSQL_ROW row;
 
 	std::stringstream req {};
@@ -175,7 +174,7 @@ std::vector<const char*> DBConnect::getColumnContent(
 
 	std::vector<const char*> names {};
 
-	MYSQL_RES *res;
+	MYSQL_RES* res;
 	MYSQL_ROW row;
 
 	std::stringstream req {};
@@ -203,7 +202,7 @@ std::vector<const char*> DBConnect::getColumnContentByCategory(
 
 	std::vector<const char*> names {};
 
-	MYSQL_RES *res;
+	MYSQL_RES* res;
 	MYSQL_ROW row;
 
 	std::stringstream req {};

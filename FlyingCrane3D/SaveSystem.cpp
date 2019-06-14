@@ -11,7 +11,7 @@ uint32_t SaveSystem::getFreeRow(std::string tableName, std::string colIdName) {
 
 	uint32_t freeRow = 1;
 
-	MYSQL_RES *res;
+	MYSQL_RES* res;
 	MYSQL_ROW row;
 
 	std::stringstream req {};
@@ -56,7 +56,7 @@ void SaveSystem::save(std::string sceneName, std::string categoryName) {
 		return;
 	}//fi
 
-	for (auto&[objectName, objectShape] : appThis->getScene().getObjects()) {
+	for (auto& [objectName, objectShape] : appThis->getScene().getObjects()) {
 		// заполнить таблицу objects
 		int32_t objectId = this->getFreeRow("objects", "id");
 
@@ -82,7 +82,7 @@ void SaveSystem::save(std::string sceneName, std::string categoryName) {
 			return;
 		}//fi
 
-		for (auto&[meshName, mesh] : objectShape->getMeshes()) {
+		for (auto& [meshName, mesh] : objectShape->getMeshes()) {
 			// заполнить таблицу meshes
 			int32_t meshId = this->getFreeRow("meshes", "id");
 
