@@ -22,9 +22,9 @@ private:
 
 	int width = 0;
 	int height = 0;
-	int nrChannels = 0; // кол-во цветовых каналов
+	int nrChannels = 0; // РєРѕР»-РІРѕ С†РІРµС‚РѕРІС‹С… РєР°РЅР°Р»РѕРІ
 
-	bool flipVertical = false; // отобразить изображение по вертикали
+	bool flipVertical = false; // РѕС‚РѕР±СЂР°Р·РёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ РїРѕ РІРµСЂС‚РёРєР°Р»Рё
 
 	TextureComponent componentsPerPixel = TextureComponent::RGBA;
 
