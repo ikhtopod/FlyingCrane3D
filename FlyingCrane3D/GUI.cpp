@@ -314,8 +314,7 @@ void GUI::showLoadPanel(bool* showLoad) {
 				if (currentCategoryItem == 0) {
 					sceneItems = ls.getColumnContent("scenes", "name");
 				} else {
-					sceneItems = ls.getColumnContentByCategory("scenes", "name",
-															   categoryItems[currentCategoryItem]);
+					sceneItems = ls.getColumnContentByCategory("scenes", "name", categoryItems[currentCategoryItem]);
 				}//fi
 			} catch (std::exception e) {
 				std::cout << e.what() << std::endl;
