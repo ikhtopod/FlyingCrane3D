@@ -22,13 +22,13 @@ public:
 	static glm::vec2 repeat(glm::vec2 val, float _min, float _max);
 
 	/**
-		\brief Функция создает цвет по id
+		\brief Р¤СѓРЅРєС†РёСЏ СЃРѕР·РґР°РµС‚ С†РІРµС‚ РїРѕ id
 
-		Максимально возможное число комбинаций соответствует размеру типа uint32_t,
-		т.е. - 4'294'967'296
+		РњР°РєСЃРёРјР°Р»СЊРЅРѕ РІРѕР·РјРѕР¶РЅРѕРµ С‡РёСЃР»Рѕ РєРѕРјР±РёРЅР°С†РёР№ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ СЂР°Р·РјРµСЂСѓ С‚РёРїР° uint32_t,
+		С‚.Рµ. - 4'294'967'296
 
-		\param colorId uint32_t id цвета
-		\return glm::vec4 вектор
+		\param colorId uint32_t id С†РІРµС‚Р°
+		\return glm::vec4 РІРµРєС‚РѕСЂ
 	*/
 	static glm::vec4 generateRGBAColorById(uint32_t colorId);
 
