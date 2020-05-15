@@ -17,18 +17,18 @@
 
 class MeshElementManager final : public ITriada {
 private:
-	// явл€етс€ ли класс D подклассом класса B
+	// Is class D a subclass of class B
 	template<class B, class D>
 	using IsBaseOf = std::enable_if_t<std::is_base_of_v<B, D>>;
 
-	// явл€етс€ ли класс D подклассом класса MeshElement
+	// Is class D a subclass of class MeshElement
 	template<class D>
 	using IsBaseOfMeshElement = IsBaseOf<MeshElement, D>;
 
 	template<typename T>
 	using VectorPtr = std::vector<std::shared_ptr<T>>;
 
-	// ќтображение списка объектов, €вл€ющихс€ подклассами класса MeshElement
+	// unordered_map of a list of objects that are subclasses of the MeshElement class.
 	template<typename T, typename = IsBaseOfMeshElement<T>>
 	using UMapMeshElements = std::unordered_map<std::string, VectorPtr<T>>;
 
